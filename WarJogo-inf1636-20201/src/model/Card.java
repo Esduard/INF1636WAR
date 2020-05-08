@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Card {
 	private Shape shape;
 	private Territory territory;
-	private ArrayList<Strings> neighbors;
+	private ArrayList<String> neighbors;
 
 
 	public Card(Shape s, Territory t) {
