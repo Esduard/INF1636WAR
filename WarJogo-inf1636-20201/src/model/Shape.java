@@ -3,5 +3,6 @@ package model;
 public enum Shape {
 	Square,
 	Triangle,
-	Circle
+	Circle,
+	Joker
 }
