@@ -7,12 +7,6 @@ public abstract class Objective {
 	protected abstract boolean ValidateObjective();
 	
 	
-	
-	public Objective(String d) {
-		description = d;
-	}
-	
-	
 	//verification type
 	
 	

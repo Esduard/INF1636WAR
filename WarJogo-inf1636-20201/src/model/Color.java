@@ -6,5 +6,6 @@ public enum Color {
 	Blue,
 	Yellow,
 	Green,
-	Red
+	Red,
+	Count
 }

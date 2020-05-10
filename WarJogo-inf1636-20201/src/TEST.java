@@ -51,5 +51,7 @@ public class TEST {
 		System.out.println(model.validateAttack(Color.Blue,Argentina,Venezuela,1));
 		
 		
+		model.start();
+		
 	}
 }
