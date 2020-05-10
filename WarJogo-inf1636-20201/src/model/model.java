@@ -5,7 +5,61 @@ public class model {
 	
 	public static void start(){
 		
-		//initialize all
+		//initialize players
+		
+		Scanner scan = new Scanner(System.in);
+		
+		int n_players = -1;
+		
+		while(n_players <= 0 || n_players > 6)
+		{
+			System.out.println("Escolha o numero de jogadores");
+			n_players = scan.nextInt();
+			if(n_players <= 0 || n_players > 6)
+			{
+				System.out.println("O numero de jogadores deve ser de 1 a 6");
+			}
+		}
+		
+		
+		
+		
+		int i;
+		int select;
+		String name;
+		
+		ArrayList<Color> colors = new ArrayList<Color>(
+				Arrays.asList(Color.White,Color.Black,Color.Blue,Color.Yellow,Color.Green,Color.Red));
+		
+		Player [] players = new Player[n_players];
+		//public Player(String n,Color c,Objective o)
+		
+		
+		for(i=0;i<6;i++)
+		{
+			System.out.print("Escolha uma cor para o jogador ");
+			System.out.print(i+1);
+			System.out.print("\n");
+			System.out.println("Indices respectivos: BRANCO, PRETO, AZUL, AMARELO, VERDE, VERMELHO");
+			select = scan.nextInt();
+			if(colors.get(select) == null)
+			{
+				System.out.println("Cor ja escolhida");
+				i--;
+			}
+			else
+			{
+				System.out.println("Insira um noma para o jogador");
+				System.out.print(i+1);
+				System.out.print("\n");
+				name = scan.nextLine();
+				
+				
+				players[i] = new Player(name,colors.get(select),null); //maybe define objectives before and give'em out here 
+				
+				colors.set(select,null);
+			}
+		}
 		
 		//initialize neighbor lists
 		
@@ -342,6 +396,18 @@ public class model {
 		
 		cards[51] = new Card(Shape.Joker	, null);
 		cards[52] = new Card(Shape.Joker	, null);
+		
+		
+		//Objectives
+		
+		
+		//public Objective(String d)
+		
+		Objective 
+		
+		
+		objectives = new ArrayList<Objectives>(
+	    	      Arrays.asList());
 		
 		
 		
