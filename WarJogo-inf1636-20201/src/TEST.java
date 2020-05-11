@@ -21,10 +21,10 @@ public class TEST {
 	    ArrayList<String> argentina_n = new ArrayList<String>(
 	    	      Arrays.asList("Peru","Brasil"));
 		
-		Territory Venezuela = new Territory("Venezuela",Color.Red, venezuela_n);
-		Territory Peru = new Territory("Peru",Color.Blue, peru_n);
-		Territory Argentina = new Territory("Argentina",Color.Blue, argentina_n);
-		Territory Brasil = new Territory("Brasil",Color.Blue, brasil_n);
+		Territory Venezuela = new Territory("Venezuela",Color.Vermelho, venezuela_n);
+		Territory Peru = new Territory("Peru",Color.Azul, peru_n);
+		Territory Argentina = new Territory("Argentina",Color.Azul, argentina_n);
+		Territory Brasil = new Territory("Brasil",Color.Azul, brasil_n);
 		
 		Venezuela.setTroops(1);
 		Peru.setTroops(5);
@@ -35,20 +35,20 @@ public class TEST {
 		
 		
 		System.out.println("can't attack with enemy troops");
-		System.out.println(model.validateAttack(Color.Blue,Venezuela,Peru,1));
+		System.out.println(model.validateAttack(Color.Azul,Venezuela,Peru,1));
 		
 		System.out.println("can't attack yourself");
-		System.out.println(model.validateAttack(Color.Blue,Brasil,Peru,1));
+		System.out.println(model.validateAttack(Color.Azul,Brasil,Peru,1));
 		
 		System.out.println("can't do attack with no troops on standby in source");
-		System.out.println(model.validateAttack(Color.Blue,Brasil,Venezuela,1));
+		System.out.println(model.validateAttack(Color.Azul,Brasil,Venezuela,1));
 	
 		System.out.println("can't attack with more than 3 troops or 0 troops");
-		System.out.println(model.validateAttack(Color.Blue,Peru,Venezuela,0));
-		System.out.println(model.validateAttack(Color.Blue,Peru,Venezuela,4));
+		System.out.println(model.validateAttack(Color.Azul,Peru,Venezuela,0));
+		System.out.println(model.validateAttack(Color.Azul,Peru,Venezuela,4));
 		
 		System.out.println("verify if target is src's neighbor");
-		System.out.println(model.validateAttack(Color.Blue,Argentina,Venezuela,1));
+		System.out.println(model.validateAttack(Color.Azul,Argentina,Venezuela,1));
 		
 		
 		model.start();

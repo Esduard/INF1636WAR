@@ -8,7 +8,7 @@ public class model {
 	public static Continent[] Continents;
 	public static Objective[] Objectives;
 	public static Player[] Players;
-	public static Color[] Colors = {Color.White,Color.Black,Color.Blue,Color.Yellow,Color.Green,Color.Red};
+	public static Color[] Colors = {Color.Branco,Color.Preto,Color.Azul,Color.Amarelo,Color.Verde,Color.Vermelho};
 	
 	public static void start(){
 		
@@ -442,6 +442,8 @@ public class model {
 		
 		Objectives[13] = new ConquerContinentObjective("Conquistar na totalidade a Ásia e a África", objContinents, false);
 		
+		//Instances log
+		
 		System.out.println("------------------CARDS---------------------");
 		System.out.println();
 		for(Card c:Cards)
@@ -507,8 +509,6 @@ public class model {
 			}
 		}
 		
-		
-		int i;
 		int select;
 		String name;
 		
@@ -518,10 +518,9 @@ public class model {
 		
 		Color[] remainingColors = Colors;
 		
-		for(i=0;i<6;i++)
+		for(int i=0;i < n_players;i++)
 		{
-			System.out.print("Escolha uma cor para o jogador ");
-			System.out.print(i+1);
+			System.out.print("Escolha uma cor para o jogador "+ Integer.toString(i+1));
 			System.out.print("\n");
 			System.out.print("Indices respectivos: \n 0 = BRANCO, \n 1 = PRETO, \n 2 = AZUL, \n 3 = AMARELO, \n 4 = VERDE, \n 5 = VERMELHO\n");
 			select = scan.nextInt();
@@ -532,19 +531,53 @@ public class model {
 			}
 			else
 			{
-				System.out.println("Insira um noma para o jogador");
-				System.out.print(i+1);
+				System.out.println("Insira um nome para o jogador "+ Integer.toString(i+1));
 				System.out.print("\n");
-				name = scan.nextLine();
+				name = scan.next();
 				
 				
-				Players[i] = new Player(name,remainingColors[select],null); //maybe define objectives before and give'em out here 
+				Players[i] = new Player(name, remainingColors[select]); //maybe define objectives before and give'em out here 
 				
 				remainingColors[select] = null;
 			}
 		}
 		
 		scan.close();
+		
+		//Draw cards and objectives
+		//Creating stacks to draw cards and objectives
+		Stack<Objective> objStack = new Stack<Objective>();
+		objStack.addAll(Arrays.asList(Objectives));
+		
+		System.out.println("-----------------OBJETIVOS REMOVIDOS-------------------");
+		for(int i = 0; i < remainingColors.length; i++)
+		{
+			Color c = remainingColors[i];
+			if(c != null)
+			{
+				System.out.println(Objectives[2+c.ordinal()].description);
+				objStack.remove(Objectives[2+c.ordinal()]);
+			}
+		}
+		
+		Collections.shuffle(objStack);
+		
+		Stack<Card> cardStack = new Stack<Card>();
+		cardStack.addAll(Arrays.asList(Cards));
+		Collections.shuffle(cardStack);
+		
+		for(Player p:Players)
+		{
+			Objective o = objStack.pop();
+			//Get cards
+			
+			p.setObjective(o);
+			System.out.println("------------------"+ p.getName() + "----------------------------");
+			System.out.println("\tObjetivo: ");
+			System.out.println("\t\t"+o.description);
+			
+			//Set Cards
+		}
 	}
 	
 	

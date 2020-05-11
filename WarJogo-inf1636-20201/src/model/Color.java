@@ -1,11 +1,11 @@
 package model;
 
 public enum Color {
-	White,
-	Black,
-	Blue,
-	Yellow,
-	Green,
-	Red,
+	Branco,
+	Preto,
+	Azul,
+	Amarelo,
+	Verde,
+	Vermelho,
 	Count
 }

@@ -28,11 +28,10 @@ public class Player {
 		return true;
 	}
 	*/
-	public Player(String n,Color c,Objective o) {
+	public Player(String n,Color c) {
 		
 		name = n;
 		color = c;
-		objective = o;
 	}
 	
 	public String getName() {
@@ -43,5 +42,13 @@ public class Player {
 		return color;
 	}
 	
+	public String getObjDescription()
+	{
+		return objective.description;
+	}
 	
+	public void setObjective(Objective o)
+	{
+		this.objective = o;
+	}
 }
