@@ -1,13 +1,12 @@
 package model;
-import java.util.ArrayList;
-import java.util.Scanner; 
+import java.util.*;
 
 public class Player {
 	private String name;
 	private Color color;
 	private Objective objective;
-	private ArrayList<Card> Cards;
-	private ArrayList<Territory> Territories;
+	private ArrayList<Card> Cards = new ArrayList<Card>();
+	private ArrayList<Territory> Territories = new ArrayList<Territory>();
 	
 	public static ArrayList<Player> players;
 	
@@ -29,7 +28,6 @@ public class Player {
 	}
 	*/
 	public Player(String n,Color c) {
-		
 		name = n;
 		color = c;
 	}
@@ -50,5 +48,21 @@ public class Player {
 	public void setObjective(Objective o)
 	{
 		this.objective = o;
+	}
+	
+	public void receiveCard(Card c)
+	{
+		Cards.add(c);
+	}
+	
+	public List<Card> getAllCards()
+	{
+		return Collections.unmodifiableList(Cards);
+	}
+	
+	public void setTerritory(Territory t, int army)
+	{
+		t.setColor(this.color);
+		t.setArmy(army);
 	}
 }

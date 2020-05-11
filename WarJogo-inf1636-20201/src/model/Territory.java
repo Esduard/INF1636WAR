@@ -44,4 +44,14 @@ public class Territory {
 		return neighbors;
 	}
 	
+	public void setColor(Color c)
+	{
+		color = c;
+	}
+	
+	public void setArmy(int number)
+	{
+		numTroops = number;
+	}
+	
 }

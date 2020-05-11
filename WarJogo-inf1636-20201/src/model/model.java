@@ -499,13 +499,13 @@ public class model {
 		
 		int n_players = -1;
 		
-		while(n_players <= 0 || n_players > 6)
+		while(n_players < 3 || n_players > 6)
 		{
 			System.out.println("Escolha o numero de jogadores");
 			n_players = scan.nextInt();
-			if(n_players <= 0 || n_players > 6)
+			if(n_players < 3 || n_players > 6)
 			{
-				System.out.println("O numero de jogadores deve ser de 1 a 6");
+				System.out.println("O numero de jogadores deve ser de 3 a 6");
 			}
 		}
 		
@@ -564,19 +564,53 @@ public class model {
 		
 		Stack<Card> cardStack = new Stack<Card>();
 		cardStack.addAll(Arrays.asList(Cards));
+		
+		System.out.println(cardStack.size());
+		
+		//Remove jokers
+		cardStack.remove(52); 
+		cardStack.remove(51);
+		
 		Collections.shuffle(cardStack);
 		
+		boolean isCardStackEmpty = false;
+		
+		while(!isCardStackEmpty)
+		{
+			for(Player p:Players)
+			{
+				if(!isCardStackEmpty)
+				{
+					System.out.println(cardStack.peek().getShape());
+					p.receiveCard(cardStack.pop());
+					
+					isCardStackEmpty = cardStack.isEmpty();
+				}
+				else
+					break;
+			}
+		}
+		
+		//Add jokers
+		cardStack.add(Cards[51]);
+		cardStack.add(Cards[52]);
+		
+		//Players info log
 		for(Player p:Players)
 		{
 			Objective o = objStack.pop();
-			//Get cards
-			
+		
 			p.setObjective(o);
+			
 			System.out.println("------------------"+ p.getName() + "----------------------------");
 			System.out.println("\tObjetivo: ");
 			System.out.println("\t\t"+o.description);
 			
-			//Set Cards
+			System.out.println("\tCartas: ");
+			for(Card c:p.getAllCards())
+			{
+				System.out.println("\t\t"+c.getShape()+", "+c.getTerritory().getName());
+			}
 		}
 	}
 	
