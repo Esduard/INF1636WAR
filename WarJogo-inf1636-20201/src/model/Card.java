@@ -13,11 +13,11 @@ public class Card {
 		
 	}
 	
-	Shape getShape() {
+	public Shape getShape() {
 		return shape;
 	}
 	
-	Territory getTerritory(){
+	public Territory getTerritory(){
 		return territory;
 	}
 }

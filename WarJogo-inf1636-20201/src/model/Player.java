@@ -50,7 +50,7 @@ public class Player {
 		this.objective = o;
 	}
 	
-	public void receiveCard(Card c)
+	public void draw(Card c)
 	{
 		Cards.add(c);
 	}
@@ -80,8 +80,13 @@ public class Player {
 	
 	public void setTerritory(Territory t, int army)
 	{
-		t.setColor(this.color);
-		t.setArmy(army);
-		Territories.add(t);
+		if(t != null)
+		{			
+			t.setColor(this.color);
+			t.setArmy(army);
+			Territories.add(t);
+		}
+		else
+			throw new NullPointerException("Parameter of type Territory cannot be null");
 	}
 }

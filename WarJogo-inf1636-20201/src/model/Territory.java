@@ -10,12 +10,15 @@ public class Territory {
 	
 	
 	
-	public Territory(String n, Color c, ArrayList<String> neighbors ) {
-		
+	public Territory(String n, ArrayList<String> neighbors ) {
 		name = n;
-		color = c;
 		this.neighbors = neighbors;
-		
+	}
+	
+	public Territory(String n, Color c, ArrayList<String> neighbors ) {
+		name = n;
+		this.color = c;
+		this.neighbors = neighbors;
 	}
 	
 	public String getName() {
@@ -40,7 +43,7 @@ public class Territory {
 		numTroops = t;
 	}
 	
-	ArrayList<String> getNeighbors(){
+	public ArrayList<String> getNeighbors(){
 		return neighbors;
 	}
 	
@@ -53,5 +56,4 @@ public class Territory {
 	{
 		numTroops = number;
 	}
-	
 }

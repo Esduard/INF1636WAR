@@ -3,11 +3,9 @@ import java.util.*;
 import model.*;
 
 public class TEST {
-
 	
-	
-	public static void main(String[] args) {
-		
+	private static void testValidateAttack()
+	{
 		//public Territory(String n, Color c, ArrayList<String> neighbors );
 	    ArrayList<String> venezuela_n = new ArrayList<String>(
 	    	      Arrays.asList("Mexico","Peru","Brasil"));
@@ -35,23 +33,24 @@ public class TEST {
 		
 		
 		System.out.println("can't attack with enemy troops");
-		System.out.println(model.validateAttack(Color.Azul,Venezuela,Peru,1));
+		System.out.println(Model.validateAttack(Color.Azul,Venezuela,Peru,1));
 		
 		System.out.println("can't attack yourself");
-		System.out.println(model.validateAttack(Color.Azul,Brasil,Peru,1));
+		System.out.println(Model.validateAttack(Color.Azul,Brasil,Peru,1));
 		
 		System.out.println("can't do attack with no troops on standby in source");
-		System.out.println(model.validateAttack(Color.Azul,Brasil,Venezuela,1));
+		System.out.println(Model.validateAttack(Color.Azul,Brasil,Venezuela,1));
 	
 		System.out.println("can't attack with more than 3 troops or 0 troops");
-		System.out.println(model.validateAttack(Color.Azul,Peru,Venezuela,0));
-		System.out.println(model.validateAttack(Color.Azul,Peru,Venezuela,4));
+		System.out.println(Model.validateAttack(Color.Azul,Peru,Venezuela,0));
+		System.out.println(Model.validateAttack(Color.Azul,Peru,Venezuela,4));
 		
 		System.out.println("verify if target is src's neighbor");
-		System.out.println(model.validateAttack(Color.Azul,Argentina,Venezuela,1));
-		
-		
-		model.start();
-		
+		System.out.println(Model.validateAttack(Color.Azul,Argentina,Venezuela,1));
+	}
+	
+	public static void main(String[] args) {
+		System.out.println("-------------TEST MODEL INTIALIZE---------------");
+		Model.testMethods();
 	}
 }
