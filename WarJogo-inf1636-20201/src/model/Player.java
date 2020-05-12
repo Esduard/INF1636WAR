@@ -55,9 +55,23 @@ public class Player {
 		Cards.add(c);
 	}
 	
+	public void cardToTerritory()
+	{
+		while(!Cards.isEmpty())
+		{
+			Card c = Cards.remove(Cards.size()-1);
+			setTerritory(c.getTerritory(),1);
+		}
+	}
+	
 	public List<Card> getAllCards()
 	{
 		return Collections.unmodifiableList(Cards);
+	}
+	
+	public List<Territory> getAllTerritories()
+	{
+		return Collections.unmodifiableList(Territories);
 	}
 	
 	public void setTerritory(Territory t, int army)

@@ -504,7 +504,7 @@ public class model {
 			System.out.print("\n");
 			System.out.print("Indices respectivos: \n 0 = BRANCO, \n 1 = PRETO, \n 2 = AZUL, \n 3 = AMARELO, \n 4 = VERDE, \n 5 = VERMELHO\n");
 			select = scan.nextInt();
-			if(Colors[i] == null)
+			if(remainingColors[select] == null)
 			{
 				System.out.println("Cor ja escolhida");
 				i--;
@@ -548,8 +548,8 @@ public class model {
 		System.out.println(cardStack.size());
 		
 		//Remove jokers
-		cardStack.remove(52); 
-		cardStack.remove(51);
+		cardStack.remove(43); 
+		cardStack.remove(42);
 		
 		Collections.shuffle(cardStack);
 		
@@ -572,8 +572,8 @@ public class model {
 		}
 		
 		//Add jokers
-		cardStack.add(Cards[51]);
-		cardStack.add(Cards[52]);
+		cardStack.add(Cards[42]);
+		cardStack.add(Cards[43]);
 		
 		//Players info log
 		for(Player p:Players)
@@ -582,7 +582,7 @@ public class model {
 		
 			p.setObjective(o);
 			
-			System.out.println("------------------"+ p.getName() + "----------------------------");
+			System.out.println("------------------"+ p.getName() + "-" + p.getColor() + "----------------------------");
 			System.out.println("\tObjetivo: ");
 			System.out.println("\t\t"+o.description);
 			
@@ -590,6 +590,14 @@ public class model {
 			for(Card c:p.getAllCards())
 			{
 				System.out.println("\t\t"+c.getShape()+", "+c.getTerritory().getName());
+			}
+			
+			p.cardToTerritory();
+			
+			System.out.println("\tTerritorios: ");
+			for(Territory t:p.getAllTerritories()) 
+			{
+				System.out.println("\t\t"+t.getName());
 			}
 		}
 	}
