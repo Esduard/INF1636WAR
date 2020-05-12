@@ -576,6 +576,9 @@ public class model {
 		cardStack.add(Cards[43]);
 		
 		//Players info log
+		
+		ArrayList<Player> PlayerOrder = new ArrayList<Player>(); //add players to shuffle order
+		
 		for(Player p:Players)
 		{
 			Objective o = objStack.pop();
@@ -599,6 +602,16 @@ public class model {
 			{
 				System.out.println("\t\t"+t.getName());
 			}
+			
+			PlayerOrder.add(p);
+		}
+		Collections.shuffle(PlayerOrder);
+		
+		System.out.println("Ordem dos Jogadores: ");
+		
+		for(Player p:PlayerOrder)
+		{
+			System.out.println(p.getName());
 		}
 	}
 	
