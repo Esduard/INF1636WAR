@@ -62,6 +62,7 @@ public class Player {
 		{
 			Card c = Cards.remove(Cards.size()-1);
 			setTerritory(c.getTerritory(),1);
+			System.out.println(""+ c.getTerritory().getName() + " eh do jogador " + this.getColor() + "----------------------------");
 			cardRet.add(c);
 		}
 		return cardRet;
@@ -81,5 +82,6 @@ public class Player {
 	{
 		t.setColor(this.color);
 		t.setArmy(army);
+		Territories.add(t);
 	}
 }
