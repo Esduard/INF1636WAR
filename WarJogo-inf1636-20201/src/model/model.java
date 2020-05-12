@@ -592,7 +592,7 @@ public class model {
 				System.out.println("\t\t"+c.getShape()+", "+c.getTerritory().getName());
 			}
 			
-			p.cardToTerritory();
+			cardStack.addAll(p.cardToTerritory());
 			
 			System.out.println("\tTerritorios: ");
 			for(Territory t:p.getAllTerritories()) 

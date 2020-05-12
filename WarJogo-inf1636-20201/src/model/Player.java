@@ -55,13 +55,16 @@ public class Player {
 		Cards.add(c);
 	}
 	
-	public void cardToTerritory()
+	public List<Card> cardToTerritory()
 	{
+		ArrayList<Card> cardRet = new ArrayList<Card>();
 		while(!Cards.isEmpty())
 		{
 			Card c = Cards.remove(Cards.size()-1);
 			setTerritory(c.getTerritory(),1);
+			cardRet.add(c);
 		}
+		return cardRet;
 	}
 	
 	public List<Card> getAllCards()
