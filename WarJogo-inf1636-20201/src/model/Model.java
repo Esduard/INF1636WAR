@@ -443,7 +443,6 @@ public class Model {
 					}
 				}
 				
-				int select;
 				String name;
 				
 				Players = new Player[n_players];
@@ -454,8 +453,19 @@ public class Model {
 				{
 					System.out.print("Escolha uma cor para o jogador "+ Integer.toString(i+1));
 					System.out.print("\n");
-					System.out.print("Indices respectivos: \n 0 = BRANCO, \n 1 = PRETO, \n 2 = AZUL, \n 3 = AMARELO, \n 4 = VERDE, \n 5 = VERMELHO\n");
-					select = scan.nextInt();
+					
+					int select = -1;
+
+					while(!(select >= 0 && select <= 5))
+					{
+						System.out.print("Indices respectivos: \n 0 = BRANCO, \n 1 = PRETO, \n 2 = AZUL, \n 3 = AMARELO, \n 4 = VERDE, \n 5 = VERMELHO\n");
+						select = scan.nextInt();
+						if(!(select >= 0 && select <= 5))
+						{
+							System.out.println("Insira um indice valido");
+						}
+					}
+						
 					if(remainingColors[select] == null)
 					{
 						System.out.println("Cor ja escolhida");
@@ -533,11 +543,11 @@ public class Model {
 				}
 				
 				//Shuffle players order
-				List<Player> listPlayers = Arrays.asList(Players);
+				List<Player> PlayerOrder = Arrays.asList(Players);
 				
-				Collections.shuffle(listPlayers);
+				Collections.shuffle(PlayerOrder);
 				
-				listPlayers.toArray(Players);
+				PlayerOrder.toArray(Players);
 	}
 	
 	public static void initialize(){
@@ -555,6 +565,15 @@ public class Model {
 	
 	
 	public static void round() {
+		
+		while(true) //loop condition must be a goal verification method for all players 
+		{
+			for (Player p:Players) 
+			{
+				
+			}
+			break;
+		}
 		
 		Model.recieveAndDistributeArmies();
 		
@@ -653,6 +672,14 @@ public class Model {
 			}
 			System.out.println();
 		}
+		
+		System.out.println("------------PLAYER ORDER-------------------");
+		System.out.println();
+		for(Player p:Players)
+		{
+			System.out.println(p.getName());
+		}
+		System.out.print("\n");
 		
 		System.out.println("------------OBJECTIVES-------------------");
 		System.out.println();
