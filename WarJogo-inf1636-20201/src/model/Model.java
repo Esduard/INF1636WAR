@@ -532,9 +532,9 @@ public class Model {
 					cardStack.addAll(p.cardToTerritory());
 				}
 				
+				//Shuffle players order
 				List<Player> listPlayers = Arrays.asList(Players);
 				
-				//Shuffle players order
 				Collections.shuffle(listPlayers);
 				
 				listPlayers.toArray(Players);
@@ -552,6 +552,29 @@ public class Model {
 		
 		Model.firstDraw();
 	}
+	
+	
+	public static void round() {
+		
+		Model.recieveAndDistributeArmies();
+		
+	}
+	
+	
+	
+	
+	public static void recieveAndDistributeArmies() {
+		
+		/* 
+		Recebimento e posicionamento dos exércitos correspondentes ao número de territórios (metade) que o jogador da vez possui.
+	 	
+	 	Recebimento e posicionamento dos exércitos correspondentes à posse de um continente inteiro.
+	 	
+	 	Recebimento e posicionamento dos exércitos correspondentes a troca de cartas.
+		 */
+		
+	}
+	
 
 	public static boolean validateAttack(Color c,Territory src,Territory target,int n_Troops_Attacking) {
 		
@@ -659,3 +682,4 @@ public class Model {
 		}
 	}
 }
+
