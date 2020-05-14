@@ -18,6 +18,11 @@ public class Model {
     private static final int EU = 3;
 	private static final int AS = 4;
     private static final int OC = 5;
+    
+    public static Continent[] getContinents() 
+    {
+    	return Continents;
+    }
 	
 	private static void initializeMap()
 	{
@@ -492,6 +497,7 @@ public class Model {
 				//Creating stacks to draw cards and objectives
 				objStack.addAll(Arrays.asList(Objectives));
 				
+				//removing "destroyArmy" type Objectives of non-participating colors
 				for(int i = 0; i < remainingColors.length; i++)
 				{
 					Color c = remainingColors[i];
@@ -571,18 +577,31 @@ public class Model {
 			for (Player p:Players) 
 			{
 				
+				Model.recieveAndDistributeArmies(p);
+				
 			}
 			break;
 		}
 		
-		Model.recieveAndDistributeArmies();
+		
 		
 	}
 	
 	
 	
 	
-	public static void recieveAndDistributeArmies() {
+	public static void recieveAndDistributeArmies(Player p) {
+		
+		int bonusArmies = 0;
+		
+		//player recives continental bonus(es)
+		bonusArmies += p.ContinentBonus();
+		
+		
+		
+		//recive regular armies
+		int newArmies = (p.getAllTerritories().size() / 2) + bonusArmies;
+		
 		
 		/* 
 		Recebimento e posicionamento dos exércitos correspondentes ao número de territórios (metade) que o jogador da vez possui.
@@ -681,7 +700,7 @@ public class Model {
 		}
 		System.out.print("\n");
 		
-		System.out.println("------------OBJECTIVES-------------------");
+		System.out.println("------------ALL OBJECTIVES-------------------");
 		System.out.println();
 		for(Objective o:Model.Objectives)
 		{

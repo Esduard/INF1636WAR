@@ -27,6 +27,7 @@ public class Player {
 		return true;
 	}
 	*/
+	
 	public Player(String n,Color c) {
 		name = n;
 		color = c;
@@ -76,6 +77,37 @@ public class Player {
 	public List<Territory> getAllTerritories()
 	{
 		return Collections.unmodifiableList(Territories);
+	}
+	
+	public int ContinentBonus()
+	{
+		int bonus = 0;
+		
+		Continent []allC = Model.getContinents();
+		
+		for(Continent c:allC)
+		{
+			boolean validBonus = true;
+			Territory []continetTerritories = c.getTerritories();
+			for(Territory t:continetTerritories)
+			{
+				if(!(Territories.contains(t)))
+				{
+					validBonus = false;
+					break;
+				}
+			}
+			if(validBonus)
+			{
+				bonus += c.getBonusArmy();
+			}
+			
+			
+		}
+		
+		
+		
+		return bonus;
 	}
 	
 	public void setTerritory(Territory t, int army)

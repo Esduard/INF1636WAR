@@ -43,6 +43,11 @@ public class Territory {
 		numTroops = t;
 	}
 	
+	//Recieves integer that increase or decrease troops
+	public void modifyTroops(int t) {
+		numTroops += t;
+	}
+	
 	public ArrayList<String> getNeighbors(){
 		return neighbors;
 	}

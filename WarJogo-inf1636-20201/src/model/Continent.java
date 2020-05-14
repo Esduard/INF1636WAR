@@ -1,5 +1,4 @@
 package model;
-import java.util.ArrayList;
 
 public class Continent {
 	private String name;
@@ -7,7 +6,7 @@ public class Continent {
 	private int bonusArmy;
 	
 	
-	public Continent (String n, Territory[] t, int b ) {
+	public Continent (String n, Territory[] t, int b) {
 		
 		name = n;
 		territories = t;
