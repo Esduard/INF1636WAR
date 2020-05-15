@@ -594,6 +594,9 @@ public class Model {
 		
 		int bonusArmies = 0;
 		
+		//trade card method
+		
+		
 		//player recives continental bonus(es)
 		bonusArmies += p.ContinentBonus();
 		
@@ -602,6 +605,15 @@ public class Model {
 		//recive regular armies
 		int newArmies = (p.getAllTerritories().size() / 2) + bonusArmies;
 		
+		
+		//select where to put
+		//while( )
+		//{
+			//select turfs to put certain amount
+			
+			//player confirm choices and program validates amount
+			
+		//}
 		
 		/* 
 		Recebimento e posicionamento dos exércitos correspondentes ao número de territórios (metade) que o jogador da vez possui.
