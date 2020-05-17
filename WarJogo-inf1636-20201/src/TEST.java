@@ -2,7 +2,7 @@ import java.util.*;
 
 import model.*;
 
-public class TEST {
+class TEST {
 	
 	private static void testValidateAttack()
 	{

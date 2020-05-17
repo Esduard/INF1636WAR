@@ -1,7 +1,7 @@
 package model;
 import java.util.*;
 
-public class Player {
+class Player {
 	private String name;
 	private Color color;
 	private Objective objective;

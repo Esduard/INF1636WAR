@@ -1,6 +1,6 @@
 package model;
 
-public enum Color {
+enum Color {
 	Branco,
 	Preto,
 	Azul,

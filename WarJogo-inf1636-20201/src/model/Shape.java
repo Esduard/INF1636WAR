@@ -1,6 +1,6 @@
 package model;
 
-public enum Shape {
+enum Shape {
 	Square,
 	Triangle,
 	Circle,

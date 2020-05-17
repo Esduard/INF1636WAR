@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class Card {
+class Card {
 	private Shape shape;
 	private Territory territory;
 

@@ -1,6 +1,6 @@
 package model;
 
-public class Continent {
+class Continent {
 	private String name;
 	private Territory[] territories;
 	private int bonusArmy;

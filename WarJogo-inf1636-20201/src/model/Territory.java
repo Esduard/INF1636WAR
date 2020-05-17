@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class Territory {
+class Territory {
 	private String name;
 	private Color color;
 	private int numTroops = 0;

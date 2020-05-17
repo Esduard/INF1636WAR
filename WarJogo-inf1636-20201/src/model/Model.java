@@ -431,7 +431,7 @@ public class Model {
 		
 	}
 	
-	public static void initializePlayers()
+	private static void initializePlayers()
 	{
 		//initialize players
 		
@@ -557,6 +557,7 @@ public class Model {
 				PlayerOrder.toArray(Players);
 	}
 	
+	//initialize all basic game elements
 	public static void initialize(){
 	    
 		Model.initializeMap();		
@@ -567,25 +568,11 @@ public class Model {
 		
 		Model.initializePlayers();
 		
-		Model.firstDraw();
 	}
 	
-	
-	public static void round() {
-		
-		while(true) //loop condition must be a goal verification method for all players 
-		{
-			for (Player p:Players) 
-			{
-				
-				Model.recieveAndDistributeArmies(p);
-				
-			}
-			break;
-		}
-		
-		
-		
+	public List<Player> getPlayers()
+	{
+		return Arrays.asList(Players);
 	}
 	
 	
@@ -687,6 +674,8 @@ public class Model {
 	public static void testMethods()
 	{
 		initialize();
+		
+		firstDraw();
 		
 		//Instances log
 		
