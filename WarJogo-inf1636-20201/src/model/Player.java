@@ -121,4 +121,33 @@ public class Player {
 		else
 			throw new NullPointerException("Parameter of type Territory cannot be null");
 	}
+	
+	
+	public void tradeCardsForArmies(ArrayList<Card> selected) //selcted only has valid cards
+	{
+		
+		Cards.removeAll(selected);
+		
+	}
+	
+	
+	public int isTradeViable()
+	{
+		//change to enum
+		int not_viable = 0;
+		int viable = 1;
+		int obligatory = 2;
+		
+		if(Cards.size() >= 5)
+		{
+			return obligatory;
+		}
+		if(Cards.size() >= 3)
+		{
+			return viable;
+		}
+		
+		return not_viable;
+		
+	}
 }

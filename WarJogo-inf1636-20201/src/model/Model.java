@@ -12,6 +12,7 @@ public class Model {
 	private static Color[] Colors = {Color.Branco,Color.Preto,Color.Azul,Color.Amarelo,Color.Verde,Color.Vermelho};
 	private static Color[] remainingColors = Colors.clone();
 	
+	//change to enum
 	private static final int NA = 0;
 	private static final int SA = 1;
     private static final int AF = 2;
@@ -593,11 +594,37 @@ public class Model {
 	public static void recieveAndDistributeArmies(Player p) {
 		
 		int bonusArmies = 0;
+		int viable = 0;
 		
 		//trade card method
 		
+		/*system verifies if trade is viable or non-viable, obligatory or non-obligatory */
+		/* method isTradeViable() 
+		 * return 0 if non-viable
+		 * return 1 if viable
+		 * return 2 if obligatory
+		 */
 		
-		//player recives continental bonus(es)
+		viable = p.isTradeViable();
+		
+		if(viable == 1)
+		{
+				//ask if player wants to trade
+				//yes - change viable to 2
+				//no - change viable to 0
+		}
+		if(viable == 2)
+		{
+			//call tradeCardsForArmies()
+			//recive array of cards to add to pile (and shuffle)
+			//each 3 cards count as a bonus
+			//bonus increases each trade
+		}
+		
+		
+		
+		
+		//player recieves continental bonus(es)
 		bonusArmies += p.ContinentBonus();
 		
 		

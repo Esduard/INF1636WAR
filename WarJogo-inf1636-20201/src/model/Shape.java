@@ -4,5 +4,9 @@ public enum Shape {
 	Square,
 	Triangle,
 	Circle,
-	Joker
+	Joker;
+	
+	
 }
+
+
