@@ -594,24 +594,38 @@ public class Model {
 	
 	public static boolean validateCardTrade(ArrayList<Card> selected)
 	{
-		if(selected != null && selected.size() == 3)
-		{
+		if(selected != null && selected.size() == 3){
+			//sort array by enum so joker is last
+			Collections.sort(selected, (a1, a2) -> a1.getShape().compareTo(a2.getShape()));
+			
 			if(selected.get(0).getShape() == selected.get(1).getShape())
 			{
 				if(selected.get(0).getShape() == selected.get(2).getShape()) //all shapes are equal
 					return true;
-				else
-					return false;
+				else{
+					if(selected.get(2).getShape() == Shape.Joker) //joker complements trade
+						return true;
+					else
+						return false;
+				}
 			}
-			else
-				if(	selected.get(0).getShape() != selected.get(2).getShape() && 
-					selected.get(1).getShape() != selected.get(2).getShape()) // all shapes are different
+			else {
+			
+				
+				if(selected.get(0).getShape() != selected.get(2).getShape()) { //all shapes are equal
 					return true;
-				else
-					return false;
+				}
+				else{
+					if(selected.get(2).getShape() == Shape.Joker) //joker complements trade
+						return true;
+					else
+						return false;
+					}	
+			}
 		}
-		else
-			return false;
+		return false; //invalid number
+				
+			
 	}
 	
 	public static boolean validateAttack(Color c,Territory src,Territory target,int n_Troops_Attacking) {

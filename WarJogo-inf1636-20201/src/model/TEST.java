@@ -1,5 +1,4 @@
 package model;
-
 import java.util.*;
 
 public class TEST {
@@ -9,20 +8,90 @@ public class TEST {
 	{
 		System.out.println("-------------TEST CARD TRADE--------------");
 		
-		//public static boolean validateCardTrade(ArrayList<Card> selected)
-		Card []cards = new Card[9];
+		
+		/* public static boolean validateCardTrade(ArrayList<Card> selected)
+	{
+		if(selected != null && selected.size() == 3)
+		{
+			if(selected.get(0).getShape() == selected.get(1).getShape())
+			{
+				if(selected.get(0).getShape() == selected.get(2).getShape()) //all shapes are equal
+					return true;
+				else
+					return false;
+			}
+			else
+				if(	selected.get(0).getShape() != selected.get(2).getShape() && 
+					selected.get(1).getShape() != selected.get(2).getShape()) // all shapes are different
+					return true;
+				else
+					return false;
+		}
+		else
+			return false;
+	}*/
+		  
+		
+		
+		
+		Card []cards = new Card[11];
+		
+		ArrayList<Card> test_subject = new ArrayList<Card>();
 		
 		cards[0]  = new Card(Shape.Triangle	, null);
 		cards[1]  = new Card(Shape.Circle	, null);
 		cards[2]  = new Card(Shape.Square	, null);
 		cards[3]  = new Card(Shape.Circle	, null);
-		cards[4]  = new Card(Shape.Square	, null);
+		cards[4]  = new Card(Shape.Triangle	, null);
 		cards[5]  = new Card(Shape.Triangle	, null);
-		cards[6]  = new Card(Shape.Square	, null);
-		cards[7]  = new Card(Shape.Circle	, null);
-		cards[8]  = new Card(Shape.Triangle	, null);
+		cards[6]  = new Card(Shape.Joker	, null);
+		cards[7]  = new Card(Shape.Joker	, null);
 		
-		System.out.println(" ");
+		
+		
+		System.out.println("correctly use 3 cards of same shape");
+		test_subject.add(cards[0]);
+		test_subject.add(cards[4]);
+		test_subject.add(cards[5]);
+		System.out.println(Model.validateCardTrade(test_subject));
+		test_subject.removeAll(test_subject);
+		
+		
+		System.out.println("correctly use 3 cards of different shape");
+		test_subject.add(cards[0]);
+		test_subject.add(cards[1]);
+		test_subject.add(cards[2]);
+		System.out.println(Model.validateCardTrade(test_subject));
+		test_subject.removeAll(test_subject);
+		
+		System.out.println("incorrectly use 4 cards for trade");
+		test_subject.add(cards[0]);
+		test_subject.add(cards[1]);
+		test_subject.add(cards[2]);
+		test_subject.add(cards[3]);
+		System.out.println(Model.validateCardTrade(test_subject));
+		test_subject.removeAll(test_subject);
+		
+		System.out.println("incorrectly use 0 cards for trade");
+		System.out.println(Model.validateCardTrade(test_subject));
+		test_subject.removeAll(test_subject);
+		
+		System.out.println("incorrectly use 2 cards of same shape and other of different-nonjoker shape");
+		test_subject.add(cards[0]);
+		test_subject.add(cards[5]);
+		test_subject.add(cards[8]);
+		System.out.println(Model.validateCardTrade(test_subject));
+		test_subject.removeAll(test_subject);
+		
+		System.out.println("incorrectly use 2 cards of different shape and other of repeated-nonjoker shape");
+		test_subject.add(cards[0]);
+		test_subject.add(cards[5]);
+		test_subject.add(cards[8]);
+		System.out.println(Model.validateCardTrade(test_subject));
+		test_subject.removeAll(test_subject);
+		
+		
+		
 		
 	}
 	
