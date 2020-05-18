@@ -4,7 +4,7 @@ import java.util.*;
 public class TEST {
 	
 	
-	private static void testValidateCardTrade()
+	public static void testValidateCardTrade()
 	{
 		System.out.println("-------------TEST CARD TRADE--------------");
 		
@@ -78,20 +78,22 @@ public class TEST {
 		
 		System.out.println("incorrectly use 2 cards of same shape and other of different-nonjoker shape");
 		test_subject.add(cards[0]);
+		test_subject.add(cards[1]);
 		test_subject.add(cards[5]);
-		test_subject.add(cards[8]);
 		System.out.println(Model.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
 		System.out.println("incorrectly use 2 cards of different shape and other of repeated-nonjoker shape");
 		test_subject.add(cards[0]);
-		test_subject.add(cards[5]);
-		test_subject.add(cards[8]);
+		test_subject.add(cards[3]);
+		test_subject.add(cards[4]);
 		System.out.println(Model.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
-		
-		
+		System.out.println("first card with different shape of second and second equal shape of third");
+		test_subject.addAll(List.of(cards[1], cards[4], cards[5]));
+		System.out.println(Model.validateCardTrade(test_subject));
+		test_subject.removeAll(test_subject);
 		
 	}
 	
