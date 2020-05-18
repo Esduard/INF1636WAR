@@ -1,6 +1,5 @@
 package model;
 
-import exception.*;
 import java.util.*;
 
 public class Model {
@@ -10,8 +9,8 @@ public class Model {
 	private static Continent[] continents;
 	private static Objective[] objectives;
 	private static Stack<Objective> objStack = new Stack<Objective>();
-	private static Player[] players;
-	private static Color[] remainingColors = {Color.Branco,Color.Preto,Color.Azul,Color.Amarelo,Color.Verde,Color.Vermelho};
+	private static ArrayList<Player> players;
+	private static ArrayList<Color> remainingColors = new ArrayList<Color>(List.of(Color.Branco,Color.Preto,Color.Azul,Color.Amarelo,Color.Verde,Color.Vermelho));
 	
 	private static final int NA = 0;
 	private static final int SA = 1;
@@ -426,66 +425,100 @@ public class Model {
 		
 	}
 	
-	public static void initializePlayers()
+	//Return if the argument numberOfPlayers is valid
+	public static boolean createPlayerList(int numberOfPlayers)
 	{
-		//initialize players
-			Scanner scan = new Scanner(System.in);
+		if(numberOfPlayers < 3 || numberOfPlayers > 6)
+		{
+			return false;
+		}
+		else
+		{
+			players = new ArrayList<Player>(Arrays.asList(new Player[numberOfPlayers]));
 			
-			int n_players = -1;
-			
-			while(n_players < 3 || n_players > 6)
-			{
-				System.out.println("Escolha o numero de jogadores");
-				n_players = scan.nextInt();
-				if(n_players < 3 || n_players > 6)
-				{
-					System.out.println("O numero de jogadores deve ser de 3 a 6");
-				}
-			}
-			
-			String name;
-			
-			players = new Player[n_players];
-			
-			//public Player(String n,Color c,Objective o)
-			
-			for(int i=0;i < n_players;i++)
-			{
-				System.out.print("Escolha uma cor para o jogador "+ Integer.toString(i+1));
-				System.out.print("\n");
-				
-				int select = -1;
-
-				while(!(select >= 0 && select <= 5))
-				{
-					System.out.print("Indices respectivos: \n 0 = BRANCO, \n 1 = PRETO, \n 2 = AZUL, \n 3 = AMARELO, \n 4 = VERDE, \n 5 = VERMELHO\n");
-					select = scan.nextInt();
-					if(!(select >= 0 && select <= 5))
-					{
-						System.out.println("Insira um indice valido");
-					}
-				}
-					
-				if(remainingColors[select] == null)
-				{
-					System.out.println("Cor ja escolhida");
-					i--;
-				}
-				else
-				{
-					System.out.println("Insira um nome para o jogador "+ Integer.toString(i+1));
-					System.out.print("\n");
-					name = scan.next();
-					
-					
-					players[i] = new Player(name, remainingColors[select]); //maybe define objectives before and give'em out here 
-					
-					remainingColors[select] = null;
-				}
-			}
-			
-			scan.close();
+			return true;
+		}
 	}
+	
+	//Return if the player was added
+	public static boolean addPlayer(Player p)
+	{
+		if(p == null)
+		{
+			return false;
+		}
+		
+		if(remainingColors.remove(p.getColor()))
+		{ 
+			if(players.add(p))
+				return true;
+			else
+				return false;
+		}
+		else
+			return false;
+	}
+	
+	/*private static void initializePlayers()
+	{
+	//initialize players
+		Scanner scan = new Scanner(System.in);
+		
+		int n_players = -1;
+		
+		while(n_players < 3 || n_players > 6)
+		{
+			System.out.println("Escolha o numero de jogadores");
+			n_players = scan.nextInt();
+			if(n_players < 3 || n_players > 6)
+			{
+				System.out.println("O numero de jogadores deve ser de 3 a 6");
+			}
+		}
+		
+		String name;
+		
+		players = new Player[n_players];
+		
+		//public Player(String n,Color c,Objective o)
+		
+		for(int i=0;i < n_players;i++)
+		{
+			System.out.print("Escolha uma cor para o jogador "+ Integer.toString(i+1));
+			System.out.print("\n");
+			
+			int select = -1;
+
+			while(!(select >= 0 && select <= 5))
+			{
+				System.out.print("Indices respectivos: \n 0 = BRANCO, \n 1 = PRETO, \n 2 = AZUL, \n 3 = AMARELO, \n 4 = VERDE, \n 5 = VERMELHO\n");
+				select = scan.nextInt();
+				if(!(select >= 0 && select <= 5))
+				{
+					System.out.println("Insira um indice valido");
+				}
+			}
+				
+			if(remainingColors[select] == null)
+			{
+				System.out.println("Cor ja escolhida");
+				i--;
+			}
+			else
+			{
+				System.out.println("Insira um nome para o jogador "+ Integer.toString(i+1));
+				System.out.print("\n");
+				name = scan.next();
+				
+				
+				players[i] = new Player(name, remainingColors[select]); //maybe define objectives before and give'em out here 
+				
+				remainingColors[select] = null;
+			}
+		}
+		
+		scan.close();
+	}*/
 	
 	public static void firstDraw() {
 		
@@ -494,9 +527,9 @@ public class Model {
 		objStack.addAll(Arrays.asList(objectives));
 		
 		//removing "destroyArmy" type Objectives of non-participating colors
-		for(int i = 0; i < remainingColors.length; i++)
+		for(int i = 0; i < remainingColors.size(); i++)
 		{
-			Color c = remainingColors[i];
+			Color c = remainingColors.get(i);
 			if(c != null)
 			{
 				objStack.remove(objectives[2+c.ordinal()]);
@@ -546,11 +579,7 @@ public class Model {
 		}
 		
 	//Shuffle players order
-		List<Player> PlayerOrder = Arrays.asList(players);
-		
-		Collections.shuffle(PlayerOrder);
-		
-		PlayerOrder.toArray(players);
+		Collections.shuffle(players);
 	}
 	
 	public static void initialize(){
@@ -561,7 +590,7 @@ public class Model {
 		
 		Model.initializeObjectives();
 		
-		Model.initializePlayers();
+		//Model.initializePlayers();
 	}
 	
 	public static void placeArmy(Player p, int army, Territory t)

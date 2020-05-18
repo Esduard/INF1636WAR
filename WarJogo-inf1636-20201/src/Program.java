@@ -1,13 +1,13 @@
 import java.util.*;
-
 import model.*;
 
-class TEST {
-	
-	
+class Program {
 	
 	public static void main(String[] args) {
 		System.out.println("-------------TEST MODEL INTIALIZE---------------");
-		Model.testMethods();
+		
+		TEST.testCreatePlayerList();
+		TEST.testAddPlayer();
 	}
+	
 }

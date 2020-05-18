@@ -5,7 +5,7 @@ import java.util.*;
 public class TEST {
 	
 	
-	private static void testvalidateCardTrade()
+	private static void testValidateCardTrade()
 	{
 		System.out.println("-------------TEST CARD TRADE--------------");
 		
@@ -26,10 +26,30 @@ public class TEST {
 		
 	}
 	
+	public static void testCreatePlayerList()
+	{
+		System.out.println("----------------TEST CREATE PLAYER LIST----------------");
+		
+		System.out.println("With 2 players: " + Model.createPlayerList(2));
+		System.out.println("With 3 players: " + Model.createPlayerList(3));
+		System.out.println("With 6 players: " + Model.createPlayerList(6));
+		System.out.println("With 7 players: " + Model.createPlayerList(7));
+	}
 	
-	
-	
-	
+	public static void testAddPlayer()
+	{
+		System.out.println("----------------TEST ADD PLAYER----------------");
+		
+		Model.createPlayerList(3);
+		System.out.println("3 players: ");
+		
+		System.out.println("Adding null: " + Model.addPlayer(null));
+		System.out.println("Adding first player: " + Model.addPlayer(new Player("Gabriel", Color.Azul)));
+		System.out.println("Adding second player: " + Model.addPlayer(new Player("Eduardo", Color.Vermelho)));
+		System.out.println("Adding third player and repeating color: " + Model.addPlayer(new Player("Ivan", Color.Vermelho)));
+		System.out.println("Adding third player: " + Model.addPlayer(new Player("Ivan", Color.Preto)));
+		System.out.println("Adding forth player: " + Model.addPlayer(new Player("Intruso", Color.Azul)));
+	}
 	
 	private static void testValidateAttack()
 	{
