@@ -1,30 +1,25 @@
 package model;
+
+import exception.*;
 import java.util.*;
 
 public class Model {
 	
-	private static Card [] Cards;
-	private static Territory[] Territories;
-	private static Continent[] Continents;
-	private static Objective[] Objectives;
+	private static Card [] cards;
+	private static Territory[] territories;
+	private static Continent[] continents;
+	private static Objective[] objectives;
 	private static Stack<Objective> objStack = new Stack<Objective>();
-	private static Player[] Players;
-	private static Color[] Colors = {Color.Branco,Color.Preto,Color.Azul,Color.Amarelo,Color.Verde,Color.Vermelho};
-	private static Color[] remainingColors = Colors.clone();
+	private static Player[] players;
+	private static Color[] remainingColors = {Color.Branco,Color.Preto,Color.Azul,Color.Amarelo,Color.Verde,Color.Vermelho};
 	
-	//change to enum
 	private static final int NA = 0;
 	private static final int SA = 1;
     private static final int AF = 2;
     private static final int EU = 3;
 	private static final int AS = 4;
     private static final int OC = 5;
-    
-    public static Continent[] getContinents() 
-    {
-    	return Continents;
-    }
-	
+
 	private static void initializeMap()
 	{
 		//initialize neighbor lists
@@ -173,22 +168,22 @@ public class Model {
 		    
 		  //initialize territories and continents
 			
-		    Territories = new Territory[42];
-		    Continents = new Continent[6];
+		    territories = new Territory[42];
+		    continents = new Continent[6];
 		    
 		  //public Territory(String n, Color c, ArrayList<String> neighbors );
 			
 			//NA
 		    
-		    Territories[0] 	= new Territory("Alaska"		, alaska_n);
-		    Territories[1] 	= new Territory("Mackenzie"		, mackenzie_n);
-		    Territories[2]	= new Territory("California"	, california_n);
-		    Territories[3] 	= new Territory("Groenlandia"	, groenlandia_n);
-		    Territories[4]	= new Territory("Mexico"		, mexico_n);
-		    Territories[5] 	= new Territory("Nova York"		, nova_york_n);
-		    Territories[6] 	= new Territory("Labrador"		, labrador_n);
-		    Territories[7] 	= new Territory("Ottawa"		, ottawa_n);
-		    Territories[8] 	= new Territory("Vancouver"		, vancouver_n);
+		    territories[0] 	= new Territory("Alaska"		, alaska_n);
+		    territories[1] 	= new Territory("Mackenzie"		, mackenzie_n);
+		    territories[2]	= new Territory("California"	, california_n);
+		    territories[3] 	= new Territory("Groenlandia"	, groenlandia_n);
+		    territories[4]	= new Territory("Mexico"		, mexico_n);
+		    territories[5] 	= new Territory("Nova York"		, nova_york_n);
+		    territories[6] 	= new Territory("Labrador"		, labrador_n);
+		    territories[7] 	= new Territory("Ottawa"		, ottawa_n);
+		    territories[8] 	= new Territory("Vancouver"		, vancouver_n);
 		    
 		    
 		    Territory[] northAmerica = new Territory[9];
@@ -196,198 +191,198 @@ public class Model {
 		    
 		    for(int i = 0; i < 9; i++)
 		    {
-		    	 northAmerica[i] = Territories[cont_all_territories];
+		    	 northAmerica[i] = territories[cont_all_territories];
 		    	 cont_all_territories++;
 		    }
 		    
-		    Continents[NA] = new Continent("América do Norte", northAmerica, 5);
+		    continents[NA] = new Continent("América do Norte", northAmerica, 5);
 		    
 			//SA
 		    
-		    Territories[9]	= new Territory("Argentina"		, argentina_n);
-		    Territories[10] = new Territory("Brasil"		, brasil_n);
-		    Territories[11] = new Territory("Chile"			, chile_n);
-		    Territories[12] = new Territory("Colombia"		, colombia_n);
+		    territories[9]	= new Territory("Argentina"		, argentina_n);
+		    territories[10] = new Territory("Brasil"		, brasil_n);
+		    territories[11] = new Territory("Chile"			, chile_n);
+		    territories[12] = new Territory("Colombia"		, colombia_n);
 		    
 		    Territory[] southAmerica = new Territory[4];
 		    
 		    for(int i = 0; i < 4; i++)
 		    {
-		    	 southAmerica[i] = Territories[cont_all_territories];
+		    	 southAmerica[i] = territories[cont_all_territories];
 		    	 cont_all_territories++;
 		    }
 		    
-		    Continents[SA] = new Continent("América do Sul", southAmerica, 2);
+		    continents[SA] = new Continent("América do Sul", southAmerica, 2);
 		    
 		    //AF
 		    
-		    Territories[13]	= new Territory("Africa Do Sul"	, africa_do_sul_n);
-		    Territories[14] = new Territory("Sudao"			, sudao_n);
-		    Territories[15] = new Territory("Argelia"		, argelia_n);
-		    Territories[16] = new Territory("Egito"			, egito_n);
-		    Territories[17]	= new Territory("Madagascar"	, madagascar_n);
-		    Territories[18] = new Territory("Congo"			, congo_n);
+		    territories[13]	= new Territory("Africa Do Sul"	, africa_do_sul_n);
+		    territories[14] = new Territory("Sudao"			, sudao_n);
+		    territories[15] = new Territory("Argelia"		, argelia_n);
+		    territories[16] = new Territory("Egito"			, egito_n);
+		    territories[17]	= new Territory("Madagascar"	, madagascar_n);
+		    territories[18] = new Territory("Congo"			, congo_n);
 		    
 		    Territory[] africa = new Territory[6];
 		    
 		    for(int i = 0; i < 6; i++)
 		    {
-		    	 africa[i] = Territories[cont_all_territories];
+		    	 africa[i] = territories[cont_all_territories];
 		    	 cont_all_territories++;
 		    }
 		    
-		    Continents[AF] = new Continent("África", africa, 3);
+		    continents[AF] = new Continent("África", africa, 3);
 		    
 		    //EU
 		    
-		    Territories[19]	= new Territory("Islandia"		, islandia_n);
-		    Territories[20] = new Territory("Franca"		, franca_n);
-		    Territories[21] = new Territory("Inglaterra"	, inglaterra_n);
-		    Territories[22]	= new Territory("Polonia"		, polonia_n);
-		    Territories[23] = new Territory("Suecia"		, suecia_n);
-		    Territories[24] = new Territory("Moscou"		, moscou_n);
-		    Territories[25] = new Territory("Alemanha"		, alemanha_n);
+		    territories[19]	= new Territory("Islandia"		, islandia_n);
+		    territories[20] = new Territory("Franca"		, franca_n);
+		    territories[21] = new Territory("Inglaterra"	, inglaterra_n);
+		    territories[22]	= new Territory("Polonia"		, polonia_n);
+		    territories[23] = new Territory("Suecia"		, suecia_n);
+		    territories[24] = new Territory("Moscou"		, moscou_n);
+		    territories[25] = new Territory("Alemanha"		, alemanha_n);
 		    
 		    Territory[] europe = new Territory[7];
 		    
 		    for(int i = 0; i < 7; i++)
 		    {
-		    	 europe[i] = Territories[cont_all_territories];
+		    	 europe[i] = territories[cont_all_territories];
 		    	 cont_all_territories++;
 		    }
 		    
-		    Continents[EU] = new Continent("Europa", northAmerica, 5);
+		    continents[EU] = new Continent("Europa", northAmerica, 5);
 		    
 		    //AS
 		    
-		    Territories[26] = new Territory("China"			, china_n);
-		    Territories[27] = new Territory("India"			, india_n);
-		    Territories[28] = new Territory("Japao"			, japao_n);
-		    Territories[29] = new Territory("Dudinka"		, dudinka_n);
-		    Territories[30] = new Territory("Aral"			, aral_n);
-		    Territories[31] = new Territory("Mongolia"		, mongolia_n);
-		    Territories[32] = new Territory("Oriente Medio"	, oriente_medio_n);
-		    Territories[33] = new Territory("Omsk"			, omsk_n);
-		    Territories[34] = new Territory("Siberia"		, siberia_n);
-		    Territories[35] = new Territory("Tchita"		, tchita_n);
-		    Territories[36] = new Territory("Vietna"		, vietna_n);
-		    Territories[37] = new Territory("Vladivostok"	, vladivostok_n);
+		    territories[26] = new Territory("China"			, china_n);
+		    territories[27] = new Territory("India"			, india_n);
+		    territories[28] = new Territory("Japao"			, japao_n);
+		    territories[29] = new Territory("Dudinka"		, dudinka_n);
+		    territories[30] = new Territory("Aral"			, aral_n);
+		    territories[31] = new Territory("Mongolia"		, mongolia_n);
+		    territories[32] = new Territory("Oriente Medio"	, oriente_medio_n);
+		    territories[33] = new Territory("Omsk"			, omsk_n);
+		    territories[34] = new Territory("Siberia"		, siberia_n);
+		    territories[35] = new Territory("Tchita"		, tchita_n);
+		    territories[36] = new Territory("Vietna"		, vietna_n);
+		    territories[37] = new Territory("Vladivostok"	, vladivostok_n);
 		    
 		    Territory[] asia = new Territory[12];
 		    
 		    for(int i = 0; i < 12; i++)
 		    {
-		    	 asia[i] = Territories[cont_all_territories];
+		    	 asia[i] = territories[cont_all_territories];
 		    	 cont_all_territories++;
 		    }
 		    
-		    Continents[AS] = new Continent("Asia", asia, 7);
+		    continents[AS] = new Continent("Asia", asia, 7);
 		    
 		    //OC
 		    
-		    Territories[38] = new Territory("Australia"		, australia_n);
-		    Territories[39] = new Territory("Sumatra"		, sumatra_n);
-		    Territories[40] = new Territory("Nova Guine"	, nova_guine_n);
-		    Territories[41] = new Territory("Borneo"		, borneo_n);
+		    territories[38] = new Territory("Australia"		, australia_n);
+		    territories[39] = new Territory("Sumatra"		, sumatra_n);
+		    territories[40] = new Territory("Nova Guine"	, nova_guine_n);
+		    territories[41] = new Territory("Borneo"		, borneo_n);
 		    
 		    Territory[] oceania = new Territory[4];
 		    
 		    for(int i = 0; i < 4; i++)
 		    {
-		    	 oceania[i] = Territories[cont_all_territories];
+		    	 oceania[i] = territories[cont_all_territories];
 		    	 cont_all_territories++;
 		    }
 		    
-		    Continents[OC] = new Continent("Oceania", oceania, 2);
+		    continents[OC] = new Continent("Oceania", oceania, 2);
 	}
 	
 	private static void initializeCards() {
 		//initialize cards
-			Cards = new Card[44];
+			cards = new Card[44];
 			
 			//public Card(Shape s, Territory t);
 			
 			//NA_Territories 
 			
-			Cards[0]  = new Card(Shape.Triangle	, Territories[0]);
-			Cards[1]  = new Card(Shape.Circle	, Territories[1]);
-			Cards[2]  = new Card(Shape.Square	, Territories[2]);
-			Cards[3]  = new Card(Shape.Circle	, Territories[3]);
-			Cards[4]  = new Card(Shape.Square	, Territories[4]);
-			Cards[5]  = new Card(Shape.Triangle	, Territories[5]);
-			Cards[6]  = new Card(Shape.Square	, Territories[6]);
-			Cards[7]  = new Card(Shape.Circle	, Territories[7]);
-			Cards[8]  = new Card(Shape.Triangle	, Territories[8]);
+			cards[0]  = new Card(Shape.Triangle	, territories[0]);
+			cards[1]  = new Card(Shape.Circle	, territories[1]);
+			cards[2]  = new Card(Shape.Square	, territories[2]);
+			cards[3]  = new Card(Shape.Circle	, territories[3]);
+			cards[4]  = new Card(Shape.Square	, territories[4]);
+			cards[5]  = new Card(Shape.Triangle	, territories[5]);
+			cards[6]  = new Card(Shape.Square	, territories[6]);
+			cards[7]  = new Card(Shape.Circle	, territories[7]);
+			cards[8]  = new Card(Shape.Triangle	, territories[8]);
 			
 			
 			//SA_Territories 
 			
-			Cards[9]  = new Card(Shape.Square	, Territories[9]);
-			Cards[10] = new Card(Shape.Circle	, Territories[10]);
-			Cards[11] = new Card(Shape.Triangle	, Territories[11]);
-			Cards[12] = new Card(Shape.Triangle	, Territories[12]);
+			cards[9]  = new Card(Shape.Square	, territories[9]);
+			cards[10] = new Card(Shape.Circle	, territories[10]);
+			cards[11] = new Card(Shape.Triangle	, territories[11]);
+			cards[12] = new Card(Shape.Triangle	, territories[12]);
 			
 			//AF_Territories 
 			
-			Cards[13] = new Card(Shape.Triangle	, Territories[13]);
-			Cards[14] = new Card(Shape.Square	, Territories[14]);
-			Cards[15] = new Card(Shape.Circle	, Territories[15]);
-			Cards[16] = new Card(Shape.Triangle	, Territories[16]);
-			Cards[17] = new Card(Shape.Circle	, Territories[17]);
-			Cards[18] = new Card(Shape.Square	, Territories[18]);
+			cards[13] = new Card(Shape.Triangle	, territories[13]);
+			cards[14] = new Card(Shape.Square	, territories[14]);
+			cards[15] = new Card(Shape.Circle	, territories[15]);
+			cards[16] = new Card(Shape.Triangle	, territories[16]);
+			cards[17] = new Card(Shape.Circle	, territories[17]);
+			cards[18] = new Card(Shape.Square	, territories[18]);
 			
 			//EU_Territories 
 			
-			Cards[19] = new Card(Shape.Triangle	, Territories[19]);
-			Cards[20] = new Card(Shape.Square	, Territories[20]);
-			Cards[21] = new Card(Shape.Circle	, Territories[21]);
-			Cards[22] = new Card(Shape.Square	, Territories[22]);
-			Cards[23] = new Card(Shape.Circle	, Territories[23]);
-			Cards[24] = new Card(Shape.Triangle	, Territories[24]);
-			Cards[25] = new Card(Shape.Circle	, Territories[25]);
+			cards[19] = new Card(Shape.Triangle	, territories[19]);
+			cards[20] = new Card(Shape.Square	, territories[20]);
+			cards[21] = new Card(Shape.Circle	, territories[21]);
+			cards[22] = new Card(Shape.Square	, territories[22]);
+			cards[23] = new Card(Shape.Circle	, territories[23]);
+			cards[24] = new Card(Shape.Triangle	, territories[24]);
+			cards[25] = new Card(Shape.Circle	, territories[25]);
 			
 			
 			//AS_Territories 
 			
-			Cards[26] = new Card(Shape.Circle	, Territories[26]);
-			Cards[27] = new Card(Shape.Square 	, Territories[27]);
-			Cards[28] = new Card(Shape.Square 	, Territories[28]);
-			Cards[29] = new Card(Shape.Circle 	, Territories[29]);
-			Cards[30] = new Card(Shape.Triangle , Territories[30]);
-			Cards[31] = new Card(Shape.Circle 	, Territories[31]);
-			Cards[32] = new Card(Shape.Square 	, Territories[32]);
-			Cards[33] = new Card(Shape.Square 	, Territories[33]);
-			Cards[34] = new Card(Shape.Triangle , Territories[34]);
-			Cards[35] = new Card(Shape.Triangle , Territories[35]);
-			Cards[36] = new Card(Shape.Triangle , Territories[36]);
-			Cards[37] = new Card(Shape.Circle 	, Territories[37]);
+			cards[26] = new Card(Shape.Circle	, territories[26]);
+			cards[27] = new Card(Shape.Square 	, territories[27]);
+			cards[28] = new Card(Shape.Square 	, territories[28]);
+			cards[29] = new Card(Shape.Circle 	, territories[29]);
+			cards[30] = new Card(Shape.Triangle , territories[30]);
+			cards[31] = new Card(Shape.Circle 	, territories[31]);
+			cards[32] = new Card(Shape.Square 	, territories[32]);
+			cards[33] = new Card(Shape.Square 	, territories[33]);
+			cards[34] = new Card(Shape.Triangle , territories[34]);
+			cards[35] = new Card(Shape.Triangle , territories[35]);
+			cards[36] = new Card(Shape.Triangle , territories[36]);
+			cards[37] = new Card(Shape.Circle 	, territories[37]);
 			
 			
 			//OC_Territories
 			
-			Cards[38] = new Card(Shape.Triangle , Territories[38]);
-			Cards[39] = new Card(Shape.Square 	, Territories[39]);
-			Cards[40] = new Card(Shape.Circle 	, Territories[40]);
-			Cards[41] = new Card(Shape.Square 	, Territories[41]);
+			cards[38] = new Card(Shape.Triangle , territories[38]);
+			cards[39] = new Card(Shape.Square 	, territories[39]);
+			cards[40] = new Card(Shape.Circle 	, territories[40]);
+			cards[41] = new Card(Shape.Square 	, territories[41]);
 			
 			//Jokers
 			
-			Cards[42] = new Card(Shape.Joker	, null);
-			Cards[43] = new Card(Shape.Joker	, null);
+			cards[42] = new Card(Shape.Joker	, null);
+			cards[43] = new Card(Shape.Joker	, null);
 
 	}
 	
 	private static void initializeObjectives()
 	{
 
-		Objectives = new Objective[14];
+		objectives = new Objective[14];
 		
 		//Conquer territory
 		
 		int objIndex = 0;
 		
-		Objectives[objIndex++] = new ConquerTerritoryObjective("Conquistar 18 territórios e ocupar cada um deles com pelo menos 2 exércitos", 18, 2);
-		Objectives[objIndex++] = new ConquerTerritoryObjective("Conquistar 24 territórios", 24, 1);
+		objectives[objIndex++] = new ConquerTerritoryObjective("Conquistar 18 territórios e ocupar cada um deles com pelo menos 2 exércitos", 18, 2);
+		objectives[objIndex++] = new ConquerTerritoryObjective("Conquistar 24 territórios", 24, 1);
 		
 		//Destroy army
 		
@@ -395,169 +390,169 @@ public class Model {
 		for(int i = 0; i < Color.Count.ordinal(); i++)
 		{
 			Color c = Color.values()[i];
-			Objectives[objIndex++] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + c.name(), c);
+			objectives[objIndex++] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + c.name(), c);
 		}
 		
 		
 		
 		//Conquer continent
 		
-		Continent[] objContinents = {Continents[EU], Continents[SA]};
+		Continent[] objContinents = {continents[EU], continents[SA]};
 		
-		Objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Europa, a América do Sul "
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Europa, a América do Sul "
 				+ "e mais um continente à sua escolha", objContinents, true);
 		
-		objContinents[1] = Continents[OC];
+		objContinents[1] = continents[OC];
 		
-		Objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Europa, a Oceania e "
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Europa, a Oceania e "
 				+ "mais um continente à sua escolha", objContinents, true);
 		
-		objContinents[0] = Continents[NA];
+		objContinents[0] = continents[NA];
 		
-		Objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a Oceania", objContinents, false);
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a Oceania", objContinents, false);
 		
-		objContinents[1] = Continents[AF];
+		objContinents[1] = continents[AF];
 		
-		Objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a África", objContinents, false);
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a África", objContinents, false);
 		
-		objContinents[0] = Continents[AS];
-		objContinents[1] = Continents[SA];
+		objContinents[0] = continents[AS];
+		objContinents[1] = continents[SA];
 		
-		Objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Sul e a Ásia", objContinents, false);
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Sul e a Ásia", objContinents, false);
 		
-		objContinents[0] = Continents[AF];
+		objContinents[0] = continents[AF];
 		
-		Objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Ásia e a África", objContinents, false);
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Ásia e a África", objContinents, false);
 		
 	}
 	
-	private static void initializePlayers()
+	public static void initializePlayers()
 	{
 		//initialize players
-		
-				Scanner scan = new Scanner(System.in);
-				
-				int n_players = -1;
-				
-				while(n_players < 3 || n_players > 6)
+			Scanner scan = new Scanner(System.in);
+			
+			int n_players = -1;
+			
+			while(n_players < 3 || n_players > 6)
+			{
+				System.out.println("Escolha o numero de jogadores");
+				n_players = scan.nextInt();
+				if(n_players < 3 || n_players > 6)
 				{
-					System.out.println("Escolha o numero de jogadores");
-					n_players = scan.nextInt();
-					if(n_players < 3 || n_players > 6)
-					{
-						System.out.println("O numero de jogadores deve ser de 3 a 6");
-					}
+					System.out.println("O numero de jogadores deve ser de 3 a 6");
 				}
+			}
+			
+			String name;
+			
+			players = new Player[n_players];
+			
+			//public Player(String n,Color c,Objective o)
+			
+			for(int i=0;i < n_players;i++)
+			{
+				System.out.print("Escolha uma cor para o jogador "+ Integer.toString(i+1));
+				System.out.print("\n");
 				
-				String name;
-				
-				Players = new Player[n_players];
-				
-				//public Player(String n,Color c,Objective o)
-				
-				for(int i=0;i < n_players;i++)
-				{
-					System.out.print("Escolha uma cor para o jogador "+ Integer.toString(i+1));
-					System.out.print("\n");
-					
-					int select = -1;
+				int select = -1;
 
-					while(!(select >= 0 && select <= 5))
+				while(!(select >= 0 && select <= 5))
+				{
+					System.out.print("Indices respectivos: \n 0 = BRANCO, \n 1 = PRETO, \n 2 = AZUL, \n 3 = AMARELO, \n 4 = VERDE, \n 5 = VERMELHO\n");
+					select = scan.nextInt();
+					if(!(select >= 0 && select <= 5))
 					{
-						System.out.print("Indices respectivos: \n 0 = BRANCO, \n 1 = PRETO, \n 2 = AZUL, \n 3 = AMARELO, \n 4 = VERDE, \n 5 = VERMELHO\n");
-						select = scan.nextInt();
-						if(!(select >= 0 && select <= 5))
-						{
-							System.out.println("Insira um indice valido");
-						}
-					}
-						
-					if(remainingColors[select] == null)
-					{
-						System.out.println("Cor ja escolhida");
-						i--;
-					}
-					else
-					{
-						System.out.println("Insira um nome para o jogador "+ Integer.toString(i+1));
-						System.out.print("\n");
-						name = scan.next();
-						
-						
-						Players[i] = new Player(name, remainingColors[select]); //maybe define objectives before and give'em out here 
-						
-						remainingColors[select] = null;
+						System.out.println("Insira um indice valido");
 					}
 				}
-				
-				scan.close();
+					
+				if(remainingColors[select] == null)
+				{
+					System.out.println("Cor ja escolhida");
+					i--;
+				}
+				else
+				{
+					System.out.println("Insira um nome para o jogador "+ Integer.toString(i+1));
+					System.out.print("\n");
+					name = scan.next();
+					
+					
+					players[i] = new Player(name, remainingColors[select]); //maybe define objectives before and give'em out here 
+					
+					remainingColors[select] = null;
+				}
+			}
+			
+			scan.close();
 	}
 	
 	public static void firstDraw() {
-		//Draw cards and objectives
-				//Creating stacks to draw cards and objectives
-				objStack.addAll(Arrays.asList(Objectives));
-				
-				//removing "destroyArmy" type Objectives of non-participating colors
-				for(int i = 0; i < remainingColors.length; i++)
+		
+	//Draw cards and objectives
+		//Creating stacks to draw cards and objectives
+		objStack.addAll(Arrays.asList(objectives));
+		
+		//removing "destroyArmy" type Objectives of non-participating colors
+		for(int i = 0; i < remainingColors.length; i++)
+		{
+			Color c = remainingColors[i];
+			if(c != null)
+			{
+				objStack.remove(objectives[2+c.ordinal()]);
+			}
+		}
+		
+		Collections.shuffle(objStack);
+		
+		Stack<Card> cardStack = new Stack<Card>();
+		cardStack.addAll(Arrays.asList(cards));
+		
+		//Remove jokers
+		cardStack.remove(43); 
+		cardStack.remove(42);
+		
+		Collections.shuffle(cardStack);
+		
+		boolean isCardStackEmpty = false;
+		
+		while(!isCardStackEmpty)
+		{
+			for(Player p:players)
+			{
+				if(!isCardStackEmpty)
 				{
-					Color c = remainingColors[i];
-					if(c != null)
-					{
-						objStack.remove(Objectives[2+c.ordinal()]);
-					}
+					p.draw(cardStack.pop());
+					
+					isCardStackEmpty = cardStack.isEmpty();
 				}
-				
-				Collections.shuffle(objStack);
-				
-				Stack<Card> cardStack = new Stack<Card>();
-				cardStack.addAll(Arrays.asList(Cards));
-				
-				//Remove jokers
-				cardStack.remove(43); 
-				cardStack.remove(42);
-				
-				Collections.shuffle(cardStack);
-				
-				boolean isCardStackEmpty = false;
-				
-				while(!isCardStackEmpty)
-				{
-					for(Player p:Players)
-					{
-						if(!isCardStackEmpty)
-						{
-							p.draw(cardStack.pop());
-							
-							isCardStackEmpty = cardStack.isEmpty();
-						}
-						else
-							break;
-					}
-				}
-				
-				//Add jokers
-				cardStack.add(Cards[42]);
-				cardStack.add(Cards[43]);
-				
-				for(Player p:Players)
-				{
-					Objective o = objStack.pop();
-				
-					p.setObjective(o);
-										
-					cardStack.addAll(p.cardToTerritory());
-				}
-				
-				//Shuffle players order
-				List<Player> PlayerOrder = Arrays.asList(Players);
-				
-				Collections.shuffle(PlayerOrder);
-				
-				PlayerOrder.toArray(Players);
+				else
+					break;
+			}
+		}
+		
+		//Add jokers
+		cardStack.add(cards[42]);
+		cardStack.add(cards[43]);
+		
+		for(Player p:players)
+		{
+			Objective o = objStack.pop();
+		
+			p.setObjective(o);
+			
+			//Place 1 army on each territory and retrieve the cards
+			cardStack.addAll(p.cardToTerritory());
+		}
+		
+	//Shuffle players order
+		List<Player> PlayerOrder = Arrays.asList(players);
+		
+		Collections.shuffle(PlayerOrder);
+		
+		PlayerOrder.toArray(players);
 	}
 	
-	//initialize all basic game elements
 	public static void initialize(){
 	    
 		Model.initializeMap();		
@@ -567,79 +562,58 @@ public class Model {
 		Model.initializeObjectives();
 		
 		Model.initializePlayers();
-		
 	}
 	
-	public List<Player> getPlayers()
+	public static void placeArmy(Player p, int army, Territory t)
 	{
-		return Arrays.asList(Players);
-	}
-	
-	
-	
-	
-	public static void recieveAndDistributeArmies(Player p) {
-		
-		int bonusArmies = 0;
-		int viable = 0;
-		
-		//trade card method
-		
-		/*system verifies if trade is viable or non-viable, obligatory or non-obligatory */
-		/* method isTradeViable() 
-		 * return 0 if non-viable
-		 * return 1 if viable
-		 * return 2 if obligatory
-		 */
-		
-		viable = p.isTradeViable();
-		
-		if(viable == 1)
+		if(p == null ||t == null)
 		{
-				//ask if player wants to trade
-				//yes - change viable to 2
-				//no - change viable to 0
-		}
-		if(viable == 2)
-		{
-			//call tradeCardsForArmies()
-			//recive array of cards to add to pile (and shuffle)
-			//each 3 cards count as a bonus
-			//bonus increases each trade
+			throw new NullPointerException();
 		}
 		
+		if(army == 0)
+		{
+			throw new IllegalArgumentException();
+		}
 		
-		
-		
-		//player recieves continental bonus(es)
-		bonusArmies += p.ContinentBonus();
-		
-		
-		
-		//recive regular armies
-		int newArmies = (p.getAllTerritories().size() / 2) + bonusArmies;
-		
-		
-		//select where to put
-		//while( )
-		//{
-			//select turfs to put certain amount
-			
-			//player confirm choices and program validates amount
-			
-		//}
-		
-		/* 
-		Recebimento e posicionamento dos exércitos correspondentes ao número de territórios (metade) que o jogador da vez possui.
-	 	
-	 	Recebimento e posicionamento dos exércitos correspondentes à posse de um continente inteiro.
-	 	
-	 	Recebimento e posicionamento dos exércitos correspondentes a troca de cartas.
-		 */
-		
+		p.manageTerritory(t, army);
 	}
 	
-
+	public static void distribuiteArmy()
+	{
+		for(Player p:players)
+		{
+			int army = 0;
+			
+			army += p.getContinentBonus(continents);
+			army += p.getAllTerritories().size()/2;
+			
+			p.receiveArmies(army);
+		}
+	}
+	
+	public static boolean validateCardTrade(ArrayList<Card> selected)
+	{
+		if(selected != null && selected.size() == 3)
+		{
+			if(selected.get(0).getShape() == selected.get(1).getShape())
+			{
+				if(selected.get(0).getShape() == selected.get(2).getShape()) //all shapes are equal
+					return true;
+				else
+					return false;
+			}
+			else
+				if(	selected.get(0).getShape() != selected.get(2).getShape() && 
+					selected.get(1).getShape() != selected.get(2).getShape()) // all shapes are different
+					return true;
+				else
+					return false;
+		}
+		else
+			return false;
+	}
+	
 	public static boolean validateAttack(Color c,Territory src,Territory target,int n_Troops_Attacking) {
 		
 		
@@ -675,13 +649,11 @@ public class Model {
 	{
 		initialize();
 		
-		firstDraw();
-		
 		//Instances log
 		
 		System.out.println("------------------CARDS---------------------");
 		System.out.println();
-		for(Card c:Model.Cards)
+		for(Card c:Model.cards)
 		{
 			if(c.getTerritory() != null)
 				System.out.println(c.getShape().name() +", "+ c.getTerritory().getName());
@@ -692,7 +664,7 @@ public class Model {
 		
 		System.out.println("---------------TERRITORIES-----------");
 		System.out.println();
-		for(Territory t:Model.Territories)
+		for(Territory t:Model.territories)
 		{
 			System.out.println("Name:" );
 			System.out.println(t.getName());
@@ -707,7 +679,7 @@ public class Model {
 		
 		System.out.println("--------------CONTINENTS-----------------");
 		System.out.println();
-		for(Continent c:Model.Continents)
+		for(Continent c:Model.continents)
 		{
 			System.out.println("Name:" );
 			System.out.println(c.getName());
@@ -720,9 +692,11 @@ public class Model {
 			System.out.println();
 		}
 		
+		Model.firstDraw();
+		
 		System.out.println("------------PLAYER ORDER-------------------");
 		System.out.println();
-		for(Player p:Players)
+		for(Player p:players)
 		{
 			System.out.println(p.getName());
 		}
@@ -730,13 +704,13 @@ public class Model {
 		
 		System.out.println("------------ALL OBJECTIVES-------------------");
 		System.out.println();
-		for(Objective o:Model.Objectives)
+		for(Objective o:Model.objectives)
 		{
 			System.out.println(o.getDescription());
 			System.out.println();
 		}
 
-		for(Player p:Players)
+		for(Player p:players)
 		{
 			System.out.println("------------------"+ p.getName() + "-" + p.getColor() + "----------------------------");
 			System.out.println("\tObjetivo: ");

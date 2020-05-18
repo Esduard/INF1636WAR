@@ -4,7 +4,9 @@ import model.*;
 
 class TEST {
 	
-	private static void testValidateAttack()
+	
+	
+	/*private static void testValidateAttack()
 	{
 		//public Territory(String n, Color c, ArrayList<String> neighbors );
 	    ArrayList<String> venezuela_n = new ArrayList<String>(
@@ -52,5 +54,5 @@ class TEST {
 	public static void main(String[] args) {
 		System.out.println("-------------TEST MODEL INTIALIZE---------------");
 		Model.testMethods();
-	}
+	}*/
 }

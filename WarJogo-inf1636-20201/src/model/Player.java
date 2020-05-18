@@ -7,6 +7,7 @@ class Player {
 	private Objective objective;
 	private ArrayList<Card> Cards = new ArrayList<Card>();
 	private ArrayList<Territory> Territories = new ArrayList<Territory>();
+	private int availableArmies;
 	
 	public static ArrayList<Player> players;
 	
@@ -51,24 +52,6 @@ class Player {
 		this.objective = o;
 	}
 	
-	public void draw(Card c)
-	{
-		Cards.add(c);
-	}
-	
-	public List<Card> cardToTerritory()
-	{
-		ArrayList<Card> cardRet = new ArrayList<Card>();
-		while(!Cards.isEmpty())
-		{
-			Card c = Cards.remove(Cards.size()-1);
-			setTerritory(c.getTerritory(),1);
-			System.out.println(""+ c.getTerritory().getName() + " eh do jogador " + this.getColor() + "----------------------------");
-			cardRet.add(c);
-		}
-		return cardRet;
-	}
-	
 	public List<Card> getAllCards()
 	{
 		return Collections.unmodifiableList(Cards);
@@ -79,17 +62,20 @@ class Player {
 		return Collections.unmodifiableList(Territories);
 	}
 	
-	public int ContinentBonus()
+	public int getAvailableArmies()
+	{
+		return availableArmies;
+	}
+	
+	public int getContinentBonus(Continent[] allContinents)
 	{
 		int bonus = 0;
 		
-		Continent []allC = Model.getContinents();
-		
-		for(Continent c:allC)
+		for(Continent c:allContinents)
 		{
 			boolean validBonus = true;
-			Territory []continetTerritories = c.getTerritories();
-			for(Territory t:continetTerritories)
+			Territory []continentTerritories = c.getTerritories();
+			for(Territory t:continentTerritories)
 			{
 				if(!(Territories.contains(t)))
 				{
@@ -101,36 +87,11 @@ class Player {
 			{
 				bonus += c.getBonusArmy();
 			}
-			
-			
 		}
-		
-		
-		
+	
 		return bonus;
 	}
-	
-	public void setTerritory(Territory t, int army)
-	{
-		if(t != null)
-		{			
-			t.setColor(this.color);
-			t.setArmy(army);
-			Territories.add(t);
-		}
-		else
-			throw new NullPointerException("Parameter of type Territory cannot be null");
-	}
-	
-	
-	public void tradeCardsForArmies(ArrayList<Card> selected) //selcted only has valid cards
-	{
-		
-		Cards.removeAll(selected);
-		
-	}
-	
-	
+
 	public int isTradeViable()
 	{
 		//change to enum
@@ -149,5 +110,40 @@ class Player {
 		
 		return not_viable;
 		
+	}
+	
+	public void draw(Card c)
+	{
+		Cards.add(c);
+	}
+	
+	public List<Card> cardToTerritory()
+	{
+		ArrayList<Card> cardRet = new ArrayList<Card>();
+		while(!Cards.isEmpty())
+		{
+			Card c = Cards.remove(Cards.size()-1);
+			manageTerritory(c.getTerritory(),1);
+			System.out.println(""+ c.getTerritory().getName() + " eh do jogador " + this.getColor() + "----------------------------");
+			cardRet.add(c);
+		}
+		return cardRet;
+	}
+	
+	public void manageTerritory(Territory t, int army)
+	{
+		if(t != null)
+		{			
+			t.setColor(this.color);
+			t.setArmy(army);
+			if(!Territories.contains(t))
+				Territories.add(t);
+		}
+		else
+			throw new NullPointerException("Parameter of type Territory cannot be null");
+	}
+	
+	public void receiveArmies(int army) {
+		availableArmies += army;
 	}
 }
