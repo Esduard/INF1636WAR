@@ -53,6 +53,7 @@ public class TEST {
 		test_subject.add(cards[0]);
 		test_subject.add(cards[4]);
 		test_subject.add(cards[5]);
+		System.out.print("Expects true -> ");
 		System.out.println(Model.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
@@ -61,6 +62,7 @@ public class TEST {
 		test_subject.add(cards[0]);
 		test_subject.add(cards[1]);
 		test_subject.add(cards[2]);
+		System.out.print("Expects true -> ");
 		System.out.println(Model.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
@@ -69,10 +71,12 @@ public class TEST {
 		test_subject.add(cards[1]);
 		test_subject.add(cards[2]);
 		test_subject.add(cards[3]);
+		System.out.print("Expects false -> ");
 		System.out.println(Model.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
 		System.out.println("incorrectly use 0 cards for trade");
+		System.out.print("Expects false -> ");
 		System.out.println(Model.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
@@ -80,6 +84,7 @@ public class TEST {
 		test_subject.add(cards[0]);
 		test_subject.add(cards[1]);
 		test_subject.add(cards[5]);
+		System.out.print("Expects false -> ");
 		System.out.println(Model.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
@@ -87,11 +92,40 @@ public class TEST {
 		test_subject.add(cards[0]);
 		test_subject.add(cards[3]);
 		test_subject.add(cards[4]);
+		System.out.print("Expects false -> ");
 		System.out.println(Model.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
-		System.out.println("first card with different shape of second and second equal shape of third");
-		test_subject.addAll(List.of(cards[1], cards[4], cards[5]));
+		System.out.println("incorrectly use first card with different shape of second and second card with equal shape of third");
+		test_subject.add(cards[1]);
+		test_subject.add(cards[4]);
+		test_subject.add(cards[5]);
+		System.out.print("Expects false -> ");
+		System.out.println(Model.validateCardTrade(test_subject));
+		test_subject.removeAll(test_subject);
+		
+		System.out.println("correctly deal 2 equal cards with 1 joker");
+		test_subject.add(cards[1]);
+		test_subject.add(cards[3]);
+		test_subject.add(cards[6]);
+		System.out.print("Expects true -> ");
+		System.out.println(Model.validateCardTrade(test_subject));
+		test_subject.removeAll(test_subject);
+		
+		
+		System.out.println("correctly deal 2 diferent cards with  1 joker");
+		test_subject.add(cards[1]);
+		test_subject.add(cards[2]);
+		test_subject.add(cards[6]);
+		System.out.print("Expects true -> ");
+		System.out.println(Model.validateCardTrade(test_subject));
+		test_subject.removeAll(test_subject);
+		
+		System.out.println("correctly deal trade with 2 jokers and 1 extra card");
+		test_subject.add(cards[1]);
+		test_subject.add(cards[7]);
+		test_subject.add(cards[6]);
+		System.out.print("Expects true -> ");
 		System.out.println(Model.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
@@ -122,7 +156,7 @@ public class TEST {
 		System.out.println("Adding forth player: " + Model.addPlayer(new Player("Intruso", Color.Azul)));
 	}
 	
-	private static void testValidateAttack()
+	public static void testValidateAttack()
 	{
 		System.out.println("-------------TEST VALIDATE ATTACK--------------");
 		//public Territory(String n, Color c, ArrayList<String> neighbors );
@@ -152,12 +186,15 @@ public class TEST {
 		
 		
 		System.out.println("can't attack with enemy troops");
+		System.out.print("Expects false -> ");
 		System.out.println(Model.validateAttack(Color.Azul,Venezuela,Peru,1));
 		
 		System.out.println("can't attack yourself");
+		System.out.print("Expects false -> ");
 		System.out.println(Model.validateAttack(Color.Azul,Brasil,Peru,1));
 		
 		System.out.println("can't do attack with no troops on standby in source");
+		System.out.print("Expects false -> ");
 		System.out.println(Model.validateAttack(Color.Azul,Brasil,Venezuela,1));
 	
 		System.out.println("can't attack with more than 3 troops or 0 troops");
@@ -166,6 +203,9 @@ public class TEST {
 		
 		System.out.println("verify if target is src's neighbor");
 		System.out.println(Model.validateAttack(Color.Azul,Argentina,Venezuela,1));
+		
+		System.out.println("valid attack");
+		System.out.println(Model.validateAttack(Color.Azul,Peru,Venezuela,1));
 	}
 
 }

@@ -10,7 +10,7 @@ public class Model {
 	private static Objective[] objectives;
 	private static Stack<Objective> objStack = new Stack<Objective>();
 	private static ArrayList<Player> players;
-	private static ArrayList<Color> remainingColors = new ArrayList<Color>(List.of(Color.Branco,Color.Preto,Color.Azul,Color.Amarelo,Color.Verde,Color.Vermelho));
+	private static ArrayList<Color> remainingColors = new ArrayList<Color>(Arrays.asList(Color.Branco,Color.Preto,Color.Azul,Color.Amarelo,Color.Verde,Color.Vermelho));
 	
 	private static final int NA = 0;
 	private static final int SA = 1;

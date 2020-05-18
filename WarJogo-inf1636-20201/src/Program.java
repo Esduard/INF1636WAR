@@ -9,6 +9,7 @@ class Program {
 		TEST.testCreatePlayerList();
 		TEST.testAddPlayer();
 		TEST.testValidateCardTrade();
+		TEST.testValidateAttack();
 	}
 	
 }
