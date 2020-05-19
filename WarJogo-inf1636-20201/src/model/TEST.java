@@ -153,7 +153,7 @@ public class TEST {
 		System.out.println("Adding second player: " + Model.addPlayer(new Player("Eduardo", Color.Vermelho)));
 		System.out.println("Adding third player and repeating color: " + Model.addPlayer(new Player("Ivan", Color.Vermelho)));
 		System.out.println("Adding third player: " + Model.addPlayer(new Player("Ivan", Color.Preto)));
-		System.out.println("Adding forth player: " + Model.addPlayer(new Player("Intruso", Color.Azul)));
+		System.out.println("Adding forth player: " + Model.addPlayer(new Player("Pedro", Color.Branco)));
 	}
 	
 	public static void testValidateAttack()
@@ -198,13 +198,17 @@ public class TEST {
 		System.out.println(Model.validateAttack(Color.Azul,Brasil,Venezuela,1));
 	
 		System.out.println("can't attack with more than 3 troops or 0 troops");
+		System.out.print("Expects false -> ");
 		System.out.println(Model.validateAttack(Color.Azul,Peru,Venezuela,0));
+		System.out.print("Expects false -> ");
 		System.out.println(Model.validateAttack(Color.Azul,Peru,Venezuela,4));
 		
 		System.out.println("verify if target is src's neighbor");
+		System.out.print("Expects false -> ");
 		System.out.println(Model.validateAttack(Color.Azul,Argentina,Venezuela,1));
 		
 		System.out.println("valid attack");
+		System.out.print("Expects true -> ");
 		System.out.println(Model.validateAttack(Color.Azul,Peru,Venezuela,1));
 	}
 
