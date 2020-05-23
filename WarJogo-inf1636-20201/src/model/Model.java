@@ -642,14 +642,14 @@ public class Model {
 			else {
 			
 				
-				if(selected.get(0).getShape() != selected.get(2).getShape()) { //all shapes are equal
-					return true;
+				if(selected.get(0).getShape() != selected.get(2).getShape()) { 
+					return true; //all shapes are diferent
 				}
 				else{
-					if(selected.get(2).getShape() == Shape.Joker) //joker complements trade
-						return true;
+					if(selected.get(2).getShape() == Shape.Joker) 
+						return true; //joker complements trade
 					else
-						return false;
+						return false; 
 					}	
 			}
 		}
