@@ -9,32 +9,8 @@ public class TEST {
 		System.out.println("-------------TEST CARD TRADE--------------");
 		
 		
-		/* public static boolean validateCardTrade(ArrayList<Card> selected)
-	{
-		if(selected != null && selected.size() == 3)
-		{
-			if(selected.get(0).getShape() == selected.get(1).getShape())
-			{
-				if(selected.get(0).getShape() == selected.get(2).getShape()) //all shapes are equal
-					return true;
-				else
-					return false;
-			}
-			else
-				if(	selected.get(0).getShape() != selected.get(2).getShape() && 
-					selected.get(1).getShape() != selected.get(2).getShape()) // all shapes are different
-					return true;
-				else
-					return false;
-		}
-		else
-			return false;
-	}*/
-		  
 		
-		
-		
-		Card []cards = new Card[11];
+		Card []cards = new Card[8];
 		
 		ArrayList<Card> test_subject = new ArrayList<Card>();
 		
@@ -149,11 +125,14 @@ public class TEST {
 		System.out.println("3 players: ");
 		
 		System.out.println("Adding null: " + Model.addPlayer(null));
-		System.out.println("Adding first player: " + Model.addPlayer(new Player("Gabriel", Color.Azul)));
-		System.out.println("Adding second player: " + Model.addPlayer(new Player("Eduardo", Color.Vermelho)));
-		System.out.println("Adding third player and repeating color: " + Model.addPlayer(new Player("Ivan", Color.Vermelho)));
-		System.out.println("Adding third player: " + Model.addPlayer(new Player("Ivan", Color.Preto)));
-		System.out.println("Adding forth player: " + Model.addPlayer(new Player("Pedro", Color.Branco)));
+		System.out.println("Adding first player: " + Model.addPlayer(new Player("Hashirama", Color.Azul)));
+		System.out.println("Adding second player: " + Model.addPlayer(new Player("Tobirama", Color.Vermelho)));
+		System.out.println("Adding third player and repeating color: " + Model.addPlayer(new Player("Madara", Color.Vermelho)));
+		System.out.println("Adding third player: " + Model.addPlayer(new Player("Hiruzen", Color.Preto)));
+		System.out.println("Adding forth player: " + Model.addPlayer(new Player("Minato", Color.Branco)));
+		System.out.println("Adding fifth player: " + Model.addPlayer(new Player("Tsunade", Color.Amarelo)));
+		System.out.println("Adding sixth player: " + Model.addPlayer(new Player("Kakashi", Color.Verde)));
+		System.out.println("Adding seventh player: " + Model.addPlayer(new Player("Naruto", Color.Branco)));
 	}
 	
 	public static void testValidateAttack()
