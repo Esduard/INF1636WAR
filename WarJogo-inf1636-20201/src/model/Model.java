@@ -689,6 +689,30 @@ public class Model {
 		return neighbors.contains(target.getName());
 	}
 	
+	public static boolean[] attack(Integer [] attack,Integer [] defend) {
+		
+		//sort arrays in reverse
+		Arrays.sort(attack, Collections.reverseOrder());
+		Arrays.sort(defend, Collections.reverseOrder());
+		
+		
+		
+		//generate array of results
+		boolean []results = new boolean[defend.length];
+		
+		for(int i=0;i<defend.length;i++)
+		{
+			if(defend[i] >= attack[i]) //defense victory
+				results[i] = true;
+			
+			else
+				results[i] = false;
+		}
+		
+		return results;
+		
+	}
+	
 	public static void testMethods()
 	{
 		initialize();

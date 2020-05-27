@@ -135,6 +135,21 @@ public class TEST {
 		System.out.println("Adding seventh player: " + Model.addPlayer(new Player("Naruto", Color.Branco)));
 	}
 	
+	public static void testAttack()
+	{
+		System.out.println("----------------TEST ATTACK----------------");
+		
+		Integer [] atk = {2,1,4};
+		Integer [] def = {3,2};
+		
+		boolean[] result = Model.attack(atk,def);
+		
+		System.out.println("ATK : " + Arrays.toString(atk));
+		System.out.println("DEF : " + Arrays.toString(def));
+		System.out.println("result : " + Arrays.toString(result));
+		
+	}
+	
 	public static void testValidateAttack()
 	{
 		System.out.println("-------------TEST VALIDATE ATTACK--------------");

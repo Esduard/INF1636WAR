@@ -10,6 +10,7 @@ class Program {
 		TEST.testAddPlayer();
 		TEST.testValidateCardTrade();
 		TEST.testValidateAttack();
-	}
+		TEST.testAttack();	
+		}
 	
 }
