@@ -686,12 +686,13 @@ public class Model {
 		//verify if target is src's neighbor	
 		ArrayList<String> neighbors = src.getNeighbors();
 		
-		//System.out.println(neighbors);
 		return neighbors.contains(target.getName());
 	}
 	
-	public static void executeAttack(Territory src , Territory target, int [] attack,int [] defend) {
+	public static boolean executeAttack(Territory src , Territory target, int [] attack,int [] defend) {
 		
+		if(!Model.validateAttack(src.getColor(), src, target, attack.length))
+			return false;
 		//sort arrays in reverse
 		Arrays.sort(attack);
 		Arrays.sort(defend);
@@ -726,7 +727,26 @@ public class Model {
 		target.modifyTroops(-results[1]);
 		src.modifyTroops(-results[0]);
 		
+		return true;
 	}
+	
+	public static boolean moveTroops(Territory src , Territory target, int mov) {
+		
+		
+		if((src.getTroops() > mov) && (src.getColor().equals(target.getColor())) ) {
+			
+			
+			src.modifyTroops(-mov);
+			target.modifyTroops(mov);
+			
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+	
 	
 	public static void testMethods()
 	{

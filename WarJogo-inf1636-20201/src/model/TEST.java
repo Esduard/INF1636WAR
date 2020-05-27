@@ -137,10 +137,14 @@ public class TEST {
 	
 	public static void testAttackResult()
 	{
+		//further testing is not required since validateAttack works
+		
 		System.out.println("----------------TEST EXECUTE ATTACK----------------");
 		
 		int [] atk = {2,1,4};
 		int [] def = {3,2};
+		
+		boolean result;
 		
 		System.out.println("ATK : " + Arrays.toString(atk));
 		System.out.println("DEF : " + Arrays.toString(def));
@@ -154,20 +158,96 @@ public class TEST {
 	    Territory Venezuela = new Territory("Venezuela",Color.Vermelho, venezuela_n);
 		Territory Peru = new Territory("Peru",Color.Azul, peru_n);
 		
-		Venezuela.setTroops(2);
-		Peru.setTroops(5);
+		Venezuela.setTroops(5);
+		Peru.setTroops(2);
 		
 		System.out.println("BEFORE ATTACK: ");
 		
-		System.out.println(Venezuela.getName() + " : " + Venezuela.getTroops());
-		System.out.println(Peru.getName() + " : " + Peru.getTroops());
+		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
+		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
 
-		Model.executeAttack( Venezuela , Peru, atk , def );
+		result = Model.executeAttack(Venezuela , Peru, atk , def );
+		
+		System.out.println(result);
 		
 		System.out.println("AFTER ATTACK: ");
 		
-		System.out.println(Venezuela.getName() + " : " + Venezuela.getTroops());
-		System.out.println(Peru.getName() + " : " + Peru.getTroops());
+		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
+		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
+		
+		
+	}
+	
+	public static void testMoveTroops(){
+		
+		System.out.println("----------------TEST MOVE TROOPS----------------");
+		
+		ArrayList<String> venezuela_n = new ArrayList<String>(
+	    	      Arrays.asList("Mexico","Peru","Brasil"));
+	    
+	    ArrayList<String> peru_n = new ArrayList<String>(
+	    	      Arrays.asList("Argentina","Venezuela","Brasil"));
+	    
+	    Territory Venezuela = new Territory("Venezuela",Color.Azul, venezuela_n);
+		Territory Peru = new Territory("Peru",Color.Vermelho, peru_n);
+		
+		boolean result;
+		
+		Venezuela.setTroops(1);
+		Peru.setTroops(5);
+		
+		
+		System.out.println("Incorrectly move troops of different colors");
+		System.out.println("BEFORE MOVE: ");
+		
+		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
+		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
+
+		result = Model.moveTroops(Venezuela,Peru,1);
+		
+		System.out.println(result);
+		
+		System.out.println("AFTER MOVE: ");
+		
+		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
+		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
+		
+		System.out.println("Incorrectly move stationary troops ");
+		
+		Venezuela.setColor(Peru.getColor());
+		
+		System.out.println("BEFORE MOVE: ");
+		
+		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
+		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
+
+		result = Model.moveTroops(Venezuela,Peru,1);
+		
+		System.out.println(result);
+		
+		System.out.println("AFTER MOVE: ");
+		
+		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
+		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
+		
+		System.out.println("Correctly move 2 troops ");
+		
+		Venezuela.setTroops(3);
+		
+		System.out.println("BEFORE MOVE: ");
+		
+		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
+		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
+
+		result = Model.moveTroops(Venezuela,Peru,2);
+		
+		System.out.println(result);
+		
+		System.out.println("AFTER MOVE: ");
+		
+		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
+		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
+		
 		
 	}
 	
