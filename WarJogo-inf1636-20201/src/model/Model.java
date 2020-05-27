@@ -1,5 +1,6 @@
 package model;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Model {
@@ -689,27 +690,41 @@ public class Model {
 		return neighbors.contains(target.getName());
 	}
 	
-	public static boolean[] attack(Integer [] attack,Integer [] defend) {
+	public static void executeAttack(Territory src , Territory target, int [] attack,int [] defend) {
 		
 		//sort arrays in reverse
-		Arrays.sort(attack, Collections.reverseOrder());
-		Arrays.sort(defend, Collections.reverseOrder());
+		Arrays.sort(attack);
+		Arrays.sort(defend);
+		
+		for(int i = 0; i < attack.length / 2; i++) {
+			int temp = attack[i];
+			attack[i] = attack[attack.length - 1 - i];
+			attack[attack.length- 1 - i] = temp;
+		}
+		
+		for(int i = 0; i < defend.length / 2; i++) {
+			int temp = defend[i];
+			defend[i] = defend[defend.length - 1 - i];
+			defend[defend.length- 1 - i] = temp;
+		}
 		
 		
 		
 		//generate array of results
-		boolean []results = new boolean[defend.length];
+		int[] results = new int[2];
 		
-		for(int i=0;i<defend.length;i++)
+		for(int i=defend.length - 1;i > -1;i--)
 		{
-			if(defend[i] >= attack[i]) //defense victory
-				results[i] = true;
+			if(defend[i] >= attack[i]) //defense victory increase
+				results[0]++;
 			
-			else
-				results[i] = false;
+			else					   //attack victory increase
+				results[1]++;
 		}
 		
-		return results;
+		//modify troops after conflict
+		target.modifyTroops(-results[1]);
+		src.modifyTroops(-results[0]);
 		
 	}
 	

@@ -135,18 +135,39 @@ public class TEST {
 		System.out.println("Adding seventh player: " + Model.addPlayer(new Player("Naruto", Color.Branco)));
 	}
 	
-	public static void testAttack()
+	public static void testAttackResult()
 	{
-		System.out.println("----------------TEST ATTACK----------------");
+		System.out.println("----------------TEST EXECUTE ATTACK----------------");
 		
-		Integer [] atk = {2,1,4};
-		Integer [] def = {3,2};
-		
-		boolean[] result = Model.attack(atk,def);
+		int [] atk = {2,1,4};
+		int [] def = {3,2};
 		
 		System.out.println("ATK : " + Arrays.toString(atk));
 		System.out.println("DEF : " + Arrays.toString(def));
-		System.out.println("result : " + Arrays.toString(result));
+		
+		ArrayList<String> venezuela_n = new ArrayList<String>(
+	    	      Arrays.asList("Mexico","Peru","Brasil"));
+	    
+	    ArrayList<String> peru_n = new ArrayList<String>(
+	    	      Arrays.asList("Argentina","Venezuela","Brasil"));
+	    
+	    Territory Venezuela = new Territory("Venezuela",Color.Vermelho, venezuela_n);
+		Territory Peru = new Territory("Peru",Color.Azul, peru_n);
+		
+		Venezuela.setTroops(2);
+		Peru.setTroops(5);
+		
+		System.out.println("BEFORE ATTACK: ");
+		
+		System.out.println(Venezuela.getName() + " : " + Venezuela.getTroops());
+		System.out.println(Peru.getName() + " : " + Peru.getTroops());
+
+		Model.executeAttack( Venezuela , Peru, atk , def );
+		
+		System.out.println("AFTER ATTACK: ");
+		
+		System.out.println(Venezuela.getName() + " : " + Venezuela.getTroops());
+		System.out.println(Peru.getName() + " : " + Peru.getTroops());
 		
 	}
 	
