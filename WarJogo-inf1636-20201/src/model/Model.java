@@ -19,6 +19,19 @@ public class Model {
     private static final int EU = 3;
 	private static final int AS = 4;
     private static final int OC = 5;
+    
+    public static Player getPlayer(Color c) {
+    	
+    	int i;
+    	
+    	for(i=0;i<players.size();i++) {
+    		Player target = players.get(i);
+    		if(target.getColor() == c) {
+    			return target;
+    		}
+    	}
+    	return null;
+    }
 
 	private static void initializeMap()
 	{

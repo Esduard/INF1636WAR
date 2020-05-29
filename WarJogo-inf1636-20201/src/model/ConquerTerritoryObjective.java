@@ -7,7 +7,9 @@ public class ConquerTerritoryObjective extends Objective {
 	
 	@Override
 	protected boolean ValidateObjective() {
-		// TODO Auto-generated method stub
+		
+		
+		
 		return false;
 	}
 	
