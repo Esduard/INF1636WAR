@@ -394,8 +394,8 @@ public class Model {
 		
 		int objIndex = 0;
 		
-		objectives[objIndex++] = new ConquerTerritoryObjective("Conquistar 18 territórios e ocupar cada um deles com pelo menos 2 exércitos", 18, 2);
-		objectives[objIndex++] = new ConquerTerritoryObjective("Conquistar 24 territórios", 24, 1);
+		objectives[objIndex++] = new ConquerTerritoryObjective("Conquistar 18 territórios e ocupar cada um deles com pelo menos 2 exércitos", 18, 2,null);
+		objectives[objIndex++] = new ConquerTerritoryObjective("Conquistar 24 territórios", 24, 1,null);
 		
 		//Destroy army
 		
@@ -403,7 +403,7 @@ public class Model {
 		for(int i = 0; i < Color.Count.ordinal(); i++)
 		{
 			Color c = Color.values()[i];
-			objectives[objIndex++] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + c.name(), c);
+			objectives[objIndex++] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + c.name(), c,null);
 		}
 		
 		
@@ -413,29 +413,29 @@ public class Model {
 		Continent[] objContinents = {continents[EU], continents[SA]};
 		
 		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Europa, a América do Sul "
-				+ "e mais um continente à sua escolha", objContinents, true);
+				+ "e mais um continente à sua escolha", objContinents, true,null);
 		
 		objContinents[1] = continents[OC];
 		
 		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Europa, a Oceania e "
-				+ "mais um continente à sua escolha", objContinents, true);
+				+ "mais um continente à sua escolha", objContinents, true,null);
 		
 		objContinents[0] = continents[NA];
 		
-		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a Oceania", objContinents, false);
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a Oceania", objContinents, false,null);
 		
 		objContinents[1] = continents[AF];
 		
-		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a África", objContinents, false);
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a África", objContinents, false,null);
 		
 		objContinents[0] = continents[AS];
 		objContinents[1] = continents[SA];
 		
-		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Sul e a Ásia", objContinents, false);
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Sul e a Ásia", objContinents, false,null);
 		
 		objContinents[0] = continents[AF];
 		
-		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Ásia e a África", objContinents, false);
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Ásia e a África", objContinents, false,null);
 		
 	}
 	
@@ -587,6 +587,7 @@ public class Model {
 			Objective o = objStack.pop();
 		
 			p.setObjective(o);
+			o.setPlayer(p); 
 			
 			//Place 1 army on each territory and retrieve the cards
 			cardStack.addAll(p.cardToTerritory());

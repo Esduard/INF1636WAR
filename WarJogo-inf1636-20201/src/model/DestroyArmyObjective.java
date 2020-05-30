@@ -24,9 +24,10 @@ public class DestroyArmyObjective extends Objective {
 		return false;
 	}
 	
-	public DestroyArmyObjective(String description, Color c)
+	public DestroyArmyObjective(String description, Color c,Player player)
 	{
 		this.description = description;
 		this.color = c;
+		this.player = player;
 	}
 }
