@@ -410,32 +410,31 @@ public class Model {
 		
 		//Conquer continent
 		
-		Continent[] objContinents = {continents[EU], continents[SA]};
+		Continent[] ContinentsEUSA = {continents[EU], continents[SA]};
+		
+		Continent[] ContinentsEUOC = {continents[EU],continents[OC]};
+		
+		Continent[] ContinentsNAOC = {continents[NA],continents[OC]};
+		
+		Continent[] ContinentsNAAF = {continents[NA],continents[AF]};
+		
+		Continent[] ContinentsASSA = {continents[AS],continents[SA]};
+		
+		Continent[] ContinentsASAF = {continents[AS],continents[AF]};
 		
 		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Europa, a América do Sul "
-				+ "e mais um continente à sua escolha", objContinents, true,null);
-		
-		objContinents[1] = continents[OC];
+				+ "e mais um continente à sua escolha", ContinentsEUSA, true,null,continents);
 		
 		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Europa, a Oceania e "
-				+ "mais um continente à sua escolha", objContinents, true,null);
+				+ "mais um continente à sua escolha", ContinentsEUOC, true,null,continents);
 		
-		objContinents[0] = continents[NA];
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a Oceania", ContinentsNAOC, false,null,continents);
 		
-		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a Oceania", objContinents, false,null);
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a África", ContinentsNAAF, false,null,continents);
 		
-		objContinents[1] = continents[AF];
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Sul e a Ásia", ContinentsASSA, false,null,continents);
 		
-		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a África", objContinents, false,null);
-		
-		objContinents[0] = continents[AS];
-		objContinents[1] = continents[SA];
-		
-		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Sul e a Ásia", objContinents, false,null);
-		
-		objContinents[0] = continents[AF];
-		
-		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Ásia e a África", objContinents, false,null);
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Ásia e a África", ContinentsASAF, false,null,continents);
 		
 	}
 	

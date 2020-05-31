@@ -13,7 +13,7 @@ public class ConquerTerritoryObjective extends Objective {
 		//get acces to player territories
 		List<Territory> territories = this.player.getAllTerritories();
 		//if all terrtories have
-		System.out.println("turf count: " + territories.size());
+		//System.out.println("turf count: " + territories.size());
 		if (territories.size() >= numberOfTerritories) {
 			
 			for(int i=0;i<territories.size();i++) {

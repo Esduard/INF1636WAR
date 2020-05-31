@@ -145,7 +145,7 @@ class Player {
 	{
 		if(t != null)
 		{	
-			System.out.println(this.getAllTerritories().size());
+			//System.out.println(t.getName());
 			t.setColor(this.color);
 			t.setTroops(army);
 			if(!Territories.contains(t))
