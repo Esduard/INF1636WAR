@@ -971,7 +971,7 @@ System.out.println("-------------TEST CONQUER CONTINENT OBJECTIVE--------------"
 	    	 cont_all_territories++;
 	    }
 	    
-	    continents[EU] = new Continent("Europa", northAmerica, 5);
+	    continents[EU] = new Continent("Europa", europe, 5);
 	    
 	    //AS
 	    
@@ -1028,40 +1028,59 @@ System.out.println("-------------TEST CONQUER CONTINENT OBJECTIVE--------------"
 		
 		Continent[] ContinentsEUSA = {continents[EU], continents[SA]};
 		
+		ArrayList<Continent> extraContinentsEUSA = new ArrayList<Continent>();
+		
+		for(int i=0;i<continents.length;i++) {
+			if(!Arrays.asList(ContinentsEUSA).contains(continents[i])) {
+				//System.out.println("is extra: " + continents[i].getName() );
+				extraContinentsEUSA.add(continents[i]);
+			}
+				
+		}
+		
 		objs[0] = new ConquerContinentObjective("Conquistar na totalidade a Europa, a América do Sul "
-				+ "e mais um continente à sua escolha", ContinentsEUSA, true,null,continents);
+				+ "e mais um continente à sua escolha", ContinentsEUSA, true,null,extraContinentsEUSA);
 		
 		Continent[] ContinentsEUOC = {continents[EU],continents[OC]};
 		
+		ArrayList<Continent> extraContinentsEUOC = new ArrayList<Continent>();
+		
+		for(int i=0;i<continents.length;i++) {
+			if(!Arrays.asList(ContinentsEUOC).contains(continents[i])) {
+				//System.out.println("is extra: " + continents[i].getName() );
+				extraContinentsEUOC.add(continents[i]);
+			}
+				
+		}
+		
 		objs[1] = new ConquerContinentObjective("Conquistar na totalidade a Europa, a Oceania e "
-				+ "mais um continente à sua escolha", ContinentsEUOC, true,null,continents);
+				+ "mais um continente à sua escolha", ContinentsEUOC, true,null,extraContinentsEUOC);
 		
 		Continent[] ContinentsNAOC = {continents[NA],continents[OC]};
 		
-		objs[2] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a Oceania", ContinentsNAOC, false,null,continents);
+		objs[2] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a Oceania", ContinentsNAOC, false,null,extraContinentsEUOC);
 		
 		Continent[] ContinentsNAAF = {continents[NA],continents[AF]};
 		
-		objs[3] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a África", ContinentsNAAF, false,null,continents);
+		objs[3] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a África", ContinentsNAAF, false,null,extraContinentsEUOC);
 		
 		
 		Continent[] ContinentsASSA = {continents[AS],continents[SA]};
 		
-		objs[4] = new ConquerContinentObjective("Conquistar na totalidade a América do Sul e a Ásia", ContinentsASSA, false,null,continents);
+		objs[4] = new ConquerContinentObjective("Conquistar na totalidade a América do Sul e a Ásia", ContinentsASSA, false,null,extraContinentsEUOC);
 		
 		Continent[] ContinentsASAF = {continents[AS],continents[AF]};
 		
-		objs[5] = new ConquerContinentObjective("Conquistar na totalidade a Ásia e a África", ContinentsASAF, false,null,continents);
+		objs[5] = new ConquerContinentObjective("Conquistar na totalidade a Ásia e a África", ContinentsASAF, false,null,extraContinentsEUOC);
 		
 		
-		System.out.println("P1 conquers NA,SA,EU");
+		System.out.println("P1 conquers NA,SA,EU, expects true");
 		
 		p[0].setObjective(objs[0]);
 		
 		
 		for(int i = 0; i < 13;i++) { //NA and SA
-			p[0].manageTerritory(territories[i],1);
-			
+			p[0].manageTerritory(territories[i],1);	
 		}
 		
 		for(int i = 19;i<26;i++) { //EU
@@ -1070,9 +1089,25 @@ System.out.println("-------------TEST CONQUER CONTINENT OBJECTIVE--------------"
 		
 		System.out.println("Objective complete: " + p[0].getObj().ValidateObjective());
 		
+		for(int i = 0;i<9;i++) { // looses NA (extra continent)
+			p[0].loseTerritory(territories[i]);
+		}
+		
+		System.out.println("P1 conquers SA,EU, but not NA, expects false");
+		
+		System.out.println("Objective complete: " + p[0].getObj().ValidateObjective());
+		
+		System.out.println("P1 conquers SA,EU, and NA again, expects true");
+		
+		for(int i = 0;i<9;i++) { // looses NA (extra continent)
+			p[0].gainTerritory(territories[i]);
+		}
+		
+		System.out.println("Objective complete: " + p[0].getObj().ValidateObjective());
+		
 		p[0].resetPlayer();
 		
-		System.out.println("P2 conquers NA,OC");
+		System.out.println("P2 conquers NA,OC, expects true");
 		
 		
 		p[2].setObjective(objs[2]);
@@ -1086,6 +1121,14 @@ System.out.println("-------------TEST CONQUER CONTINENT OBJECTIVE--------------"
 			p[2].manageTerritory(territories[i],1);
 		}
 		
+		
+		System.out.println("Objective complete: " + p[2].getObj().ValidateObjective());
+		
+		System.out.println("P2 conquers NA, but not OC, expects false");
+		
+		for(int i = 38;i < 42;i++) { //OC
+			p[2].loseTerritory(territories[i]);
+		}
 		
 		System.out.println("Objective complete: " + p[2].getObj().ValidateObjective());
 		

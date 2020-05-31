@@ -1,12 +1,12 @@
 package model;
 
-import java.util.List;
+import java.util.*;
 
 public class ConquerContinentObjective extends Objective {
 
 	private Continent[] continents;
 	private boolean extraContinent;
-	private Continent[] allContinents;
+	private ArrayList<Continent> allExtraContinents;
 	
 	@Override
 	protected boolean ValidateObjective() {
@@ -16,12 +16,17 @@ public class ConquerContinentObjective extends Objective {
 		for(int i=0;i<continents.length;i++) {
 			
 			Territory [] t = continents[i].getTerritories();
+			for(int j=0;j<t.length;j++) {
+				//System.out.println(t[j].getName() + " parte da " + continents[i].getName());
+			}
 			
 			for(int j=0;j<t.length;j++) {
 				
 				if(!territories.contains(t[j])){
 					//System.out.println("i = " + i);
-					System.out.println("falseou em " + t[j].getName() + " parte da " + continents[i].getName());
+					//System.out.println("j = " + j);
+					//System.out.println("falseou em " + t[j].getName() + " parte da " + continents[i].getName());
+					
 					return false;
 				}
 			}
@@ -29,10 +34,12 @@ public class ConquerContinentObjective extends Objective {
 		}
 		
 		if(extraContinent) {
-			for(int cont=0;cont<allContinents.length;cont++)
-			{
+			//System.out.println("extracontinet size: " + allExtraContinents.size());
+			for(int cont=0;cont<allExtraContinents.size();cont++)
+			{	
+				//System.out.println("checking extracontinet: " + allExtraContinents.get(cont).getName());
 				boolean hasContinent = true;
-				Territory []continentTerritories = allContinents[cont].getTerritories();
+				Territory []continentTerritories = allExtraContinents.get(cont).getTerritories();
 				for(Territory t:continentTerritories){
 					if(!(territories.contains(t)))
 					{
@@ -53,14 +60,14 @@ public class ConquerContinentObjective extends Objective {
 		return true;
 	}
 	
-	public ConquerContinentObjective(String description, Continent[] continents, boolean extraContinent,Player player,Continent[] allContinents)
+	public ConquerContinentObjective(String description, Continent[] continents, boolean extraContinent,Player player, ArrayList<Continent> allExtraContinents)
 	{
 		this.description = description;
 		this.continents = continents;
 		this.extraContinent = extraContinent;
 		this.player = player;
-		this.allContinents = allContinents;
 		
+		//exclude obligatory continents of "all continents" list
+		this.allExtraContinents = allExtraContinents;
 	}
-
 }

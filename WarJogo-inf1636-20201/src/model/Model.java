@@ -264,7 +264,7 @@ public class Model {
 	    	 cont_all_territories++;
 	    }
 	    
-	    continents[EU] = new Continent("Europa", northAmerica, 5);
+	    continents[EU] = new Continent("Europa", europe, 5);
 	    
 	    //AS
 	    
@@ -410,6 +410,12 @@ public class Model {
 		
 		//Conquer continent
 		
+		ArrayList<Continent> extraContinents = new ArrayList<Continent>();
+		
+		for(int i=0;i<continents.length;i++) {
+			extraContinents.add(continents[i]);
+		}
+		
 		Continent[] ContinentsEUSA = {continents[EU], continents[SA]};
 		
 		Continent[] ContinentsEUOC = {continents[EU],continents[OC]};
@@ -420,21 +426,41 @@ public class Model {
 		
 		Continent[] ContinentsASSA = {continents[AS],continents[SA]};
 		
-		Continent[] ContinentsASAF = {continents[AS],continents[AF]};
+		Continent[] ContinentsASAF = {continents[AS],continents[AF]}; 
+		
+		ArrayList<Continent> extraContinentsEUSA = new ArrayList<Continent>();
+		
+		for(int i=0;i<continents.length;i++) {
+			if(!Arrays.asList(ContinentsEUSA).contains(continents[i])) {
+				//System.out.println("is extra: " + continents[i].getName() );
+				extraContinentsEUSA.add(continents[i]);
+			}
+				
+		}
 		
 		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Europa, a América do Sul "
-				+ "e mais um continente à sua escolha", ContinentsEUSA, true,null,continents);
+				+ "e mais um continente à sua escolha", ContinentsEUSA, true,null,extraContinentsEUSA);
+		
+		ArrayList<Continent> extraContinentsEUOC = new ArrayList<Continent>();
+		
+		for(int i=0;i<continents.length;i++) {
+			if(!Arrays.asList(ContinentsEUOC).contains(continents[i])) {
+				//System.out.println("is extra: " + continents[i].getName() );
+				extraContinentsEUOC.add(continents[i]);
+			}
+				
+		}
 		
 		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Europa, a Oceania e "
-				+ "mais um continente à sua escolha", ContinentsEUOC, true,null,continents);
+				+ "mais um continente à sua escolha", ContinentsEUOC, true,null,extraContinentsEUOC);
 		
-		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a Oceania", ContinentsNAOC, false,null,continents);
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a Oceania", ContinentsNAOC, false,null,extraContinentsEUOC);
 		
-		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a África", ContinentsNAAF, false,null,continents);
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a África", ContinentsNAAF, false,null,extraContinentsEUOC);
 		
-		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Sul e a Ásia", ContinentsASSA, false,null,continents);
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a América do Sul e a Ásia", ContinentsASSA, false,null,extraContinentsEUOC);
 		
-		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Ásia e a África", ContinentsASAF, false,null,continents);
+		objectives[objIndex++] = new ConquerContinentObjective("Conquistar na totalidade a Ásia e a África", ContinentsASAF, false,null,extraContinentsEUOC);
 		
 	}
 	
