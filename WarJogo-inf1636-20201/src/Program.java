@@ -12,6 +12,7 @@ class Program {
 		TEST.testValidateAttack();
 		TEST.testAttackResult();
 		TEST.testMoveTroops();
+		TEST.testObjectiveValidation();
 		}
 	
 }

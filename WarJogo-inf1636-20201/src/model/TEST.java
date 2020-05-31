@@ -141,8 +141,8 @@ public class TEST {
 		
 		System.out.println("----------------TEST EXECUTE ATTACK----------------");
 		
-		int [] atk = {2,1,4};
-		int [] def = {3,2};
+		int [] atk = {6,6,6};
+		int [] def = {1,1,1};
 		
 		boolean result;
 		
@@ -159,7 +159,7 @@ public class TEST {
 		Territory Peru = new Territory("Peru",Color.Azul, peru_n);
 		
 		Venezuela.setTroops(5);
-		Peru.setTroops(2);
+		Peru.setTroops(3);
 		
 		System.out.println("BEFORE ATTACK: ");
 		
@@ -305,6 +305,440 @@ public class TEST {
 		System.out.println("valid attack");
 		System.out.print("Expects true -> ");
 		System.out.println(Model.validateAttack(Color.Azul,Peru,Venezuela,1));
+	}
+	
+	public static void testObjectiveValidation (){
+		
+		testDestroyArmyObjective();
+		testConquerTerritoryObjective();
+		testConquerContinentObjective();
+		
+	}
+	
+	private static void  testDestroyArmyObjective() {
+		
+		System.out.println("-------------TEST DESTROY ARMY OBJECTIVE--------------");
+		
+		//setting the stage
+		
+		Player [] p = new Player[3];
+		
+		p[0] = new Player("Mario",Color.Vermelho);
+		p[1] = new Player("Luigi",Color.Verde);
+		p[2] = new Player("Peach",Color.Branco);
+		
+		
+		Objective objs[] = new Objective[3];
+		//DestroyArmyObjective(String description, Player target,Player player)
+		objs[0] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + p[0].getColor().name(),p[0],null);
+		objs[1] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + p[1].getColor().name(),p[1],null);
+		objs[2] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + p[2].getColor().name(),p[2],null);
+		
+		p[0].setObjective(objs[1]);
+		p[1].setObjective(objs[2]);
+		p[2].setObjective(objs[0]);
+		
+		Territory [] territories = new Territory[28];
+		
+		ArrayList<String> mushroom_kingdom_n = new ArrayList<String>(
+	    	      Arrays.asList("Beanbean Kingdom","Pillo Kingdom"));
+		
+		ArrayList<String> beanbean_kingdom_n = new ArrayList<String>(
+	    	      Arrays.asList("Pillo Kingdom","Mushroom Kingdom"));
+		
+		ArrayList<String> pillo_kingdom_n = new ArrayList<String>(
+	    	      Arrays.asList("Mushroom Kingdom","Beanbean Kingdom"));
+		
+		territories[0] 	= new Territory("Mushroom Kingdom"	, mushroom_kingdom_n);
+	    territories[1] 	= new Territory("Beanbean Kingdom"	, beanbean_kingdom_n);
+	    territories[2]	= new Territory("Pillo Kingdom"		, pillo_kingdom_n	);
+		
+		
+		//add territories to all players
+	    
+	    System.out.println("Correctly eliminate target player. expects [T,F,F]");
+	    
+	    p[0].manageTerritory(territories[0],4);
+		p[1].manageTerritory(territories[1],3);
+		p[2].manageTerritory(territories[2],3);
+		
+		//destroyArmyObjective holding player will win attack against his target
+		
+		int [] max_value = {6,6,6};
+		
+		int [] min_value = {1,1,1};
+		
+		
+		Model.attack(p[0],p[1],territories[0],territories[1], max_value , min_value);
+		
+		for(int i=0;i<p.length;i++) {
+			System.out.println("Objective complete: " + p[i].getObj().ValidateObjective());
+		}
+		
+		for(int i=0;i<p.length;i++) {
+			p[i].resetPlayer();
+		}
+		
+		
+		System.out.println("Correctly conquer 24 territories after target player is defeated by someone else. expects [T,F,F]");
+		
+		//lots of stub territories to get red a lot of territories
+		
+		ArrayList<String> alaska_n = new ArrayList<String>(
+	    	      Arrays.asList("Vladvostok","Vancouver","Mackenzie"));
+		
+		ArrayList<String> california_n = new ArrayList<String>(
+	    	      Arrays.asList("Mexico","Nova York","Ottawa","Vancouver"));
+		
+		ArrayList<String> groenlandia_n = new ArrayList<String>(
+	    	      Arrays.asList("Mackenzie","Labrador","Islandia"));
+		
+		ArrayList<String> mackenzie_n = new ArrayList<String>(
+	    	      Arrays.asList("Alaska","Vancouver","Ottawa","Groenlandia"));
+		
+		ArrayList<String> labrador_n = new ArrayList<String>(
+	    	      Arrays.asList("Groenlandia","Nova York","Ottawa"));
+		
+		ArrayList<String> mexico_n = new ArrayList<String>(
+	    	      Arrays.asList("California","Nova York","Colombia"));
+		
+		ArrayList<String> nova_york_n = new ArrayList<String>(
+	    	      Arrays.asList("Ottawa","Labrador","California","Mexico"));
+		
+		ArrayList<String> vancouver_n = new ArrayList<String>(
+	    	      Arrays.asList("Alaska","Mackenzie","California","Ottawa"));
+		
+		ArrayList<String> ottawa_n = new ArrayList<String>(
+	    	      Arrays.asList("Vancouver","Labrador","Nova York","California","Mackenzie"));
+		
+		ArrayList<String> argentina_n = new ArrayList<String>(
+	    	      Arrays.asList("Chile","Brasil"));
+		
+		ArrayList<String> brasil_n = new ArrayList<String>(
+	    	      Arrays.asList("Colombia","Chile","Argentina"));
+		
+		ArrayList<String> chile_n = new ArrayList<String>(
+	    	    Arrays.asList("Argentina","Colombia","Brasil"));
+		
+	    ArrayList<String> colombia_n = new ArrayList<String>(
+	    		Arrays.asList("Mexico","Chile","Brasil"));
+	    
+	    ArrayList<String> argelia_n = new ArrayList<String>(
+	    	      Arrays.asList("Franca","Brasil","Egito","Sudao","Congo"));
+
+	    ArrayList<String> egito_n = new ArrayList<String>(
+	    	      Arrays.asList("Polonia","Franca","Oriente Medio","Sudao","Argelia"));
+	    
+	    ArrayList<String> sudao_n = new ArrayList<String>(
+	    	      Arrays.asList("Egito","Argelia","Congo","Madagascar","Africa Do Sul"));
+	    
+	    ArrayList<String> africa_do_sul_n = new ArrayList<String>(
+	    	      Arrays.asList("Congo","Sudao","Madagascar"));
+	    
+	    ArrayList<String> madagascar_n = new ArrayList<String>(
+	    	      Arrays.asList("Sudao","Africa Do Sul"));
+	    
+	    ArrayList<String> congo_n = new ArrayList<String>(
+	    	      Arrays.asList("Argelia","Sudao","Africa Do Sul"));
+	    
+	    ArrayList<String> franca_n = new ArrayList<String>(
+	    	      Arrays.asList("Argelia","Egito","Inglaterra","Alemanha","Polonia"));
+	    
+	    ArrayList<String> polonia_n = new ArrayList<String>(
+	    	      Arrays.asList("Moscou","Alemanha","Franca","Egito"));
+	    
+	    ArrayList<String> inglaterra_n = new ArrayList<String>(
+	    	      Arrays.asList("Islandia","Suecia","Alemanha","Franca"));
+	    
+	    ArrayList<String> alemanha_n = new ArrayList<String>(
+	    	      Arrays.asList("Inglaterra","Franca","Polonia"));
+	    
+	    ArrayList<String> suecia_n = new ArrayList<String>(
+	    	      Arrays.asList("Inglaterra", "Moscou"));
+	    
+	    ArrayList<String> islandia_n = new ArrayList<String>(
+	    	      Arrays.asList("Inglaterra","Groenlandia"));
+	    
+	    ArrayList<String> moscou_n = new ArrayList<String>(
+	    	      Arrays.asList("Suecia","Polonia","Omsk","Aral","Oriente Medio"));
+	    
+	    territories[3] 	= new Territory("Alaska"		, alaska_n);
+	    territories[4] 	= new Territory("Mackenzie"		, mackenzie_n);
+	    territories[5]	= new Territory("California"	, california_n);
+	    territories[6] 	= new Territory("Groenlandia"	, groenlandia_n);
+	    territories[7]	= new Territory("Mexico"		, mexico_n);
+	    territories[8] 	= new Territory("Nova York"		, nova_york_n);
+	    territories[9] 	= new Territory("Labrador"		, labrador_n);
+	    territories[10] = new Territory("Ottawa"		, ottawa_n);
+	    territories[11] = new Territory("Vancouver"		, vancouver_n);
+	    territories[12]	= new Territory("Argentina"		, argentina_n);
+	    territories[13] = new Territory("Brasil"		, brasil_n);
+	    territories[14] = new Territory("Chile"			, chile_n);
+	    territories[15] = new Territory("Colombia"		, colombia_n);
+	    territories[16]	= new Territory("Africa Do Sul"	, africa_do_sul_n);
+	    territories[17] = new Territory("Sudao"			, sudao_n);
+	    territories[18] = new Territory("Argelia"		, argelia_n);
+	    territories[19] = new Territory("Egito"			, egito_n);
+	    territories[20]	= new Territory("Madagascar"	, madagascar_n);
+	    territories[21] = new Territory("Congo"			, congo_n);
+	    territories[22]	= new Territory("Islandia"		, islandia_n);
+	    territories[23] = new Territory("Franca"		, franca_n);
+	    territories[24] = new Territory("Inglaterra"	, inglaterra_n);
+	    territories[25]	= new Territory("Polonia"		, polonia_n);
+	    territories[26] = new Territory("Suecia"		, suecia_n);
+	    territories[27] = new Territory("Moscou"		, moscou_n);
+	    
+	    for(int i=3;i<territories.length;i++) {
+	    	p[0].manageTerritory(territories[i],1);
+	    }
+		
+		
+		p[0].manageTerritory(territories[0],4);
+		p[1].manageTerritory(territories[1],3);
+		p[2].manageTerritory(territories[2],4);
+		
+		p[0].setObjective(objs[1]);
+		p[1].setObjective(objs[2]);
+		p[2].setObjective(objs[0]);
+		
+		Model.attack(p[2],p[1],territories[2],territories[1], max_value , min_value);
+		
+		
+		for(int i=0;i<p.length;i++) {
+			System.out.println("Objective complete: " + p[i].getObj().ValidateObjective());
+		}
+		
+	}
+	
+	private static void  testConquerTerritoryObjective() {
+		
+		System.out.println("-------------TEST CONQUER TERRITORY OBJECTIVE--------------");
+		
+		System.out.println("Both P1 and P2 have enough territories, expects [T,T,F]");
+		
+		Territory territories[] = new Territory[42];
+		
+		//NA
+		
+		ArrayList<String> alaska_n = new ArrayList<String>(
+	    	      Arrays.asList("Vladvostok","Vancouver","Mackenzie"));
+		
+		ArrayList<String> california_n = new ArrayList<String>(
+	    	      Arrays.asList("Mexico","Nova York","Ottawa","Vancouver"));
+		
+		ArrayList<String> groenlandia_n = new ArrayList<String>(
+	    	      Arrays.asList("Mackenzie","Labrador","Islandia"));
+		
+		ArrayList<String> mackenzie_n = new ArrayList<String>(
+	    	      Arrays.asList("Alaska","Vancouver","Ottawa","Groenlandia"));
+		
+		ArrayList<String> labrador_n = new ArrayList<String>(
+	    	      Arrays.asList("Groenlandia","Nova York","Ottawa"));
+		
+		ArrayList<String> mexico_n = new ArrayList<String>(
+	    	      Arrays.asList("California","Nova York","Colombia"));
+		
+		ArrayList<String> nova_york_n = new ArrayList<String>(
+	    	      Arrays.asList("Ottawa","Labrador","California","Mexico"));
+		
+		ArrayList<String> vancouver_n = new ArrayList<String>(
+	    	      Arrays.asList("Alaska","Mackenzie","California","Ottawa"));
+		
+		ArrayList<String> ottawa_n = new ArrayList<String>(
+	    	      Arrays.asList("Vancouver","Labrador","Nova York","California","Mackenzie"));
+		
+		//SA
+		
+		ArrayList<String> argentina_n = new ArrayList<String>(
+	    	      Arrays.asList("Chile","Brasil"));
+		
+		ArrayList<String> brasil_n = new ArrayList<String>(
+	    	      Arrays.asList("Colombia","Chile","Argentina"));
+		
+		ArrayList<String> chile_n = new ArrayList<String>(
+	    	    Arrays.asList("Argentina","Colombia","Brasil"));
+		
+	    ArrayList<String> colombia_n = new ArrayList<String>(
+	    		Arrays.asList("Mexico","Chile","Brasil"));
+	    
+	    
+	    //AF
+	    
+	    ArrayList<String> argelia_n = new ArrayList<String>(
+	    	      Arrays.asList("Franca","Brasil","Egito","Sudao","Congo"));
+
+	    ArrayList<String> egito_n = new ArrayList<String>(
+	    	      Arrays.asList("Polonia","Franca","Oriente Medio","Sudao","Argelia"));
+	    
+	    ArrayList<String> sudao_n = new ArrayList<String>(
+	    	      Arrays.asList("Egito","Argelia","Congo","Madagascar","Africa Do Sul"));
+	    
+	    ArrayList<String> africa_do_sul_n = new ArrayList<String>(
+	    	      Arrays.asList("Congo","Sudao","Madagascar"));
+	    
+	    ArrayList<String> madagascar_n = new ArrayList<String>(
+	    	      Arrays.asList("Sudao","Africa Do Sul"));
+	    
+	    ArrayList<String> congo_n = new ArrayList<String>(
+	    	      Arrays.asList("Argelia","Sudao","Africa Do Sul"));
+	    
+	    
+	    //EU
+	    
+	    ArrayList<String> franca_n = new ArrayList<String>(
+	    	      Arrays.asList("Argelia","Egito","Inglaterra","Alemanha","Polonia"));
+	    
+	    ArrayList<String> polonia_n = new ArrayList<String>(
+	    	      Arrays.asList("Moscou","Alemanha","Franca","Egito"));
+	    
+	    ArrayList<String> inglaterra_n = new ArrayList<String>(
+	    	      Arrays.asList("Islandia","Suecia","Alemanha","Franca"));
+	    
+	    ArrayList<String> alemanha_n = new ArrayList<String>(
+	    	      Arrays.asList("Inglaterra","Franca","Polonia"));
+	    
+	    ArrayList<String> suecia_n = new ArrayList<String>(
+	    	      Arrays.asList("Inglaterra", "Moscou"));
+	    
+	    ArrayList<String> islandia_n = new ArrayList<String>(
+	    	      Arrays.asList("Inglaterra","Groenlandia"));
+	    
+	    ArrayList<String> moscou_n = new ArrayList<String>(
+	    	      Arrays.asList("Suecia","Polonia","Omsk","Aral","Oriente Medio"));
+	    
+	    //AS
+	    
+	    ArrayList<String> china_n = new ArrayList<String>(
+	    	      Arrays.asList("Mongolia","Japao","Vietna","India","Aral","Omsk","Tchita"));
+	    
+	    ArrayList<String> india_n = new ArrayList<String>(
+	    	      Arrays.asList("China","Aral","Oriente Medio","Vietna","Sumatra"));
+	    
+	    ArrayList<String> japao_n = new ArrayList<String>(
+	    	      Arrays.asList("China","Vladivostok"));
+	    
+	    ArrayList<String> vladivostok_n = new ArrayList<String>(
+	    	      Arrays.asList("Japao","Tchita","Siberia","China"));
+	    
+	    ArrayList<String> siberia_n = new ArrayList<String>(
+	    	      Arrays.asList("Vladivostok","Tchita","Dudinka"));
+	    
+	    ArrayList<String> dudinka_n = new ArrayList<String>(
+	    	      Arrays.asList("Siberia","Tchita","Mongolia","Omsk"));
+	    
+	    ArrayList<String> tchita_n = new ArrayList<String>(
+	    	      Arrays.asList("Mongolia","Vladivostok","China","Siberia","Dudinka"));
+	    
+	    ArrayList<String> omsk_n = new ArrayList<String>(
+	    	      Arrays.asList("Mongolia","China","Aral","Dudinka","Moscou"));
+	    
+	    ArrayList<String> aral_n = new ArrayList<String>(
+	    	      Arrays.asList("Moscou","Omsk","Oriente Medio","China","India"));
+	    
+	    ArrayList<String> oriente_medio_n = new ArrayList<String>(
+	    	      Arrays.asList("Moscou","Aral","India","Egito","Polonia"));
+	    
+	    ArrayList<String> vietna_n = new ArrayList<String>(
+	    	      Arrays.asList("China","India","Borneo"));
+	    
+	    ArrayList<String> mongolia_n = new ArrayList<String>(
+	    	      Arrays.asList("China","Tchita","Dudinka","Omsk"));
+	    
+	    //OC
+	    
+	    ArrayList<String> australia_n = new ArrayList<String>(
+	    	      Arrays.asList("Sumatra","Nova Guine","Borneo"));
+	    
+	    ArrayList<String> borneo_n = new ArrayList<String>(
+	    	      Arrays.asList("Australia","Nova Guine","Vietna"));
+	    
+	    ArrayList<String> nova_guine_n = new ArrayList<String>(
+	    	      Arrays.asList("Australia","Borneo"));
+	    
+	    ArrayList<String> sumatra_n = new ArrayList<String>(
+	    	      Arrays.asList("Australia","India"));
+		
+		territories[0] 	= new Territory("Alaska"		, alaska_n);
+	    territories[1] 	= new Territory("Mackenzie"		, mackenzie_n);
+	    territories[2]	= new Territory("California"	, california_n);
+	    territories[3] 	= new Territory("Groenlandia"	, groenlandia_n);
+	    territories[4]	= new Territory("Mexico"		, mexico_n);
+	    territories[5] 	= new Territory("Nova York"		, nova_york_n);
+	    territories[6] 	= new Territory("Labrador"		, labrador_n);
+	    territories[7] 	= new Territory("Ottawa"		, ottawa_n);
+	    territories[8] 	= new Territory("Vancouver"		, vancouver_n);
+	    territories[9]	= new Territory("Argentina"		, argentina_n);
+	    territories[10] = new Territory("Brasil"		, brasil_n);
+	    territories[11] = new Territory("Chile"			, chile_n);
+	    territories[12] = new Territory("Colombia"		, colombia_n);
+	    territories[13]	= new Territory("Africa Do Sul"	, africa_do_sul_n);
+	    territories[14] = new Territory("Sudao"			, sudao_n);
+	    territories[15] = new Territory("Argelia"		, argelia_n);
+	    territories[16] = new Territory("Egito"			, egito_n);
+	    territories[17]	= new Territory("Madagascar"	, madagascar_n);
+	    territories[18] = new Territory("Congo"			, congo_n);
+	    territories[19]	= new Territory("Islandia"		, islandia_n);
+	    territories[20] = new Territory("Franca"		, franca_n);
+	    territories[21] = new Territory("Inglaterra"	, inglaterra_n);
+	    territories[22]	= new Territory("Polonia"		, polonia_n);
+	    territories[23] = new Territory("Suecia"		, suecia_n);
+	    territories[24] = new Territory("Moscou"		, moscou_n);
+	    territories[25] = new Territory("Alemanha"		, alemanha_n);
+	    territories[26] = new Territory("China"			, china_n);
+	    territories[27] = new Territory("India"			, india_n);
+	    territories[28] = new Territory("Japao"			, japao_n);
+	    territories[29] = new Territory("Dudinka"		, dudinka_n);
+	    territories[30] = new Territory("Aral"			, aral_n);
+	    territories[31] = new Territory("Mongolia"		, mongolia_n);
+	    territories[32] = new Territory("Oriente Medio"	, oriente_medio_n);
+	    territories[33] = new Territory("Omsk"			, omsk_n);
+	    territories[34] = new Territory("Siberia"		, siberia_n);
+	    territories[35] = new Territory("Tchita"		, tchita_n);
+	    territories[36] = new Territory("Vietna"		, vietna_n);
+	    territories[37] = new Territory("Vladivostok"	, vladivostok_n);
+	    territories[38] = new Territory("Australia"		, australia_n);
+	    territories[39] = new Territory("Sumatra"		, sumatra_n);
+	    territories[40] = new Territory("Nova Guine"	, nova_guine_n);
+	    territories[41] = new Territory("Borneo"		, borneo_n);
+	    
+	    Player [] p = new Player[3];
+		
+		p[0] = new Player("Mario",Color.Vermelho);
+		p[1] = new Player("Luigi",Color.Verde);
+		p[2] = new Player("Peach",Color.Branco);
+		
+		Objective objs[] = new Objective[3];
+		//ConquerTerritoryObjective(String description, int numberOfTerritories, int armyPerTerritory,Player player)
+		
+		objs[0] = new ConquerTerritoryObjective("Conquistar 18 territórios e ocupar cada um deles com pelo menos 2 exércitos", 18, 2, null);
+		objs[1] = new ConquerTerritoryObjective("Conquistar 24 territórios", 24, 1,null);
+		
+		p[0].setObjective(objs[0]);
+		p[1].setObjective(objs[1]);
+		p[2].setObjective(objs[1]);
+		
+		//player 1 will have his objective conquered
+		for(int i=0;i<18;i++) {
+			p[0].manageTerritory(territories[i],2);
+		}
+		
+		//player 2 will have his objective conquered
+		for(int i=18;i<42;i++) {
+			p[1].manageTerritory(territories[i],1);
+		}
+		
+		//player 3 will not have territories
+		
+		
+		for(int i=0;i<p.length;i++) {
+			System.out.println("Objective complete: " + p[i].getObj().ValidateObjective());
+		}
+	
+		
+	}
+
+	private static void  testConquerContinentObjective() {
+	
 	}
 
 }

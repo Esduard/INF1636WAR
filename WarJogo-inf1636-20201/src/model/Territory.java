@@ -57,8 +57,4 @@ class Territory {
 		color = c;
 	}
 	
-	public void setArmy(int number)
-	{
-		numTroops = number;
-	}
 }

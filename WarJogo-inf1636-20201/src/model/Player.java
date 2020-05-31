@@ -8,6 +8,7 @@ class Player {
 	private ArrayList<Card> Cards = new ArrayList<Card>();
 	private ArrayList<Territory> Territories = new ArrayList<Territory>();
 	private int availableArmies;
+	private ArrayList<Color> playersKilled = new ArrayList<Color>(); 
 	
 	public static ArrayList<Player> players;
 	
@@ -42,14 +43,24 @@ class Player {
 		return color;
 	}
 	
-	public String getObjDescription()
+	public ArrayList<Color> getPlayersKilled() {
+		return playersKilled;
+	}
+	
+	public void KillPlayer(Color c) {
+		playersKilled.add(c);
+	}
+	
+	
+	public Objective getObj()
 	{
-		return objective.description;
+		return objective;
 	}
 	
 	public void setObjective(Objective o)
 	{
 		this.objective = o;
+		o.setPlayer(this);
 	}
 	
 	public List<Card> getAllCards()
@@ -133,9 +144,10 @@ class Player {
 	public void manageTerritory(Territory t, int army)
 	{
 		if(t != null)
-		{			
+		{	
+			System.out.println(this.getAllTerritories().size());
 			t.setColor(this.color);
-			t.setArmy(army);
+			t.setTroops(army);
 			if(!Territories.contains(t))
 				Territories.add(t);
 		}
@@ -143,7 +155,39 @@ class Player {
 			throw new NullPointerException("Parameter of type Territory cannot be null");
 	}
 	
+	
+	public void loseTerritory(Territory t) {
+		if(Territories.contains(t)) {
+			Territories.remove(t);
+		}
+			
+		
+	}
+	
+	public void gainTerritory(Territory t) {
+		if(!Territories.contains(t)) {
+			Territories.add(t);
+			
+			t.setTroops(0);
+			t.setColor(this.color);
+			
+		}
+			
+	}
+	
+	
 	public void receiveArmies(int army) {
 		availableArmies += army;
 	}
+	
+	public void resetPlayer() {
+		
+		objective = null;
+		Cards.clear();
+		Territories.clear();
+		availableArmies = 0;
+		playersKilled.clear(); 
+		
+	}
+	
 }

@@ -403,7 +403,7 @@ public class Model {
 		for(int i = 0; i < Color.Count.ordinal(); i++)
 		{
 			Color c = Color.values()[i];
-			objectives[objIndex++] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + c.name(), c,null);
+			objectives[objIndex++] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + c.name(),getPlayer(c),null);
 		}
 		
 		
@@ -705,8 +705,10 @@ public class Model {
 	
 	public static boolean executeAttack(Territory src , Territory target, int [] attack,int [] defend) {
 		
-		if(!Model.validateAttack(src.getColor(), src, target, attack.length))
+		if(!Model.validateAttack(src.getColor(), src, target, attack.length)) {
 			return false;
+		}
+			
 		//sort arrays in reverse
 		Arrays.sort(attack);
 		Arrays.sort(defend);
@@ -759,6 +761,26 @@ public class Model {
 			return false;
 		}
 		
+	}
+	
+	public static void attack (Player attacker, Player defender, Territory src , Territory target, int [] attack,int [] defend) {
+		
+		Model.executeAttack(src,target,attack,defend);
+		
+		//System.out.println("target troops: " + target.getTroops());
+		
+		if(target.getTroops() <= 0) {
+			
+			
+			attacker.gainTerritory(target);
+			defender.loseTerritory(target);
+			moveTroops(src ,target, attack.length);
+			
+			if(defender.getAllTerritories().isEmpty()) {
+				attacker.KillPlayer(defender.getColor());
+			}
+			
+		}
 	}
 	
 	
@@ -831,7 +853,7 @@ public class Model {
 		{
 			System.out.println("------------------"+ p.getName() + "-" + p.getColor() + "----------------------------");
 			System.out.println("\tObjetivo: ");
-			System.out.println("\t\t"+p.getObjDescription());
+			System.out.println("\t\t"+p.getObj().getDescription());
 			
 			System.out.println("\tCartas: ");
 			for(Card c:p.getAllCards())

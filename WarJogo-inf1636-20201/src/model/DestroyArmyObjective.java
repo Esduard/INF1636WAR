@@ -1,33 +1,54 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DestroyArmyObjective extends Objective {
 
-	private Color color;
+	private Player target;
 	
 	@Override
 	protected boolean ValidateObjective() {
 		
 		//get target player's territory count
-		Player target = Model.getPlayer(color);
+		//System.out.println("target is " + target.getName());
+		//System.out.println("target turf count is " + target.getAllTerritories().size());
+		if(target.getAllTerritories().isEmpty()) {
+			//if count is 0 then assert that you killed him
+			ArrayList<Color> killList = player.getPlayersKilled();
+			
+			if(!killList.isEmpty()) {
+				
+				for(int i=0;i<killList.size();i++) {
+					if(killList.get(i).equals(target.getColor())) {
+						return true;
+					}
+				}
+			
+			}
+			
+			//if player was killed by someone else verify if territory count is valid
+			List<Territory> territories = this.player.getAllTerritories();
+			if (territories.size() >= 24) {
+				return true;
+			}
+			else {
+				return false;
+			}
+			
 		
-		//if player color does not exist return null
-		if (target == null) {
+		}
+		else {
 			return false;
 		}
 		
-		//if count is 0 then true
-		if(target.getAllTerritories().isEmpty()) {
-			return true;
-		}
 		
-		
-		return false;
 	}
 	
-	public DestroyArmyObjective(String description, Color c,Player player)
+	public DestroyArmyObjective(String description, Player target,Player player)
 	{
 		this.description = description;
-		this.color = c;
+		this.target = target;
 		this.player = player;
 	}
 }
