@@ -1,10 +1,12 @@
 import java.util.*;
+
+import controller.GameController;
 import model.*;
 
 class Program {
 	
 	public static void main(String[] args) {
-		System.out.println("-------------TEST MODEL INTIALIZE---------------");
+		/*System.out.println("-------------TEST MODEL INTIALIZE---------------");
 		
 		TEST.testCreatePlayerList();
 		TEST.testAddPlayer();
@@ -12,7 +14,9 @@ class Program {
 		TEST.testValidateAttack();
 		TEST.testAttackResult();
 		TEST.testMoveTroops();
-		TEST.testObjectiveValidation();
+		TEST.testObjectiveValidation();*/
+		
+		GameController gC = GameController.getGameController();
 		}
 	
 }

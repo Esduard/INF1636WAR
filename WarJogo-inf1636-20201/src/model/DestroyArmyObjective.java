@@ -15,7 +15,7 @@ public class DestroyArmyObjective extends Objective {
 		//System.out.println("target turf count is " + target.getAllTerritories().size());
 		if(target.getAllTerritories().isEmpty()) {
 			//if count is 0 then assert that you killed him
-			ArrayList<Color> killList = player.getPlayersKilled();
+			ArrayList<GameColor> killList = player.getPlayersKilled();
 			
 			if(!killList.isEmpty()) {
 				

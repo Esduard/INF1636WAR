@@ -124,7 +124,7 @@ public class TEST {
 		Model.createPlayerList(3);
 		System.out.println("3 players: ");
 		
-		System.out.println("Adding null: " + Model.addPlayer(null));
+		/*System.out.println("Adding null: " + Model.addPlayer(null));
 		System.out.println("Adding first player: " + Model.addPlayer(new Player("Hashirama", Color.Azul)));
 		System.out.println("Adding second player: " + Model.addPlayer(new Player("Tobirama", Color.Vermelho)));
 		System.out.println("Adding third player and repeating color: " + Model.addPlayer(new Player("Madara", Color.Vermelho)));
@@ -132,7 +132,7 @@ public class TEST {
 		System.out.println("Adding forth player: " + Model.addPlayer(new Player("Minato", Color.Branco)));
 		System.out.println("Adding fifth player: " + Model.addPlayer(new Player("Tsunade", Color.Amarelo)));
 		System.out.println("Adding sixth player: " + Model.addPlayer(new Player("Kakashi", Color.Verde)));
-		System.out.println("Adding seventh player: " + Model.addPlayer(new Player("Naruto", Color.Branco)));
+		System.out.println("Adding seventh player: " + Model.addPlayer(new Player("Naruto", Color.Branco)));*/
 	}
 	
 	public static void testAttackResult()
@@ -155,11 +155,11 @@ public class TEST {
 	    ArrayList<String> peru_n = new ArrayList<String>(
 	    	      Arrays.asList("Argentina","Venezuela","Brasil"));
 	    
-	    Territory Venezuela = new Territory("Venezuela",Color.Vermelho, venezuela_n);
-		Territory Peru = new Territory("Peru",Color.Azul, peru_n);
+	    Territory Venezuela = new Territory("Venezuela", venezuela_n);
+		Territory Peru = new Territory("Peru", peru_n);
 		
-		Venezuela.setTroops(5);
-		Peru.setTroops(3);
+		Player.getPlayer(Color.Vermelho).manageTerritory(Venezuela, 5);
+		Player.getPlayer(Color.Azul).manageTerritory(Peru, 3);
 		
 		System.out.println("BEFORE ATTACK: ");
 		
@@ -187,15 +187,13 @@ public class TEST {
 	    
 	    ArrayList<String> peru_n = new ArrayList<String>(
 	    	      Arrays.asList("Argentina","Venezuela","Brasil"));
-	    
-	    Territory Venezuela = new Territory("Venezuela",Color.Azul, venezuela_n);
-		Territory Peru = new Territory("Peru",Color.Vermelho, peru_n);
+	    Territory Venezuela = new Territory("Venezuela", venezuela_n);
+		Territory Peru = new Territory("Peru", peru_n);
+		
+		Player.getPlayer(Color.Vermelho).manageTerritory(Venezuela, 1);
+		Player.getPlayer(Color.Azul).manageTerritory(Peru, 5);
 		
 		boolean result;
-		
-		Venezuela.setTroops(1);
-		Peru.setTroops(5);
-		
 		
 		System.out.println("Incorrectly move troops of different colors");
 		System.out.println("BEFORE MOVE: ");
@@ -1134,6 +1132,92 @@ System.out.println("-------------TEST CONQUER CONTINENT OBJECTIVE--------------"
 		
 		
 	}
+	
+	public static void testMethods()
+	{
+		GameExecution.initializeGameComponents();
+		
+		//Instances log
+		
+		System.out.println("------------------CARDS---------------------");
+		System.out.println();
+		for(Card c:Card.getCardList())
+		{
+			if(c.getTerritory() != null)
+				System.out.println(c.getShape().name() +", "+ c.getTerritory().getName());
+			else
+				System.out.println(c.getShape().name());
+			System.out.println();
+		}
+		
+		System.out.println("---------------TERRITORIES-----------");
+		System.out.println();
+		for(Territory t:)
+		{
+			System.out.println("Name:" );
+			System.out.println(t.getName());
+			
+			System.out.println("\tNeighbours:" );
+			for(String n:t.getNeighbors())
+			{
+				System.out.println("\t" + n);
+			}
+			System.out.println();
+		}
+		
+		System.out.println("--------------CONTINENTS-----------------");
+		System.out.println();
+		for(Continent c:Model.continents)
+		{
+			System.out.println("Name:" );
+			System.out.println(c.getName());
+			
+			System.out.println("\tTerritories:" );
+			for(Territory t:c.getTerritories())
+			{
+				System.out.println("\t" + t.getName());
+			}
+			System.out.println();
+		}
+		
+		Model.firstDraw();
+		
+		System.out.println("------------PLAYER ORDER-------------------");
+		System.out.println();
+		for(Player p:players)
+		{
+			System.out.println(p.getName());
+		}
+		System.out.print("\n");
+		
+		System.out.println("------------ALL OBJECTIVES-------------------");
+		System.out.println();
+		for(Objective o:Model.objectives)
+		{
+			System.out.println(o.getDescription());
+			System.out.println();
+		}
+
+		for(Player p:players)
+		{
+			System.out.println("------------------"+ p.getName() + "-" + p.getColor() + "----------------------------");
+			System.out.println("\tObjetivo: ");
+			System.out.println("\t\t"+p.getObj().getDescription());
+			
+			System.out.println("\tCartas: ");
+			for(Card c:p.getAllCards())
+			{
+				System.out.println("\t\t"+c.getShape()+", "+c.getTerritory().getName());
+			}
+			
+			System.out.println("\tTerritorios: ");
+			for(Territory t:p.getAllTerritories()) 
+			{
+				System.out.println("\t\t"+t.getName());
+			}
+		}
+	}
+
 	
 	}
 

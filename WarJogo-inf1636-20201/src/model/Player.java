@@ -3,34 +3,14 @@ import java.util.*;
 
 class Player {
 	private String name;
-	private Color color;
+	private GameColor color;
 	private Objective objective;
 	private ArrayList<Card> Cards = new ArrayList<Card>();
 	private ArrayList<Territory> Territories = new ArrayList<Territory>();
 	private int availableArmies;
-	private ArrayList<Color> playersKilled = new ArrayList<Color>(); 
+	private ArrayList<GameColor> playersKilled = new ArrayList<GameColor>(); 
 	
-	public static ArrayList<Player> players;
-	
-	//waiting for view
-	/*
-	public static boolean generatePlayers(int n_players) {
-	int index;
-	Scanner scan = new Scanner(System.in);
-		
-		for(index=0;index<n_players;index++)
-		{
-			//catch name from swing later
-			String name = "name " + Integer.toString(index + 1);
-		
-		}
-		
-		
-		return true;
-	}
-	*/
-	
-	public Player(String n,Color c) {
+	public Player(String n,GameColor c) {
 		name = n;
 		color = c;
 	}
@@ -39,15 +19,15 @@ class Player {
 		return name;
 	}
 	
-	public Color getColor() {
+	public GameColor getColor() {
 		return color;
 	}
 	
-	public ArrayList<Color> getPlayersKilled() {
+	public ArrayList<GameColor> getPlayersKilled() {
 		return playersKilled;
 	}
 	
-	public void KillPlayer(Color c) {
+	public void KillPlayer(GameColor c) {
 		playersKilled.add(c);
 	}
 	
@@ -78,11 +58,11 @@ class Player {
 		return availableArmies;
 	}
 	
-	public int getContinentBonus(Continent[] allContinents)
+	public int getContinentBonus()
 	{
 		int bonus = 0;
 		
-		for(Continent c:allContinents)
+		for(Continent c:Continent.getContinentList())
 		{
 			boolean validBonus = true;
 			Territory []continentTerritories = c.getTerritories();
