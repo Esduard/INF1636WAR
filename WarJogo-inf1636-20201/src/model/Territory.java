@@ -234,33 +234,12 @@ class Territory {
 		    territories.add(new Territory("Vancouver"		, vancouver_n));
 		    
 		    
-		    Territory[] northAmerica = new Territory[9];
-		    int cont_all_territories = 0;
-		    
-		    for(int i = 0; i < 9; i++)
-		    {
-		    	 northAmerica[i] = territoryList.get(cont_all_territories);
-		    	 cont_all_territories++;
-		    }
-		    
-		    new Continent("América do Norte", northAmerica, 5);
-		    
 			//SA
 		    
-		    new Territory("Argentina", argentina_n);
-		    new Territory("Brasil", brasil_n);
-		    new Territory("Chile"			, chile_n);
-		    new Territory("Colombia"		, colombia_n);
-		    
-		    Territory[] southAmerica = new Territory[4];
-		    
-		    for(int i = 0; i < 4; i++)
-		    {
-		    	 southAmerica[i] = territoryList.get(cont_all_territories);
-		    	 cont_all_territories++;
-		    }
-		    
-		    new Continent("América do Sul", southAmerica, 2);
+		    territories.add(new Territory("Argentina", argentina_n));
+		    territories.add(new Territory("Brasil", brasil_n));
+		    territories.add(new Territory("Chile"			, chile_n));
+		    territories.add(new Territory("Colombia"		, colombia_n));
 		    
 		    //AF
 		    
