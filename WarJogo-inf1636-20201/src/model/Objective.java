@@ -48,10 +48,18 @@ abstract class Objective {
 		//Destroy army
 		
 		
-		for(int i = 0; i < GameColor.Count.ordinal(); i++)
+		for(GameColor c : GameColor.values())
 		{
-			GameColor c = GameColor.values()[i];
-			objectives.add(new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + c.name(),GameExecution.getPlayer(c),null));
+			Player p = null;
+			
+			try {
+				p = GameExecution.getPlayer(c);
+			} catch (Exception e) {
+				continue;
+			}
+			
+			if(!(p == null))
+				objectives.add(new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + c.name(), GameExecution.getPlayer(c),null));
 		}
 		
 		//Conquer continent

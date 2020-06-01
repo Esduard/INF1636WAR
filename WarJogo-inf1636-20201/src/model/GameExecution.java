@@ -11,7 +11,7 @@ public class GameExecution {
 	private static Stack<Objective> objStack = new Stack<Objective>();
 	private static Stack<Card> cardStack = new Stack<Card>();
 	private static ArrayList<Player> players = new ArrayList<Player>();
-	private static ArrayList<GameColor> remainingColors = new ArrayList<GameColor>(Arrays.asList(GameColor.Branco,GameColor.Preto,GameColor.Azul,GameColor.Amarelo,GameColor.Verde,GameColor.Vermelho));
+	private static ArrayList<GameColor> chosenColors = new ArrayList<GameColor>();
 	
 	public static void initializeGameComponents()
 	{
@@ -35,7 +35,7 @@ public class GameExecution {
 		} 
 		return null;
 	 }
-
+	
 	 public static int getPlayerCount()
 	 {
 	    return players.size();
@@ -71,11 +71,15 @@ public class GameExecution {
   			
   			cArray[i] = GameColor.valueOf(colors[i]);
   			
-  			if(!remainingColors.remove(cArray[i]))
+  			if(chosenColors.contains(cArray[i]))
   			{
-  				remainingColors.addAll(Arrays.asList(cArray));
+  				chosenColors.clear();
   				return false;
   			}
+  			
+  			System.out.println(cArray[i].name());
+  			
+  			chosenColors.add(cArray[i]);
   			
   			pArray[i] = new Player(names[i], cArray[i]);
   		}
@@ -95,20 +99,9 @@ public class GameExecution {
   		//Creating stacks to draw cards and objectives
   		objStack.addAll(objectives);
   		
-  		//removing "destroyArmy" type Objectives of non-participating colors
-  		for(int i = 0; i < remainingColors.size(); i++)
-  		{
-  			GameColor c = remainingColors.get(i);
-  			if(c != null)
-  			{
-  				objStack.remove(objectives.get(2+c.ordinal()));
-  			}
-  		}
-  		
   		Collections.shuffle(objStack);
   		
   		List<Card> cards = Card.getCardList();
-  		Stack<Card> cardStack = new Stack<Card>();
   		cardStack.addAll(cards);
   		
   		//Remove jokers

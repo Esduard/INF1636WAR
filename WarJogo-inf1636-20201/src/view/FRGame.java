@@ -4,8 +4,6 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import model.Model;
-
 public class FRGame extends JFrame{
 	
 	private final static Dimension DEFAULT_SIZE = new Dimension(1024, 768);
