@@ -135,6 +135,32 @@ class Player {
 			throw new NullPointerException("Parameter of type Territory cannot be null");
 	}
 	
+	public void manageContinent(Continent c, int army) {
+		
+		Territory [] territories = c.getTerritories();
+		
+		for(int i=0;i<territories.length;i++) {
+			this.manageTerritory(territories[i], army);
+		}
+		
+	}
+	
+	public void loseContinent(Continent c) {
+		
+		Territory [] territories = c.getTerritories();
+		
+		for(int i = 0;i < territories.length;i++){
+			if(!Territories.contains(territories[i])) {
+				return;
+			}	
+		}
+		
+		for(int i = 0;i < territories.length;i++){
+			Territories.remove(territories[i]);
+		}	
+		
+	}
+	
 	
 	public void loseTerritory(Territory t) {
 		if(Territories.contains(t)) {

@@ -6,17 +6,17 @@ import model.*;
 class Program {
 	
 	public static void main(String[] args) {
-		/*System.out.println("-------------TEST MODEL INTIALIZE---------------");
+		System.out.println("-------------TEST MODEL INTIALIZE---------------");
 		
 		TEST.testCreatePlayerList();
-		TEST.testAddPlayer();
+		TEST.testAddPlayers();
 		TEST.testValidateCardTrade();
 		TEST.testValidateAttack();
 		TEST.testAttackResult();
 		TEST.testMoveTroops();
-		TEST.testObjectiveValidation();*/
+		TEST.testObjectiveValidation();
 		
-		GameController gC = GameController.getGameController();
+		//GameController gC = GameController.getGameController();
 		}
 	
 }

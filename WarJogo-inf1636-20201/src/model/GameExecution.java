@@ -40,6 +40,11 @@ public class GameExecution {
 	 {
 	    return players.size();
 	 }
+	 
+	 public static List<Player> getPlayerList() {
+		 return Collections.unmodifiableList(players);
+	 }
+	 
 	
 	//Return if the argument numberOfPlayers is valid
   	public static boolean createPlayerList(int numberOfPlayers)
@@ -51,6 +56,8 @@ public class GameExecution {
   		else
   		{
   			players = new ArrayList<Player>(Arrays.asList(new Player[numberOfPlayers]));
+  			
+  			//System.out.println(" 'createPlayerList' player list size: " + players.size());
   			
   			return true;
   		}
@@ -68,9 +75,12 @@ public class GameExecution {
   			{
   				return false;
   			}
-  			
+  			try {
   			cArray[i] = GameColor.valueOf(colors[i]);
-  			
+  			}
+  			catch(IllegalArgumentException e) {
+  				return false;
+  			}
   			if(!remainingColors.remove(cArray[i]))
   			{
   				remainingColors.addAll(Arrays.asList(cArray));
@@ -78,12 +88,21 @@ public class GameExecution {
   			}
   			
   			pArray[i] = new Player(names[i], cArray[i]);
+  			//System.out.println("insert : " + pArray[i].getName() + "/" + pArray[i].getColor());
   		}
   		
+  		int cont = 0;
   		for(Player p : pArray)
   		{
-  			players.add(p);
+  			//System.out.println(" 'addPlayers loop' player list size: " + players.size());
+  			players.set(cont, p);
+  			//System.out.println("insert players: " + p.getName() + "/" + p.getColor());
+  			cont++;
   		}
+  		//System.out.println(" 'addPlayers' player list size: " + players.size());
+  		/*for(int i= 0;i < players.size(); i++) {
+			System.out.println("player gameexec list : " + players.get(i).getName());
+		}*/
   		
   		return true;
   	}
@@ -241,7 +260,7 @@ public class GameExecution {
 		
 	}
 	
-	private static void conquer (Player attacker, Player defender, Territory src , Territory target, int [] attack,int [] defend) {
+	static void conquer (Player attacker, Player defender, Territory src , Territory target, int [] attack,int [] defend) {
 		
 		executeAttack(src,target,attack,defend);
 		
@@ -266,4 +285,23 @@ public class GameExecution {
 	{
 		conquer(players.get(attacker), players.get(defender), Territory.getTerritory(src), Territory.getTerritory(target), attackDice, defenseDice);
 	}
+	
+	public static void resetPlayers() {
+		players.clear();
+		remainingColors.clear();
+		
+		remainingColors.add(GameColor.Branco);
+		remainingColors.add(GameColor.Preto);
+		remainingColors.add(GameColor.Azul);
+		remainingColors.add(GameColor.Amarelo);
+		remainingColors.add(GameColor.Verde);
+		remainingColors.add(GameColor.Vermelho);
+
+	}
+	
+	public static void resetAll() {
+		resetPlayers();
+		Territory.resetTerritories();
+	}
+	
 }

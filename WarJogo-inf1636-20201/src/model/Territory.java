@@ -28,6 +28,15 @@ class Territory {
 		return null;
 	}
 	
+	public static Territory getTerritory(int i_turf)
+	{
+		if(i_turf > -1 && i_turf < territories.size()){
+			return territories.get(i_turf);
+		}
+		
+		return null;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -69,149 +78,190 @@ class Territory {
 		return Collections.unmodifiableList(territories);
 	}
 	
+	public static void resetTerritories() {
+		
+		for(Territory t: territories) {
+			t.setTroops(0);
+			t.setColor(null);
+		}
+		
+	}
+	
 	public static void initialize()
 	{
 		//initialize neighbor lists
 		
-			//NA
-			
-			ArrayList<String> alaska_n = new ArrayList<String>(
-		    	      Arrays.asList("Vladvostok","Vancouver","Mackenzie"));
-			
-			ArrayList<String> california_n = new ArrayList<String>(
-		    	      Arrays.asList("Mexico","Nova York","Ottawa","Vancouver"));
-			
-			ArrayList<String> groenlandia_n = new ArrayList<String>(
-		    	      Arrays.asList("Mackenzie","Labrador","Islandia"));
-			
-			ArrayList<String> mackenzie_n = new ArrayList<String>(
-		    	      Arrays.asList("Alaska","Vancouver","Ottawa","Groenlandia"));
-			
-			ArrayList<String> labrador_n = new ArrayList<String>(
-		    	      Arrays.asList("Groenlandia","Nova York","Ottawa"));
-			
-			ArrayList<String> mexico_n = new ArrayList<String>(
-		    	      Arrays.asList("California","Nova York","Colombia"));
-			
-			ArrayList<String> nova_york_n = new ArrayList<String>(
-		    	      Arrays.asList("Ottawa","Labrador","California","Mexico"));
-			
-			ArrayList<String> vancouver_n = new ArrayList<String>(
-		    	      Arrays.asList("Alaska","Mackenzie","California","Ottawa"));
-			
-			ArrayList<String> ottawa_n = new ArrayList<String>(
-		    	      Arrays.asList("Vancouver","Labrador","Nova York","California","Mackenzie"));
-			
-			//SA
-			
-			ArrayList<String> argentina_n = new ArrayList<String>(
-		    	      Arrays.asList("Chile","Brasil"));
-			
-			ArrayList<String> brasil_n = new ArrayList<String>(
-		    	      Arrays.asList("Colombia","Chile","Argentina"));
-			
-			ArrayList<String> chile_n = new ArrayList<String>(
-		    	    Arrays.asList("Argentina","Colombia","Brasil"));
-			
-		    ArrayList<String> colombia_n = new ArrayList<String>(
-		    		Arrays.asList("Mexico","Chile","Brasil"));
-		    
-		    
-		    //AF
-		    
-		    ArrayList<String> argelia_n = new ArrayList<String>(
-		    	      Arrays.asList("Franca","Brasil","Egito","Sudao","Congo"));
 
-		    ArrayList<String> egito_n = new ArrayList<String>(
-		    	      Arrays.asList("Polonia","Franca","Oriente Medio","Sudao","Argelia"));
-		    
-		    ArrayList<String> sudao_n = new ArrayList<String>(
-		    	      Arrays.asList("Egito","Argelia","Congo","Madagascar","Africa Do Sul"));
-		    
-		    ArrayList<String> africa_do_sul_n = new ArrayList<String>(
-		    	      Arrays.asList("Congo","Sudao","Madagascar"));
-		    
-		    ArrayList<String> madagascar_n = new ArrayList<String>(
-		    	      Arrays.asList("Sudao","Africa Do Sul"));
-		    
-		    ArrayList<String> congo_n = new ArrayList<String>(
-		    	      Arrays.asList("Argelia","Sudao","Africa Do Sul"));
-		    
-		    
-		    //EU
-		    
-		    ArrayList<String> franca_n = new ArrayList<String>(
-		    	      Arrays.asList("Argelia","Egito","Inglaterra","Alemanha","Polonia"));
-		    
-		    ArrayList<String> polonia_n = new ArrayList<String>(
-		    	      Arrays.asList("Moscou","Alemanha","Franca","Egito"));
-		    
-		    ArrayList<String> inglaterra_n = new ArrayList<String>(
-		    	      Arrays.asList("Islandia","Suecia","Alemanha","Franca"));
-		    
-		    ArrayList<String> alemanha_n = new ArrayList<String>(
-		    	      Arrays.asList("Inglaterra","Franca","Polonia"));
-		    
-		    ArrayList<String> suecia_n = new ArrayList<String>(
-		    	      Arrays.asList("Inglaterra", "Moscou"));
-		    
-		    ArrayList<String> islandia_n = new ArrayList<String>(
-		    	      Arrays.asList("Inglaterra","Groenlandia"));
-		    
-		    ArrayList<String> moscou_n = new ArrayList<String>(
-		    	      Arrays.asList("Suecia","Polonia","Omsk","Aral","Oriente Medio"));
-		    
-		    //AS
-		    
-		    ArrayList<String> china_n = new ArrayList<String>(
-		    	      Arrays.asList("Mongolia","Japao","Vietna","India","Aral","Omsk","Tchita"));
-		    
-		    ArrayList<String> india_n = new ArrayList<String>(
-		    	      Arrays.asList("China","Aral","Oriente Medio","Vietna","Sumatra"));
-		    
-		    ArrayList<String> japao_n = new ArrayList<String>(
-		    	      Arrays.asList("China","Vladivostok"));
-		    
-		    ArrayList<String> vladivostok_n = new ArrayList<String>(
-		    	      Arrays.asList("Japao","Tchita","Siberia","China"));
-		    
-		    ArrayList<String> siberia_n = new ArrayList<String>(
-		    	      Arrays.asList("Vladivostok","Tchita","Dudinka"));
-		    
-		    ArrayList<String> dudinka_n = new ArrayList<String>(
-		    	      Arrays.asList("Siberia","Tchita","Mongolia","Omsk"));
-		    
-		    ArrayList<String> tchita_n = new ArrayList<String>(
-		    	      Arrays.asList("Mongolia","Vladivostok","China","Siberia","Dudinka"));
-		    
-		    ArrayList<String> omsk_n = new ArrayList<String>(
-		    	      Arrays.asList("Mongolia","China","Aral","Dudinka","Moscou"));
-		    
-		    ArrayList<String> aral_n = new ArrayList<String>(
-		    	      Arrays.asList("Moscou","Omsk","Oriente Medio","China","India"));
-		    
-		    ArrayList<String> oriente_medio_n = new ArrayList<String>(
-		    	      Arrays.asList("Moscou","Aral","India","Egito","Polonia"));
-		    
-		    ArrayList<String> vietna_n = new ArrayList<String>(
-		    	      Arrays.asList("China","India","Borneo"));
-		    
-		    ArrayList<String> mongolia_n = new ArrayList<String>(
-		    	      Arrays.asList("China","Tchita","Dudinka","Omsk"));
-		    
-		    //OC
-		    
-		    ArrayList<String> australia_n = new ArrayList<String>(
-		    	      Arrays.asList("Sumatra","Nova Guine","Borneo"));
-		    
-		    ArrayList<String> borneo_n = new ArrayList<String>(
-		    	      Arrays.asList("Australia","Nova Guine","Vietna"));
-		    
-		    ArrayList<String> nova_guine_n = new ArrayList<String>(
-		    	      Arrays.asList("Australia","Borneo"));
-		    
-		    ArrayList<String> sumatra_n = new ArrayList<String>(
-		    	      Arrays.asList("Australia","India"));
+		//NA
+
+		ArrayList<String> alasca_n = new ArrayList<String>(
+	    	      Arrays.asList("Siberia","Vancouver","Calgary"));
+
+		ArrayList<String> calgary_n = new ArrayList<String>(
+	    	      Arrays.asList("Alasca","Vancouver","Groenlandia"));
+
+		ArrayList<String> california_n = new ArrayList<String>(
+	    	      Arrays.asList("Mexico","Texas","Vancouver"));
+
+		ArrayList<String> groenlandia_n = new ArrayList<String>(
+	    	      Arrays.asList("Calgary","Quebec","Reino Unido"));
+
+		ArrayList<String> mexico_n = new ArrayList<String>(
+	    	      Arrays.asList("California","Texas","Venezuela"));
+
+		ArrayList<String> nova_york_n = new ArrayList<String>(
+	    	      Arrays.asList("Quebec","Texas"));
+
+		ArrayList<String> quebec_n = new ArrayList<String>(
+	    	      Arrays.asList("Groenlandia","Nova York"));
+
+		ArrayList<String> texas_n = new ArrayList<String>(
+	    	      Arrays.asList("California","Quebec","Mexico","Nova York","Vancouver"));
+
+		ArrayList<String> vancouver_n = new ArrayList<String>(
+	    	      Arrays.asList("Alasca","Calgary","California","Quebec","Texas"));
+
+		//SA
+
+		ArrayList<String> argentina_n = new ArrayList<String>(
+	    	      Arrays.asList("Peru","Brasil"));
+
+		ArrayList<String> brasil_n = new ArrayList<String>(
+	    	      Arrays.asList("Venezuela","Peru","Argentina"));
+
+		ArrayList<String> peru_n = new ArrayList<String>(
+	    	    Arrays.asList("Argentina","Venezuela","Brasil"));
+
+	    ArrayList<String> venezuela_n = new ArrayList<String>(
+	    		Arrays.asList("Mexico","Peru","Brasil"));
+
+
+	    //AF
+
+	    ArrayList<String> argelia_n = new ArrayList<String>(
+	    	      Arrays.asList("Espanha","Nigeria","Egito","Italia"));
+
+	    ArrayList<String> egito_n = new ArrayList<String>(
+	    	      Arrays.asList("Romenia","Jordania","Somalia","Nigeria","Argelia"));
+
+	    ArrayList<String> nigeria_n = new ArrayList<String>(
+	    	      Arrays.asList("Argelia","Egito","Brasil","Somalia","Angola"));
+
+	    ArrayList<String> somalia_n = new ArrayList<String>(
+	    	      Arrays.asList("Arabia Saudita","Egito","Nigeria","Angola","Africa Do Sul"));
+
+	    ArrayList<String> angola_n = new ArrayList<String>(
+	    	      Arrays.asList("Africa Do Sul","Somalia","Nigeria"));
+
+	    ArrayList<String> africa_do_sul_n = new ArrayList<String>(
+	    	      Arrays.asList("Angola","Somalia"));
+
+
+	    //EU
+
+	    ArrayList<String> espanha_n = new ArrayList<String>(
+	    	      Arrays.asList("Argelia","Franca"));
+
+	    ArrayList<String> franca_n = new ArrayList<String>(
+	    	      Arrays.asList("Espanha","Italia","Reino Unido"));
+
+	    ArrayList<String> italia_n = new ArrayList<String>(
+	    	      Arrays.asList("Romenia","Polonia","Suecia","Franca","Argelia"));
+
+	    ArrayList<String> polonia_n = new ArrayList<String>(
+	    	      Arrays.asList("Letonia","Ucrania","Romenia","Italia"));
+
+	    ArrayList<String> reino_unido_n = new ArrayList<String>(
+	    	      Arrays.asList("Groenlandia","Franca"));
+
+	    ArrayList<String> romenia_n = new ArrayList<String>(
+	    	      Arrays.asList("Ucrania","Polonia","Italia","Egito"));
+
+	    ArrayList<String> suecia_n = new ArrayList<String>(
+	    	      Arrays.asList("Estonia", "Letonia" ,"Italia","Franca"));
+
+	    ArrayList<String> ucrania_n = new ArrayList<String>(
+	    	      Arrays.asList("Turquia","Letonia","Polonia","Romenia"));
+
+
+	    //AS
+
+	    ArrayList<String> arabia_saudita_n = new ArrayList<String>(
+	    	      Arrays.asList("Somalia","Iraque","Jordania"));
+
+	    ArrayList<String> bangladesh_n = new ArrayList<String>(
+	    	      Arrays.asList("India","Coreia Do Sul","Tailandia","Indonesia"));
+
+	    ArrayList<String> cazaquistao_n = new ArrayList<String>(
+	    	      Arrays.asList("Siberia","Russia","Letonia","Turquia","China","Mongolia","Japao"));
+
+	    ArrayList<String> china_n = new ArrayList<String>(
+	    	      Arrays.asList("Mongolia","Cazaquistao","Turquia","Paquistao","India","Coreia Do Sul","Coreia Do Norte"));
+
+	    ArrayList<String> coreia_do_norte_n = new ArrayList<String>(
+	    	      Arrays.asList("Japao","China","Coreia Do Sul"));
+
+	    ArrayList<String> coreia_do_sul_n = new ArrayList<String>(
+	    	      Arrays.asList("Coreia Do Norte","China","India","Bangladesh","Tailandia"));
+
+	    ArrayList<String> estonia_n = new ArrayList<String>(
+	    	      Arrays.asList("Letonia","Suecia","Russia"));
+
+	    ArrayList<String> india_n = new ArrayList<String>(
+	    	      Arrays.asList("Coreia Do Sul","China","Paquistao","Indonesia","Bangladesh"));
+
+	    ArrayList<String> ira_n = new ArrayList<String>(
+	    	      Arrays.asList("Paquistao","Siria","Iraque"));
+
+	    ArrayList<String> iraque_n = new ArrayList<String>(
+	    	      Arrays.asList("Ira","Siria","Jordania","Arabia Saudita"));
+
+	    ArrayList<String> japao_n = new ArrayList<String>(
+	    	      Arrays.asList("Cazaquistao","Mongolia","Coreia Do Norte"));
+
+	    ArrayList<String> jordania_n = new ArrayList<String>(
+	    	      Arrays.asList("Arabia Saudita","Iraque","Siria","Egito"));
+
+	    ArrayList<String> letonia_n = new ArrayList<String>(
+	    	      Arrays.asList("Estonia","Russia","Cazaquistao","Turquia","Ucrania","Polonia","Suecia"));
+
+	    ArrayList<String> mongolia_n = new ArrayList<String>(
+	    	      Arrays.asList("Japao","Cazaquistao","China"));
+
+	    ArrayList<String> paquistao_n = new ArrayList<String>(
+	    	      Arrays.asList("China","India","Ira","Siria","Turquia"));
+
+	    ArrayList<String> russia_n = new ArrayList<String>(
+	    	      Arrays.asList("Estonia","Siberia","Cazaquistao","Letonia"));
+
+	    ArrayList<String> siberia_n = new ArrayList<String>(
+	    	      Arrays.asList("Russia","Cazaquistao","Alasca"));
+
+	    ArrayList<String> siria_n = new ArrayList<String>(
+	    	      Arrays.asList("Turquia","Paquistao","Ira","Iraque","Jordania"));
+
+	    ArrayList<String> tailandia_n = new ArrayList<String>(
+	    	      Arrays.asList("Coreia Do Sul","Bangladesh"));
+
+	    ArrayList<String> turquia_n = new ArrayList<String>(
+	    	      Arrays.asList("Letonia","Ucrania","Siria","Paquistao","China","Cazaquistao"));
+
+
+	    //OC
+
+	    ArrayList<String> australia_n = new ArrayList<String>(
+	    	      Arrays.asList("Perth","Nova Zelandia","Indonesia"));
+
+	    ArrayList<String> indonesia_n = new ArrayList<String>(
+	    	      Arrays.asList("Australia","Nova Zelandia","Bangladesh","India"));
+
+	    ArrayList<String> nova_zelandia_n = new ArrayList<String>(
+	    	      Arrays.asList("Australia","Indonesia"));
+
+	    ArrayList<String> perth_n = new ArrayList<String>(
+	    	      Arrays.asList("Australia"));
+
+
 		    
 		    
 		    
@@ -223,64 +273,73 @@ class Territory {
 			
 			//NA
 		    
-		    territories.add(new Territory("Alaska"		, alaska_n));
-		    territories.add(new Territory("Mackenzie"		, mackenzie_n));
-		    territories.add(new Territory("California"	, california_n));
-		    territories.add(new Territory("Groenlandia"	, groenlandia_n));
-		    territories.add(new Territory("Mexico"		, mexico_n));
+		    territories.add(new Territory("Alasca"			, alasca_n));
+		    territories.add(new Territory("Calgary"			, calgary_n));
+		    territories.add(new Territory("California"		, california_n));
+		    territories.add(new Territory("Groenlandia"		, groenlandia_n));
+		    territories.add(new Territory("Mexico"			, mexico_n));
 		    territories.add(new Territory("Nova York"		, nova_york_n));
-		    territories.add(new Territory("Labrador"		, labrador_n));
-		    territories.add(new Territory("Ottawa"		, ottawa_n));
+		    territories.add(new Territory("Quebec"			, quebec_n));
+		    territories.add(new Territory("Texas"			, texas_n));
 		    territories.add(new Territory("Vancouver"		, vancouver_n));
 		    
 		    
 			//SA
 		    
-		    territories.add(new Territory("Argentina", argentina_n));
-		    territories.add(new Territory("Brasil", brasil_n));
-		    territories.add(new Territory("Chile"			, chile_n));
-		    territories.add(new Territory("Colombia"		, colombia_n));
+		    territories.add(new Territory("Argentina"		, argentina_n));
+		    territories.add(new Territory("Brasil"			, brasil_n));
+		    territories.add(new Territory("Peru"			, peru_n));
+		    territories.add(new Territory("Venezuela"		, venezuela_n));
 		    
 		    //AF
 		    
 		    territories.add(new Territory("Africa Do Sul"	, africa_do_sul_n));
-		    territories.add(new Territory("Sudao"			, sudao_n));
-		    territories.add(new Territory("Argelia"		, argelia_n));
+		    territories.add(new Territory("Angola"			, angola_n));
+		    territories.add(new Territory("Argelia"			, argelia_n));
 		    territories.add(new Territory("Egito"			, egito_n));
-		    territories.add(new Territory("Madagascar"	, madagascar_n));
-		    territories.add(new Territory("Congo"			, congo_n));
+		    territories.add(new Territory("Nigeria"			, nigeria_n));
+		    territories.add(new Territory("Somalia"			, somalia_n));
 		    
 		    //EU
 		    
-		    territories.add(new Territory("Islandia"		, islandia_n));
+		    territories.add(new Territory("Espanha"		, espanha_n));
 		    territories.add(new Territory("Franca"		, franca_n));
-		    territories.add(new Territory("Inglaterra"	, inglaterra_n));
+		    territories.add(new Territory("Italia"		, italia_n));
+		    territories.add(new Territory("Reino Unido"	, reino_unido_n));
 		    territories.add(new Territory("Polonia"		, polonia_n));
 		    territories.add(new Territory("Suecia"		, suecia_n));
-		    territories.add(new Territory("Moscou"		, moscou_n));
-		    territories.add(new Territory("Alemanha"		, alemanha_n));
+		    territories.add(new Territory("Romenia"		, romenia_n));
+		    territories.add(new Territory("Ucrania"		, ucrania_n));
 		    
 		    //AS
 		    
+		    territories.add(new Territory("Arabia Saudita"	, arabia_saudita_n));
+		    territories.add(new Territory("Bangladesh"		, bangladesh_n));
+		    territories.add(new Territory("Cazaquistao"		, cazaquistao_n));
 		    territories.add(new Territory("China"			, china_n));
+		    territories.add(new Territory("Coreia Do Norte"	, coreia_do_norte_n));
+		    territories.add(new Territory("Coreia Do Sul"	, coreia_do_sul_n));
+		    territories.add(new Territory("Estonia"			, estonia_n));
 		    territories.add(new Territory("India"			, india_n));
+		    territories.add(new Territory("Ira"				, ira_n));
+		    territories.add(new Territory("Iraque"			, iraque_n));
 		    territories.add(new Territory("Japao"			, japao_n));
-		    territories.add(new Territory("Dudinka"		, dudinka_n));
-		    territories.add(new Territory("Aral"			, aral_n));
+		    territories.add(new Territory("Jordania"		, jordania_n));
+		    territories.add(new Territory("Letonia"			, letonia_n));
 		    territories.add(new Territory("Mongolia"		, mongolia_n));
-		    territories.add(new Territory("Oriente Medio"	, oriente_medio_n));
-		    territories.add(new Territory("Omsk"			, omsk_n));
-		    territories.add(new Territory("Siberia"		, siberia_n));
-		    territories.add(new Territory("Tchita"		, tchita_n));
-		    territories.add(new Territory("Vietna"		, vietna_n));
-		    territories.add(new Territory("Vladivostok"	, vladivostok_n));
+		    territories.add(new Territory("Paquistao"		, paquistao_n));
+		    territories.add(new Territory("Russia"			, russia_n));
+		    territories.add(new Territory("Siberia"			, siberia_n));
+		    territories.add(new Territory("Siria"			, siria_n));
+		    territories.add(new Territory("Tailandia"		, tailandia_n));
+		    territories.add(new Territory("Turquia"			, turquia_n));
 		    
 		    //OC
 		    
 		    territories.add(new Territory("Australia"		, australia_n));
-		    territories.add(new Territory("Sumatra"		, sumatra_n));
-		    territories.add(new Territory("Nova Guine"	, nova_guine_n));
-		    territories.add(new Territory("Borneo"		, borneo_n));
+		    territories.add(new Territory("Indonesia"		, indonesia_n));
+		    territories.add(new Territory("Nova Zelandia"	, nova_zelandia_n));
+		    territories.add(new Territory("Perth"			, perth_n));
 		    
 	}
 }

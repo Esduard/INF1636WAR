@@ -29,6 +29,11 @@ abstract class Objective {
 		return Collections.unmodifiableList(objectives);
 	}
 	
+	public static Objective getObjective(int i) {
+		return objectives.get(i);
+	}
+	
+	
 	public static void initialize()
 	{
 		List<Continent> continents = Continent.getContinentList();
@@ -48,13 +53,17 @@ abstract class Objective {
 		//Destroy army
 		
 		
-		for(int i = 0; i < GameColor.Count.ordinal(); i++)
+		//must have acces to players
+		int number_p = GameExecution.getPlayerCount();
+		
+		for(int i = 0; i < number_p; i++)
 		{
-			GameColor c = GameColor.values()[i];
-			objectives.add(new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + c.name(),GameExecution.getPlayer(c),null));
+			objectives.add(new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + GameExecution.getPlayer(i).getColor(),GameExecution.getPlayer(i),null));
 		}
 		
 		//Conquer continent
+		
+		//Conquer continent objectives with extra continents
 		
 		ArrayList<Continent> extraContinents = new ArrayList<Continent>();
 		
@@ -97,8 +106,10 @@ abstract class Objective {
 				
 		}
 		
-		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a Europa, a Oceania e "
-				+ "mais um continente à sua escolha", ContinentsEUOC, true,null,extraContinentsEUOC));
+		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a Europa, a Oceania "
+				+ " mais um continente à sua escolha", ContinentsEUOC, true,null,extraContinentsEUOC));
+		
+		//Conquer continent objectives without extra continents
 		
 		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a Oceania", ContinentsNAOC, false,null,extraContinentsEUOC));
 		

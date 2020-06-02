@@ -23,86 +23,88 @@ public class TEST {
 		cards[6]  = new Card(Shape.Joker	, null);
 		cards[7]  = new Card(Shape.Joker	, null);
 		
+		//GameValidation {
 		
+		//public static boolean validateCardTrade(ArrayList<Card> selected)
 		
-		System.out.println("correctly use 3 cards of same shape");
+		System.out.println("\ncorrectly use 3 cards of same shape");
 		test_subject.add(cards[0]);
 		test_subject.add(cards[4]);
 		test_subject.add(cards[5]);
 		System.out.print("Expects true -> ");
-		System.out.println(Model.validateCardTrade(test_subject));
+		System.out.println(GameValidation.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
 		
-		System.out.println("correctly use 3 cards of different shape");
+		System.out.println("\ncorrectly use 3 cards of different shape");
 		test_subject.add(cards[0]);
 		test_subject.add(cards[1]);
 		test_subject.add(cards[2]);
 		System.out.print("Expects true -> ");
-		System.out.println(Model.validateCardTrade(test_subject));
+		System.out.println(GameValidation.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
-		System.out.println("incorrectly use 4 cards for trade");
+		System.out.println("\nincorrectly use 4 cards for trade");
 		test_subject.add(cards[0]);
 		test_subject.add(cards[1]);
 		test_subject.add(cards[2]);
 		test_subject.add(cards[3]);
 		System.out.print("Expects false -> ");
-		System.out.println(Model.validateCardTrade(test_subject));
+		System.out.println(GameValidation.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
-		System.out.println("incorrectly use 0 cards for trade");
+		System.out.println("\nincorrectly use 0 cards for trade");
 		System.out.print("Expects false -> ");
-		System.out.println(Model.validateCardTrade(test_subject));
+		System.out.println(GameValidation.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
-		System.out.println("incorrectly use 2 cards of same shape and other of different-nonjoker shape");
+		System.out.println("\nincorrectly use 2 cards of same shape and other of different-nonjoker shape");
 		test_subject.add(cards[0]);
 		test_subject.add(cards[1]);
 		test_subject.add(cards[5]);
 		System.out.print("Expects false -> ");
-		System.out.println(Model.validateCardTrade(test_subject));
+		System.out.println(GameValidation.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
-		System.out.println("incorrectly use 2 cards of different shape and other of repeated-nonjoker shape");
+		System.out.println("\nincorrectly use 2 cards of different shape and other of repeated-nonjoker shape");
 		test_subject.add(cards[0]);
 		test_subject.add(cards[3]);
 		test_subject.add(cards[4]);
 		System.out.print("Expects false -> ");
-		System.out.println(Model.validateCardTrade(test_subject));
+		System.out.println(GameValidation.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
-		System.out.println("incorrectly use first card with different shape of second and second card with equal shape of third");
+		System.out.println("\nincorrectly use first card with different shape of second and second card with equal shape of third");
 		test_subject.add(cards[1]);
 		test_subject.add(cards[4]);
 		test_subject.add(cards[5]);
 		System.out.print("Expects false -> ");
-		System.out.println(Model.validateCardTrade(test_subject));
+		System.out.println(GameValidation.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
-		System.out.println("correctly deal 2 equal cards with 1 joker");
+		System.out.println("\ncorrectly deal 2 equal cards with 1 joker");
 		test_subject.add(cards[1]);
 		test_subject.add(cards[3]);
 		test_subject.add(cards[6]);
 		System.out.print("Expects true -> ");
-		System.out.println(Model.validateCardTrade(test_subject));
+		System.out.println(GameValidation.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
 		
-		System.out.println("correctly deal 2 diferent cards with  1 joker");
+		System.out.println("\ncorrectly deal 2 diferent cards with  1 joker");
 		test_subject.add(cards[1]);
 		test_subject.add(cards[2]);
 		test_subject.add(cards[6]);
 		System.out.print("Expects true -> ");
-		System.out.println(Model.validateCardTrade(test_subject));
+		System.out.println(GameValidation.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
-		System.out.println("correctly deal trade with 2 jokers and 1 extra card");
+		System.out.println("\ncorrectly deal trade with 2 jokers and 1 extra card");
 		test_subject.add(cards[1]);
 		test_subject.add(cards[7]);
 		test_subject.add(cards[6]);
 		System.out.print("Expects true -> ");
-		System.out.println(Model.validateCardTrade(test_subject));
+		System.out.println(GameValidation.validateCardTrade(test_subject));
 		test_subject.removeAll(test_subject);
 		
 	}
@@ -111,28 +113,71 @@ public class TEST {
 	{
 		System.out.println("----------------TEST CREATE PLAYER LIST----------------");
 		
-		System.out.println("With 2 players: " + Model.createPlayerList(2));
-		System.out.println("With 3 players: " + Model.createPlayerList(3));
-		System.out.println("With 6 players: " + Model.createPlayerList(6));
-		System.out.println("With 7 players: " + Model.createPlayerList(7));
+		System.out.println("With 2 players: " + GameExecution.createPlayerList(2));
+		System.out.println("With 3 players: " + GameExecution.createPlayerList(3));
+		System.out.println("With 6 players: " + GameExecution.createPlayerList(6));
+		System.out.println("With 7 players: " + GameExecution.createPlayerList(7));
+		
+		GameExecution.resetPlayers();
 	}
 	
-	public static void testAddPlayer()
+	public static void testAddPlayers()
 	{
-		System.out.println("----------------TEST ADD PLAYER----------------");
+		System.out.println("----------------TEST ADD PLAYERS----------------");
 		
-		Model.createPlayerList(3);
 		System.out.println("3 players: ");
 		
-		/*System.out.println("Adding null: " + Model.addPlayer(null));
-		System.out.println("Adding first player: " + Model.addPlayer(new Player("Hashirama", Color.Azul)));
-		System.out.println("Adding second player: " + Model.addPlayer(new Player("Tobirama", Color.Vermelho)));
-		System.out.println("Adding third player and repeating color: " + Model.addPlayer(new Player("Madara", Color.Vermelho)));
-		System.out.println("Adding third player: " + Model.addPlayer(new Player("Hiruzen", Color.Preto)));
-		System.out.println("Adding forth player: " + Model.addPlayer(new Player("Minato", Color.Branco)));
-		System.out.println("Adding fifth player: " + Model.addPlayer(new Player("Tsunade", Color.Amarelo)));
-		System.out.println("Adding sixth player: " + Model.addPlayer(new Player("Kakashi", Color.Verde)));
-		System.out.println("Adding seventh player: " + Model.addPlayer(new Player("Naruto", Color.Branco)));*/
+		//public static boolean addPlayers(String[] names, String[] colors)
+		
+		System.out.println("\ncorrectly adds 3 players: expects true");
+		GameExecution.createPlayerList(3);
+		
+		String[] jogadores1 = {"Hashirama","Tobirama","Hiruzen"};
+		
+		String[] cores1 = {"Azul","Vermelho","Preto"};
+		
+		boolean result = GameExecution.addPlayers(jogadores1,cores1);
+		
+		System.out.println(result);
+		
+		for(int i= 0;i < 3; i++) {
+			System.out.println(GameExecution.getPlayer(i).getName());
+		}
+		
+		GameExecution.resetPlayers();
+		
+		System.out.println("\nincorrectly adds 2 players: expects false");
+		GameExecution.createPlayerList(2);
+		
+		String[] jogadores2 = {"Hashirama","Tobirama"};
+		
+		String[] cores2 = {"Azul","Vermelho"};
+		
+		System.out.println(GameExecution.addPlayers(jogadores2,cores2));
+		
+		GameExecution.resetPlayers();
+		
+		System.out.println("\nincorrectly adds 3 players with repeated color: expects false");
+		GameExecution.createPlayerList(3);
+		
+		String[] jogadores3 = {"Hashirama","Madara","Tobirama"};
+		
+		String[] cores3 = {"Azul","Azul","Vermelho"};
+		
+		System.out.println(GameExecution.addPlayers(jogadores3,cores3));
+		
+		GameExecution.resetPlayers();
+		
+		System.out.println("\nincorrectly adds 3 players with non-existent color: expects false");
+		GameExecution.createPlayerList(3);
+		
+		String[] jogadores4 = {"Hashirama","Madara","Tobirama"};
+		
+		String[] cores4 = {"Azul","Laranja","Vermelho"};
+		
+		System.out.println(GameExecution.addPlayers(jogadores4,cores4));
+		
+		GameExecution.resetPlayers();
 	}
 	
 	public static void testAttackResult()
@@ -158,15 +203,20 @@ public class TEST {
 	    Territory Venezuela = new Territory("Venezuela", venezuela_n);
 		Territory Peru = new Territory("Peru", peru_n);
 		
-		Player.getPlayer(Color.Vermelho).manageTerritory(Venezuela, 5);
-		Player.getPlayer(Color.Azul).manageTerritory(Peru, 3);
+		//public Player(String n,GameColor c) {
+		
+		Player p1 = new Player("Eduardo",GameColor.Vermelho);
+		Player p2 = new Player("Gabriel",GameColor.Azul);
+		
+		p1.manageTerritory(Venezuela, 5);
+		p2.manageTerritory(Peru, 3);
 		
 		System.out.println("BEFORE ATTACK: ");
 		
 		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
 		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
 
-		result = Model.executeAttack(Venezuela , Peru, atk , def );
+		result = GameExecution.executeAttack(Venezuela , Peru, atk , def );
 		
 		System.out.println(result);
 		
@@ -190,18 +240,21 @@ public class TEST {
 	    Territory Venezuela = new Territory("Venezuela", venezuela_n);
 		Territory Peru = new Territory("Peru", peru_n);
 		
-		Player.getPlayer(Color.Vermelho).manageTerritory(Venezuela, 1);
-		Player.getPlayer(Color.Azul).manageTerritory(Peru, 5);
+		Player p1 = new Player("Eduardo",GameColor.Vermelho);
+		Player p2 = new Player("Gabriel",GameColor.Azul);
+		
+		p1.manageTerritory(Venezuela, 1);
+		p2.manageTerritory(Peru, 5);
 		
 		boolean result;
 		
-		System.out.println("Incorrectly move troops of different colors");
+		System.out.println("\nincorrectly move troops of different colors");
 		System.out.println("BEFORE MOVE: ");
 		
 		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
 		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
 
-		result = Model.moveTroops(Venezuela,Peru,1);
+		result = GameExecution.moveTroops(Venezuela,Peru,1);
 		
 		System.out.println(result);
 		
@@ -210,7 +263,7 @@ public class TEST {
 		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
 		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
 		
-		System.out.println("Incorrectly move stationary troops ");
+		System.out.println("\nincorrectly move stationary troops ");
 		
 		Venezuela.setColor(Peru.getColor());
 		
@@ -219,7 +272,7 @@ public class TEST {
 		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
 		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
 
-		result = Model.moveTroops(Venezuela,Peru,1);
+		result = GameExecution.moveTroops(Venezuela,Peru,1);
 		
 		System.out.println(result);
 		
@@ -228,7 +281,7 @@ public class TEST {
 		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
 		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
 		
-		System.out.println("Correctly move 2 troops ");
+		System.out.println("\ncorrectly move 2 troops ");
 		
 		Venezuela.setTroops(3);
 		
@@ -237,7 +290,7 @@ public class TEST {
 		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
 		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
 
-		result = Model.moveTroops(Venezuela,Peru,2);
+		result = GameExecution.moveTroops(Venezuela,Peru,2);
 		
 		System.out.println(result);
 		
@@ -265,44 +318,50 @@ public class TEST {
 	    ArrayList<String> argentina_n = new ArrayList<String>(
 	    	      Arrays.asList("Peru","Brasil"));
 		
-		Territory Venezuela = new Territory("Venezuela",Color.Vermelho, venezuela_n);
-		Territory Peru = new Territory("Peru",Color.Azul, peru_n);
-		Territory Argentina = new Territory("Argentina",Color.Azul, argentina_n);
-		Territory Brasil = new Territory("Brasil",Color.Azul, brasil_n);
+	    
+	    Player p1 = new Player("Eduardo",GameColor.Vermelho);
+		Player p2 = new Player("Gabriel",GameColor.Azul);
+	    
+		Territory Venezuela = new Territory("Venezuela", venezuela_n);
+		Territory Peru = new Territory("Peru", peru_n);
+		Territory Argentina = new Territory("Argentina", argentina_n);
+		Territory Brasil = new Territory("Brasil", brasil_n);
 		
-		Venezuela.setTroops(1);
-		Peru.setTroops(5);
-		Argentina.setTroops(2);
-		Brasil.setTroops(1);
+		
+		p1.manageTerritory(Venezuela, 1);
+		p2.manageTerritory(Peru, 5);
+		p2.manageTerritory(Argentina, 2);
+		p2.manageTerritory(Brasil, 1);
 		
 		//public static boolean validateAttack(Color c,Territory src,Territory target,int n_Troops_Attacking)
 		
 		
 		System.out.println("can't attack with enemy troops");
 		System.out.print("Expects false -> ");
-		System.out.println(Model.validateAttack(Color.Azul,Venezuela,Peru,1));
+		System.out.println(GameValidation.validateAttack(GameColor.Azul,Venezuela,Peru,1));
 		
 		System.out.println("can't attack yourself");
 		System.out.print("Expects false -> ");
-		System.out.println(Model.validateAttack(Color.Azul,Brasil,Peru,1));
+		System.out.println(GameValidation.validateAttack(GameColor.Azul,Brasil,Peru,1));
 		
 		System.out.println("can't do attack with no troops on standby in source");
 		System.out.print("Expects false -> ");
-		System.out.println(Model.validateAttack(Color.Azul,Brasil,Venezuela,1));
+		System.out.println(GameValidation.validateAttack(GameColor.Azul,Brasil,Venezuela,1));
 	
-		System.out.println("can't attack with more than 3 troops or 0 troops");
+		System.out.println("can't attack with 0 troops");
 		System.out.print("Expects false -> ");
-		System.out.println(Model.validateAttack(Color.Azul,Peru,Venezuela,0));
+		System.out.println(GameValidation.validateAttack(GameColor.Azul,Peru,Venezuela,0));
+		System.out.println("can't attack with more than 3 troops");
 		System.out.print("Expects false -> ");
-		System.out.println(Model.validateAttack(Color.Azul,Peru,Venezuela,4));
+		System.out.println(GameValidation.validateAttack(GameColor.Azul,Peru,Venezuela,4));
 		
 		System.out.println("verify if target is src's neighbor");
 		System.out.print("Expects false -> ");
-		System.out.println(Model.validateAttack(Color.Azul,Argentina,Venezuela,1));
+		System.out.println(GameValidation.validateAttack(GameColor.Azul,Argentina,Venezuela,1));
 		
 		System.out.println("valid attack");
 		System.out.print("Expects true -> ");
-		System.out.println(Model.validateAttack(Color.Azul,Peru,Venezuela,1));
+		System.out.println(GameValidation.validateAttack(GameColor.Azul,Peru,Venezuela,1));
 	}
 	
 	public static void testObjectiveValidation (){
@@ -318,47 +377,35 @@ public class TEST {
 		System.out.println("-------------TEST DESTROY ARMY OBJECTIVE--------------");
 		
 		//setting the stage
+		GameExecution.resetAll();
+		GameExecution.createPlayerList(3);
+		Territory.initialize();
+		Continent.initialize();
 		
-		Player [] p = new Player[3];
+		String[] jogadores = {"Mario","Luigi","Peach"};
 		
-		p[0] = new Player("Mario",Color.Vermelho);
-		p[1] = new Player("Luigi",Color.Verde);
-		p[2] = new Player("Peach",Color.Branco);
+		String[] cores = {"Azul","Vermelho","Preto"};
 		
+		GameExecution.addPlayers(jogadores,cores);
 		
 		Objective objs[] = new Objective[3];
 		//DestroyArmyObjective(String description, Player target,Player player)
-		objs[0] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + p[0].getColor().name(),p[0],null);
-		objs[1] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + p[1].getColor().name(),p[1],null);
-		objs[2] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + p[2].getColor().name(),p[2],null);
+		objs[0] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + GameExecution.getPlayer(0).getColor().name(),GameExecution.getPlayer(0),null);
+		objs[1] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + GameExecution.getPlayer(1).getColor().name(),GameExecution.getPlayer(1),null);
+		objs[2] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + GameExecution.getPlayer(2).getColor().name(),GameExecution.getPlayer(2),null);
 		
-		p[0].setObjective(objs[1]);
-		p[1].setObjective(objs[2]);
-		p[2].setObjective(objs[0]);
-		
-		Territory [] territories = new Territory[28];
-		
-		ArrayList<String> mushroom_kingdom_n = new ArrayList<String>(
-	    	      Arrays.asList("Beanbean Kingdom","Pillo Kingdom"));
-		
-		ArrayList<String> beanbean_kingdom_n = new ArrayList<String>(
-	    	      Arrays.asList("Pillo Kingdom","Mushroom Kingdom"));
-		
-		ArrayList<String> pillo_kingdom_n = new ArrayList<String>(
-	    	      Arrays.asList("Mushroom Kingdom","Beanbean Kingdom"));
-		
-		territories[0] 	= new Territory("Mushroom Kingdom"	, mushroom_kingdom_n);
-	    territories[1] 	= new Territory("Beanbean Kingdom"	, beanbean_kingdom_n);
-	    territories[2]	= new Territory("Pillo Kingdom"		, pillo_kingdom_n	);
+		GameExecution.getPlayer(0).setObjective(objs[1]);
+		GameExecution.getPlayer(1).setObjective(objs[2]);
+		GameExecution.getPlayer(2).setObjective(objs[0]);
 		
 		
 		//add territories to all players
 	    
-	    System.out.println("Correctly eliminate target player. expects [T,F,F]");
+	    System.out.println("\ncorrectly eliminate target player. expects [T,F,F]");
 	    
-	    p[0].manageTerritory(territories[0],4);
-		p[1].manageTerritory(territories[1],3);
-		p[2].manageTerritory(territories[2],3);
+	    GameExecution.getPlayer(0).manageTerritory(Territory.getTerritory("Argentina"),4);
+	    GameExecution.getPlayer(1).manageTerritory(Territory.getTerritory("Brasil"),3);
+	    GameExecution.getPlayer(2).manageTerritory(Territory.getTerritory("Peru"),3);
 		
 		//destroyArmyObjective holding player will win attack against his target
 		
@@ -366,145 +413,49 @@ public class TEST {
 		
 		int [] min_value = {1,1,1};
 		
+		// attack (int attacker, int defender, String src, String target, int[] attackDice, int[] defenseDice)
+		GameExecution.attack(0,1,"Argentina","Brasil", max_value , min_value);
 		
-		Model.attack(p[0],p[1],territories[0],territories[1], max_value , min_value);
-		
-		for(int i=0;i<p.length;i++) {
-			System.out.println("Objective complete: " + p[i].getObj().ValidateObjective());
+		for(int i=0;i<3;i++) {
+			System.out.println("Objective complete: " + GameExecution.getPlayer(i).getObj().ValidateObjective());
 		}
 		
-		for(int i=0;i<p.length;i++) {
-			p[i].resetPlayer();
+		//red will win by having 24 territories
+		GameExecution.resetAll();
+		GameExecution.createPlayerList(3);
+		Territory.initialize();
+		Continent.initialize();
+		GameExecution.addPlayers(jogadores,cores);
+		
+		
+		System.out.println("\ncorrectly conquer 24 territories after target player is defeated by someone else. expects [T,F,F]");
+		
+		//lots of stub territories to give red a lot of territories
+		int i_turf = 0;
+		
+		while(i_turf < 30) {
+			if(i_turf < 9 || i_turf > 11) {
+				GameExecution.getPlayer(0).manageTerritory(Territory.getTerritory(i_turf),1);
+			}
+			i_turf++;
+		}
+	    
+	    GameExecution.getPlayer(0).manageTerritory(Territory.getTerritory("Argentina"),4);
+	    GameExecution.getPlayer(1).manageTerritory(Territory.getTerritory("Brasil"),3);
+	    GameExecution.getPlayer(2).manageTerritory(Territory.getTerritory("Peru"),4);
+		
+	    GameExecution.getPlayer(0).setObjective(objs[1]);
+	    GameExecution.getPlayer(1).setObjective(objs[2]);
+	    GameExecution.getPlayer(2).setObjective(objs[0]);
+		
+	    
+		GameExecution.attack(2,1,"Peru","Brasil", max_value , min_value);
+		
+		
+		for(int i=0;i<3;i++) {
+			System.out.println("Objective complete: " + GameExecution.getPlayer(i).getObj().ValidateObjective());
 		}
 		
-		
-		System.out.println("Correctly conquer 24 territories after target player is defeated by someone else. expects [T,F,F]");
-		
-		//lots of stub territories to get red a lot of territories
-		
-		ArrayList<String> alaska_n = new ArrayList<String>(
-	    	      Arrays.asList("Vladvostok","Vancouver","Mackenzie"));
-		
-		ArrayList<String> california_n = new ArrayList<String>(
-	    	      Arrays.asList("Mexico","Nova York","Ottawa","Vancouver"));
-		
-		ArrayList<String> groenlandia_n = new ArrayList<String>(
-	    	      Arrays.asList("Mackenzie","Labrador","Islandia"));
-		
-		ArrayList<String> mackenzie_n = new ArrayList<String>(
-	    	      Arrays.asList("Alaska","Vancouver","Ottawa","Groenlandia"));
-		
-		ArrayList<String> labrador_n = new ArrayList<String>(
-	    	      Arrays.asList("Groenlandia","Nova York","Ottawa"));
-		
-		ArrayList<String> mexico_n = new ArrayList<String>(
-	    	      Arrays.asList("California","Nova York","Colombia"));
-		
-		ArrayList<String> nova_york_n = new ArrayList<String>(
-	    	      Arrays.asList("Ottawa","Labrador","California","Mexico"));
-		
-		ArrayList<String> vancouver_n = new ArrayList<String>(
-	    	      Arrays.asList("Alaska","Mackenzie","California","Ottawa"));
-		
-		ArrayList<String> ottawa_n = new ArrayList<String>(
-	    	      Arrays.asList("Vancouver","Labrador","Nova York","California","Mackenzie"));
-		
-		ArrayList<String> argentina_n = new ArrayList<String>(
-	    	      Arrays.asList("Chile","Brasil"));
-		
-		ArrayList<String> brasil_n = new ArrayList<String>(
-	    	      Arrays.asList("Colombia","Chile","Argentina"));
-		
-		ArrayList<String> chile_n = new ArrayList<String>(
-	    	    Arrays.asList("Argentina","Colombia","Brasil"));
-		
-	    ArrayList<String> colombia_n = new ArrayList<String>(
-	    		Arrays.asList("Mexico","Chile","Brasil"));
-	    
-	    ArrayList<String> argelia_n = new ArrayList<String>(
-	    	      Arrays.asList("Franca","Brasil","Egito","Sudao","Congo"));
-
-	    ArrayList<String> egito_n = new ArrayList<String>(
-	    	      Arrays.asList("Polonia","Franca","Oriente Medio","Sudao","Argelia"));
-	    
-	    ArrayList<String> sudao_n = new ArrayList<String>(
-	    	      Arrays.asList("Egito","Argelia","Congo","Madagascar","Africa Do Sul"));
-	    
-	    ArrayList<String> africa_do_sul_n = new ArrayList<String>(
-	    	      Arrays.asList("Congo","Sudao","Madagascar"));
-	    
-	    ArrayList<String> madagascar_n = new ArrayList<String>(
-	    	      Arrays.asList("Sudao","Africa Do Sul"));
-	    
-	    ArrayList<String> congo_n = new ArrayList<String>(
-	    	      Arrays.asList("Argelia","Sudao","Africa Do Sul"));
-	    
-	    ArrayList<String> franca_n = new ArrayList<String>(
-	    	      Arrays.asList("Argelia","Egito","Inglaterra","Alemanha","Polonia"));
-	    
-	    ArrayList<String> polonia_n = new ArrayList<String>(
-	    	      Arrays.asList("Moscou","Alemanha","Franca","Egito"));
-	    
-	    ArrayList<String> inglaterra_n = new ArrayList<String>(
-	    	      Arrays.asList("Islandia","Suecia","Alemanha","Franca"));
-	    
-	    ArrayList<String> alemanha_n = new ArrayList<String>(
-	    	      Arrays.asList("Inglaterra","Franca","Polonia"));
-	    
-	    ArrayList<String> suecia_n = new ArrayList<String>(
-	    	      Arrays.asList("Inglaterra", "Moscou"));
-	    
-	    ArrayList<String> islandia_n = new ArrayList<String>(
-	    	      Arrays.asList("Inglaterra","Groenlandia"));
-	    
-	    ArrayList<String> moscou_n = new ArrayList<String>(
-	    	      Arrays.asList("Suecia","Polonia","Omsk","Aral","Oriente Medio"));
-	    
-	    territories[3] 	= new Territory("Alaska"		, alaska_n);
-	    territories[4] 	= new Territory("Mackenzie"		, mackenzie_n);
-	    territories[5]	= new Territory("California"	, california_n);
-	    territories[6] 	= new Territory("Groenlandia"	, groenlandia_n);
-	    territories[7]	= new Territory("Mexico"		, mexico_n);
-	    territories[8] 	= new Territory("Nova York"		, nova_york_n);
-	    territories[9] 	= new Territory("Labrador"		, labrador_n);
-	    territories[10] = new Territory("Ottawa"		, ottawa_n);
-	    territories[11] = new Territory("Vancouver"		, vancouver_n);
-	    territories[12]	= new Territory("Argentina"		, argentina_n);
-	    territories[13] = new Territory("Brasil"		, brasil_n);
-	    territories[14] = new Territory("Chile"			, chile_n);
-	    territories[15] = new Territory("Colombia"		, colombia_n);
-	    territories[16]	= new Territory("Africa Do Sul"	, africa_do_sul_n);
-	    territories[17] = new Territory("Sudao"			, sudao_n);
-	    territories[18] = new Territory("Argelia"		, argelia_n);
-	    territories[19] = new Territory("Egito"			, egito_n);
-	    territories[20]	= new Territory("Madagascar"	, madagascar_n);
-	    territories[21] = new Territory("Congo"			, congo_n);
-	    territories[22]	= new Territory("Islandia"		, islandia_n);
-	    territories[23] = new Territory("Franca"		, franca_n);
-	    territories[24] = new Territory("Inglaterra"	, inglaterra_n);
-	    territories[25]	= new Territory("Polonia"		, polonia_n);
-	    territories[26] = new Territory("Suecia"		, suecia_n);
-	    territories[27] = new Territory("Moscou"		, moscou_n);
-	    
-	    for(int i=3;i<territories.length;i++) {
-	    	p[0].manageTerritory(territories[i],1);
-	    }
-		
-		
-		p[0].manageTerritory(territories[0],4);
-		p[1].manageTerritory(territories[1],3);
-		p[2].manageTerritory(territories[2],4);
-		
-		p[0].setObjective(objs[1]);
-		p[1].setObjective(objs[2]);
-		p[2].setObjective(objs[0]);
-		
-		Model.attack(p[2],p[1],territories[2],territories[1], max_value , min_value);
-		
-		
-		for(int i=0;i<p.length;i++) {
-			System.out.println("Objective complete: " + p[i].getObj().ValidateObjective());
-		}
 		
 	}
 	
@@ -514,196 +465,20 @@ public class TEST {
 		
 		System.out.println("Both P1 and P2 have enough territories, expects [T,T,F]");
 		
-		Territory territories[] = new Territory[42];
+		//setting the stage
 		
-		//NA
+		GameExecution.resetAll();
+		GameExecution.createPlayerList(3);
+		Territory.initialize();
+		Continent.initialize();
 		
-		ArrayList<String> alaska_n = new ArrayList<String>(
-	    	      Arrays.asList("Vladvostok","Vancouver","Mackenzie"));
+		String[] jogadores = {"Mario","Luigi","Peach"};
 		
-		ArrayList<String> california_n = new ArrayList<String>(
-	    	      Arrays.asList("Mexico","Nova York","Ottawa","Vancouver"));
+		String[] cores = {"Azul","Vermelho","Preto"};
 		
-		ArrayList<String> groenlandia_n = new ArrayList<String>(
-	    	      Arrays.asList("Mackenzie","Labrador","Islandia"));
+		GameExecution.addPlayers(jogadores,cores);
 		
-		ArrayList<String> mackenzie_n = new ArrayList<String>(
-	    	      Arrays.asList("Alaska","Vancouver","Ottawa","Groenlandia"));
-		
-		ArrayList<String> labrador_n = new ArrayList<String>(
-	    	      Arrays.asList("Groenlandia","Nova York","Ottawa"));
-		
-		ArrayList<String> mexico_n = new ArrayList<String>(
-	    	      Arrays.asList("California","Nova York","Colombia"));
-		
-		ArrayList<String> nova_york_n = new ArrayList<String>(
-	    	      Arrays.asList("Ottawa","Labrador","California","Mexico"));
-		
-		ArrayList<String> vancouver_n = new ArrayList<String>(
-	    	      Arrays.asList("Alaska","Mackenzie","California","Ottawa"));
-		
-		ArrayList<String> ottawa_n = new ArrayList<String>(
-	    	      Arrays.asList("Vancouver","Labrador","Nova York","California","Mackenzie"));
-		
-		//SA
-		
-		ArrayList<String> argentina_n = new ArrayList<String>(
-	    	      Arrays.asList("Chile","Brasil"));
-		
-		ArrayList<String> brasil_n = new ArrayList<String>(
-	    	      Arrays.asList("Colombia","Chile","Argentina"));
-		
-		ArrayList<String> chile_n = new ArrayList<String>(
-	    	    Arrays.asList("Argentina","Colombia","Brasil"));
-		
-	    ArrayList<String> colombia_n = new ArrayList<String>(
-	    		Arrays.asList("Mexico","Chile","Brasil"));
-	    
-	    
-	    //AF
-	    
-	    ArrayList<String> argelia_n = new ArrayList<String>(
-	    	      Arrays.asList("Franca","Brasil","Egito","Sudao","Congo"));
-
-	    ArrayList<String> egito_n = new ArrayList<String>(
-	    	      Arrays.asList("Polonia","Franca","Oriente Medio","Sudao","Argelia"));
-	    
-	    ArrayList<String> sudao_n = new ArrayList<String>(
-	    	      Arrays.asList("Egito","Argelia","Congo","Madagascar","Africa Do Sul"));
-	    
-	    ArrayList<String> africa_do_sul_n = new ArrayList<String>(
-	    	      Arrays.asList("Congo","Sudao","Madagascar"));
-	    
-	    ArrayList<String> madagascar_n = new ArrayList<String>(
-	    	      Arrays.asList("Sudao","Africa Do Sul"));
-	    
-	    ArrayList<String> congo_n = new ArrayList<String>(
-	    	      Arrays.asList("Argelia","Sudao","Africa Do Sul"));
-	    
-	    
-	    //EU
-	    
-	    ArrayList<String> franca_n = new ArrayList<String>(
-	    	      Arrays.asList("Argelia","Egito","Inglaterra","Alemanha","Polonia"));
-	    
-	    ArrayList<String> polonia_n = new ArrayList<String>(
-	    	      Arrays.asList("Moscou","Alemanha","Franca","Egito"));
-	    
-	    ArrayList<String> inglaterra_n = new ArrayList<String>(
-	    	      Arrays.asList("Islandia","Suecia","Alemanha","Franca"));
-	    
-	    ArrayList<String> alemanha_n = new ArrayList<String>(
-	    	      Arrays.asList("Inglaterra","Franca","Polonia"));
-	    
-	    ArrayList<String> suecia_n = new ArrayList<String>(
-	    	      Arrays.asList("Inglaterra", "Moscou"));
-	    
-	    ArrayList<String> islandia_n = new ArrayList<String>(
-	    	      Arrays.asList("Inglaterra","Groenlandia"));
-	    
-	    ArrayList<String> moscou_n = new ArrayList<String>(
-	    	      Arrays.asList("Suecia","Polonia","Omsk","Aral","Oriente Medio"));
-	    
-	    //AS
-	    
-	    ArrayList<String> china_n = new ArrayList<String>(
-	    	      Arrays.asList("Mongolia","Japao","Vietna","India","Aral","Omsk","Tchita"));
-	    
-	    ArrayList<String> india_n = new ArrayList<String>(
-	    	      Arrays.asList("China","Aral","Oriente Medio","Vietna","Sumatra"));
-	    
-	    ArrayList<String> japao_n = new ArrayList<String>(
-	    	      Arrays.asList("China","Vladivostok"));
-	    
-	    ArrayList<String> vladivostok_n = new ArrayList<String>(
-	    	      Arrays.asList("Japao","Tchita","Siberia","China"));
-	    
-	    ArrayList<String> siberia_n = new ArrayList<String>(
-	    	      Arrays.asList("Vladivostok","Tchita","Dudinka"));
-	    
-	    ArrayList<String> dudinka_n = new ArrayList<String>(
-	    	      Arrays.asList("Siberia","Tchita","Mongolia","Omsk"));
-	    
-	    ArrayList<String> tchita_n = new ArrayList<String>(
-	    	      Arrays.asList("Mongolia","Vladivostok","China","Siberia","Dudinka"));
-	    
-	    ArrayList<String> omsk_n = new ArrayList<String>(
-	    	      Arrays.asList("Mongolia","China","Aral","Dudinka","Moscou"));
-	    
-	    ArrayList<String> aral_n = new ArrayList<String>(
-	    	      Arrays.asList("Moscou","Omsk","Oriente Medio","China","India"));
-	    
-	    ArrayList<String> oriente_medio_n = new ArrayList<String>(
-	    	      Arrays.asList("Moscou","Aral","India","Egito","Polonia"));
-	    
-	    ArrayList<String> vietna_n = new ArrayList<String>(
-	    	      Arrays.asList("China","India","Borneo"));
-	    
-	    ArrayList<String> mongolia_n = new ArrayList<String>(
-	    	      Arrays.asList("China","Tchita","Dudinka","Omsk"));
-	    
-	    //OC
-	    
-	    ArrayList<String> australia_n = new ArrayList<String>(
-	    	      Arrays.asList("Sumatra","Nova Guine","Borneo"));
-	    
-	    ArrayList<String> borneo_n = new ArrayList<String>(
-	    	      Arrays.asList("Australia","Nova Guine","Vietna"));
-	    
-	    ArrayList<String> nova_guine_n = new ArrayList<String>(
-	    	      Arrays.asList("Australia","Borneo"));
-	    
-	    ArrayList<String> sumatra_n = new ArrayList<String>(
-	    	      Arrays.asList("Australia","India"));
-		
-		territories[0] 	= new Territory("Alaska"		, alaska_n);
-	    territories[1] 	= new Territory("Mackenzie"		, mackenzie_n);
-	    territories[2]	= new Territory("California"	, california_n);
-	    territories[3] 	= new Territory("Groenlandia"	, groenlandia_n);
-	    territories[4]	= new Territory("Mexico"		, mexico_n);
-	    territories[5] 	= new Territory("Nova York"		, nova_york_n);
-	    territories[6] 	= new Territory("Labrador"		, labrador_n);
-	    territories[7] 	= new Territory("Ottawa"		, ottawa_n);
-	    territories[8] 	= new Territory("Vancouver"		, vancouver_n);
-	    territories[9]	= new Territory("Argentina"		, argentina_n);
-	    territories[10] = new Territory("Brasil"		, brasil_n);
-	    territories[11] = new Territory("Chile"			, chile_n);
-	    territories[12] = new Territory("Colombia"		, colombia_n);
-	    territories[13]	= new Territory("Africa Do Sul"	, africa_do_sul_n);
-	    territories[14] = new Territory("Sudao"			, sudao_n);
-	    territories[15] = new Territory("Argelia"		, argelia_n);
-	    territories[16] = new Territory("Egito"			, egito_n);
-	    territories[17]	= new Territory("Madagascar"	, madagascar_n);
-	    territories[18] = new Territory("Congo"			, congo_n);
-	    territories[19]	= new Territory("Islandia"		, islandia_n);
-	    territories[20] = new Territory("Franca"		, franca_n);
-	    territories[21] = new Territory("Inglaterra"	, inglaterra_n);
-	    territories[22]	= new Territory("Polonia"		, polonia_n);
-	    territories[23] = new Territory("Suecia"		, suecia_n);
-	    territories[24] = new Territory("Moscou"		, moscou_n);
-	    territories[25] = new Territory("Alemanha"		, alemanha_n);
-	    territories[26] = new Territory("China"			, china_n);
-	    territories[27] = new Territory("India"			, india_n);
-	    territories[28] = new Territory("Japao"			, japao_n);
-	    territories[29] = new Territory("Dudinka"		, dudinka_n);
-	    territories[30] = new Territory("Aral"			, aral_n);
-	    territories[31] = new Territory("Mongolia"		, mongolia_n);
-	    territories[32] = new Territory("Oriente Medio"	, oriente_medio_n);
-	    territories[33] = new Territory("Omsk"			, omsk_n);
-	    territories[34] = new Territory("Siberia"		, siberia_n);
-	    territories[35] = new Territory("Tchita"		, tchita_n);
-	    territories[36] = new Territory("Vietna"		, vietna_n);
-	    territories[37] = new Territory("Vladivostok"	, vladivostok_n);
-	    territories[38] = new Territory("Australia"		, australia_n);
-	    territories[39] = new Territory("Sumatra"		, sumatra_n);
-	    territories[40] = new Territory("Nova Guine"	, nova_guine_n);
-	    territories[41] = new Territory("Borneo"		, borneo_n);
-	    
-	    Player [] p = new Player[3];
-		
-		p[0] = new Player("Mario",Color.Vermelho);
-		p[1] = new Player("Luigi",Color.Verde);
-		p[2] = new Player("Peach",Color.Branco);
+		List<Territory> territories = Territory.getTerritoriesList();
 		
 		Objective objs[] = new Objective[3];
 		//ConquerTerritoryObjective(String description, int numberOfTerritories, int armyPerTerritory,Player player)
@@ -712,423 +487,104 @@ public class TEST {
 		objs[1] = new ConquerTerritoryObjective("Conquistar 24 territórios", 24, 1,null);
 		objs[2] = new ConquerTerritoryObjective("Conquistar 24 territórios", 24, 1,null);
 		
-		p[0].setObjective(objs[0]);
-		p[1].setObjective(objs[1]);
-		p[2].setObjective(objs[2]);
+		GameExecution.getPlayer(0).setObjective(objs[0]);
+		GameExecution.getPlayer(1).setObjective(objs[1]);
+		GameExecution.getPlayer(2).setObjective(objs[2]);
+		
 		
 		//player 1 will have his objective conquered
 		for(int i=0;i<18;i++) {
-			p[0].manageTerritory(territories[i],2);
+			GameExecution.getPlayer(0).manageTerritory(territories.get(i),2);
 		}
+		
 		
 		//player 2 will have his objective conquered
 		for(int i=18;i<42;i++) {
-			p[1].manageTerritory(territories[i],1);
+			GameExecution.getPlayer(1).manageTerritory(territories.get(i),1);
 		}
 		
 		//player 3 will not have territories
 		
-		
-		for(int i=0;i<p.length;i++) {
-			System.out.println("Objective complete: " + p[i].getObj().ValidateObjective());
+		for(int i=0;i<3;i++) {
+			System.out.println("Objective complete: " + GameExecution.getPlayer(i).getObj().ValidateObjective());
 		}
 	
+		GameExecution.resetAll();
+		
 		
 	}
 
 	private static void  testConquerContinentObjective() {
 		
-System.out.println("-------------TEST CONQUER CONTINENT OBJECTIVE--------------");
+		System.out.println("-------------TEST CONQUER CONTINENT OBJECTIVE--------------");
 		
-		Territory territories[] = new Territory[42];
+		GameExecution.resetAll();
+		GameExecution.createPlayerList(3);
+		Territory.initialize();
+		Continent.initialize();
 		
-		//NA
+		String[] jogadores = {"Mario","Luigi","Peach"};
 		
-		ArrayList<String> alaska_n = new ArrayList<String>(
-	    	      Arrays.asList("Vladvostok","Vancouver","Mackenzie"));
+		String[] cores = {"Azul","Vermelho","Preto"};
 		
-		ArrayList<String> california_n = new ArrayList<String>(
-	    	      Arrays.asList("Mexico","Nova York","Ottawa","Vancouver"));
+		GameExecution.addPlayers(jogadores,cores);
 		
-		ArrayList<String> groenlandia_n = new ArrayList<String>(
-	    	      Arrays.asList("Mackenzie","Labrador","Islandia"));
-		
-		ArrayList<String> mackenzie_n = new ArrayList<String>(
-	    	      Arrays.asList("Alaska","Vancouver","Ottawa","Groenlandia"));
-		
-		ArrayList<String> labrador_n = new ArrayList<String>(
-	    	      Arrays.asList("Groenlandia","Nova York","Ottawa"));
-		
-		ArrayList<String> mexico_n = new ArrayList<String>(
-	    	      Arrays.asList("California","Nova York","Colombia"));
-		
-		ArrayList<String> nova_york_n = new ArrayList<String>(
-	    	      Arrays.asList("Ottawa","Labrador","California","Mexico"));
-		
-		ArrayList<String> vancouver_n = new ArrayList<String>(
-	    	      Arrays.asList("Alaska","Mackenzie","California","Ottawa"));
-		
-		ArrayList<String> ottawa_n = new ArrayList<String>(
-	    	      Arrays.asList("Vancouver","Labrador","Nova York","California","Mackenzie"));
-		
-		//SA
-		
-		ArrayList<String> argentina_n = new ArrayList<String>(
-	    	      Arrays.asList("Chile","Brasil"));
-		
-		ArrayList<String> brasil_n = new ArrayList<String>(
-	    	      Arrays.asList("Colombia","Chile","Argentina"));
-		
-		ArrayList<String> chile_n = new ArrayList<String>(
-	    	    Arrays.asList("Argentina","Colombia","Brasil"));
-		
-	    ArrayList<String> colombia_n = new ArrayList<String>(
-	    		Arrays.asList("Mexico","Chile","Brasil"));
-	    
-	    
-	    //AF
-	    
-	    ArrayList<String> argelia_n = new ArrayList<String>(
-	    	      Arrays.asList("Franca","Brasil","Egito","Sudao","Congo"));
-
-	    ArrayList<String> egito_n = new ArrayList<String>(
-	    	      Arrays.asList("Polonia","Franca","Oriente Medio","Sudao","Argelia"));
-	    
-	    ArrayList<String> sudao_n = new ArrayList<String>(
-	    	      Arrays.asList("Egito","Argelia","Congo","Madagascar","Africa Do Sul"));
-	    
-	    ArrayList<String> africa_do_sul_n = new ArrayList<String>(
-	    	      Arrays.asList("Congo","Sudao","Madagascar"));
-	    
-	    ArrayList<String> madagascar_n = new ArrayList<String>(
-	    	      Arrays.asList("Sudao","Africa Do Sul"));
-	    
-	    ArrayList<String> congo_n = new ArrayList<String>(
-	    	      Arrays.asList("Argelia","Sudao","Africa Do Sul"));
-	    
-	    
-	    //EU
-	    
-	    ArrayList<String> franca_n = new ArrayList<String>(
-	    	      Arrays.asList("Argelia","Egito","Inglaterra","Alemanha","Polonia"));
-	    
-	    ArrayList<String> polonia_n = new ArrayList<String>(
-	    	      Arrays.asList("Moscou","Alemanha","Franca","Egito"));
-	    
-	    ArrayList<String> inglaterra_n = new ArrayList<String>(
-	    	      Arrays.asList("Islandia","Suecia","Alemanha","Franca"));
-	    
-	    ArrayList<String> alemanha_n = new ArrayList<String>(
-	    	      Arrays.asList("Inglaterra","Franca","Polonia"));
-	    
-	    ArrayList<String> suecia_n = new ArrayList<String>(
-	    	      Arrays.asList("Inglaterra", "Moscou"));
-	    
-	    ArrayList<String> islandia_n = new ArrayList<String>(
-	    	      Arrays.asList("Inglaterra","Groenlandia"));
-	    
-	    ArrayList<String> moscou_n = new ArrayList<String>(
-	    	      Arrays.asList("Suecia","Polonia","Omsk","Aral","Oriente Medio"));
-	    
-	    //AS
-	    
-	    ArrayList<String> china_n = new ArrayList<String>(
-	    	      Arrays.asList("Mongolia","Japao","Vietna","India","Aral","Omsk","Tchita"));
-	    
-	    ArrayList<String> india_n = new ArrayList<String>(
-	    	      Arrays.asList("China","Aral","Oriente Medio","Vietna","Sumatra"));
-	    
-	    ArrayList<String> japao_n = new ArrayList<String>(
-	    	      Arrays.asList("China","Vladivostok"));
-	    
-	    ArrayList<String> vladivostok_n = new ArrayList<String>(
-	    	      Arrays.asList("Japao","Tchita","Siberia","China"));
-	    
-	    ArrayList<String> siberia_n = new ArrayList<String>(
-	    	      Arrays.asList("Vladivostok","Tchita","Dudinka"));
-	    
-	    ArrayList<String> dudinka_n = new ArrayList<String>(
-	    	      Arrays.asList("Siberia","Tchita","Mongolia","Omsk"));
-	    
-	    ArrayList<String> tchita_n = new ArrayList<String>(
-	    	      Arrays.asList("Mongolia","Vladivostok","China","Siberia","Dudinka"));
-	    
-	    ArrayList<String> omsk_n = new ArrayList<String>(
-	    	      Arrays.asList("Mongolia","China","Aral","Dudinka","Moscou"));
-	    
-	    ArrayList<String> aral_n = new ArrayList<String>(
-	    	      Arrays.asList("Moscou","Omsk","Oriente Medio","China","India"));
-	    
-	    ArrayList<String> oriente_medio_n = new ArrayList<String>(
-	    	      Arrays.asList("Moscou","Aral","India","Egito","Polonia"));
-	    
-	    ArrayList<String> vietna_n = new ArrayList<String>(
-	    	      Arrays.asList("China","India","Borneo"));
-	    
-	    ArrayList<String> mongolia_n = new ArrayList<String>(
-	    	      Arrays.asList("China","Tchita","Dudinka","Omsk"));
-	    
-	    //OC
-	    
-	    ArrayList<String> australia_n = new ArrayList<String>(
-	    	      Arrays.asList("Sumatra","Nova Guine","Borneo"));
-	    
-	    ArrayList<String> borneo_n = new ArrayList<String>(
-	    	      Arrays.asList("Australia","Nova Guine","Vietna"));
-	    
-	    ArrayList<String> nova_guine_n = new ArrayList<String>(
-	    	      Arrays.asList("Australia","Borneo"));
-	    
-	    ArrayList<String> sumatra_n = new ArrayList<String>(
-	    	      Arrays.asList("Australia","India"));
-	    
-	    int NA = 0;
-		int SA = 1;
-	    int AF = 2;
-	    int EU = 3;
-		int AS = 4;
-	    int OC = 5;
-	    
-	    Continent continents[] = new Continent[6];
-		
-	    //NA
-	    
-	    territories[0] 	= new Territory("Alaska"		, alaska_n);
-	    territories[1] 	= new Territory("Mackenzie"		, mackenzie_n);
-	    territories[2]	= new Territory("California"	, california_n);
-	    territories[3] 	= new Territory("Groenlandia"	, groenlandia_n);
-	    territories[4]	= new Territory("Mexico"		, mexico_n);
-	    territories[5] 	= new Territory("Nova York"		, nova_york_n);
-	    territories[6] 	= new Territory("Labrador"		, labrador_n);
-	    territories[7] 	= new Territory("Ottawa"		, ottawa_n);
-	    territories[8] 	= new Territory("Vancouver"		, vancouver_n);
-	    
-	    
-	    Territory[] northAmerica = new Territory[9];
-	    int cont_all_territories = 0;
-	    
-	    for(int i = 0; i < 9; i++)
-	    {
-	    	 northAmerica[i] = territories[cont_all_territories];
-	    	 cont_all_territories++;
-	    }
-	    
-	    continents[NA] = new Continent("América do Norte", northAmerica, 5);
-	    
-		//SA
-	    
-	    territories[9]	= new Territory("Argentina"		, argentina_n);
-	    territories[10] = new Territory("Brasil"		, brasil_n);
-	    territories[11] = new Territory("Chile"			, chile_n);
-	    territories[12] = new Territory("Colombia"		, colombia_n);
-	    
-	    Territory[] southAmerica = new Territory[4];
-	    
-	    for(int i = 0; i < 4; i++)
-	    {
-	    	 southAmerica[i] = territories[cont_all_territories];
-	    	 cont_all_territories++;
-	    }
-	    
-	    continents[SA] = new Continent("América do Sul", southAmerica, 2);
-	    
-	    //AF
-	    
-	    territories[13]	= new Territory("Africa Do Sul"	, africa_do_sul_n);
-	    territories[14] = new Territory("Sudao"			, sudao_n);
-	    territories[15] = new Territory("Argelia"		, argelia_n);
-	    territories[16] = new Territory("Egito"			, egito_n);
-	    territories[17]	= new Territory("Madagascar"	, madagascar_n);
-	    territories[18] = new Territory("Congo"			, congo_n);
-	    
-	    Territory[] africa = new Territory[6];
-	    
-	    for(int i = 0; i < 6; i++)
-	    {
-	    	 africa[i] = territories[cont_all_territories];
-	    	 cont_all_territories++;
-	    }
-	    
-	    continents[AF] = new Continent("África", africa, 3);
-	    
-	    //EU
-	    
-	    territories[19]	= new Territory("Islandia"		, islandia_n);
-	    territories[20] = new Territory("Franca"		, franca_n);
-	    territories[21] = new Territory("Inglaterra"	, inglaterra_n);
-	    territories[22]	= new Territory("Polonia"		, polonia_n);
-	    territories[23] = new Territory("Suecia"		, suecia_n);
-	    territories[24] = new Territory("Moscou"		, moscou_n);
-	    territories[25] = new Territory("Alemanha"		, alemanha_n);
-	    
-	    Territory[] europe = new Territory[7];
-	    
-	    for(int i = 0; i < 7; i++)
-	    {
-	    	 europe[i] = territories[cont_all_territories];
-	    	 cont_all_territories++;
-	    }
-	    
-	    continents[EU] = new Continent("Europa", europe, 5);
-	    
-	    //AS
-	    
-	    territories[26] = new Territory("China"			, china_n);
-	    territories[27] = new Territory("India"			, india_n);
-	    territories[28] = new Territory("Japao"			, japao_n);
-	    territories[29] = new Territory("Dudinka"		, dudinka_n);
-	    territories[30] = new Territory("Aral"			, aral_n);
-	    territories[31] = new Territory("Mongolia"		, mongolia_n);
-	    territories[32] = new Territory("Oriente Medio"	, oriente_medio_n);
-	    territories[33] = new Territory("Omsk"			, omsk_n);
-	    territories[34] = new Territory("Siberia"		, siberia_n);
-	    territories[35] = new Territory("Tchita"		, tchita_n);
-	    territories[36] = new Territory("Vietna"		, vietna_n);
-	    territories[37] = new Territory("Vladivostok"	, vladivostok_n);
-	    
-	    Territory[] asia = new Territory[12];
-	    
-	    for(int i = 0; i < 12; i++)
-	    {
-	    	 asia[i] = territories[cont_all_territories];
-	    	 cont_all_territories++;
-	    }
-	    
-	    continents[AS] = new Continent("Asia", asia, 7);
-	    
-	    //OC
-	    
-	    territories[38] = new Territory("Australia"		, australia_n);
-	    territories[39] = new Territory("Sumatra"		, sumatra_n);
-	    territories[40] = new Territory("Nova Guine"	, nova_guine_n);
-	    territories[41] = new Territory("Borneo"		, borneo_n);
-	    
-	    Territory[] oceania = new Territory[4];
-	    
-	    for(int i = 0; i < 4; i++)
-	    {
-	    	 oceania[i] = territories[cont_all_territories];
-	    	 cont_all_territories++;
-	    }
-	    
-	    continents[OC] = new Continent("Oceania", oceania, 2);
-	    
-	    
-	    Player [] p = new Player[3];
-		
-		p[0] = new Player("Mario",Color.Vermelho);
-		p[1] = new Player("Luigi",Color.Verde);
-		p[2] = new Player("Peach",Color.Branco);
-		
-		Objective objs[] = new Objective[6];
-		
-		
-		
-		Continent[] ContinentsEUSA = {continents[EU], continents[SA]};
-		
-		ArrayList<Continent> extraContinentsEUSA = new ArrayList<Continent>();
-		
-		for(int i=0;i<continents.length;i++) {
-			if(!Arrays.asList(ContinentsEUSA).contains(continents[i])) {
-				//System.out.println("is extra: " + continents[i].getName() );
-				extraContinentsEUSA.add(continents[i]);
-			}
-				
-		}
-		
-		objs[0] = new ConquerContinentObjective("Conquistar na totalidade a Europa, a América do Sul "
-				+ "e mais um continente à sua escolha", ContinentsEUSA, true,null,extraContinentsEUSA);
-		
-		Continent[] ContinentsEUOC = {continents[EU],continents[OC]};
-		
-		ArrayList<Continent> extraContinentsEUOC = new ArrayList<Continent>();
-		
-		for(int i=0;i<continents.length;i++) {
-			if(!Arrays.asList(ContinentsEUOC).contains(continents[i])) {
-				//System.out.println("is extra: " + continents[i].getName() );
-				extraContinentsEUOC.add(continents[i]);
-			}
-				
-		}
-		
-		objs[1] = new ConquerContinentObjective("Conquistar na totalidade a Europa, a Oceania e "
-				+ "mais um continente à sua escolha", ContinentsEUOC, true,null,extraContinentsEUOC);
-		
-		Continent[] ContinentsNAOC = {continents[NA],continents[OC]};
-		
-		objs[2] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a Oceania", ContinentsNAOC, false,null,extraContinentsEUOC);
-		
-		Continent[] ContinentsNAAF = {continents[NA],continents[AF]};
-		
-		objs[3] = new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a África", ContinentsNAAF, false,null,extraContinentsEUOC);
-		
-		
-		Continent[] ContinentsASSA = {continents[AS],continents[SA]};
-		
-		objs[4] = new ConquerContinentObjective("Conquistar na totalidade a América do Sul e a Ásia", ContinentsASSA, false,null,extraContinentsEUOC);
-		
-		Continent[] ContinentsASAF = {continents[AS],continents[AF]};
-		
-		objs[5] = new ConquerContinentObjective("Conquistar na totalidade a Ásia e a África", ContinentsASAF, false,null,extraContinentsEUOC);
+		Objective.initialize();
 		
 		
 		System.out.println("P1 conquers NA,SA,EU, expects true");
 		
-		p[0].setObjective(objs[0]);
+		GameExecution.getPlayer(0).setObjective(Objective.getObjective(8));
+		GameExecution.getPlayer(0).getObj().getDescription();
 		
 		
-		for(int i = 0; i < 13;i++) { //NA and SA
-			p[0].manageTerritory(territories[i],1);	
+		for(int i = 0; i < 2; i++) { //NA and SA
+			GameExecution.getPlayer(0).manageContinent(continents.get(i),1);	
 		}
 		
-		for(int i = 19;i<26;i++) { //EU
-			p[0].manageTerritory(territories[i],1);
-		}
+		//EU
+		GameExecution.getPlayer(0).manageContinent(continents.get(3),1);
 		
-		System.out.println("Objective complete: " + p[0].getObj().ValidateObjective());
+		System.out.println("Objective complete: " + GameExecution.getPlayer(0).getObj().ValidateObjective());
 		
-		for(int i = 0;i<9;i++) { // looses NA (extra continent)
-			p[0].loseTerritory(territories[i]);
-		}
+		
+		//looses NA (extra continent)
+		GameExecution.getPlayer(0).loseContinent(continents.get(0));
 		
 		System.out.println("P1 conquers SA,EU, but not NA, expects false");
 		
-		System.out.println("Objective complete: " + p[0].getObj().ValidateObjective());
+		System.out.println("Objective complete: " + GameExecution.getPlayer(0).getObj().ValidateObjective());
 		
 		System.out.println("P1 conquers SA,EU, and NA again, expects true");
 		
-		for(int i = 0;i<9;i++) { // looses NA (extra continent)
-			p[0].gainTerritory(territories[i]);
-		}
 		
-		System.out.println("Objective complete: " + p[0].getObj().ValidateObjective());
+		// looses NA (extra continent)
+		GameExecution.getPlayer(0).manageContinent(continents.get(0),1);
 		
-		p[0].resetPlayer();
+		System.out.println("Objective complete: " + GameExecution.getPlayer(0).getObj().ValidateObjective());
+		
+		GameExecution.getPlayer(0).resetPlayer();
 		
 		System.out.println("P2 conquers NA,OC, expects true");
 		
+		GameExecution.getPlayer(2).setObjective(objectives.get(10));
 		
-		p[2].setObjective(objs[2]);
-		
-		for(int i = 0; i < 9;i++) { //NA
-			p[2].manageTerritory(territories[i],1);
-			
-		}
-		
-		for(int i = 38;i < 42;i++) { //OC
-			p[2].manageTerritory(territories[i],1);
-		}
+		//NA
+		GameExecution.getPlayer(2).manageContinent(continents.get(0),1);
 		
 		
-		System.out.println("Objective complete: " + p[2].getObj().ValidateObjective());
+		//OC
+		GameExecution.getPlayer(2).manageContinent(continents.get(5),1);
+		
+		
+		System.out.println("Objective complete: " + GameExecution.getPlayer(2).getObj().ValidateObjective());
 		
 		System.out.println("P2 conquers NA, but not OC, expects false");
 		
-		for(int i = 38;i < 42;i++) { //OC
-			p[2].loseTerritory(territories[i]);
-		}
+		//looses OC
+		GameExecution.getPlayer(0).loseContinent(continents.get(5));
 		
-		System.out.println("Objective complete: " + p[2].getObj().ValidateObjective());
+		System.out.println("Objective complete: " + GameExecution.getPlayer(2).getObj().ValidateObjective());
 		
 		
 	}
@@ -1152,7 +608,7 @@ System.out.println("-------------TEST CONQUER CONTINENT OBJECTIVE--------------"
 		
 		System.out.println("---------------TERRITORIES-----------");
 		System.out.println();
-		for(Territory t:)
+		for(Territory t:Territory.getTerritoriesList())
 		{
 			System.out.println("Name:" );
 			System.out.println(t.getName());
@@ -1167,7 +623,7 @@ System.out.println("-------------TEST CONQUER CONTINENT OBJECTIVE--------------"
 		
 		System.out.println("--------------CONTINENTS-----------------");
 		System.out.println();
-		for(Continent c:Model.continents)
+		for(Continent c:Continent.getContinentList())
 		{
 			System.out.println("Name:" );
 			System.out.println(c.getName());
@@ -1180,11 +636,11 @@ System.out.println("-------------TEST CONQUER CONTINENT OBJECTIVE--------------"
 			System.out.println();
 		}
 		
-		Model.firstDraw();
+		GameExecution.firstDraw();
 		
 		System.out.println("------------PLAYER ORDER-------------------");
 		System.out.println();
-		for(Player p:players)
+		for(Player p:GameExecution.getPlayerList())
 		{
 			System.out.println(p.getName());
 		}
@@ -1192,13 +648,13 @@ System.out.println("-------------TEST CONQUER CONTINENT OBJECTIVE--------------"
 		
 		System.out.println("------------ALL OBJECTIVES-------------------");
 		System.out.println();
-		for(Objective o:Model.objectives)
+		for(Objective o:Objective.getObjectiveList())
 		{
 			System.out.println(o.getDescription());
 			System.out.println();
 		}
 
-		for(Player p:players)
+		for(Player p:GameExecution.getPlayerList())
 		{
 			System.out.println("------------------"+ p.getName() + "-" + p.getColor() + "----------------------------");
 			System.out.println("\tObjetivo: ");

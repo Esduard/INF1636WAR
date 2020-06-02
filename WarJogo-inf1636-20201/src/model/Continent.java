@@ -84,9 +84,9 @@ class Continent {
 	    continents.add(new Continent("África", africa, 3));
 	    
 	    //EU
-	    Territory[] europe = new Territory[7];
+	    Territory[] europe = new Territory[8];
 	    
-	    for(int i = 0; i < 7; i++)
+	    for(int i = 0; i < 8; i++)
 	    {
 	    	 europe[i] = territoryList.get(cont_all_territories);
 	    	 cont_all_territories++;
@@ -95,9 +95,9 @@ class Continent {
 	    continents.add(new Continent("Europa", europe, 5));
 	    
 	    //AS
-	    Territory[] asia = new Territory[12];
+	    Territory[] asia = new Territory[20];
 	    
-	    for(int i = 0; i < 12; i++)
+	    for(int i = 0; i < 20; i++)
 	    {
 	    	 asia[i] = territoryList.get(cont_all_territories);
 	    	 cont_all_territories++;
