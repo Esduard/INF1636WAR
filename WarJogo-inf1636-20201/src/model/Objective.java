@@ -47,8 +47,8 @@ abstract class Objective {
 		
 		//Conquer territory
 		
-		objectives.add(new ConquerTerritoryObjective("Conquistar 18 territórios e ocupar cada um deles com pelo menos 2 exércitos", 18, 2,null));
-		objectives.add(new ConquerTerritoryObjective("Conquistar 24 territórios", 24, 1,null));
+		objectives.add(new ConquerTerritoryObjective("Conquistar 18 territï¿½rios e ocupar cada um deles com pelo menos 2 exï¿½rcitos", 18, 2,null));
+		objectives.add(new ConquerTerritoryObjective("Conquistar 24 territï¿½rios", 24, 1,null));
 		
 		//Destroy army
 		
@@ -58,7 +58,7 @@ abstract class Objective {
 		
 		for(int i = 0; i < number_p; i++)
 		{
-			objectives.add(new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + GameExecution.getPlayer(i).getColor(),GameExecution.getPlayer(i),null));
+			objectives.add(new DestroyArmyObjective("Destruir totalmente os exï¿½rcitos do jogador " + GameExecution.getPlayer(i).getColor(),GameExecution.getPlayer(i),null));
 		}
 		
 		//Conquer continent
@@ -93,8 +93,8 @@ abstract class Objective {
 				
 		}
 		
-		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a Europa, a América do Sul "
-				+ "e mais um continente à sua escolha", ContinentsEUSA, true,null,extraContinentsEUSA));
+		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a Europa, a Amï¿½rica do Sul "
+				+ "e mais um continente ï¿½ sua escolha", ContinentsEUSA, true,null,extraContinentsEUSA));
 		
 		ArrayList<Continent> extraContinentsEUOC = new ArrayList<Continent>();
 		
@@ -107,17 +107,17 @@ abstract class Objective {
 		}
 		
 		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a Europa, a Oceania "
-				+ " mais um continente à sua escolha", ContinentsEUOC, true,null,extraContinentsEUOC));
+				+ " mais um continente ï¿½ sua escolha", ContinentsEUOC, true,null,extraContinentsEUOC));
 		
 		//Conquer continent objectives without extra continents
 		
-		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a Oceania", ContinentsNAOC, false,null,extraContinentsEUOC));
+		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a Amï¿½rica do Norte e a Oceania", ContinentsNAOC, false,null,extraContinentsEUOC));
 		
-		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a América do Norte e a África", ContinentsNAAF, false,null,extraContinentsEUOC));
+		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a Amï¿½rica do Norte e a ï¿½frica", ContinentsNAAF, false,null,extraContinentsEUOC));
 		
-		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a América do Sul e a Ásia", ContinentsASSA, false,null,extraContinentsEUOC));
+		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a Amï¿½rica do Sul e a ï¿½sia", ContinentsASSA, false,null,extraContinentsEUOC));
 		
-		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a Ásia e a África", ContinentsASAF, false,null,extraContinentsEUOC));
+		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a ï¿½sia e a ï¿½frica", ContinentsASAF, false,null,extraContinentsEUOC));
 		
 
 	}

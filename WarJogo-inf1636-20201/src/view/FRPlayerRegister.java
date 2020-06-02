@@ -7,13 +7,13 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 
 import controller.GameController;
-import model.Model;
+import model.*;
 
 public class FRPlayerRegister extends JFrame {
 
 	public FRPlayerRegister()
 	{
-		int pCount = Model.getPlayerCount();
+		int pCount = GameExecution.getPlayerCount();
 		setLayout(null);
 		
 		Point pos = new Point(0,0);
@@ -27,7 +27,7 @@ public class FRPlayerRegister extends JFrame {
 		{
 			JLabel label = new JLabel("Jogador " + i);
 			texts[i] = new JTextField("Nome", 16);
-			lists[i] = new JList(Model.getColorNames().toArray());
+			lists[i] = new JList(GameColor.getColorNames().toArray());
 			
 			label.setBounds(pos.x, pos.y, width, width/2);
 			pos.translate(width, 0);
@@ -64,7 +64,7 @@ public class FRPlayerRegister extends JFrame {
 					}
 				}
 				
-				boolean r  = Model.addPlayers(names, colors);
+				boolean r  = GameExecution.addPlayers(names, colors);
 				
 				if(!r)
 					JOptionPane.showMessageDialog(null, "Jogadores inválidos. Não é permitido repetir cores.");
