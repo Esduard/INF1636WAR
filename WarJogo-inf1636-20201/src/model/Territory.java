@@ -79,18 +79,13 @@ class Territory {
 	}
 	
 	public static void resetTerritories() {
-		
-		for(Territory t: territories) {
-			t.setTroops(0);
-			t.setColor(null);
-		}
-		
+		territories.clear();
 	}
 	
 	public static void initialize()
 	{
 		//initialize neighbor lists
-		
+		Territory.resetTerritories();
 
 		//NA
 

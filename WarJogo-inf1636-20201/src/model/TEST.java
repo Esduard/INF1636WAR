@@ -117,8 +117,6 @@ public class TEST {
 		System.out.println("With 3 players: " + GameExecution.createPlayerList(3));
 		System.out.println("With 6 players: " + GameExecution.createPlayerList(6));
 		System.out.println("With 7 players: " + GameExecution.createPlayerList(7));
-		
-		GameExecution.resetPlayers();
 	}
 	
 	public static void testAddPlayers()
@@ -144,8 +142,6 @@ public class TEST {
 			System.out.println(GameExecution.getPlayer(i).getName());
 		}
 		
-		GameExecution.resetPlayers();
-		
 		System.out.println("\nincorrectly adds 2 players: expects false");
 		GameExecution.createPlayerList(2);
 		
@@ -154,8 +150,6 @@ public class TEST {
 		String[] cores2 = {"Azul","Vermelho"};
 		
 		System.out.println(GameExecution.addPlayers(jogadores2,cores2));
-		
-		GameExecution.resetPlayers();
 		
 		System.out.println("\nincorrectly adds 3 players with repeated color: expects false");
 		GameExecution.createPlayerList(3);
@@ -166,8 +160,6 @@ public class TEST {
 		
 		System.out.println(GameExecution.addPlayers(jogadores3,cores3));
 		
-		GameExecution.resetPlayers();
-		
 		System.out.println("\nincorrectly adds 3 players with non-existent color: expects false");
 		GameExecution.createPlayerList(3);
 		
@@ -176,8 +168,6 @@ public class TEST {
 		String[] cores4 = {"Azul","Laranja","Vermelho"};
 		
 		System.out.println(GameExecution.addPlayers(jogadores4,cores4));
-		
-		GameExecution.resetPlayers();
 	}
 	
 	public static void testAttackResult()
@@ -377,10 +367,8 @@ public class TEST {
 		System.out.println("-------------TEST DESTROY ARMY OBJECTIVE--------------");
 		
 		//setting the stage
-		GameExecution.resetAll();
 		GameExecution.createPlayerList(3);
-		Territory.initialize();
-		Continent.initialize();
+		
 		
 		String[] jogadores = {"Mario","Luigi","Peach"};
 		
@@ -388,11 +376,13 @@ public class TEST {
 		
 		GameExecution.addPlayers(jogadores,cores);
 		
+		GameExecution.initializeGameComponents();
+		
 		Objective objs[] = new Objective[3];
 		//DestroyArmyObjective(String description, Player target,Player player)
-		objs[0] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + GameExecution.getPlayer(0).getColor().name(),GameExecution.getPlayer(0),null);
-		objs[1] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + GameExecution.getPlayer(1).getColor().name(),GameExecution.getPlayer(1),null);
-		objs[2] = new DestroyArmyObjective("Destruir totalmente os exércitos do jogador " + GameExecution.getPlayer(2).getColor().name(),GameExecution.getPlayer(2),null);
+		objs[0] = new DestroyArmyObjective("DA" + GameExecution.getPlayer(0).getColor(),"Destruir totalmente os exércitos do jogador " + GameExecution.getPlayer(0).getColor().name(),GameExecution.getPlayer(0),null);
+		objs[1] = new DestroyArmyObjective("DA" + GameExecution.getPlayer(1).getColor(),"Destruir totalmente os exércitos do jogador " + GameExecution.getPlayer(1).getColor().name(),GameExecution.getPlayer(1),null);
+		objs[2] = new DestroyArmyObjective("DA" + GameExecution.getPlayer(2).getColor(),"Destruir totalmente os exércitos do jogador " + GameExecution.getPlayer(2).getColor().name(),GameExecution.getPlayer(2),null);
 		
 		GameExecution.getPlayer(0).setObjective(objs[1]);
 		GameExecution.getPlayer(1).setObjective(objs[2]);
@@ -421,7 +411,6 @@ public class TEST {
 		}
 		
 		//red will win by having 24 territories
-		GameExecution.resetAll();
 		GameExecution.createPlayerList(3);
 		Territory.initialize();
 		Continent.initialize();
@@ -467,7 +456,6 @@ public class TEST {
 		
 		//setting the stage
 		
-		GameExecution.resetAll();
 		GameExecution.createPlayerList(3);
 		Territory.initialize();
 		Continent.initialize();
@@ -483,9 +471,9 @@ public class TEST {
 		Objective objs[] = new Objective[3];
 		//ConquerTerritoryObjective(String description, int numberOfTerritories, int armyPerTerritory,Player player)
 		
-		objs[0] = new ConquerTerritoryObjective("Conquistar 18 territórios e ocupar cada um deles com pelo menos 2 exércitos", 18, 2, null);
-		objs[1] = new ConquerTerritoryObjective("Conquistar 24 territórios", 24, 1,null);
-		objs[2] = new ConquerTerritoryObjective("Conquistar 24 territórios", 24, 1,null);
+		objs[0] = new ConquerTerritoryObjective("CT182","Conquistar 18 territórios e ocupar cada um deles com pelo menos 2 exércitos", 18, 2, null);
+		objs[1] = new ConquerTerritoryObjective("CT241","Conquistar 24 territórios", 24, 1,null);
+		objs[2] = new ConquerTerritoryObjective("CT241","Conquistar 24 territórios", 24, 1,null);
 		
 		GameExecution.getPlayer(0).setObjective(objs[0]);
 		GameExecution.getPlayer(1).setObjective(objs[1]);
@@ -507,10 +495,7 @@ public class TEST {
 		
 		for(int i=0;i<3;i++) {
 			System.out.println("Objective complete: " + GameExecution.getPlayer(i).getObj().ValidateObjective());
-		}
-	
-		GameExecution.resetAll();
-		
+		}	
 		
 	}
 
@@ -518,10 +503,17 @@ public class TEST {
 		
 		System.out.println("-------------TEST CONQUER CONTINENT OBJECTIVE--------------");
 		
-		GameExecution.resetAll();
 		GameExecution.createPlayerList(3);
 		Territory.initialize();
 		Continent.initialize();
+		
+		//Index for each continent on Continents List
+		int NA = 0;
+		int SA = 1;
+	    int AF = 2;
+	    int EU = 3;
+		int AS = 4;
+	    int OC = 5;
 		
 		String[] jogadores = {"Mario","Luigi","Peach"};
 		
@@ -534,32 +526,31 @@ public class TEST {
 		
 		System.out.println("P1 conquers NA,SA,EU, expects true");
 		
-		GameExecution.getPlayer(0).setObjective(Objective.getObjective(8));
+		GameExecution.getPlayer(0).setObjective(Objective.getObjective("CCEUSA1"));
 		GameExecution.getPlayer(0).getObj().getDescription();
 		
 		
-		for(int i = 0; i < 2; i++) { //NA and SA
-			GameExecution.getPlayer(0).manageContinent(continents.get(i),1);	
-		}
+		//NA, SA and EU
+		GameExecution.getPlayer(0).manageContinent(Continent.getContinent(NA),1);
+		GameExecution.getPlayer(0).manageContinent(Continent.getContinent(SA),1);
+		GameExecution.getPlayer(0).manageContinent(Continent.getContinent(EU),1);
 		
-		//EU
-		GameExecution.getPlayer(0).manageContinent(continents.get(3),1);
 		
 		System.out.println("Objective complete: " + GameExecution.getPlayer(0).getObj().ValidateObjective());
 		
 		
 		//looses NA (extra continent)
-		GameExecution.getPlayer(0).loseContinent(continents.get(0));
+		GameExecution.getPlayer(0).loseContinent(Continent.getContinent(NA));
 		
 		System.out.println("P1 conquers SA,EU, but not NA, expects false");
 		
 		System.out.println("Objective complete: " + GameExecution.getPlayer(0).getObj().ValidateObjective());
 		
-		System.out.println("P1 conquers SA,EU, and NA again, expects true");
+		System.out.println("P1 conquers SA,EU, and AS, expects true");
 		
 		
 		// looses NA (extra continent)
-		GameExecution.getPlayer(0).manageContinent(continents.get(0),1);
+		GameExecution.getPlayer(0).manageContinent(Continent.getContinent(AS),1);
 		
 		System.out.println("Objective complete: " + GameExecution.getPlayer(0).getObj().ValidateObjective());
 		
@@ -567,14 +558,14 @@ public class TEST {
 		
 		System.out.println("P2 conquers NA,OC, expects true");
 		
-		GameExecution.getPlayer(2).setObjective(objectives.get(10));
+		GameExecution.getPlayer(2).setObjective(Objective.getObjective("CCNAOC0"));
 		
 		//NA
-		GameExecution.getPlayer(2).manageContinent(continents.get(0),1);
+		GameExecution.getPlayer(2).manageContinent(Continent.getContinent(NA),1);
 		
 		
 		//OC
-		GameExecution.getPlayer(2).manageContinent(continents.get(5),1);
+		GameExecution.getPlayer(2).manageContinent(Continent.getContinent(OC),1);
 		
 		
 		System.out.println("Objective complete: " + GameExecution.getPlayer(2).getObj().ValidateObjective());
@@ -582,7 +573,7 @@ public class TEST {
 		System.out.println("P2 conquers NA, but not OC, expects false");
 		
 		//looses OC
-		GameExecution.getPlayer(0).loseContinent(continents.get(5));
+		GameExecution.getPlayer(2).loseContinent(Continent.getContinent(OC));
 		
 		System.out.println("Objective complete: " + GameExecution.getPlayer(2).getObj().ValidateObjective());
 		

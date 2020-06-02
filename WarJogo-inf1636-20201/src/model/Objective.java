@@ -10,6 +10,7 @@ abstract class Objective {
 	protected String description;
 	protected abstract boolean ValidateObjective();
 	protected Player player;
+	protected String code;
 	
 	private static ArrayList<Objective> objectives = new ArrayList<Objective>(14);
 	
@@ -19,9 +20,12 @@ abstract class Objective {
 	}
 	
 	
-	public String getDescription()
-	{
+	public String getDescription(){
 		return description;
+	}
+	
+	public String getCode() {
+		return code;
 	}
 	
 	public static List<Objective> getObjectiveList()
@@ -34,8 +38,26 @@ abstract class Objective {
 	}
 	
 	
+	
+	public static Objective getObjective(String code) {
+		
+		for(Objective o: objectives) {
+			if(o.getCode() == code) {
+				return o;
+			}
+		}
+		return null;
+	}
+	
+	public static void resetObjectives() {
+		objectives.clear();
+	}
+	
+	
 	public static void initialize()
 	{
+		Objective.resetObjectives();
+		
 		List<Continent> continents = Continent.getContinentList();
 		
 		int EU = Continent.EU;
@@ -47,8 +69,16 @@ abstract class Objective {
 		
 		//Conquer territory
 		
-		objectives.add(new ConquerTerritoryObjective("Conquistar 18 territ�rios e ocupar cada um deles com pelo menos 2 ex�rcitos", 18, 2,null));
-		objectives.add(new ConquerTerritoryObjective("Conquistar 24 territ�rios", 24, 1,null));
+		/*ID de ConquerTerritory:
+
+			"CT" + 'numerototal' + 'quantidade por territorio'
+
+			ex: conquista de 24 territorios com 1 em cada
+
+			CT241*/
+		
+		objectives.add(new ConquerTerritoryObjective("CT182","Conquistar 18 territ�rios e ocupar cada um deles com pelo menos 2 ex�rcitos", 18, 2,null));
+		objectives.add(new ConquerTerritoryObjective("CT241","Conquistar 24 territ�rios", 24, 1,null));
 		
 		//Destroy army
 		
@@ -56,9 +86,18 @@ abstract class Objective {
 		//must have acces to players
 		int number_p = GameExecution.getPlayerCount();
 		
+		/*ID of destroyArmyObjective:
+
+			"DA + 'color enum'
+
+			ex: 
+
+			"DAAzul" to destroy blue armies
+		*/
+		
 		for(int i = 0; i < number_p; i++)
 		{
-			objectives.add(new DestroyArmyObjective("Destruir totalmente os ex�rcitos do jogador " + GameExecution.getPlayer(i).getColor(),GameExecution.getPlayer(i),null));
+			objectives.add(new DestroyArmyObjective("DA" + GameExecution.getPlayer(i).getColor(),"Destruir totalmente os ex�rcitos do jogador " + GameExecution.getPlayer(i).getColor(),GameExecution.getPlayer(i),null));
 		}
 		
 		//Conquer continent
@@ -93,7 +132,15 @@ abstract class Objective {
 				
 		}
 		
-		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a Europa, a Am�rica do Sul "
+		/*ID de ConquerContinent:
+
+			"CC" + "iniciais dos continents obrigatorios + "1 SE TEM CONTINENTE EXTRA" OU "0 SE NAO TEM"
+
+			EX: conquiste a America do norte e oceania
+
+			CCNAOC0 */
+		
+		objectives.add(new ConquerContinentObjective("CCEUSA1","Conquistar na totalidade a Europa, a Am�rica do Sul "
 				+ "e mais um continente � sua escolha", ContinentsEUSA, true,null,extraContinentsEUSA));
 		
 		ArrayList<Continent> extraContinentsEUOC = new ArrayList<Continent>();
@@ -106,18 +153,18 @@ abstract class Objective {
 				
 		}
 		
-		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a Europa, a Oceania "
+		objectives.add(new ConquerContinentObjective("CCEUOC1","Conquistar na totalidade a Europa, a Oceania "
 				+ " mais um continente � sua escolha", ContinentsEUOC, true,null,extraContinentsEUOC));
 		
 		//Conquer continent objectives without extra continents
 		
-		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a Am�rica do Norte e a Oceania", ContinentsNAOC, false,null,extraContinentsEUOC));
+		objectives.add(new ConquerContinentObjective("CCNAOC0","Conquistar na totalidade a Am�rica do Norte e a Oceania", ContinentsNAOC, false,null,extraContinentsEUOC));
 		
-		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a Am�rica do Norte e a �frica", ContinentsNAAF, false,null,extraContinentsEUOC));
+		objectives.add(new ConquerContinentObjective("CCNAAF0","Conquistar na totalidade a Am�rica do Norte e a �frica", ContinentsNAAF, false,null,extraContinentsEUOC));
 		
-		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a Am�rica do Sul e a �sia", ContinentsASSA, false,null,extraContinentsEUOC));
+		objectives.add(new ConquerContinentObjective("CCSAAS0","Conquistar na totalidade a Am�rica do Sul e a �sia", ContinentsASSA, false,null,extraContinentsEUOC));
 		
-		objectives.add(new ConquerContinentObjective("Conquistar na totalidade a �sia e a �frica", ContinentsASAF, false,null,extraContinentsEUOC));
+		objectives.add(new ConquerContinentObjective("CCASAF0","Conquistar na totalidade a �sia e a �frica", ContinentsASAF, false,null,extraContinentsEUOC));
 		
 
 	}

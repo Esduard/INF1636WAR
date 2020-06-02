@@ -41,9 +41,19 @@ class Continent {
 		return Collections.unmodifiableList(continents);
 	}
 	
+	public static Continent getContinent(int initial) {
+		return continents.get(initial);
+	}
+	
+	public static void resetContinents() {
+		continents.clear();
+	}
+	
+	
 	public static void initialize()
 	{
 		//initialize territories and continents
+		Continent.resetContinents();
 		
 	    List<Territory> territoryList = Territory.getTerritoriesList();
 	    

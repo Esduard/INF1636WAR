@@ -28,11 +28,12 @@ public class ConquerTerritoryObjective extends Objective {
 		return false;
 	}
 	
-	public ConquerTerritoryObjective(String description, int numberOfTerritories, int armyPerTerritory,Player player) {
+	public ConquerTerritoryObjective(String code,String description, int numberOfTerritories, int armyPerTerritory,Player player) {
 		this.description = description;
 		this.numberOfTerritories = numberOfTerritories;
 		this.armyPerTerritory = armyPerTerritory;
 		this.player = player;
+		this.code = code;
 	}
 
 }

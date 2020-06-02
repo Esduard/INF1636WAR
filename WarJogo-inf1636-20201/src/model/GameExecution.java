@@ -11,7 +11,7 @@ public class GameExecution {
 	private static Stack<Objective> objStack = new Stack<Objective>();
 	private static Stack<Card> cardStack = new Stack<Card>();
 	private static ArrayList<Player> players = new ArrayList<Player>();
-	private static ArrayList<GameColor> chosenColors = new ArrayList<GameColor>();
+	private static ArrayList<GameColor> remainingColors = new ArrayList<GameColor>(Arrays.asList(GameColor.Branco,GameColor.Preto,GameColor.Azul,GameColor.Amarelo,GameColor.Verde,GameColor.Vermelho));
 	
 	public static void initializeGameComponents()
 	{
@@ -55,6 +55,7 @@ public class GameExecution {
   		}
   		else
   		{
+  			GameExecution.resetPlayers();
   			players = new ArrayList<Player>(Arrays.asList(new Player[numberOfPlayers]));
   			
   			//System.out.println(" 'createPlayerList' player list size: " + players.size());
@@ -83,13 +84,11 @@ public class GameExecution {
   			}
   			if(!remainingColors.remove(cArray[i]))
   			{
-  				chosenColors.clear();
+  				remainingColors.addAll(Arrays.asList(cArray));
   				return false;
   			}
   			
   			System.out.println(cArray[i].name());
-  			
-  			chosenColors.add(cArray[i]);
   			
   			pArray[i] = new Player(names[i], cArray[i]);
   			//System.out.println("insert : " + pArray[i].getName() + "/" + pArray[i].getColor());
@@ -291,10 +290,4 @@ public class GameExecution {
 		remainingColors.add(GameColor.Vermelho);
 
 	}
-	
-	public static void resetAll() {
-		resetPlayers();
-		Territory.resetTerritories();
-	}
-	
 }

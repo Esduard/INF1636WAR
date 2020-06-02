@@ -28,9 +28,15 @@ class Card {
 		return Collections.unmodifiableList(cards);
 	}
 	
+	public static void resetCards() {
+		cards.clear();
+	}
+	
 	public static void initialize()
 	{	
 		//public Card(Shape s, Territory t);
+		
+		resetCards();
 		
 		List<Territory> territories = Territory.getTerritoriesList();
 		

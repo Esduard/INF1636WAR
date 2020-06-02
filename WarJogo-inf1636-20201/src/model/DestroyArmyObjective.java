@@ -45,10 +45,11 @@ public class DestroyArmyObjective extends Objective {
 		
 	}
 	
-	public DestroyArmyObjective(String description, Player target,Player player)
+	public DestroyArmyObjective(String code, String description, Player target,Player player)
 	{
 		this.description = description;
 		this.target = target;
 		this.player = player;
+		this.code = code;
 	}
 }

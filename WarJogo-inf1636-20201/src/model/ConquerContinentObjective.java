@@ -60,14 +60,16 @@ public class ConquerContinentObjective extends Objective {
 		return true;
 	}
 	
-	public ConquerContinentObjective(String description, Continent[] continents, boolean extraContinent,Player player, ArrayList<Continent> allExtraContinents)
+	public ConquerContinentObjective(String code,String description, Continent[] continents, boolean extraContinent,Player player, ArrayList<Continent> allExtraContinents)
 	{
 		this.description = description;
 		this.continents = continents;
 		this.extraContinent = extraContinent;
 		this.player = player;
+		this.code = code;
 		
-		//exclude obligatory continents of "all continents" list
+		
 		this.allExtraContinents = allExtraContinents;
 	}
+	
 }
