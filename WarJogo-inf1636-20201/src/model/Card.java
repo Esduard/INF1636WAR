@@ -23,6 +23,15 @@ class Card {
 		return territory;
 	}
 	
+	public static Card getCard(Territory t) {
+		for(Card c: cards) {
+			if(c.getTerritory().equals(t)) {
+				return c;
+			}
+		}
+		return null;
+	}
+	
 	public static List<Card> getCardList()
 	{
 		return Collections.unmodifiableList(cards);

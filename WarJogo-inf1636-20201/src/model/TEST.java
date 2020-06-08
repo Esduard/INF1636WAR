@@ -6,7 +6,7 @@ public class TEST {
 	
 	public static void testValidateCardTrade()
 	{
-		System.out.println("-------------TEST CARD TRADE--------------");
+		System.out.println("-------------TEST VALIDATE CARD TRADE--------------");
 		
 		
 		

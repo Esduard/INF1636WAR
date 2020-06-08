@@ -12,6 +12,7 @@ public class GameExecution {
 	private static Stack<Card> cardStack = new Stack<Card>();
 	private static ArrayList<Player> players = new ArrayList<Player>();
 	private static ArrayList<GameColor> remainingColors = new ArrayList<GameColor>(Arrays.asList(GameColor.Branco,GameColor.Preto,GameColor.Azul,GameColor.Amarelo,GameColor.Verde,GameColor.Vermelho));
+	private static int cardBonus = 4;
 	
 	public static void initializeGameComponents()
 	{
@@ -252,6 +253,22 @@ public class GameExecution {
 		
 	}
 	
+	public static boolean movePlayerTroops(int player , Territory src , Territory target, int mov) {
+		
+		Player p = players.get(player);
+		
+		ArrayList<Territory> territories = new ArrayList<Territory>(Arrays.asList(src,target));
+		
+		if(!p.verifyTerritories(territories)) {
+			return false;
+		}
+		
+		moveTroops(src,target,mov);
+		
+		return true;
+	}
+	
+	
 	static void conquer (Player attacker, Player defender, Territory src , Territory target, int [] attack,int [] defend) {
 		
 		executeAttack(src,target,attack,defend);
@@ -277,6 +294,28 @@ public class GameExecution {
 	{
 		conquer(players.get(attacker), players.get(defender), Territory.getTerritory(src), Territory.getTerritory(target), attackDice, defenseDice);
 	}
+	
+	public static void CardTrade(int player,ArrayList<Card> selected) {
+		Player p = players.get(player);
+		if(p.tradeCards(selected)){
+				//puts cards back on stack
+				cardStack.addAll(selected);
+				Collections.shuffle(cardStack);
+				
+				p.receiveArmies(cardBonus);
+				if(cardBonus < 12) {
+					cardBonus += 2;
+				}
+				else if (cardBonus == 12) {
+					cardBonus += 3;
+				}
+				else {
+					cardBonus += 5;
+				}
+		}
+	}
+	
+	
 	
 	public static void resetPlayers() {
 		players.clear();

@@ -108,6 +108,26 @@ class Player {
 		Cards.add(c);
 	}
 	
+	public boolean tradeCards(ArrayList<Card> trading) {
+		
+		if(!GameValidation.validateCardTrade(trading))
+			return false;
+		
+		for(Card c:trading) {
+			if (!Cards.contains(c)) {
+				return false;
+			}
+		}
+		
+		for(Card c:trading) {
+			Cards.remove(c);
+			if(Territories.contains(c.getTerritory())){
+				availableArmies += 2;
+			}
+		}
+		return true;
+	}
+	
 	public List<Card> cardToTerritory()
 	{
 		ArrayList<Card> cardRet = new ArrayList<Card>();
@@ -119,6 +139,14 @@ class Player {
 			cardRet.add(c);
 		}
 		return cardRet;
+	}
+	
+	public boolean verifyTerritories(ArrayList<Territory> selection) {
+		if(Territories.containsAll(selection)) {
+			return true;
+		}
+		return false;
+		
 	}
 	
 	public void manageTerritory(Territory t, int army)
