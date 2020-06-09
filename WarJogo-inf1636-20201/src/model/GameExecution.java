@@ -89,7 +89,7 @@ public class GameExecution {
   				return false;
   			}
   			
-  			System.out.println(cArray[i].name());
+  			//System.out.println(cArray[i].name());
   			
   			pArray[i] = new Player(names[i], cArray[i]);
   			//System.out.println("insert : " + pArray[i].getName() + "/" + pArray[i].getColor());
@@ -241,7 +241,6 @@ public class GameExecution {
 		
 		if((src.getTroops() > mov) && (src.getColor().equals(target.getColor())) ) {
 			
-			
 			src.modifyTroops(-mov);
 			target.modifyTroops(mov);
 			
@@ -273,8 +272,6 @@ public class GameExecution {
 		
 		executeAttack(src,target,attack,defend);
 		
-		//System.out.println("target troops: " + target.getTroops());
-		
 		if(target.getTroops() <= 0) {
 			
 			
@@ -295,7 +292,7 @@ public class GameExecution {
 		conquer(players.get(attacker), players.get(defender), Territory.getTerritory(src), Territory.getTerritory(target), attackDice, defenseDice);
 	}
 	
-	public static void CardTrade(int player,ArrayList<Card> selected) {
+	public static boolean CardTrade(int player,ArrayList<Card> selected) {
 		Player p = players.get(player);
 		if(p.tradeCards(selected)){
 				//puts cards back on stack
@@ -312,7 +309,23 @@ public class GameExecution {
 				else {
 					cardBonus += 5;
 				}
+			return true;
 		}
+		else {
+			return false;
+		}
+	}
+	
+	public static boolean playerManualDraw(int player,Card c) {
+		
+		if((!cardStack.contains(c) && players.get(player).hasCard(c)))
+			return false;
+		
+		players.get(player).draw(c);
+		
+		cardStack.removeElement(c);
+		
+		return true;
 	}
 	
 	

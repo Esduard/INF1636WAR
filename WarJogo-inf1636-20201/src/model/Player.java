@@ -7,7 +7,7 @@ class Player {
 	private Objective objective;
 	private ArrayList<Card> Cards = new ArrayList<Card>();
 	private ArrayList<Territory> Territories = new ArrayList<Territory>();
-	private int availableArmies;
+	private int availableArmies = 0;
 	private ArrayList<GameColor> playersKilled = new ArrayList<GameColor>(); 
 	
 	public Player(String n,GameColor c) {
@@ -46,6 +46,15 @@ class Player {
 	public List<Card> getAllCards()
 	{
 		return Collections.unmodifiableList(Cards);
+	}
+	
+	public Card getCard(Territory t) {
+		for(Card c:Cards) {
+			if (c.getTerritory().equals(t)) {
+				return c;
+			}
+		}
+		return null;
 	}
 	
 	public List<Territory> getAllTerritories()
@@ -103,6 +112,10 @@ class Player {
 		
 	}
 	
+	public boolean hasCard(Card c) {
+		return Cards.contains(c);
+	}
+	
 	public void draw(Card c)
 	{
 		Cards.add(c);
@@ -110,14 +123,14 @@ class Player {
 	
 	public boolean tradeCards(ArrayList<Card> trading) {
 		
-		if(!GameValidation.validateCardTrade(trading))
-			return false;
-		
 		for(Card c:trading) {
 			if (!Cards.contains(c)) {
 				return false;
 			}
 		}
+		
+		if(!GameValidation.validateCardTrade(trading))
+			return false;
 		
 		for(Card c:trading) {
 			Cards.remove(c);
@@ -222,6 +235,10 @@ class Player {
 		availableArmies = 0;
 		playersKilled.clear(); 
 		
+	}
+	
+	public void resetPlayerCards() {
+		Cards.clear();
 	}
 	
 }

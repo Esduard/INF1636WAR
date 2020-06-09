@@ -109,6 +109,141 @@ public class TEST {
 		
 	}
 	
+	public static void testCardTrade() {
+		
+		System.out.println("----------------TEST CARD TRADE ----------------");
+		
+		GameExecution.createPlayerList(3);
+		
+		String names[] = {"Eduardo", "Gabriel", "Ivan"};
+		
+		String colors[] = {"Vermelho", "Azul", "Preto"};
+		
+		boolean result = GameExecution.addPlayers(names, colors);
+		
+		GameExecution.initializeGameComponents();
+		
+		System.out.println("game created: " + result);
+		
+		Player p = GameExecution.getPlayer(0);
+		
+		System.out.println("Correctly trades 3 cards that he owns, gets 4 bonus troops");
+		
+			System.out.println("BEFORE TRADE");
+			
+			//acquires cards
+			GameExecution.playerManualDraw(0,Card.getCard(Territory.getTerritory("Alasca")));
+			GameExecution.playerManualDraw(0,Card.getCard(Territory.getTerritory("Calgary")));
+			GameExecution.playerManualDraw(0,Card.getCard(Territory.getTerritory("California")));
+			
+			ArrayList<Card> selected = new ArrayList<Card>();
+			
+			//get territory for function
+			selected.add(p.getCard(Territory.getTerritory("Alasca")));
+			selected.add(p.getCard(Territory.getTerritory("Calgary")));
+			selected.add(p.getCard(Territory.getTerritory("California")));
+			
+			ArrayList<Card> cards = new ArrayList<Card>();
+			
+			cards.addAll(p.getAllCards());
+			
+			System.out.print("cards: ");
+			for(Card c: cards)
+				System.out.print(c.getTerritory().getName() + " ");
+			
+			System.out.println("availableTroops: " + p.getAvailableArmies());
+			
+			GameExecution.CardTrade(0,selected);
+			
+			
+			System.out.println("AFTER TRADE");
+			
+			cards.clear();
+			cards.addAll(p.getAllCards());
+			
+			System.out.print("cards: ");
+			for(Card c: cards)
+				System.out.print(c.getTerritory().getName() + " ");
+			
+			System.out.println("availableTroops: " + p.getAvailableArmies());
+			
+			p.resetPlayerCards();
+		
+		System.out.println("Incorrectly trades 3 cards that he doesn't own");
+		
+			System.out.println("BEFORE TRADE");
+			
+			//acquires cards
+			GameExecution.playerManualDraw(0,Card.getCard(Territory.getTerritory("Calgary")));
+			GameExecution.playerManualDraw(0,Card.getCard(Territory.getTerritory("California")));
+			
+			cards.clear();
+			cards.addAll(p.getAllCards());
+
+			System.out.print("cards: ");
+			for(Card c: cards)
+				System.out.print(c.getTerritory().getName() + " ");
+			
+			System.out.println("available Troops: " + p.getAvailableArmies());
+			
+			GameExecution.CardTrade(0,selected);
+			
+			
+			System.out.println("AFTER TRADE");
+			
+			cards.clear();
+			cards.addAll(p.getAllCards());
+			
+			System.out.print("cards: ");
+			for(Card c: cards)
+				System.out.print(c.getTerritory().getName() + " ");
+			
+			System.out.println("available Troops: " + p.getAvailableArmies());
+			
+			p.resetPlayerCards();
+		
+		System.out.println("Correctly trades 3 cards that he owns the turfs");
+		
+			System.out.println("BEFORE TRADE");
+			
+			//acquires cards
+			GameExecution.playerManualDraw(0,Card.getCard(Territory.getTerritory("Alasca")));
+			GameExecution.playerManualDraw(0,Card.getCard(Territory.getTerritory("Calgary")));
+			GameExecution.playerManualDraw(0,Card.getCard(Territory.getTerritory("California")));
+			
+			
+			
+			//get territory of cards
+			p.manageTerritory(Territory.getTerritory("Alasca"), 1);
+			p.manageTerritory(Territory.getTerritory("Calgary"), 1);
+			p.manageTerritory(Territory.getTerritory("California"), 1);
+			
+			cards.clear();
+			cards.addAll(p.getAllCards());
+			
+			System.out.print("cards: ");
+			for(Card c: cards)
+				System.out.print(c.getTerritory().getName() + " ");
+			
+			System.out.println("available Troops: " + p.getAvailableArmies());
+			
+			GameExecution.CardTrade(0,selected);
+			
+			System.out.println("AFTER TRADE");
+			
+			cards.clear();
+			cards.addAll(p.getAllCards());
+			
+			System.out.print("cards: ");
+			for(Card c: cards)
+				System.out.print(c.getTerritory().getName() + " ");
+			
+			System.out.println("available Troops: " + p.getAvailableArmies());
+			
+			p.resetPlayerCards();
+		
+	}
+	
 	public static void testCreatePlayerList()
 	{
 		System.out.println("----------------TEST CREATE PLAYER LIST----------------");
@@ -136,7 +271,7 @@ public class TEST {
 		
 		boolean result = GameExecution.addPlayers(jogadores1,cores1);
 		
-		System.out.println(result);
+		System.out.println("game created: " + result);
 		
 		for(int i= 0;i < 3; i++) {
 			System.out.println(GameExecution.getPlayer(i).getName());
@@ -149,7 +284,7 @@ public class TEST {
 		
 		String[] cores2 = {"Azul","Vermelho"};
 		
-		System.out.println(GameExecution.addPlayers(jogadores2,cores2));
+		System.out.println("game created: " + GameExecution.addPlayers(jogadores2,cores2));
 		
 		System.out.println("\nincorrectly adds 3 players with repeated color: expects false");
 		GameExecution.createPlayerList(3);
@@ -158,7 +293,7 @@ public class TEST {
 		
 		String[] cores3 = {"Azul","Azul","Vermelho"};
 		
-		System.out.println(GameExecution.addPlayers(jogadores3,cores3));
+		System.out.println("game created: " + GameExecution.addPlayers(jogadores3,cores3));
 		
 		System.out.println("\nincorrectly adds 3 players with non-existent color: expects false");
 		GameExecution.createPlayerList(3);
@@ -167,7 +302,7 @@ public class TEST {
 		
 		String[] cores4 = {"Azul","Laranja","Vermelho"};
 		
-		System.out.println(GameExecution.addPlayers(jogadores4,cores4));
+		System.out.println("game created: " + GameExecution.addPlayers(jogadores4,cores4));
 	}
 	
 	public static void testAttackResult()

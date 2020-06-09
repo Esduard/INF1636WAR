@@ -12,7 +12,6 @@ class Card {
 	public Card(Shape s, Territory t) {
 		shape = s;
 		territory = t;
-		
 	}
 	
 	public Shape getShape() {
@@ -47,74 +46,83 @@ class Card {
 		
 		resetCards();
 		
-		List<Territory> territories = Territory.getTerritoriesList();
-		
 		//NA_Territories 
 		
-		cards.add(new Card(Shape.Triangle	, territories.get(0)));
-		cards.add(new Card(Shape.Circle	, territories.get(1)));
-		cards.add(new Card(Shape.Square	, territories.get(2)));
-		cards.add(new Card(Shape.Circle	, territories.get(3)));
-		cards.add(new Card(Shape.Square	, territories.get(4)));
-		cards.add(new Card(Shape.Triangle	, territories.get(5)));
-		cards.add(new Card(Shape.Square	, territories.get(6)));
-		cards.add(new Card(Shape.Circle	, territories.get(7)));
-		cards.add(new Card(Shape.Triangle	, territories.get(8)));
+		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Alasca")));
+		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Calgary")));
+		cards.add(new Card(Shape.Square		, Territory.getTerritory("California")));
+		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Groenlandia")));
+		cards.add(new Card(Shape.Square		, Territory.getTerritory("Mexico")));
+		cards.add(new Card(Shape.Square		, Territory.getTerritory("Nova York")));
+		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Quebec")));
+		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Texas")));
+		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Vancouver")));
 		
 		
 		//SA_Territories 
 		
-		cards.add(new Card(Shape.Square	, territories.get(9)));
-		cards.add(new Card(Shape.Circle	, territories.get(10)));
-		cards.add( new Card(Shape.Triangle	, territories.get(11)));
-		cards.add(new Card(Shape.Triangle	, territories.get(12)));
+		cards.add(new Card(Shape.Square		, Territory.getTerritory("Argentina")));
+		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Brasil")));
+		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Peru")));
+		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Venezuela")));
 		
 		//AF_Territories 
 		
-		cards.add(new Card(Shape.Triangle	, territories.get(13)));
-		cards.add(new Card(Shape.Square	, territories.get(14)));
-		cards.add(new Card(Shape.Circle	, territories.get(15)));
-		cards.add(new Card(Shape.Triangle	, territories.get(16)));
-		cards.add(new Card(Shape.Circle	, territories.get(17)));
-		cards.add(new Card(Shape.Square	, territories.get(18)));
+		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Africa Do Sul")));
+		cards.add(new Card(Shape.Square		, Territory.getTerritory("Angola")));
+		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Argelia")));
+		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Egito")));
+		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Nigeria")));
+		cards.add(new Card(Shape.Square		, Territory.getTerritory("Somalia")));
 		
 		//EU_Territories 
 		
-		cards.add(new Card(Shape.Triangle	, territories.get(19)));
-		cards.add(new Card(Shape.Square	, territories.get(20)));
-		cards.add(new Card(Shape.Circle	, territories.get(21)));
-		cards.add(new Card(Shape.Square	, territories.get(22)));
-		cards.add(new Card(Shape.Circle	, territories.get(23)));
-		cards.add(new Card(Shape.Triangle	, territories.get(24)));
-		cards.add(new Card(Shape.Circle	, territories.get(25)));
+		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Espanha")));
+		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Franca")));
+		cards.add(new Card(Shape.Square		, Territory.getTerritory("Italia")));
+		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Reino Unido")));
+		cards.add(new Card(Shape.Square		, Territory.getTerritory("Suecia")));
+		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Polonia")));
+		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Romenia")));
+		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Ucrania")));
 		
 		
 		//AS_Territories 
 		
-		cards.add(new Card(Shape.Circle	, territories.get(26)));
-		cards.add(new Card(Shape.Square 	, territories.get(27)));
-		cards.add(new Card(Shape.Square 	, territories.get(28)));
-		cards.add(new Card(Shape.Circle 	, territories.get(29)));
-		cards.add(new Card(Shape.Triangle , territories.get(30)));
-		cards.add(new Card(Shape.Circle 	, territories.get(31)));
-		cards.add(new Card(Shape.Square 	, territories.get(32)));
-		cards.add(new Card(Shape.Square 	, territories.get(33)));
-		cards.add(new Card(Shape.Triangle , territories.get(34)));
-		cards.add(new Card(Shape.Triangle , territories.get(35)));
-		cards.add(new Card(Shape.Triangle , territories.get(36)));
-		cards.add(new Card(Shape.Circle 	, territories.get(37)));
+		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Arabia Saudita")));
+		cards.add(new Card(Shape.Circle 	, Territory.getTerritory("Bangladesh")));
+		cards.add(new Card(Shape.Circle 	, Territory.getTerritory("Cazaquistao")));
+		cards.add(new Card(Shape.Square		, Territory.getTerritory("China")));
+		cards.add(new Card(Shape.Square 	, Territory.getTerritory("Coreia Do Norte")));
+		cards.add(new Card(Shape.Triangle 	, Territory.getTerritory("Coreia Do Sul")));
+		cards.add(new Card(Shape.Circle 	, Territory.getTerritory("Estonia")));
+		cards.add(new Card(Shape.Triangle 	, Territory.getTerritory("India")));
+		cards.add(new Card(Shape.Square 	, Territory.getTerritory("Ira")));
+		cards.add(new Card(Shape.Triangle 	, Territory.getTerritory("Iraque")));
+		cards.add(new Card(Shape.Circle 	, Territory.getTerritory("Japao")));
+		cards.add(new Card(Shape.Square 	, Territory.getTerritory("Jordania")));
+		cards.add(new Card(Shape.Square 	, Territory.getTerritory("Letonia")));
+		cards.add(new Card(Shape.Triangle 	, Territory.getTerritory("Mongolia")));
+		cards.add(new Card(Shape.Circle 	, Territory.getTerritory("Paquistao")));
+		cards.add(new Card(Shape.Triangle 	, Territory.getTerritory("Russia")));
+		cards.add(new Card(Shape.Square 	, Territory.getTerritory("Siberia")));
+		cards.add(new Card(Shape.Square 	, Territory.getTerritory("Siria")));
+		cards.add(new Card(Shape.Triangle 	, Territory.getTerritory("Tailandia")));
+		cards.add(new Card(Shape.Triangle 	, Territory.getTerritory("Turquia")));
 		
 		
 		//OC_Territories
 		
-		cards.add(new Card(Shape.Triangle , territories.get(38)));
-		cards.add(new Card(Shape.Square 	, territories.get(39)));
-		cards.add(new Card(Shape.Circle 	, territories.get(40)));
-		cards.add(new Card(Shape.Square 	, territories.get(41)));
+		cards.add(new Card(Shape.Triangle 	, Territory.getTerritory("Australia")));
+		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Indonesia")));
+		cards.add(new Card(Shape.Square		, Territory.getTerritory("Nova Zelandia")));
+		cards.add(new Card(Shape.Circle 	, Territory.getTerritory("Perth")));
 		
 		//Jokers
 		
 		cards.add(new Card(Shape.Joker	, null));
 		cards.add(new Card(Shape.Joker	, null));
+		
+		
 	}
 }
