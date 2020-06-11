@@ -12,6 +12,7 @@ public class GameExecution {
 	private static Stack<Card> cardStack = new Stack<Card>();
 	private static ArrayList<Player> players = new ArrayList<Player>();
 	private static ArrayList<GameColor> remainingColors = new ArrayList<GameColor>(Arrays.asList(GameColor.Branco,GameColor.Preto,GameColor.Azul,GameColor.Amarelo,GameColor.Verde,GameColor.Vermelho));
+	private static int cardBonus = 4;
 	
 	public static void initializeGameComponents()
 	{
@@ -88,7 +89,7 @@ public class GameExecution {
   				return false;
   			}
   			
-  			System.out.println(cArray[i].name());
+  			//System.out.println(cArray[i].name());
   			
   			pArray[i] = new Player(names[i], cArray[i]);
   			//System.out.println("insert : " + pArray[i].getName() + "/" + pArray[i].getColor());
@@ -243,7 +244,6 @@ public class GameExecution {
 		
 		if((src.getTroops() > mov) && (src.getColor().equals(target.getColor())) ) {
 			
-			
 			src.modifyTroops(-mov);
 			target.modifyTroops(mov);
 			
@@ -255,11 +255,25 @@ public class GameExecution {
 		
 	}
 	
+	public static boolean movePlayerTroops(int player , Territory src , Territory target, int mov) {
+		
+		Player p = players.get(player);
+		
+		ArrayList<Territory> territories = new ArrayList<Territory>(Arrays.asList(src,target));
+		
+		if(!p.verifyTerritories(territories)) {
+			return false;
+		}
+		
+		moveTroops(src,target,mov);
+		
+		return true;
+	}
+	
+	
 	static void conquer (Player attacker, Player defender, Territory src , Territory target, int [] attack,int [] defend) {
 		
 		executeAttack(src,target,attack,defend);
-		
-		//System.out.println("target troops: " + target.getTroops());
 		
 		if(target.getTroops() <= 0) {
 			
@@ -280,6 +294,44 @@ public class GameExecution {
 	{
 		conquer(players.get(attacker), players.get(defender), Territory.getTerritory(src), Territory.getTerritory(target), attackDice, defenseDice);
 	}
+	
+	public static boolean CardTrade(int player,ArrayList<Card> selected) {
+		Player p = players.get(player);
+		if(p.tradeCards(selected)){
+				//puts cards back on stack
+				cardStack.addAll(selected);
+				Collections.shuffle(cardStack);
+				
+				p.receiveArmies(cardBonus);
+				if(cardBonus < 12) {
+					cardBonus += 2;
+				}
+				else if (cardBonus == 12) {
+					cardBonus += 3;
+				}
+				else {
+					cardBonus += 5;
+				}
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public static boolean playerManualDraw(int player,Card c) {
+		
+		if((!cardStack.contains(c) && players.get(player).hasCard(c)))
+			return false;
+		
+		players.get(player).draw(c);
+		
+		cardStack.removeElement(c);
+		
+		return true;
+	}
+	
+	
 	
 	public static void resetPlayers() {
 		players.clear();
