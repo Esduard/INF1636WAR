@@ -9,7 +9,7 @@ import javax.swing.*;
 import controller.GameController;
 import model.*;
 
-public class FRPlayerRegister extends JFrame {
+class FRPlayerRegister extends JFrame {
 
 	public FRPlayerRegister()
 	{
@@ -26,8 +26,11 @@ public class FRPlayerRegister extends JFrame {
 		for(int i = 0; i < pCount; i++)
 		{
 			JLabel label = new JLabel("Jogador " + i);
+			DefaultListModel<String> m = new DefaultListModel<String>();
+			
+			m.addAll(GameColor.getColorNames());
 			texts[i] = new JTextField("Nome", 16);
-			lists[i] = new JList(GameColor.getColorNames().toArray());
+			lists[i] = new JList<String>(m);
 			
 			label.setBounds(pos.x, pos.y, width, width/2);
 			pos.translate(width, 0);
@@ -101,10 +104,6 @@ public class FRPlayerRegister extends JFrame {
 		b.setBounds(pos.x + width, pos.y, width, width);
 		
 		getContentPane().add(b);
-		
-		setVisible(true);
-		
-		setResizable(false);
 		
 		setSize(width * pCount, width * pCount + 5 * width);
 	}

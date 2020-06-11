@@ -255,16 +255,8 @@ class Territory {
 
 	    ArrayList<String> perth_n = new ArrayList<String>(
 	    	      Arrays.asList("Australia"));
-
-
 		    
-		    
-		    
-		  //initialize territories and continents
-			
-		    List<Territory> territoryList = Territory.getTerritoriesList();
-		    
-		  //public Territory(String n, Color c, ArrayList<String> neighbors );
+		  //public Territory(String n, ArrayList<String> neighbors );
 			
 			//NA
 		    

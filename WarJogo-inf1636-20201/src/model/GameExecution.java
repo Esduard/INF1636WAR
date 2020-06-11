@@ -164,8 +164,11 @@ public class GameExecution {
   		Collections.shuffle(players);
   	}
     	
-	public static void placeArmy(Player p, int army, Territory t)
+	public static void placeArmy(int player, int army, String territory)
 	{
+		Player p = players.get(player);
+		Territory t = Territory.getTerritory(territory);
+		
 		if(p == null ||t == null)
 		{
 			throw new NullPointerException();
@@ -289,5 +292,27 @@ public class GameExecution {
 		remainingColors.add(GameColor.Verde);
 		remainingColors.add(GameColor.Vermelho);
 
+	}
+	
+	public static List<String> getTerritoriesNameList()
+	{
+		ArrayList<String> nameList = new ArrayList<String>();
+		
+		for(Territory t : Territory.getTerritoriesList())
+		{
+			nameList.add(t.getName());
+		}
+		
+		return nameList;
+	}
+	
+	public static String getTerritoryColor(String territory)
+	{
+		return Territory.getTerritory(territory).getColor().name();
+	}
+	
+	public static int getTerritoryArmy(String territory)
+	{
+		return Territory.getTerritory(territory).getTroops();
 	}
 }

@@ -8,15 +8,13 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class FRNewGame extends JFrame{
+class FRNewGame extends JFrame{
 	
 	private final static String IMG_FILE_PATH = "src\\images\\bgconfiguracao.png";
 	private final static String BUTTON_ICON_FILE_PATH = "src\\images\\botaoNovoJogo.png";
 	
 	public FRNewGame()
 	{
-		super();
-		
 		setLayout(null);
 		
 		JLabel l = new JLabel(new ImageIcon(IMG_FILE_PATH));

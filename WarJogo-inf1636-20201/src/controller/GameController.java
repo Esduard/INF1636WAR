@@ -1,21 +1,20 @@
 package controller;
 
-import javax.swing.*;
-
 import model.*;
-import view.*;
+import observer.Observable;
 
-public class GameController {
+import view.GameScreen;
+
+public class GameController extends Observable{
 
 	private GameState currentState = GameState.newGameMenu;
-	private JFrame activeFrame;
-	private JFrame turnFrame;
+	
+	private int currentPlayer;
 	
 	private static GameController singleton;
-	
+
 	private GameController()
 	{
-		activeFrame = new FRNewGame();
 	}
 	
 	public static GameController getGameController()
@@ -29,23 +28,46 @@ public class GameController {
 	{
 		switch (currentState) {
 		case newGameMenu:
-			activeFrame.dispose();
-			activeFrame = new FRChooseNumberOfPlayers();
 			currentState = GameState.chooseNumberOfPlayersMenu;
 			break;
 		case chooseNumberOfPlayersMenu:
-			activeFrame.dispose();
-			activeFrame = new FRPlayerRegister();
 			currentState = GameState.playerRegisterMenu;
 			break;
 		case playerRegisterMenu:
-			activeFrame.dispose();
-			activeFrame = new FRGame();
 			GameExecution.initializeGameComponents();
-			currentState = GameState.p1Turn;
+			currentState = GameState.game;
 			break;
-		case p1Turn:
-			//turnFrame = new FRPlayerTurn();
+		default:
+			break;
+		}
+		
+		notifyObservers();
+	}
+	
+	public void nextTurn()
+	{
+		if(currentState == GameState.game)
+		{
+			if(currentPlayer == GameExecution.getPlayerCount())
+				currentPlayer = 1;
+			else
+				currentPlayer++;
+		}
+	}
+	
+	public int getCurrentPlayer()
+	{
+		return currentPlayer;
+	}
+
+	@Override
+	public Object get(int i) {
+		switch(i)
+		{
+			case 0:
+				return currentState;
+			default:
+				return null;
 		}
 	}
 }

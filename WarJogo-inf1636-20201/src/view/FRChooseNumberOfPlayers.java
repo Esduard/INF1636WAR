@@ -9,7 +9,7 @@ import javax.swing.*;
 import controller.GameController;
 import model.*;
 
-public class FRChooseNumberOfPlayers extends JFrame{
+class FRChooseNumberOfPlayers extends JFrame{
 
 	public FRChooseNumberOfPlayers()
 	{
@@ -57,8 +57,7 @@ public class FRChooseNumberOfPlayers extends JFrame{
 		getContentPane().add(l);
 		getContentPane().add(t);
 		
-		setSize(300,400);
+		setSize(200,100);
 		setResizable(false);
-		setVisible(true);
 	}
 }
