@@ -9,11 +9,13 @@ import javax.swing.*;
 import controller.GameController;
 import model.*;
 
-class FRPlayerRegister extends JFrame {
+public class FRPlayerRegister extends JFrame {
 
 	public FRPlayerRegister()
 	{
-		int pCount = GameExecution.getPlayerCount();
+		GameExecution gE = GameExecution.getGameExecution();
+		
+		int pCount = gE.getPlayerCount();
 		setLayout(null);
 		
 		Point pos = new Point(0,0);
@@ -25,7 +27,7 @@ class FRPlayerRegister extends JFrame {
 		
 		for(int i = 0; i < pCount; i++)
 		{
-			JLabel label = new JLabel("Jogador " + i);
+			JLabel label = new JLabel("Jogador " + (i+1));
 			DefaultListModel<String> m = new DefaultListModel<String>();
 			
 			m.addAll(GameColor.getColorNames());
@@ -67,7 +69,7 @@ class FRPlayerRegister extends JFrame {
 					}
 				}
 				
-				boolean r  = GameExecution.addPlayers(names, colors);
+				boolean r  = gE.addPlayers(names, colors);
 				
 				if(!r)
 					JOptionPane.showMessageDialog(null, "Jogadores inválidos. Não é permitido repetir cores.");

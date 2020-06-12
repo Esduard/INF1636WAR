@@ -10,11 +10,11 @@ public abstract class Observable {
     public abstract Object get(int i);
     
     public void addObserver(IObserver o) {
-        this.observers.add(o);
+        observers.add(o);
     }
  
     public void removeObserver(IObserver o) {
-        this.observers.remove(o);
+        observers.remove(o);
     }
  
     public void notifyObservers()

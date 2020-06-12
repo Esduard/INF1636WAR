@@ -7,7 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-class PNMap extends JPanel {
+public class PNMap extends JPanel {
 	
 	private final static String MAP_IMG_FILE_PATH = "src\\images\\war_tabuleiro_mapa.png";
 	private final static String BG_IMG_FILE_PATH = "src\\images\\war_tabuleiro_fundo.png";
@@ -22,14 +22,14 @@ class PNMap extends JPanel {
 		this.size = size;
 		
 		try {
-			mapImg = ImageIO.read(new File(MAP_IMG_FILE_PATH));
+			mapImg = ImageIO.read(new File(MAP_IMG_FILE_PATH)).getScaledInstance(size.width, size.height, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 			System.exit(1);
 		}
 		
 		try {
-			bgImg = ImageIO.read(new File(BG_IMG_FILE_PATH));
+			bgImg = ImageIO.read(new File(BG_IMG_FILE_PATH)).getScaledInstance(size.width, size.height, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 			System.exit(1);
