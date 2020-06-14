@@ -17,11 +17,11 @@ class Program {
 			TEST.testMoveTroops();
 			TEST.testObjectiveValidation();*/
 		
-			TEST.testCardTrade();
+			//TEST.testCardTrade();
 		
-			GameController gC = GameController.getGameController();
+			/*GameController gC = GameController.getGameController();
 			GameScreen gS = GameScreen.getGameScreen();
-			gC.addObserver(gS);
+			gC.addObserver(gS);*/
 		}
 	
 }

@@ -5,6 +5,36 @@ public class Point {
 	
 	private static double INF = Double.MAX_VALUE;
 	
+	 double x;
+	 double y; 
+	  
+    public Point(double x, double y)
+	{
+		this.x = x;
+		this.y = y;
+	}  
+	
+	static Point centroid(ArrayList<Point> polygon) {
+		
+		if(polygon.isEmpty()) {
+			return null;
+		}
+		
+		Point center = new Point(0,0);
+		
+		for(Point p: polygon) {
+			center.x += p.x;
+			center.y += p.y;
+		}
+		
+		center.x = center.x/polygon.size();
+		center.y = center.y/polygon.size();
+		
+		
+		return center;
+	}
+	
+	
 	// The function that returns true if  
     // line segment 'p1q1' and 'p2q2' intersect. 
     static boolean doIntersect(Point p1, Point q1,  
@@ -126,14 +156,5 @@ public class Point {
         } 
         return (val > 0) ? 1 : 2; // clock or counterclock wise 
     }
-    
-    double x;
-    double y; 
-  
-    public Point(double x, double y)
-	{
-		this.x = x;
-		this.y = y;
-	}  
 
 }
