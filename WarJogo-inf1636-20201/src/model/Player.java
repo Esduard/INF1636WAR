@@ -22,7 +22,6 @@ class Player {
 		{
 			Card c = Cards.remove(Cards.size()-1);
 			manageTerritory(c.getTerritory(),1);
-			System.out.println(""+ c.getTerritory().getName() + " eh do jogador " + this.getColor() + "----------------------------");
 			cardRet.add(c);
 		}
 		return cardRet;

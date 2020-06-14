@@ -1,34 +1,38 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
 import controller.GameController;
-import model.*;
+import model.GameExecution;
 
-class FRPlayerRegister extends JFrame {
+public class FRPlayerRegister extends JFrame {
 
 	public FRPlayerRegister()
 	{
-		int pCount = GameExecution.getPlayerCount();
+		GameExecution gE = GameExecution.getGameExecution();
+		
+		int pCount = gE.getPlayerCount();
 		setLayout(null);
 		
 		Point pos = new Point(0,0);
 		
-		int width = 100;
+		int width = 80;
 		
 		JTextField[] texts = new JTextField[pCount];
 		JList[] lists = new JList[pCount];
 		
 		for(int i = 0; i < pCount; i++)
 		{
-			JLabel label = new JLabel("Jogador " + i);
+			JLabel label = new JLabel("Jogador " + (i+1));
 			DefaultListModel<String> m = new DefaultListModel<String>();
 			
-			m.addAll(GameColor.getColorNames());
+			m.addAll(gE.getColorNames());
 			texts[i] = new JTextField("Nome", 16);
 			lists[i] = new JList<String>(m);
 			
@@ -39,7 +43,10 @@ class FRPlayerRegister extends JFrame {
 			pos.translate(width, 0);
 			
 			lists[i].setBounds(pos.x, pos.y, width, width * 2);
-			pos.translate(- 2 * width,  2 * width);
+			if((i+1) % 2 == 0)
+				pos.translate(- 5 * width,  2 * width);
+			else
+				pos.translate(width, 0);
 			
 			getContentPane().add(label);
 			getContentPane().add(texts[i]);
@@ -48,10 +55,9 @@ class FRPlayerRegister extends JFrame {
 		
 		JButton b = new JButton("Iniciar Jogo");
 		
-		b.addMouseListener(new MouseListener() {
-
+		b.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				String[] names = new String[pCount];
 				String[] colors = new String[pCount];
 				
@@ -67,45 +73,21 @@ class FRPlayerRegister extends JFrame {
 					}
 				}
 				
-				boolean r  = GameExecution.addPlayers(names, colors);
+				boolean r  = gE.addPlayers(names, colors);
 				
 				if(!r)
 					JOptionPane.showMessageDialog(null, "Jogadores inválidos. Não é permitido repetir cores.");
 				else
 					GameController.getGameController().nextState();
 			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		
 		});
 		
-		b.setBounds(pos.x + width, pos.y, width, width);
+		b.setBounds(pos.x, pos.y, width * 2, width);
 		
 		getContentPane().add(b);
 		
-		setSize(width * pCount, width * pCount + 5 * width);
+		setSize(width * 6, width * (pCount + 2));
+		setResizable(false);
 	}
 	
 }

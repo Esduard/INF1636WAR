@@ -22,6 +22,18 @@ class Card {
 		return territory;
 	}
 	
+	public static ArrayList<Card> getJokers()
+	{
+		ArrayList<Card> cArray = new ArrayList<Card>(2);
+		
+		for(Card c: cards) {
+			if(c.getShape() == Shape.Joker) {
+				cArray.add(c);
+			}
+		}
+		return cArray;
+	}
+	
 	public static Card getCard(Territory t) {
 		for(Card c: cards) {
 			if(c.getTerritory().equals(t)) {

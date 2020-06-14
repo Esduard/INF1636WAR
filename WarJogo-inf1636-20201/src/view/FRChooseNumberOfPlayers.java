@@ -9,7 +9,7 @@ import javax.swing.*;
 import controller.GameController;
 import model.*;
 
-class FRChooseNumberOfPlayers extends JFrame{
+public class FRChooseNumberOfPlayers extends JFrame{
 
 	public FRChooseNumberOfPlayers()
 	{
@@ -32,7 +32,7 @@ class FRChooseNumberOfPlayers extends JFrame{
 						return;
 					}
 					
-					boolean r = GameExecution.createPlayerList(numberOfPlayers);
+					boolean r = GameExecution.getGameExecution().createPlayerList(numberOfPlayers);
 					
 					if(!r)
 						JOptionPane.showMessageDialog(null, "Número inválido de jogadores. Escolha um número de 3 a 6.");

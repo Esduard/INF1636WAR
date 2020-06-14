@@ -1,14 +1,10 @@
-import java.util.*;
-
 import controller.GameController;
-import model.*;
-import view.GameScreen;
 
 class Program {
 	
 	public static void main(String[] args) 
 	{
-			System.out.println("-------------TEST MODEL INTIALIZE---------------");
+			//System.out.println("-------------TEST MODEL INTIALIZE---------------");
 			/*TEST.testCreatePlayerList();
 			TEST.testAddPlayers();
 			TEST.testValidateCardTrade();
@@ -17,11 +13,9 @@ class Program {
 			TEST.testMoveTroops();
 			TEST.testObjectiveValidation();*/
 		
-			TEST.testCardTrade();
+			//TEST.testCardTrade();
 		
 			GameController gC = GameController.getGameController();
-			GameScreen gS = GameScreen.getGameScreen();
-			gC.addObserver(gS);
 		}
 	
 }
