@@ -3,6 +3,7 @@ import java.util.*;
 
 public class TEST {
 	
+	private static GameExecution gE = GameExecution.getGameExecution();
 	
 	public static void testValidateCardTrade()
 	{
@@ -113,28 +114,28 @@ public class TEST {
 		
 		System.out.println("----------------TEST CARD TRADE ----------------");
 		
-		GameExecution.createPlayerList(3);
+		gE.createPlayerList(3);
 		
 		String names[] = {"Eduardo", "Gabriel", "Ivan"};
 		
 		String colors[] = {"Vermelho", "Azul", "Preto"};
 		
-		boolean result = GameExecution.addPlayers(names, colors);
+		boolean result = gE.addPlayers(names, colors);
 		
-		GameExecution.initializeGameComponents();
+		gE.initializeGameComponents();
 		
 		System.out.println("game created: " + result);
 		
-		Player p = GameExecution.getPlayer(0);
+		Player p = gE.getPlayer(0);
 		
 		System.out.println("Correctly trades 3 cards that he owns, gets 4 bonus troops");
 		
 			System.out.println("BEFORE TRADE");
 			
 			//acquires cards
-			GameExecution.playerManualDraw(0,Card.getCard(Territory.getTerritory("Alasca")));
-			GameExecution.playerManualDraw(0,Card.getCard(Territory.getTerritory("Calgary")));
-			GameExecution.playerManualDraw(0,Card.getCard(Territory.getTerritory("California")));
+			gE.playerManualDraw(0,Card.getCard(Territory.getTerritory("Alasca")));
+			gE.playerManualDraw(0,Card.getCard(Territory.getTerritory("Calgary")));
+			gE.playerManualDraw(0,Card.getCard(Territory.getTerritory("California")));
 			
 			ArrayList<Card> selected = new ArrayList<Card>();
 			
@@ -153,7 +154,7 @@ public class TEST {
 			
 			System.out.println("availableTroops: " + p.getAvailableArmies());
 			
-			GameExecution.CardTrade(0,selected);
+			gE.CardTrade(0,selected);
 			
 			
 			System.out.println("AFTER TRADE");
@@ -174,8 +175,8 @@ public class TEST {
 			System.out.println("BEFORE TRADE");
 			
 			//acquires cards
-			GameExecution.playerManualDraw(0,Card.getCard(Territory.getTerritory("Calgary")));
-			GameExecution.playerManualDraw(0,Card.getCard(Territory.getTerritory("California")));
+			gE.playerManualDraw(0,Card.getCard(Territory.getTerritory("Calgary")));
+			gE.playerManualDraw(0,Card.getCard(Territory.getTerritory("California")));
 			
 			cards.clear();
 			cards.addAll(p.getAllCards());
@@ -186,7 +187,7 @@ public class TEST {
 			
 			System.out.println("available Troops: " + p.getAvailableArmies());
 			
-			GameExecution.CardTrade(0,selected);
+			gE.CardTrade(0,selected);
 			
 			
 			System.out.println("AFTER TRADE");
@@ -207,9 +208,9 @@ public class TEST {
 			System.out.println("BEFORE TRADE");
 			
 			//acquires cards
-			GameExecution.playerManualDraw(0,Card.getCard(Territory.getTerritory("Alasca")));
-			GameExecution.playerManualDraw(0,Card.getCard(Territory.getTerritory("Calgary")));
-			GameExecution.playerManualDraw(0,Card.getCard(Territory.getTerritory("California")));
+			gE.playerManualDraw(0,Card.getCard(Territory.getTerritory("Alasca")));
+			gE.playerManualDraw(0,Card.getCard(Territory.getTerritory("Calgary")));
+			gE.playerManualDraw(0,Card.getCard(Territory.getTerritory("California")));
 			
 			
 			
@@ -227,7 +228,7 @@ public class TEST {
 			
 			System.out.println("available Troops: " + p.getAvailableArmies());
 			
-			GameExecution.CardTrade(0,selected);
+			gE.CardTrade(0,selected);
 			
 			System.out.println("AFTER TRADE");
 			
@@ -248,10 +249,10 @@ public class TEST {
 	{
 		System.out.println("----------------TEST CREATE PLAYER LIST----------------");
 		
-		System.out.println("With 2 players: " + GameExecution.createPlayerList(2));
-		System.out.println("With 3 players: " + GameExecution.createPlayerList(3));
-		System.out.println("With 6 players: " + GameExecution.createPlayerList(6));
-		System.out.println("With 7 players: " + GameExecution.createPlayerList(7));
+		System.out.println("With 2 players: " + gE.createPlayerList(2));
+		System.out.println("With 3 players: " + gE.createPlayerList(3));
+		System.out.println("With 6 players: " + gE.createPlayerList(6));
+		System.out.println("With 7 players: " + gE.createPlayerList(7));
 	}
 	
 	public static void testAddPlayers()
@@ -263,46 +264,46 @@ public class TEST {
 		//public static boolean addPlayers(String[] names, String[] colors)
 		
 		System.out.println("\ncorrectly adds 3 players: expects true");
-		GameExecution.createPlayerList(3);
+		gE.createPlayerList(3);
 		
 		String[] jogadores1 = {"Hashirama","Tobirama","Hiruzen"};
 		
 		String[] cores1 = {"Azul","Vermelho","Preto"};
 		
-		boolean result = GameExecution.addPlayers(jogadores1,cores1);
+		boolean result = gE.addPlayers(jogadores1,cores1);
 		
 		System.out.println("game created: " + result);
 		
 		for(int i= 0;i < 3; i++) {
-			System.out.println(GameExecution.getPlayer(i).getName());
+			System.out.println(gE.getPlayer(i).getName());
 		}
 		
 		System.out.println("\nincorrectly adds 2 players: expects false");
-		GameExecution.createPlayerList(2);
+		gE.createPlayerList(2);
 		
 		String[] jogadores2 = {"Hashirama","Tobirama"};
 		
 		String[] cores2 = {"Azul","Vermelho"};
 		
-		System.out.println("game created: " + GameExecution.addPlayers(jogadores2,cores2));
+		System.out.println("game created: " + gE.addPlayers(jogadores2,cores2));
 		
 		System.out.println("\nincorrectly adds 3 players with repeated color: expects false");
-		GameExecution.createPlayerList(3);
+		gE.createPlayerList(3);
 		
 		String[] jogadores3 = {"Hashirama","Madara","Tobirama"};
 		
 		String[] cores3 = {"Azul","Azul","Vermelho"};
 		
-		System.out.println("game created: " + GameExecution.addPlayers(jogadores3,cores3));
+		System.out.println("game created: " + gE.addPlayers(jogadores3,cores3));
 		
 		System.out.println("\nincorrectly adds 3 players with non-existent color: expects false");
-		GameExecution.createPlayerList(3);
+		gE.createPlayerList(3);
 		
 		String[] jogadores4 = {"Hashirama","Madara","Tobirama"};
 		
 		String[] cores4 = {"Azul","Laranja","Vermelho"};
 		
-		System.out.println("game created: " + GameExecution.addPlayers(jogadores4,cores4));
+		System.out.println("game created: " + gE.addPlayers(jogadores4,cores4));
 	}
 	
 	public static void testAttackResult()
@@ -341,7 +342,7 @@ public class TEST {
 		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
 		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
 
-		result = GameExecution.executeAttack(Venezuela , Peru, atk , def );
+		result = gE.executeAttack(Venezuela , Peru, atk , def );
 		
 		System.out.println(result);
 		
@@ -379,7 +380,7 @@ public class TEST {
 		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
 		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
 
-		result = GameExecution.moveTroops(Venezuela,Peru,1);
+		result = gE.moveTroops(Venezuela,Peru,1);
 		
 		System.out.println(result);
 		
@@ -397,7 +398,7 @@ public class TEST {
 		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
 		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
 
-		result = GameExecution.moveTroops(Venezuela,Peru,1);
+		result = gE.moveTroops(Venezuela,Peru,1);
 		
 		System.out.println(result);
 		
@@ -415,7 +416,7 @@ public class TEST {
 		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
 		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
 
-		result = GameExecution.moveTroops(Venezuela,Peru,2);
+		result = gE.moveTroops(Venezuela,Peru,2);
 		
 		System.out.println(result);
 		
@@ -502,35 +503,35 @@ public class TEST {
 		System.out.println("-------------TEST DESTROY ARMY OBJECTIVE--------------");
 		
 		//setting the stage
-		GameExecution.createPlayerList(3);
+		gE.createPlayerList(3);
 		
 		
 		String[] jogadores = {"Mario","Luigi","Peach"};
 		
 		String[] cores = {"Azul","Vermelho","Preto"};
 		
-		GameExecution.addPlayers(jogadores,cores);
+		gE.addPlayers(jogadores,cores);
 		
-		GameExecution.initializeGameComponents();
+		gE.initializeGameComponents();
 		
 		Objective objs[] = new Objective[3];
 		//DestroyArmyObjective(String description, Player target,Player player)
-		objs[0] = new DestroyArmyObjective("DA" + GameExecution.getPlayer(0).getColor(),"Destruir totalmente os exércitos do jogador " + GameExecution.getPlayer(0).getColor().name(),GameExecution.getPlayer(0),null);
-		objs[1] = new DestroyArmyObjective("DA" + GameExecution.getPlayer(1).getColor(),"Destruir totalmente os exércitos do jogador " + GameExecution.getPlayer(1).getColor().name(),GameExecution.getPlayer(1),null);
-		objs[2] = new DestroyArmyObjective("DA" + GameExecution.getPlayer(2).getColor(),"Destruir totalmente os exércitos do jogador " + GameExecution.getPlayer(2).getColor().name(),GameExecution.getPlayer(2),null);
+		objs[0] = new DestroyArmyObjective("DA" + gE.getPlayer(0).getColor(),"Destruir totalmente os exércitos do jogador " + gE.getPlayer(0).getColor().name(),gE.getPlayer(0),null);
+		objs[1] = new DestroyArmyObjective("DA" + gE.getPlayer(1).getColor(),"Destruir totalmente os exércitos do jogador " + gE.getPlayer(1).getColor().name(),gE.getPlayer(1),null);
+		objs[2] = new DestroyArmyObjective("DA" + gE.getPlayer(2).getColor(),"Destruir totalmente os exércitos do jogador " + gE.getPlayer(2).getColor().name(),gE.getPlayer(2),null);
 		
-		GameExecution.getPlayer(0).setObjective(objs[1]);
-		GameExecution.getPlayer(1).setObjective(objs[2]);
-		GameExecution.getPlayer(2).setObjective(objs[0]);
+		gE.getPlayer(0).setObjective(objs[1]);
+		gE.getPlayer(1).setObjective(objs[2]);
+		gE.getPlayer(2).setObjective(objs[0]);
 		
 		
 		//add territories to all players
 	    
 	    System.out.println("\ncorrectly eliminate target player. expects [T,F,F]");
 	    
-	    GameExecution.getPlayer(0).manageTerritory(Territory.getTerritory("Argentina"),4);
-	    GameExecution.getPlayer(1).manageTerritory(Territory.getTerritory("Brasil"),3);
-	    GameExecution.getPlayer(2).manageTerritory(Territory.getTerritory("Peru"),3);
+	    gE.getPlayer(0).manageTerritory(Territory.getTerritory("Argentina"),4);
+	    gE.getPlayer(1).manageTerritory(Territory.getTerritory("Brasil"),3);
+	    gE.getPlayer(2).manageTerritory(Territory.getTerritory("Peru"),3);
 		
 		//destroyArmyObjective holding player will win attack against his target
 		
@@ -539,17 +540,17 @@ public class TEST {
 		int [] min_value = {1,1,1};
 		
 		// attack (int attacker, int defender, String src, String target, int[] attackDice, int[] defenseDice)
-		GameExecution.attack(0,1,"Argentina","Brasil", max_value , min_value);
+		gE.attack(0,1,"Argentina","Brasil", max_value , min_value);
 		
 		for(int i=0;i<3;i++) {
-			System.out.println("Objective complete: " + GameExecution.getPlayer(i).getObj().ValidateObjective());
+			System.out.println("Objective complete: " + gE.getPlayer(i).getObj().ValidateObjective());
 		}
 		
 		//red will win by having 24 territories
-		GameExecution.createPlayerList(3);
+		gE.createPlayerList(3);
 		Territory.initialize();
 		Continent.initialize();
-		GameExecution.addPlayers(jogadores,cores);
+		gE.addPlayers(jogadores,cores);
 		
 		
 		System.out.println("\ncorrectly conquer 24 territories after target player is defeated by someone else. expects [T,F,F]");
@@ -559,25 +560,25 @@ public class TEST {
 		
 		while(i_turf < 30) {
 			if(i_turf < 9 || i_turf > 11) {
-				GameExecution.getPlayer(0).manageTerritory(Territory.getTerritory(i_turf),1);
+				gE.getPlayer(0).manageTerritory(Territory.getTerritory(i_turf),1);
 			}
 			i_turf++;
 		}
 	    
-	    GameExecution.getPlayer(0).manageTerritory(Territory.getTerritory("Argentina"),4);
-	    GameExecution.getPlayer(1).manageTerritory(Territory.getTerritory("Brasil"),3);
-	    GameExecution.getPlayer(2).manageTerritory(Territory.getTerritory("Peru"),4);
+	    gE.getPlayer(0).manageTerritory(Territory.getTerritory("Argentina"),4);
+	    gE.getPlayer(1).manageTerritory(Territory.getTerritory("Brasil"),3);
+	    gE.getPlayer(2).manageTerritory(Territory.getTerritory("Peru"),4);
 		
-	    GameExecution.getPlayer(0).setObjective(objs[1]);
-	    GameExecution.getPlayer(1).setObjective(objs[2]);
-	    GameExecution.getPlayer(2).setObjective(objs[0]);
+	    gE.getPlayer(0).setObjective(objs[1]);
+	    gE.getPlayer(1).setObjective(objs[2]);
+	    gE.getPlayer(2).setObjective(objs[0]);
 		
 	    
-		GameExecution.attack(2,1,"Peru","Brasil", max_value , min_value);
+		gE.attack(2,1,"Peru","Brasil", max_value , min_value);
 		
 		
 		for(int i=0;i<3;i++) {
-			System.out.println("Objective complete: " + GameExecution.getPlayer(i).getObj().ValidateObjective());
+			System.out.println("Objective complete: " + gE.getPlayer(i).getObj().ValidateObjective());
 		}
 		
 		
@@ -591,7 +592,7 @@ public class TEST {
 		
 		//setting the stage
 		
-		GameExecution.createPlayerList(3);
+		gE.createPlayerList(3);
 		Territory.initialize();
 		Continent.initialize();
 		
@@ -599,7 +600,7 @@ public class TEST {
 		
 		String[] cores = {"Azul","Vermelho","Preto"};
 		
-		GameExecution.addPlayers(jogadores,cores);
+		gE.addPlayers(jogadores,cores);
 		
 		List<Territory> territories = Territory.getTerritoriesList();
 		
@@ -610,26 +611,26 @@ public class TEST {
 		objs[1] = new ConquerTerritoryObjective("CT241","Conquistar 24 territórios", 24, 1,null);
 		objs[2] = new ConquerTerritoryObjective("CT241","Conquistar 24 territórios", 24, 1,null);
 		
-		GameExecution.getPlayer(0).setObjective(objs[0]);
-		GameExecution.getPlayer(1).setObjective(objs[1]);
-		GameExecution.getPlayer(2).setObjective(objs[2]);
+		gE.getPlayer(0).setObjective(objs[0]);
+		gE.getPlayer(1).setObjective(objs[1]);
+		gE.getPlayer(2).setObjective(objs[2]);
 		
 		
 		//player 1 will have his objective conquered
 		for(int i=0;i<18;i++) {
-			GameExecution.getPlayer(0).manageTerritory(territories.get(i),2);
+			gE.getPlayer(0).manageTerritory(territories.get(i),2);
 		}
 		
 		
 		//player 2 will have his objective conquered
 		for(int i=18;i<42;i++) {
-			GameExecution.getPlayer(1).manageTerritory(territories.get(i),1);
+			gE.getPlayer(1).manageTerritory(territories.get(i),1);
 		}
 		
 		//player 3 will not have territories
 		
 		for(int i=0;i<3;i++) {
-			System.out.println("Objective complete: " + GameExecution.getPlayer(i).getObj().ValidateObjective());
+			System.out.println("Objective complete: " + gE.getPlayer(i).getObj().ValidateObjective());
 		}	
 		
 	}
@@ -638,7 +639,7 @@ public class TEST {
 		
 		System.out.println("-------------TEST CONQUER CONTINENT OBJECTIVE--------------");
 		
-		GameExecution.createPlayerList(3);
+		gE.createPlayerList(3);
 		Territory.initialize();
 		Continent.initialize();
 		
@@ -654,70 +655,70 @@ public class TEST {
 		
 		String[] cores = {"Azul","Vermelho","Preto"};
 		
-		GameExecution.addPlayers(jogadores,cores);
+		gE.addPlayers(jogadores,cores);
 		
 		Objective.initialize();
 		
 		
 		System.out.println("P1 conquers NA,SA,EU, expects true");
 		
-		GameExecution.getPlayer(0).setObjective(Objective.getObjective("CCEUSA1"));
-		GameExecution.getPlayer(0).getObj().getDescription();
+		gE.getPlayer(0).setObjective(Objective.getObjective("CCEUSA1"));
+		gE.getPlayer(0).getObj().getDescription();
 		
 		
 		//NA, SA and EU
-		GameExecution.getPlayer(0).manageContinent(Continent.getContinent(NA),1);
-		GameExecution.getPlayer(0).manageContinent(Continent.getContinent(SA),1);
-		GameExecution.getPlayer(0).manageContinent(Continent.getContinent(EU),1);
+		gE.getPlayer(0).manageContinent(Continent.getContinent(NA),1);
+		gE.getPlayer(0).manageContinent(Continent.getContinent(SA),1);
+		gE.getPlayer(0).manageContinent(Continent.getContinent(EU),1);
 		
 		
-		System.out.println("Objective complete: " + GameExecution.getPlayer(0).getObj().ValidateObjective());
+		System.out.println("Objective complete: " + gE.getPlayer(0).getObj().ValidateObjective());
 		
 		
 		//looses NA (extra continent)
-		GameExecution.getPlayer(0).loseContinent(Continent.getContinent(NA));
+		gE.getPlayer(0).loseContinent(Continent.getContinent(NA));
 		
 		System.out.println("P1 conquers SA,EU, but not NA, expects false");
 		
-		System.out.println("Objective complete: " + GameExecution.getPlayer(0).getObj().ValidateObjective());
+		System.out.println("Objective complete: " + gE.getPlayer(0).getObj().ValidateObjective());
 		
 		System.out.println("P1 conquers SA,EU, and AS, expects true");
 		
 		
 		// looses NA (extra continent)
-		GameExecution.getPlayer(0).manageContinent(Continent.getContinent(AS),1);
+		gE.getPlayer(0).manageContinent(Continent.getContinent(AS),1);
 		
-		System.out.println("Objective complete: " + GameExecution.getPlayer(0).getObj().ValidateObjective());
+		System.out.println("Objective complete: " + gE.getPlayer(0).getObj().ValidateObjective());
 		
-		GameExecution.getPlayer(0).resetPlayer();
+		gE.getPlayer(0).resetPlayer();
 		
 		System.out.println("P2 conquers NA,OC, expects true");
 		
-		GameExecution.getPlayer(2).setObjective(Objective.getObjective("CCNAOC0"));
+		gE.getPlayer(2).setObjective(Objective.getObjective("CCNAOC0"));
 		
 		//NA
-		GameExecution.getPlayer(2).manageContinent(Continent.getContinent(NA),1);
+		gE.getPlayer(2).manageContinent(Continent.getContinent(NA),1);
 		
 		
 		//OC
-		GameExecution.getPlayer(2).manageContinent(Continent.getContinent(OC),1);
+		gE.getPlayer(2).manageContinent(Continent.getContinent(OC),1);
 		
 		
-		System.out.println("Objective complete: " + GameExecution.getPlayer(2).getObj().ValidateObjective());
+		System.out.println("Objective complete: " + gE.getPlayer(2).getObj().ValidateObjective());
 		
 		System.out.println("P2 conquers NA, but not OC, expects false");
 		
 		//looses OC
-		GameExecution.getPlayer(2).loseContinent(Continent.getContinent(OC));
+		gE.getPlayer(2).loseContinent(Continent.getContinent(OC));
 		
-		System.out.println("Objective complete: " + GameExecution.getPlayer(2).getObj().ValidateObjective());
+		System.out.println("Objective complete: " + gE.getPlayer(2).getObj().ValidateObjective());
 		
 		
 	}
 	
 	public static void testMethods()
 	{
-		GameExecution.initializeGameComponents();
+		gE.initializeGameComponents();
 		
 		//Instances log
 		
@@ -762,11 +763,11 @@ public class TEST {
 			System.out.println();
 		}
 		
-		GameExecution.firstDraw();
+		gE.firstDraw();
 		
 		System.out.println("------------PLAYER ORDER-------------------");
 		System.out.println();
-		for(Player p:GameExecution.getPlayerList())
+		for(Player p:gE.getPlayerList())
 		{
 			System.out.println(p.getName());
 		}
@@ -780,7 +781,7 @@ public class TEST {
 			System.out.println();
 		}
 
-		for(Player p:GameExecution.getPlayerList())
+		for(Player p:gE.getPlayerList())
 		{
 			System.out.println("------------------"+ p.getName() + "-" + p.getColor() + "----------------------------");
 			System.out.println("\tObjetivo: ");

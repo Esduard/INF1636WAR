@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-class FRNewGame extends JFrame{
+public class FRNewGame extends JFrame{
 	
 	private final static String IMG_FILE_PATH = "src\\images\\bgconfiguracao.png";
 	private final static String BUTTON_ICON_FILE_PATH = "src\\images\\botaoNovoJogo.png";

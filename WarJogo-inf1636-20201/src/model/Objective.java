@@ -56,6 +56,8 @@ abstract class Objective {
 	
 	public static void initialize()
 	{
+		GameExecution gE = GameExecution.getGameExecution();
+		
 		Objective.resetObjectives();
 		
 		List<Continent> continents = Continent.getContinentList();
@@ -84,7 +86,7 @@ abstract class Objective {
 		
 		
 		//must have acces to players
-		int number_p = GameExecution.getPlayerCount();
+		int number_p = gE.getPlayerCount();
 		
 		/*ID of destroyArmyObjective:
 
@@ -97,7 +99,8 @@ abstract class Objective {
 		
 		for(int i = 0; i < number_p; i++)
 		{
-			objectives.add(new DestroyArmyObjective("DA" + GameExecution.getPlayer(i).getColor(),"Destruir totalmente os ex�rcitos do jogador " + GameExecution.getPlayer(i).getColor(),GameExecution.getPlayer(i),null));
+			Player p = gE.getPlayer(i);
+			objectives.add(new DestroyArmyObjective("DA" + p.getColor(),"Destruir totalmente os ex�rcitos do jogador " + p.getColor(), p,null));
 		}
 		
 		//Conquer continent
