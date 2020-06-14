@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class GameValidation {
+class GameValidation {
 	
 	public static boolean validateCardTrade(ArrayList<Card> selected)
 	{

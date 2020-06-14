@@ -1,7 +1,7 @@
 package model;
 import java.util.*;
 
-public class Point {
+class Point {
 	
 	private static double INF = Double.MAX_VALUE;
 	
@@ -34,7 +34,35 @@ public class Point {
 		return center;
 	}
 	
-	
+	// Given three colinear points p, q, r,  
+    // the function checks if point q lies 
+    // on line segment 'pr' 
+    static boolean onSegment(Point p, Point q, Point r)  
+    { 
+        if (q.x <= Math.max(p.x, r.x) && q.x >= Math.min(p.x, r.x) && 
+            q.y <= Math.max(p.y, r.y) && q.y >= Math.min(p.y, r.y)) 
+        { 
+            return true; 
+        } 
+        return false; 
+    } 
+    
+    // To find orientation of ordered triplet (p, q, r). 
+    // The function returns following values 
+    // 0 --> p, q and r are colinear 
+    // 1 --> Clockwise 
+    // 2 --> Counterclockwise 
+    static int orientation(Point p, Point q, Point r)  
+    { 
+        double val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y); 
+  
+        if (val == 0)  
+        { 
+            return 0; // colinear 
+        } 
+        return (val > 0) ? 1 : 2; // clock or counterclock wise 
+    }
+
 	// The function that returns true if  
     // line segment 'p1q1' and 'p2q2' intersect. 
     static boolean doIntersect(Point p1, Point q1,  
@@ -85,8 +113,9 @@ public class Point {
         // Doesn't fall in any of the above cases 
         return false;  
     }
+    
 	// Returns true if the point p lies  
-    // inside the polygon[] with n vertices 
+    // inside the polygon with n vertices 
     static boolean isInside(ArrayList<Point> polygon, int n, Point p) 
     { 
         // There must be at least 3 vertices in polygon[] 
@@ -127,34 +156,4 @@ public class Point {
         // Return true if count is odd, false otherwise 
         return (count % 2 == 1); // Same as (count%2 == 1) 
     }
-	
-	// Given three colinear points p, q, r,  
-    // the function checks if point q lies 
-    // on line segment 'pr' 
-    static boolean onSegment(Point p, Point q, Point r)  
-    { 
-        if (q.x <= Math.max(p.x, r.x) && q.x >= Math.min(p.x, r.x) && 
-            q.y <= Math.max(p.y, r.y) && q.y >= Math.min(p.y, r.y)) 
-        { 
-            return true; 
-        } 
-        return false; 
-    } 
-    
-    // To find orientation of ordered triplet (p, q, r). 
-    // The function returns following values 
-    // 0 --> p, q and r are colinear 
-    // 1 --> Clockwise 
-    // 2 --> Counterclockwise 
-    static int orientation(Point p, Point q, Point r)  
-    { 
-        double val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y); 
-  
-        if (val == 0)  
-        { 
-            return 0; // colinear 
-        } 
-        return (val > 0) ? 1 : 2; // clock or counterclock wise 
-    }
-
 }

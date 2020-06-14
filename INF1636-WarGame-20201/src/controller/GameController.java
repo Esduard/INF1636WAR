@@ -2,8 +2,8 @@ package controller;
 
 import javax.swing.JFrame;
 
+
 import model.GameExecution;
-import observer.Observable;
 import view.*;
 
 public class GameController{
@@ -45,9 +45,9 @@ public class GameController{
 				currentState = GameState.playerRegisterMenu;
 				break;
 			case playerRegisterMenu:
-				changeFrame(new FRGame());
 				gE.initializeGameComponents();
 				gE.firstDraw();
+				changeFrame(new FRGame());
 				currentState = GameState.game;
 				break;
 			default:

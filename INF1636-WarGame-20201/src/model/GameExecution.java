@@ -33,6 +33,11 @@ public class GameExecution {
 		Objective.initialize();
 	}
 
+	public ArrayList<String> getColorNames()
+	{
+		return GameColor.getColorNames();
+	}
+	
 	public Player getPlayer(int i) {
 		return players.get(i);
 	}
@@ -52,6 +57,11 @@ public class GameExecution {
 	public String getPlayerName(int i) {
 		return players.get(i).getName();
 	}
+
+	public String getPlayerObjective(int i)
+	{
+		return players.get(i).getObj().getDescription();
+	}
 	
 	public String getPlayerColorCode(int i)
 	{
@@ -69,10 +79,6 @@ public class GameExecution {
 		} else {
 			resetPlayers();
 			players = new ArrayList<Player>(Arrays.asList(new Player[numberOfPlayers]));
-
-			// System.out.println(" 'createPlayerList' player list size: " +
-			// players.size());
-
 			return true;
 		}
 	}
@@ -95,27 +101,15 @@ public class GameExecution {
 				remainingColors.addAll(Arrays.asList(cArray));
 				return false;
 			}
-
-			// System.out.println(cArray[i].name());
-
 			pArray[i] = new Player(names[i], cArray[i]);
-			// System.out.println("insert : " + pArray[i].getName() + "/" +
-			// pArray[i].getColor());
 		}
 
 		int cont = 0;
 		for (Player p : pArray) {
-			// System.out.println(" 'addPlayers loop' player list size: " + players.size());
 			players.set(cont, p);
-			// System.out.println("insert players: " + p.getName() + "/" + p.getColor());
 			cont++;
 		}
-		// System.out.println(" 'addPlayers' player list size: " + players.size());
-		/*
-		 * for(int i= 0;i < players.size(); i++) {
-		 * System.out.println("player gameexec list : " + players.get(i).getName()); }
-		 */
-
+		
 		Collections.shuffle(players);
 
 		return true;
@@ -332,22 +326,33 @@ public class GameExecution {
 
 	}
 
-	public List<String> getTerritoriesNameList() {
-		ArrayList<String> nameList = new ArrayList<String>();
-
-		for (Territory t : Territory.getTerritoriesList()) {
-			nameList.add(t.getName());
-		}
-
-		return nameList;
+	public int getTerritoryCount()
+	{
+		return Territory.getTerritoriesList().size();
+	}
+	
+	public String getTerritoryName(int i) {
+		return Territory.getTerritory(i).getName();
 	}
 
-	public String getTerritoryColor(String territory) {
-		return Territory.getTerritory(territory).getColor().name();
+	public String getTerritoryColorCode(int i) {
+		return Territory.getTerritory(i).getColor().getColorCode();
 	}
 
-	public int getTerritoryArmy(String territory) {
-		return Territory.getTerritory(territory).getTroops();
+	public int getTerritoryArmy(int i) {
+		return Territory.getTerritory(i).getTroops();
+	}
+	
+	public int[] getTerritoryCenter(int i)
+	{
+		int[] center = new int[2];
+		
+		Point c = Territory.getTerritoriesList().get(i).getCenter();
+		
+		center[0] = (int)c.x;
+		center[1] = (int)c.y;
+		
+		return center;
 	}
 	
 }

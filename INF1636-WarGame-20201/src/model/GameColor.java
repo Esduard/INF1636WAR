@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public enum GameColor {
+enum GameColor {
 	Branco,
 	Preto,
 	Azul,
@@ -32,7 +32,7 @@ public enum GameColor {
 		case Amarelo:
 			return "#ffff00";
 		case Azul:
-			return "#0000ff";
+			return "#0080ff";
 		case Branco:
 			return "#ffffff";
 		case Preto:
@@ -40,7 +40,7 @@ public enum GameColor {
 		case Verde:
 			return "#00ff00";
 		case Vermelho:
-			return "#ff0000";
+			return "#b30505";
 		default:
 			return null;
 		}

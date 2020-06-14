@@ -18,7 +18,9 @@ public class PNMap extends JPanel {
 	
 	public PNMap(Dimension size)
 	{
-		super();
+		super(null);
+		
+		setPreferredSize(size);
 		this.size = size;
 		
 		try {

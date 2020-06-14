@@ -10,13 +10,13 @@ class Territory {
 	private GameColor color;
 	private int numTroops = 0;
 	private ArrayList<String> neighbors;
-	private ArrayList<Point> fronteirs;
+	private ArrayList<Point> frontiers;
 	private static ArrayList<Territory> territories = new ArrayList<Territory>(51);
 	
 	public Territory(String n, ArrayList<String> neighbors, ArrayList<Point> fronteirs) {
 		name = n;
 		this.neighbors = neighbors;
-		this.fronteirs = fronteirs;
+		this.frontiers = fronteirs;
 	}
 	
 	public static Territory getTerritory(String name)
@@ -73,6 +73,11 @@ class Territory {
 	public void setColor(GameColor c)
 	{
 		color = c;
+	}
+	
+	public Point getCenter()
+	{
+		return Point.centroid(frontiers);
 	}
 	
 	public static List<Territory> getTerritoriesList()
