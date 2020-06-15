@@ -11,30 +11,30 @@ class Vertex extends Point {
 	}
 	  
 	
-	static Point centroid(ArrayList<Point> polygon) {
+	static Vertex centroid(ArrayList<Vertex> frontiers) {
 		
-		if(polygon.isEmpty()) {
+		if(frontiers.isEmpty()) {
 			return null;
 		}
 		
-		Point center = new Point(0,0);
+		Vertex center = new Vertex(0,0);
 		
-		for(Point p: polygon) {
+		for(Vertex p: frontiers) {
 			center.x += p.x;
 			center.y += p.y;
 		}
 		
-		center.x = center.x/polygon.size();
-		center.y = center.y/polygon.size();
+		center.x = center.x/frontiers.size();
+		center.y = center.y/frontiers.size();
 		
 		
 		return center;
 	}
 	
 	// Given three colinear points p, q, r,  
-    // the function checks if point q lies 
+    // the function checks if Vertex q lies 
     // on line segment 'pr' 
-    static boolean onSegment(Point p, Point q, Point r)  
+    static boolean onSegment(Vertex p, Vertex q, Vertex r)  
     { 
         if (q.x <= Math.max(p.x, r.x) && q.x >= Math.min(p.x, r.x) && 
             q.y <= Math.max(p.y, r.y) && q.y >= Math.min(p.y, r.y)) 
@@ -49,7 +49,7 @@ class Vertex extends Point {
     // 0 --> p, q and r are colinear 
     // 1 --> Clockwise 
     // 2 --> Counterclockwise 
-    static int orientation(Point p, Point q, Point r)  
+    static int orientation(Vertex p, Vertex q, Vertex r)  
     { 
         double val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y); 
   
@@ -62,8 +62,8 @@ class Vertex extends Point {
 
 	// The function that returns true if  
     // line segment 'p1q1' and 'p2q2' intersect. 
-    static boolean doIntersect(Point p1, Point q1,  
-                               Point p2, Point q2)  
+    static boolean doIntersect(Vertex p1, Vertex q1,  
+                               Vertex p2, Vertex q2)  
     { 
         // Find the four orientations needed for  
         // general and special cases 
@@ -111,9 +111,9 @@ class Vertex extends Point {
         return false;  
     }
     
-	// Returns true if the point p lies  
+	// Returns true if the Vertex p lies  
     // inside the polygon with n vertices 
-    static boolean isInside(ArrayList<Point> polygon, int n, Point p) 
+    static boolean isInside(ArrayList<Vertex> polygon, int n, Vertex p) 
     { 
         // There must be at least 3 vertices in polygon[] 
         if (n < 3)  
@@ -121,8 +121,8 @@ class Vertex extends Point {
             return false; 
         } 
   
-        // Create a point for line segment from p to infinite 
-        Point extreme = new Point(INF, p.y); 
+        // Create a Vertex for line segment from p to infinite 
+        Vertex extreme = new Vertex(INF, p.y); 
   
         // Count intersections of the above line  
         // with sides of polygon 
@@ -136,7 +136,7 @@ class Vertex extends Point {
             // segment from 'polygon.get(i)' to 'polygon.get(next)' 
             if (doIntersect(polygon.get(i), polygon.get(next), p, extreme))  
             { 
-                // If the point 'p' is colinear with line  
+                // If the Vertex 'p' is colinear with line  
                 // segment 'i-next', then check if it lies  
                 // on segment. If it lies, return true, otherwise false 
                 if (orientation(polygon.get(i), p, polygon.get(next)) == 0) 
