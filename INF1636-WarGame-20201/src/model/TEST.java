@@ -326,8 +326,8 @@ public class TEST {
 	    ArrayList<String> peru_n = new ArrayList<String>(
 	    	      Arrays.asList("Argentina","Venezuela","Brasil"));
 	    
-	    Territory Venezuela = new Territory("Venezuela", venezuela_n, null);
-		Territory Peru = new Territory("Peru", peru_n, null);
+	    Territory Venezuela = new Territory("Venezuela", venezuela_n, null, null);
+		Territory Peru = new Territory("Peru", peru_n, null, null);
 		
 		//public Player(String n,GameColor c) {
 		
@@ -363,8 +363,8 @@ public class TEST {
 	    
 	    ArrayList<String> peru_n = new ArrayList<String>(
 	    	      Arrays.asList("Argentina","Venezuela","Brasil"));
-	    Territory Venezuela = new Territory("Venezuela", venezuela_n, null);
-		Territory Peru = new Territory("Peru", peru_n, null);
+	    Territory Venezuela = new Territory("Venezuela", venezuela_n, null, null);
+		Territory Peru = new Territory("Peru", peru_n, null, null);
 		
 		Player p1 = new Player("Eduardo",GameColor.Vermelho);
 		Player p2 = new Player("Gabriel",GameColor.Azul);
@@ -448,10 +448,10 @@ public class TEST {
 	    Player p1 = new Player("Eduardo",GameColor.Vermelho);
 		Player p2 = new Player("Gabriel",GameColor.Azul);
 	    
-		Territory Venezuela = new Territory("Venezuela", venezuela_n, null);
-		Territory Peru = new Territory("Peru", peru_n, null);
-		Territory Argentina = new Territory("Argentina", argentina_n, null);
-		Territory Brasil = new Territory("Brasil", brasil_n, null);
+		Territory Venezuela = new Territory("Venezuela", venezuela_n, null, null);
+		Territory Peru = new Territory("Peru", peru_n, null, null);
+		Territory Argentina = new Territory("Argentina", argentina_n, null, null);
+		Territory Brasil = new Territory("Brasil", brasil_n, null, null);
 		
 		
 		p1.manageTerritory(Venezuela, 1);

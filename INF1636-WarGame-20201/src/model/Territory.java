@@ -12,11 +12,13 @@ class Territory {
 	private ArrayList<String> neighbors;
 	private ArrayList<Vertex> frontiers;
 	private static ArrayList<Territory> territories = new ArrayList<Territory>(51);
+	private Vertex center;
 	
-	public Territory(String n, ArrayList<String> neighbors, ArrayList<Vertex> fronteirs) {
+	public Territory(String n, ArrayList<String> neighbors, ArrayList<Vertex> fronteirs, Vertex center) {
 		name = n;
 		this.neighbors = neighbors;
 		this.frontiers = fronteirs;
+		this.center = center;
 	}
 	
 	public static Territory getTerritory(String name)
@@ -77,7 +79,7 @@ class Territory {
 	
 	public Vertex getCenter()
 	{
-		return Vertex.centroid(frontiers);
+		return center;
 	}
 	
 	public static List<Territory> getTerritoriesList()
@@ -273,7 +275,7 @@ class Territory {
                     new Vertex(111, 163),
                     new Vertex(58, 163),
                     new Vertex(71, 137),
-                    new Vertex(76, 137)))));
+                    new Vertex(76, 137))), new Vertex(93, 139)));
 		    territories.add(new Territory("Calgary"			, calgary_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(134, 119),
                     new Vertex(148, 119),
@@ -289,7 +291,7 @@ class Territory {
                     new Vertex(231, 159),
                     new Vertex(223, 171),
                     new Vertex(147, 171),
-                    new Vertex(127, 135)))));
+                    new Vertex(127, 135))), new Vertex(182, 145)));
 		    territories.add(new Territory("California"		, california_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(107, 216),
                     new Vertex(177, 216),
@@ -297,7 +299,7 @@ class Territory {
                     new Vertex(90, 305),
                     new Vertex(77, 204),
                     new Vertex(90, 266),
-                    new Vertex(84, 253)))));
+                    new Vertex(84, 253))), new Vertex(116, 258)));
 		    territories.add(new Territory("Groenlandia"		, groenlandia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(270, 112),
                     new Vertex(285, 90),
@@ -309,7 +311,7 @@ class Territory {
                     new Vertex(351, 145),
                     new Vertex(335, 145),
                     new Vertex(327, 135),
-                    new Vertex(285, 135)))));
+                    new Vertex(285, 135))), new Vertex(320, 109)));
 		    territories.add(new Territory("Mexico"			, mexico_n,new ArrayList<Vertex>(Arrays.asList(
 		    		new Vertex(90, 305),
                     new Vertex(126, 305),
@@ -327,14 +329,14 @@ class Territory {
                     new Vertex(172, 403),
                     new Vertex(161, 403),
                     new Vertex(146, 373),
-                    new Vertex(135, 373))))); //not every Vertex but its something
+                    new Vertex(135, 373))), new Vertex(151, 364))); //not every Vertex but its something
 		    territories.add(new Territory("Nova York"		, nova_york_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(246, 216),
                     new Vertex(296, 216),
                     new Vertex(203, 346),
                     new Vertex(166, 306),
                     new Vertex(202, 246),
-                    new Vertex(231, 245))))); //not every Vertex but its something
+                    new Vertex(231, 245))), new Vertex(221, 264))); //not every Vertex but its something
 		    territories.add(new Territory("Quebec"			, quebec_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(231, 186),
                     new Vertex(262, 186),
@@ -346,14 +348,14 @@ class Territory {
                     new Vertex(340, 159),
                     new Vertex(325, 211),
                     new Vertex(296, 216),
-                    new Vertex(214, 215)))));
+                    new Vertex(214, 215))), new Vertex(276, 189)));
 		    territories.add(new Territory("Texas"			, texas_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(177, 216),
                     new Vertex(246, 216),
                     new Vertex(231, 245),
                     new Vertex(202, 246),
                     new Vertex(146, 338),
-                    new Vertex(126, 305)))));
+                    new Vertex(126, 305))), new Vertex(193, 230)));
 		    territories.add(new Territory("Vancouver"		, vancouver_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(127,134),
                     new Vertex(147, 172),
@@ -361,7 +363,7 @@ class Territory {
                     new Vertex(231, 186),
                     new Vertex(214, 216),
                     new Vertex(107, 216),
-                    new Vertex(110, 163))))); //not every Vertex but its something
+                    new Vertex(110, 163))), new Vertex(159, 192))); //not every Vertex but its something
 		    
 		    
 			//SA
@@ -371,23 +373,23 @@ class Territory {
                     new Vertex(334, 500),
                     new Vertex(295, 645),
                     new Vertex(278, 645),
-                    new Vertex(235, 566)))));
+                    new Vertex(235, 566))), new Vertex(277, 563)));
 		    territories.add(new Territory("Brasil"			, brasil_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(255, 394),
                     new Vertex(335, 442),
                     new Vertex(334, 500),
                     new Vertex(275, 500),
-                    new Vertex(235, 430)))));
+                    new Vertex(235, 430))), new Vertex(291, 445)));
 		    territories.add(new Territory("Peru"			, peru_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(235, 430),
                     new Vertex(275, 500),
                     new Vertex(241, 559),
-                    new Vertex(197, 495)))));
+                    new Vertex(197, 495))), new Vertex(231, 491)));
 		    territories.add(new Territory("Venezuela"		, venezuela_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(192, 395),
                     new Vertex(255, 394),
                     new Vertex(197, 495),
-                    new Vertex(163, 452)))));
+                    new Vertex(163, 452))), new Vertex(199, 427)));
 		    
 		    //AF
 		    
@@ -396,7 +398,7 @@ class Territory {
                     new Vertex(618, 542),
                     new Vertex(614, 581),
                     new Vertex(597, 596),
-                    new Vertex(559, 596)))));
+                    new Vertex(559, 596))), new Vertex(574, 563)));
 		    territories.add(new Territory("Angola"			, angola_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(520, 479),
                     new Vertex(587, 477),
@@ -404,7 +406,7 @@ class Territory {
                     new Vertex(574, 540),
                     new Vertex(528, 541),
                     new Vertex(536, 527),
-                    new Vertex(515, 488)))));
+                    new Vertex(515, 488))), new Vertex(553, 504)));
 		    territories.add(new Territory("Argelia"			, argelia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(438, 331),
                     new Vertex(474, 331),
@@ -412,21 +414,21 @@ class Territory {
                     new Vertex(538, 358),
                     new Vertex(513, 404),
                     new Vertex(425, 404),
-                    new Vertex(409, 378)))));
+                    new Vertex(409, 378))), new Vertex(468, 372)));
 		    territories.add(new Territory("Egito"			, egito_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(541, 355),
                     new Vertex(591, 355),
                     new Vertex(623, 431),
                     new Vertex(565, 432),
                     new Vertex(549, 405),
-                    new Vertex(516, 405)))));
+                    new Vertex(516, 405))), new Vertex(567, 389)));
 		    territories.add(new Territory("Nigeria"			, nigeria_n, new ArrayList<Vertex>(Arrays.asList(
 		    		new Vertex(427, 408),
                     new Vertex(548, 406),
                     new Vertex(588, 478),
                     new Vertex(520, 478),
                     new Vertex(502, 448),
-                    new Vertex(449, 447)))));
+                    new Vertex(449, 447))), new Vertex(502, 431)));
 		    territories.add(new Territory("Somalia"			, somalia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(563, 433),
                     new Vertex(624, 433),
@@ -436,7 +438,7 @@ class Territory {
                     new Vertex(643, 497),
                     new Vertex(618, 540),
                     new Vertex(574, 540),
-                    new Vertex(602, 496)))));
+                    new Vertex(602, 496))), new Vertex(625, 481)));
 		    
 		    //EU
 		    
@@ -445,7 +447,7 @@ class Territory {
                     new Vertex(461, 259),
                     new Vertex(476, 285),
                     new Vertex(471, 308),
-                    new Vertex(417, 304)))));
+                    new Vertex(417, 304))), new Vertex(444, 281)));
 		    territories.add(new Territory("Franca"		, franca_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(449, 230),
                     new Vertex(489, 229),
@@ -455,7 +457,7 @@ class Territory {
                     new Vertex(539, 205),
                     new Vertex(510, 259),
                     new Vertex(477, 285),
-                    new Vertex(462, 262)))));
+                    new Vertex(462, 262))), new Vertex(483, 241)));
 		    territories.add(new Territory("Italia"		, italia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(540, 206),
                     new Vertex(553, 206),
@@ -463,7 +465,7 @@ class Territory {
                     new Vertex(556, 256),
                     new Vertex(562, 296),
                     new Vertex(536, 304),
-                    new Vertex(510, 259)))));
+                    new Vertex(510, 259))), new Vertex(531, 258)));
 		    territories.add(new Territory("Reino Unido"	, reino_unido_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(461, 141),
                     new Vertex(480, 141),
@@ -471,14 +473,14 @@ class Territory {
                     new Vertex(482, 207),
                     new Vertex(445, 207),
                     new Vertex(422, 193),
-                    new Vertex(431, 176)))));
+                    new Vertex(431, 176))), new Vertex(454, 169)));
 		    territories.add(new Territory("Polonia"		, polonia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(574, 172),
                     new Vertex(585, 171),
                     new Vertex(600, 200),
                     new Vertex(582, 232),
                     new Vertex(567, 232),
-                    new Vertex(552, 205)))));
+                    new Vertex(552, 205))), new Vertex(572, 204)));
 		    territories.add(new Territory("Suecia"		, suecia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(551, 91),
                     new Vertex(583, 92),
@@ -489,7 +491,7 @@ class Territory {
                     new Vertex(500, 179),
                     new Vertex(491, 161),
                     new Vertex(507, 135),
-                    new Vertex(536, 106)))));
+                    new Vertex(536, 106))), new Vertex(529, 141)));
 		    territories.add(new Territory("Romenia"		, romenia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(567, 233),
                     new Vertex(582, 233),
@@ -498,14 +500,14 @@ class Territory {
                     new Vertex(580, 303),
                     new Vertex(574, 292),
                     new Vertex(557, 259),
-                    new Vertex(555, 254)))));
+                    new Vertex(555, 254))), new Vertex(584, 283)));
 		    territories.add(new Territory("Ucrania"		, ucrania_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(601, 201),
                     new Vertex(620, 234),
                     new Vertex(612,249),
                     new Vertex(619, 260),
                     new Vertex(608, 277),
-                    new Vertex(582, 233)))));
+                    new Vertex(582, 233))), new Vertex(612, 254)));
 		    
 		    //AS
 		    
@@ -518,7 +520,7 @@ class Territory {
                     new Vertex(649, 445),
                     new Vertex(639, 430),
                     new Vertex(646, 419),
-                    new Vertex(627, 383)))));
+                    new Vertex(627, 383))), new Vertex(672, 410)));
 		    territories.add(new Territory("Bangladesh"		, bangladesh_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(847, 345),
                     new Vertex(884, 346),
@@ -527,7 +529,7 @@ class Territory {
                     new Vertex(880, 452),
                     new Vertex(870, 465),
                     new Vertex(855, 435),
-                    new Vertex(829, 379)))));
+                    new Vertex(829, 379))), new Vertex(869, 452)));
 		    territories.add(new Territory("Cazaquistao"		, cazaquistao_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(738, 197),
                     new Vertex(908, 197),
@@ -535,7 +537,7 @@ class Territory {
                     new Vertex(905, 241),
                     new Vertex(784, 241),
                     new Vertex(772, 219),
-                    new Vertex(726, 219)))));
+                    new Vertex(726, 219))), new Vertex(838, 217)));
 		    territories.add(new Territory("China"			, china_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(784, 242),
                     new Vertex(806, 242),
@@ -545,34 +547,34 @@ class Territory {
                     new Vertex(838, 297),
                     new Vertex(812, 345),
                     new Vertex(785, 345),
-                    new Vertex(755, 292)))));
+                    new Vertex(755, 292))), new Vertex(793, 289)));
 		    territories.add(new Territory("Coreia Do Norte"	, coreia_do_norte_n, new ArrayList<Vertex>(Arrays.asList( 
                     new Vertex(838, 297),
                     new Vertex(887, 297),
                     new Vertex(893, 309),
                     new Vertex(908, 309),
                     new Vertex(915, 321),
-                    new Vertex(826, 321)))));
+                    new Vertex(826, 321))), new Vertex(866, 310)));
 		    territories.add(new Territory("Coreia Do Sul"	, coreia_do_sul_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(826, 321),
                     new Vertex(915, 321),
                     new Vertex(921, 332),
                     new Vertex(915, 345),
-                    new Vertex(812, 345)))));
+                    new Vertex(812, 345))), new Vertex(864, 335)));
 		    territories.add(new Territory("Estonia"			, estonia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(583, 92),
                     new Vertex(605, 92),
                     new Vertex(632, 96),
                     new Vertex(734, 119),
                     new Vertex(706, 168),
-                    new Vertex(626, 168)))));
+                    new Vertex(626, 168))), new Vertex(654, 146)));
 		    territories.add(new Territory("India"			, india_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(786, 345),
                     new Vertex(846, 346),
                     new Vertex(807, 415),
                     new Vertex(812, 422),
                     new Vertex(798, 445),
-                    new Vertex(764, 383)))));
+                    new Vertex(764, 383))), new Vertex(793, 394)));
 		    territories.add(new Territory("Ira"				, ira_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(701, 306),
                     new Vertex(717, 306),
@@ -580,7 +582,7 @@ class Territory {
                     new Vertex(739, 383),
                     new Vertex(733, 371),
                     new Vertex(715, 370),
-                    new Vertex(690, 323)))));
+                    new Vertex(690, 323))), new Vertex(718, 346)));
 		    territories.add(new Territory("Iraque"			, iraque_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(671, 306),
                     new Vertex(700, 306),
@@ -589,7 +591,7 @@ class Territory {
                     new Vertex(693, 357),
                     new Vertex(706, 382),
                     new Vertex(680, 382),
-                    new Vertex(654, 338)))));
+                    new Vertex(654, 338))), new Vertex(677, 345)));
 		    territories.add(new Territory("Japao"			, japao_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(937, 217),
                     new Vertex(956, 249),
@@ -602,7 +604,7 @@ class Territory {
                     new Vertex(927, 283),
                     new Vertex(934, 275),
                     new Vertex(943, 265),
-                    new Vertex(927, 235)))));
+                    new Vertex(927, 235))), new Vertex(955, 267)));
 		    territories.add(new Territory("Jordania"		, jordania_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(648, 306),
                     new Vertex(671, 306),
@@ -610,7 +612,7 @@ class Territory {
                     new Vertex(612, 373),
                     new Vertex(602, 351),
                     new Vertex(615, 332),
-                    new Vertex(633, 333)))));
+                    new Vertex(633, 333))), new Vertex(615, 341)));
 		    territories.add(new Territory("Letonia"			, letonia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(610, 140),
                     new Vertex(627, 169),
@@ -619,16 +621,16 @@ class Territory {
                     new Vertex(725, 218),
                     new Vertex(612, 219),
                     new Vertex(584, 171),
-                    new Vertex(592, 171)))));
+                    new Vertex(592, 171))), new Vertex(660, 193)));
 		    territories.add(new Territory("Mongolia"		, mongolia_n, new ArrayList<Vertex>(Arrays.asList(
-                    new Vertex(610, 140),
-                    new Vertex(626, 168),
-                    new Vertex(724, 168),
-                    new Vertex(738, 196),
-                    new Vertex(724, 219),
-                    new Vertex(612, 219),
-                    new Vertex(584, 171),
-                    new Vertex(591, 171)))));
+                    new Vertex(805, 242),
+                    new Vertex(906, 242),
+                    new Vertex(910, 249),
+                    new Vertex(902, 260),
+                    new Vertex(916, 282),
+                    new Vertex(906, 295),
+                    new Vertex(894, 273),
+                    new Vertex(822, 273))), new Vertex(855, 257)));
 		    territories.add(new Territory("Paquistao"		, paquistao_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(718, 274),
                     new Vertex(764, 274),
@@ -637,7 +639,7 @@ class Territory {
                     new Vertex(763, 382),
                     new Vertex(739, 383),
                     new Vertex(751, 365),
-                    new Vertex(709, 292)))));
+                    new Vertex(709, 292))), new Vertex(745, 321)));
 		    territories.add(new Territory("Russia"			, russia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(744, 119),
                     new Vertex(869, 120),
@@ -645,7 +647,7 @@ class Territory {
                     new Vertex(739, 196),
                     new Vertex(724, 168),
                     new Vertex(707, 168),
-                    new Vertex(729, 131)))));
+                    new Vertex(729, 131))), new Vertex(781, 154)));
 		    territories.add(new Territory("Siberia"			, siberia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(875, 112),
                     new Vertex(437, 112),
@@ -662,7 +664,7 @@ class Territory {
                     new Vertex(885, 171),
                     new Vertex(877, 182),
                     new Vertex(888, 196),
-                    new Vertex(826, 197)))));
+                    new Vertex(826, 197))), new Vertex(903, 140)));
 		    territories.add(new Territory("Siria"			, siria_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(628, 271),
                     new Vertex(647, 267),
@@ -673,7 +675,7 @@ class Territory {
                     new Vertex(716, 305),
                     new Vertex(636, 305),
                     new Vertex(628, 301),
-                    new Vertex(619, 285)))));
+                    new Vertex(619, 285))), new Vertex(664, 287)));
 		    territories.add(new Territory("Tailandia"		, tailandia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(885, 346),
                     new Vertex(915, 346),
@@ -685,7 +687,7 @@ class Territory {
                     new Vertex(901, 427),
                     new Vertex(895, 441),
                     new Vertex(887, 441),
-                    new Vertex(859, 391)))));
+                    new Vertex(859, 391))), new Vertex(907, 374)));
 		    territories.add(new Territory("Turquia"			, turquia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(612, 220),
                     new Vertex(771, 219),
@@ -699,7 +701,7 @@ class Territory {
                     new Vertex(652, 236),
                     new Vertex(646, 245),
                     new Vertex(638, 235),
-                    new Vertex(620, 234)))));
+                    new Vertex(620, 234))), new Vertex(712, 244)));
 		    
 		    //OC
 		    
@@ -715,7 +717,7 @@ class Territory {
                     new Vertex(845, 668),
                     new Vertex(838, 651),
                     new Vertex(823, 651),
-                    new Vertex(816, 636)))));
+                    new Vertex(816, 636))), new Vertex(871, 610)));
 		    territories.add(new Territory("Indonesia"		, indonesia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(851, 476),
                     new Vertex(860, 495),
@@ -735,8 +737,7 @@ class Territory {
                     new Vertex(885, 512),
                     new Vertex(848, 512),
                     new Vertex(834, 485),
-                    new Vertex(840, 477)
-                    ))));
+                    new Vertex(840, 477))), new Vertex(87, 500)));
 		    territories.add(new Territory("Nova Zelandia"	, nova_zelandia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(928, 600),
                     new Vertex(936, 600),
@@ -746,7 +747,7 @@ class Territory {
                     new Vertex(926, 660),
                     new Vertex(917, 677),
                     new Vertex(899, 677),
-                    new Vertex(917, 642)))));
+                    new Vertex(917, 642))), new Vertex(934, 644)));
 		    territories.add(new Territory("Perth"			, perth_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(856, 531),
                     new Vertex(862, 537),
@@ -765,7 +766,7 @@ class Territory {
                     new Vertex(789, 578),
                     new Vertex(798, 561),
                     new Vertex(822, 561),
-                    new Vertex(838, 531)))));
+                    new Vertex(838, 531))), new Vertex(802, 588)));
 		    
 	}
 }
