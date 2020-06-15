@@ -10,10 +10,10 @@ class Territory {
 	private GameColor color;
 	private int numTroops = 0;
 	private ArrayList<String> neighbors;
-	private ArrayList<Point> frontiers;
+	private ArrayList<Vertex> frontiers;
 	private static ArrayList<Territory> territories = new ArrayList<Territory>(51);
 	
-	public Territory(String n, ArrayList<String> neighbors, ArrayList<Point> fronteirs) {
+	public Territory(String n, ArrayList<String> neighbors, ArrayList<Vertex> fronteirs) {
 		name = n;
 		this.neighbors = neighbors;
 		this.frontiers = fronteirs;
@@ -75,9 +75,9 @@ class Territory {
 		color = c;
 	}
 	
-	public Point getCenter()
+	public Vertex getCenter()
 	{
-		return Point.centroid(frontiers);
+		return Vertex.centroid(frontiers);
 	}
 	
 	public static List<Territory> getTerritoriesList()
@@ -267,642 +267,505 @@ class Territory {
 			
 			//NA
 		    
-		    territories.add(new Territory("Alasca"			, alasca_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(86, 119),
-                    new Point(134, 119),
-                    new Point(111, 163),
-                    new Point(58, 163),
-                    new Point(71, 137),
-                    new Point(76, 137)))));
-		    territories.add(new Territory("Calgary"			, calgary_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(134, 119),
-                    new Point(148, 119),
-                    new Point(152, 125),
-                    new Point(208, 125),
-                    new Point(212, 133),
-                    new Point(230, 133),
-                    new Point(241, 112),
-                    new Point(270, 112),
-                    new Point(283, 134),
-                    new Point(258, 134),
-                    new Point(246, 158),
-                    new Point(231, 159),
-                    new Point(223, 171),
-                    new Point(147, 171),
-                    new Point(127, 135)))));
-		    territories.add(new Territory("California"		, california_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(107, 216),
-                    new Point(177, 216),
-                    new Point(126, 305),
-                    new Point(90, 305),
-                    new Point(77, 204),
-                    new Point(90, 266),
-                    new Point(84, 253)))));
-		    territories.add(new Territory("Groenlandia"		, groenlandia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(270, 112),
-                    new Point(285, 90),
-                    new Point(371, 90),
-                    new Point(379, 102),
-                    new Point(379, 106),
-                    new Point(372, 117),
-                    new Point(365, 117),
-                    new Point(351, 145),
-                    new Point(335, 145),
-                    new Point(327, 135),
-                    new Point(285, 135)))));
-		    territories.add(new Territory("Mexico"			, mexico_n,new ArrayList<Point>(Arrays.asList(
-		    		new Point(90, 305),
-                    new Point(126, 305),
-                    new Point(151, 350),
-                    new Point(161, 350),
-                    new Point(164, 343),
-                    new Point(172, 356),
-                    new Point(166, 366),
-                    new Point(175, 379),
-                    new Point(173, 383),
-                    new Point(178, 393),
-                    new Point(184, 393),
-                    new Point(188, 401),
-                    new Point(179, 416),
-                    new Point(172, 403),
-                    new Point(161, 403),
-                    new Point(146, 373),
-                    new Point(135, 373))))); //not every point but its something
-		    territories.add(new Territory("Nova York"		, nova_york_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(246, 216),
-                    new Point(296, 216),
-                    new Point(203, 346),
-                    new Point(166, 306),
-                    new Point(202, 246),
-                    new Point(231, 245))))); //not every point but its something
-		    territories.add(new Territory("Quebec"			, quebec_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(231, 186),
-                    new Point(262, 186),
-                    new Point(273, 268),
-                    new Point(272, 167),
-                    new Point(283, 167),
-                    new Point(288, 157),
-                    new Point(319, 157),
-                    new Point(340, 159),
-                    new Point(325, 211),
-                    new Point(296, 216),
-                    new Point(214, 215)))));
-		    territories.add(new Territory("Texas"			, texas_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(177, 216),
-                    new Point(246, 216),
-                    new Point(231, 245),
-                    new Point(202, 246),
-                    new Point(146, 338),
-                    new Point(126, 305)))));
-		    territories.add(new Territory("Vancouver"		, vancouver_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(127,134),
-                    new Point(147, 172),
-                    new Point(223,173),
-                    new Point(231, 186),
-                    new Point(214, 216),
-                    new Point(107, 216),
-                    new Point(110, 163))))); //not every point but its something
+		    territories.add(new Territory("Alasca"			, alasca_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(86, 119),
+                    new Vertex(134, 119),
+                    new Vertex(111, 163),
+                    new Vertex(58, 163),
+                    new Vertex(71, 137),
+                    new Vertex(76, 137)))));
+		    territories.add(new Territory("Calgary"			, calgary_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(134, 119),
+                    new Vertex(148, 119),
+                    new Vertex(152, 125),
+                    new Vertex(208, 125),
+                    new Vertex(212, 133),
+                    new Vertex(230, 133),
+                    new Vertex(241, 112),
+                    new Vertex(270, 112),
+                    new Vertex(283, 134),
+                    new Vertex(258, 134),
+                    new Vertex(246, 158),
+                    new Vertex(231, 159),
+                    new Vertex(223, 171),
+                    new Vertex(147, 171),
+                    new Vertex(127, 135)))));
+		    territories.add(new Territory("California"		, california_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(107, 216),
+                    new Vertex(177, 216),
+                    new Vertex(126, 305),
+                    new Vertex(90, 305),
+                    new Vertex(77, 204),
+                    new Vertex(90, 266),
+                    new Vertex(84, 253)))));
+		    territories.add(new Territory("Groenlandia"		, groenlandia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(270, 112),
+                    new Vertex(285, 90),
+                    new Vertex(371, 90),
+                    new Vertex(379, 102),
+                    new Vertex(379, 106),
+                    new Vertex(372, 117),
+                    new Vertex(365, 117),
+                    new Vertex(351, 145),
+                    new Vertex(335, 145),
+                    new Vertex(327, 135),
+                    new Vertex(285, 135)))));
+		    territories.add(new Territory("Mexico"			, mexico_n,new ArrayList<Vertex>(Arrays.asList(
+		    		new Vertex(90, 305),
+                    new Vertex(126, 305),
+                    new Vertex(151, 350),
+                    new Vertex(161, 350),
+                    new Vertex(164, 343),
+                    new Vertex(172, 356),
+                    new Vertex(166, 366),
+                    new Vertex(175, 379),
+                    new Vertex(173, 383),
+                    new Vertex(178, 393),
+                    new Vertex(184, 393),
+                    new Vertex(188, 401),
+                    new Vertex(179, 416),
+                    new Vertex(172, 403),
+                    new Vertex(161, 403),
+                    new Vertex(146, 373),
+                    new Vertex(135, 373))))); //not every Vertex but its something
+		    territories.add(new Territory("Nova York"		, nova_york_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(246, 216),
+                    new Vertex(296, 216),
+                    new Vertex(203, 346),
+                    new Vertex(166, 306),
+                    new Vertex(202, 246),
+                    new Vertex(231, 245))))); //not every Vertex but its something
+		    territories.add(new Territory("Quebec"			, quebec_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(231, 186),
+                    new Vertex(262, 186),
+                    new Vertex(273, 268),
+                    new Vertex(272, 167),
+                    new Vertex(283, 167),
+                    new Vertex(288, 157),
+                    new Vertex(319, 157),
+                    new Vertex(340, 159),
+                    new Vertex(325, 211),
+                    new Vertex(296, 216),
+                    new Vertex(214, 215)))));
+		    territories.add(new Territory("Texas"			, texas_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(177, 216),
+                    new Vertex(246, 216),
+                    new Vertex(231, 245),
+                    new Vertex(202, 246),
+                    new Vertex(146, 338),
+                    new Vertex(126, 305)))));
+		    territories.add(new Territory("Vancouver"		, vancouver_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(127,134),
+                    new Vertex(147, 172),
+                    new Vertex(223,173),
+                    new Vertex(231, 186),
+                    new Vertex(214, 216),
+                    new Vertex(107, 216),
+                    new Vertex(110, 163))))); //not every Vertex but its something
 		    
 		    
 			//SA
 		    
-		    territories.add(new Territory("Argentina"		, argentina_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(333.8, 505.0),
-                    new Point(302.4, 558.8),
-                    new Point(311.2, 573.0),
-                    new Point(281.6, 624.5),
-                    new Point(295.7, 650.2),
-                    new Point(278.1, 650.2),
-                    new Point(235.0, 572.4),
-                    new Point(239.7, 564.8),
-                    new Point(274.9, 505.0)))));
-		    territories.add(new Territory("Brasil"			, brasil_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(259.6, 407.2),
-                    new Point(285.3, 407.2),
-                    new Point(293.4, 423.9),
-                    new Point(305.7, 423.9),
-                    new Point(316.1, 445.2),
-                    new Point(335.4, 445.2),
-                    new Point(343.3, 461.0),
-                    new Point(343.3, 463.1),
-                    new Point(325.9, 491.3),
-                    new Point(333.8, 505.0),
-                    new Point(274.9, 505.0),
-                    new Point(233.8, 433.8),
-                    new Point(254.3, 398.2)))));
-		    territories.add(new Territory("Peru"			, peru_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(196.8, 498.1),
-                    new Point(202.3, 507.9),
-                    new Point(216.1, 507.9),
-                    new Point(232.2, 538.5),
-                    new Point(226.8, 545.4),
-                    new Point(239.7, 564.8),
-                    new Point(274.9, 505.0),
-                    new Point(233.8, 433.8)))));
-		    territories.add(new Territory("Venezuela"		, venezuela_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(193.5, 398.2),
-                    new Point(254.3, 398.2),
-                    new Point(196.8, 498.1),
-                    new Point(188.8, 482.2),
-                    new Point(176.2, 482.2),
-                    new Point(161.2, 455.8),
-                    new Point(179.8, 421.9),
-                    new Point(188.8, 406.2)))));
+		    territories.add(new Territory("Argentina"		, argentina_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(275, 500),
+                    new Vertex(334, 500),
+                    new Vertex(295, 645),
+                    new Vertex(278, 645),
+                    new Vertex(235, 566)))));
+		    territories.add(new Territory("Brasil"			, brasil_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(255, 394),
+                    new Vertex(335, 442),
+                    new Vertex(334, 500),
+                    new Vertex(275, 500),
+                    new Vertex(235, 430)))));
+		    territories.add(new Territory("Peru"			, peru_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(235, 430),
+                    new Vertex(275, 500),
+                    new Vertex(241, 559),
+                    new Vertex(197, 495)))));
+		    territories.add(new Territory("Venezuela"		, venezuela_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(192, 395),
+                    new Vertex(255, 394),
+                    new Vertex(197, 495),
+                    new Vertex(163, 452)))));
 		    
 		    //AF
 		    
-		    territories.add(new Territory("Africa Do Sul"	, africa_do_sul_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(333.8, 505.0),
-                    new Point(302.4, 558.8),
-                    new Point(311.2, 573.0),
-                    new Point(281.6, 624.5),
-                    new Point(295.7, 650.2),
-                    new Point(278.1, 650.2),
-                    new Point(235.0, 572.4),
-                    new Point(239.7, 564.8),
-                    new Point(274.9, 505.0)))));
-		    territories.add(new Territory("Angola"			, angola_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(333.8, 505.0),
-                    new Point(302.4, 558.8),
-                    new Point(311.2, 573.0),
-                    new Point(281.6, 624.5),
-                    new Point(295.7, 650.2),
-                    new Point(278.1, 650.2),
-                    new Point(235.0, 572.4),
-                    new Point(239.7, 564.8),
-                    new Point(274.9, 505.0)))));
-		    territories.add(new Territory("Argelia"			, argelia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(436.7, 337.5),
-                    new Point(473.2, 337.5),
-                    new Point(479.6, 350.3),
-                    new Point(492.5, 350.3),
-                    new Point(499.1, 364.1),
-                    new Point(539.8, 364.1),
-                    new Point(513.0, 410.1),
-                    new Point(425.3, 410.1),
-                    new Point(409.3, 384.5)))));
-		    territories.add(new Territory("Egito"			, egito_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(588.6, 360.3),
-                    new Point(542.0, 360.3),
-                    new Point(539.8, 364.1),
-                    new Point(513.0, 410.1),
-                    new Point(547.6, 410.1),
-                    new Point(562.4, 436.6),
-                    new Point(623.6, 436.6),
-                    new Point(594.0, 385.3),
-                    new Point(597.8, 378.5)))));
-		    territories.add(new Territory("Nigeria"			, nigeria_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(588.6, 360.3),
-                    new Point(542.0, 360.3),
-                    new Point(539.8, 364.1),
-                    new Point(513.0, 410.1),
-                    new Point(547.6, 410.1),
-                    new Point(562.4, 436.6),
-                    new Point(623.6, 436.6),
-                    new Point(594.0, 385.3),
-                    new Point(597.8, 378.5)))));
-		    territories.add(new Territory("Somalia"			, somalia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(588.6, 360.3),
-                    new Point(542.0, 360.3),
-                    new Point(539.8, 364.1),
-                    new Point(513.0, 410.1),
-                    new Point(547.6, 410.1),
-                    new Point(562.4, 436.6),
-                    new Point(623.6, 436.6),
-                    new Point(594.0, 385.3),
-                    new Point(597.8, 378.5)))));
+		    territories.add(new Territory("Africa Do Sul"	, africa_do_sul_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(527, 540),
+                    new Vertex(618, 542),
+                    new Vertex(614, 581),
+                    new Vertex(597, 596),
+                    new Vertex(559, 596)))));
+		    territories.add(new Territory("Angola"			, angola_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(520, 479),
+                    new Vertex(587, 477),
+                    new Vertex(600, 498),
+                    new Vertex(574, 540),
+                    new Vertex(528, 541),
+                    new Vertex(536, 527),
+                    new Vertex(515, 488)))));
+		    territories.add(new Territory("Argelia"			, argelia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(438, 331),
+                    new Vertex(474, 331),
+                    new Vertex(499, 358),
+                    new Vertex(538, 358),
+                    new Vertex(513, 404),
+                    new Vertex(425, 404),
+                    new Vertex(409, 378)))));
+		    territories.add(new Territory("Egito"			, egito_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(541, 355),
+                    new Vertex(591, 355),
+                    new Vertex(623, 431),
+                    new Vertex(565, 432),
+                    new Vertex(549, 405),
+                    new Vertex(516, 405)))));
+		    territories.add(new Territory("Nigeria"			, nigeria_n, new ArrayList<Vertex>(Arrays.asList(
+		    		new Vertex(427, 408),
+                    new Vertex(548, 406),
+                    new Vertex(588, 478),
+                    new Vertex(520, 478),
+                    new Vertex(502, 448),
+                    new Vertex(449, 447)))));
+		    territories.add(new Territory("Somalia"			, somalia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(563, 433),
+                    new Vertex(624, 433),
+                    new Vertex(640, 459),
+                    new Vertex(671, 459),
+                    new Vertex(653, 498),
+                    new Vertex(643, 497),
+                    new Vertex(618, 540),
+                    new Vertex(574, 540),
+                    new Vertex(602, 496)))));
 		    
 		    //EU
 		    
-		    territories.add(new Territory("Espanha"		, espanha_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(442.3, 266.0),
-                    new Point(461.0, 266.0),
-                    new Point(476.9, 292.5),
-                    new Point(475.0, 296.6),
-                    new Point(480.0, 296.6),
-                    new Point(470.7, 312.3),
-                    new Point(452.3, 312.3),
-                    new Point(456.4, 304.0),
-                    new Point(443.2, 304.0),
-                    new Point(440.2, 309.2),
-                    new Point(415.9, 309.2)))));
-		    territories.add(new Territory("Franca"		, franca_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(526.8, 186.6),
-                    new Point(538.7, 210.4),
-                    new Point(508.1, 263.1),
-                    new Point(502.1, 263.1),
-                    new Point(494.4, 279.1),
-                    new Point(483.7, 279.1),
-                    new Point(476.9, 292.5),
-                    new Point(461.0, 266.0),
-                    new Point(466.7, 255.2),
-                    new Point(459.9, 244.7),
-                    new Point(452.3, 244.7),
-                    new Point(448.2, 235.7),
-                    new Point(488.6, 235.7),
-                    new Point(499.3, 219.1),
-                    new Point(516.2, 219.1),
-                    new Point(521.8, 207.7),
-                    new Point(517.8, 200.4)))));
-		    territories.add(new Territory("Italia"		, italia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(552.4, 210.4),
-                    new Point(538.7, 210.4),
-                    new Point(508.1, 263.1),
-                    new Point(516.6, 263.1),
-                    new Point(526.7, 281.8),
-                    new Point(533.7, 281.8),
-                    new Point(542.5, 298.2),
-                    new Point(542.5, 300.2),
-                    new Point(537.1, 308.2),
-                    new Point(549.2, 308.2),
-                    new Point(554.8, 297.3),
-                    new Point(556.1, 297.3),
-                    new Point(557.4, 299.5),
-                    new Point(563.9, 299.5),
-                    new Point(563.9, 297.7),
-                    new Point(552.8, 277.8),
-                    new Point(547.0, 277.8),
-                    new Point(539.1, 261.1),
-                    new Point(543.5, 253.4),
-                    new Point(552.8, 253.4),
-                    new Point(555.8, 259.4),
-                    new Point(567.5, 237.9)))));
-		    territories.add(new Territory("Reino Unido"	, reino_unido_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(462.0, 146.2),
-                    new Point(481.6, 146.2),
-                    new Point(473.7, 156.6),
-                    new Point(480.8, 156.6),
-                    new Point(470.3, 174.2),
-                    new Point(482.7, 198.4),
-                    new Point(490.8, 198.4),
-                    new Point(484.0, 210.4),
-                    new Point(445.5, 210.4),
-                    new Point(451.3, 196.1),
-                    new Point(458.1, 196.1),
-                    new Point(463.2, 188.5),
-                    new Point(454.0, 174.2),
-                    new Point(459.4, 165.3),
-                    new Point(459.4, 163.2),
-                    new Point(450.8, 163.2)))));
-		    territories.add(new Territory("Polonia"		, polonia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(575.6, 176.1),
-                    new Point(583.6, 176.0),
-                    new Point(600.8, 205.9),
-                    new Point(581.8, 237.9),
-                    new Point(567.5, 237.9),
-                    new Point(552.4, 210.4),
-                    new Point(564.1, 189.0),
-                    new Point(569.8, 189.0)))));
-		    territories.add(new Territory("Suecia"		, suecia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(551.0, 96.6),
-                    new Point(582.5, 96.6),
-                    new Point(610.2, 144.5),
-                    new Point(602.0, 158.0),
-                    new Point(571.5, 158.0),
-                    new Point(578.7, 145.7),
-                    new Point(569.6, 145.7),
-                    new Point(579.6, 127.8),
-                    new Point(562.9, 127.8),
-                    new Point(552.1, 145.8),
-                    new Point(558.1, 156.3),
-                    new Point(552.0, 167.3),
-                    new Point(555.4, 172.1),
-                    new Point(548.3, 183.7),
-                    new Point(535.8, 183.7),
-                    new Point(530.4, 171.1),
-                    new Point(521.7, 171.1),
-                    new Point(514.0, 183.7),
-                    new Point(501.4, 183.7),
-                    new Point(492.1, 166.6),
-                    new Point(507.0, 140.6),
-                    new Point(522.0, 140.6),
-                    new Point(537.1, 111.5),
-                    new Point(543.0, 111.5)))));
-		    territories.add(new Territory("Romenia"		, romenia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(567.5, 237.9),
-                    new Point(555.8, 259.4),
-                    new Point(555.8, 262.4),
-                    new Point(557.6, 264.2),
-                    new Point(566.1, 264.2),
-                    new Point(579.8, 288.6),
-                    new Point(574.4, 297.5),
-                    new Point(581.4, 308.2),
-                    new Point(593.2, 308.2),
-                    new Point(601.4, 297.4),
-                    new Point(595.1, 289.5),
-                    new Point(598.3, 283.7),
-                    new Point(607.9, 283.7),
-                    new Point(581.8, 237.9)))));
-		    territories.add(new Territory("Ucrania"		, ucrania_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(611.6, 254.4),
-                    new Point(620.1, 239.5),
-                    new Point(600.8, 205.9),
-                    new Point(581.8, 237.9),
-                    new Point(607.9, 283.7),
-                    new Point(619.0, 264.9)))));
+		    territories.add(new Territory("Espanha"		, espanha_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(441, 262),
+                    new Vertex(461, 259),
+                    new Vertex(476, 285),
+                    new Vertex(471, 308),
+                    new Vertex(417, 304)))));
+		    territories.add(new Territory("Franca"		, franca_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(449, 230),
+                    new Vertex(489, 229),
+                    new Vertex(498, 214),
+                    new Vertex(516, 215),
+                    new Vertex(527, 183),
+                    new Vertex(539, 205),
+                    new Vertex(510, 259),
+                    new Vertex(477, 285),
+                    new Vertex(462, 262)))));
+		    territories.add(new Territory("Italia"		, italia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(540, 206),
+                    new Vertex(553, 206),
+                    new Vertex(568, 233),
+                    new Vertex(556, 256),
+                    new Vertex(562, 296),
+                    new Vertex(536, 304),
+                    new Vertex(510, 259)))));
+		    territories.add(new Territory("Reino Unido"	, reino_unido_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(461, 141),
+                    new Vertex(480, 141),
+                    new Vertex(490, 192),
+                    new Vertex(482, 207),
+                    new Vertex(445, 207),
+                    new Vertex(422, 193),
+                    new Vertex(431, 176)))));
+		    territories.add(new Territory("Polonia"		, polonia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(574, 172),
+                    new Vertex(585, 171),
+                    new Vertex(600, 200),
+                    new Vertex(582, 232),
+                    new Vertex(567, 232),
+                    new Vertex(552, 205)))));
+		    territories.add(new Territory("Suecia"		, suecia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(551, 91),
+                    new Vertex(583, 92),
+                    new Vertex(610, 139),
+                    new Vertex(601, 154),
+                    new Vertex(572, 152),
+                    new Vertex(548, 179),
+                    new Vertex(500, 179),
+                    new Vertex(491, 161),
+                    new Vertex(507, 135),
+                    new Vertex(536, 106)))));
+		    territories.add(new Territory("Romenia"		, romenia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(567, 233),
+                    new Vertex(582, 233),
+                    new Vertex(608, 279),
+                    new Vertex(593, 304),
+                    new Vertex(580, 303),
+                    new Vertex(574, 292),
+                    new Vertex(557, 259),
+                    new Vertex(555, 254)))));
+		    territories.add(new Territory("Ucrania"		, ucrania_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(601, 201),
+                    new Vertex(620, 234),
+                    new Vertex(612,249),
+                    new Vertex(619, 260),
+                    new Vertex(608, 277),
+                    new Vertex(582, 233)))));
 		    
 		    //AS
 		    
-		    territories.add(new Territory("Arabia Saudita"	, arabia_saudita_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(646.2, 423.6),
-                    new Point(639.1, 434.7),
-                    new Point(649.1, 450.3),
-                    new Point(699.0, 450.3),
-                    new Point(726.6, 403.0),
-                    new Point(716.8, 387.3),
-                    new Point(680.5, 387.3),
-                    new Point(654.0, 342.4),
-                    new Point(627.4, 388.2)))));
-		    territories.add(new Territory("Bangladesh"		, bangladesh_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(885.3, 350.0),
-                    new Point(847.8, 350.0),
-                    new Point(828.7, 383.5),
-                    new Point(842.1, 410.9),
-                    new Point(848.1, 410.9),
-                    new Point(859.7, 432.6),
-                    new Point(854.7, 441.3),
-                    new Point(870.5, 470.8),
-                    new Point(879.3, 458.8),
-                    new Point(879.3, 456.0),
-                    new Point(872.2, 444.6),
-                    new Point(879.9, 432.5),
-                    new Point(859.2, 396.3)))));
-		    territories.add(new Territory("Cazaquistao"		, cazaquistao_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(907.9, 201.9),
-                    new Point(920.4, 222.6),
-                    new Point(906.1, 246.4),
-                    new Point(784.1, 246.5),
-                    new Point(772.1, 224.1),
-                    new Point(724.7, 224.1),
-                    new Point(739.0, 201.9)))));
-		    territories.add(new Territory("China"			, china_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(873.9, 278.5),
-                    new Point(822.0, 278.5),
-                    new Point(804.9, 246.5),
-                    new Point(784.1, 246.5),
-                    new Point(773.5, 264.0),
-                    new Point(764.7, 278.9),
-                    new Point(754.8, 297.2),
-                    new Point(785.5, 348.8),
-                    new Point(785.5, 350.5),
-                    new Point(811.9, 350.5),
-                    new Point(838.9, 302.5),
-                    new Point(887.9, 302.5)))));
-		    territories.add(new Territory("Coreia Do Norte"	, coreia_do_norte_n, new ArrayList<Point>(Arrays.asList( 
-                    new Point(839.0, 302.2),
-                    new Point(825.3, 326.1),
-                    new Point(914.9, 326.1),
-                    new Point(908.2, 314.2),
-                    new Point(894.1, 314.2),
-                    new Point(888.0, 302.2)))));
-		    territories.add(new Territory("Coreia Do Sul"	, coreia_do_sul_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(914.9, 326.1),
-                    new Point(922.1, 337.2),
-                    new Point(915.5, 350.0),
-                    new Point(811.9, 350.0),
-                    new Point(825.3, 326.1)))));
-		    territories.add(new Territory("Estonia"			, estonia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(735.3, 123.8),
-                    new Point(659.5, 123.8),
-                    new Point(650.1, 144.1),
-                    new Point(630.0, 144.1),
-                    new Point(614.8, 117.0),
-                    new Point(628.2, 117.0),
-                    new Point(632.0, 124.2),
-                    new Point(644.4, 124.2),
-                    new Point(632.6, 101.5),
-                    new Point(607.8, 101.5),
-                    new Point(604.9, 96.6),
-                    new Point(582.5, 96.6),
-                    new Point(626.8, 173.1),
-                    new Point(706.8, 173.1)))));
-		    territories.add(new Territory("India"			, india_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(798.0, 450.3),
-                    new Point(763.8, 387.8),
-                    new Point(785.5, 351.2),
-                    new Point(785.5, 350.0),
-                    new Point(847.8, 350.0),
-                    new Point(808.0, 420.0),
-                    new Point(812.3, 427.5)))));
-		    territories.add(new Territory("Ira"				, ira_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(716.8, 310.2),
-                    new Point(701.1, 310.2),
-                    new Point(691.0, 329.0),
-                    new Point(703.0, 351.2),
-                    new Point(716.5, 375.9),
-                    new Point(733.6, 375.9),
-                    new Point(739.9, 387.8),
-                    new Point(751.3, 370.1)))));
-		    territories.add(new Territory("Iraque"			, iraque_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(703.0, 351.2),
-                    new Point(694.0, 362.7),
-                    new Point(694.0, 364.8),
-                    new Point(706.5, 387.3),
-                    new Point(680.5, 387.3),
-                    new Point(654.0, 342.4),
-                    new Point(671.9, 310.2),
-                    new Point(701.1, 310.2),
-                    new Point(691.0, 329.0)))));
-		    territories.add(new Territory("Japao"			, japao_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(937.3, 222.4),
-                    new Point(956.3, 254.3),
-                    new Point(953.7, 257.5),
-                    new Point(965.5, 276.8),
-                    new Point(955.4, 293.3),
-                    new Point(947.6, 293.3),
-                    new Point(940.0, 307.4),
-                    new Point(921.9, 307.4),
-                    new Point(930.2, 293.0),
-                    new Point(927.9, 288.6),
-                    new Point(933.8, 279.7),
-                    new Point(939.4, 279.7),
-                    new Point(943.7, 269.9),
-                    new Point(927.1, 239.4)))));
-		    territories.add(new Territory("Jordania"		, jordania_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(621.9, 378.5),
-                    new Point(612.8, 378.5),
-                    new Point(602.1, 357.1),
-                    new Point(615.7, 337.6),
-                    new Point(633.6, 337.6),
-                    new Point(649.1, 310.2),
-                    new Point(671.9, 310.2),
-                    new Point(654.0, 342.4),
-                    new Point(627.4, 388.2)))));
-		    territories.add(new Territory("Letonia"			, letonia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(610.2, 144.5),
-                    new Point(591.0, 176.0),
-                    new Point(583.6, 176.0),
-                    new Point(611.2, 224.1),
-                    new Point(724.7, 224.1),
-                    new Point(739.0, 201.9),
-                    new Point(724.7, 173.1),
-                    new Point(626.8, 173.1)))));
-		    territories.add(new Territory("Mongolia"		, mongolia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(906.1, 246.4),
-                    new Point(804.9, 246.4),
-                    new Point(822.0, 278.5),
-                    new Point(873.9, 278.5),
-                    new Point(894.6, 278.5),
-                    new Point(906.1, 300.4),
-                    new Point(916.3, 287.4),
-                    new Point(902.8, 264.5),
-                    new Point(910.3, 254.7)))));
-		    territories.add(new Territory("Paquistao"		, paquistao_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(763.8, 387.8),
-                    new Point(739.9, 387.8),
-                    new Point(751.3, 370.1),
-                    new Point(708.9, 296.4),
-                    new Point(718.3, 278.9),
-                    new Point(764.7, 278.9),
-                    new Point(754.8, 297.2),
-                    new Point(785.5, 348.8),
-                    new Point(785.5, 351.2)))));
-		    territories.add(new Territory("Russia"			, russia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(744.4, 125.0),
-                    new Point(742.5, 129.9),
-                    new Point(748.2, 129.9),
-                    new Point(744.1, 136.7),
-                    new Point(728.4, 136.7),
-                    new Point(706.7, 173.1),
-                    new Point(724.7, 173.1),
-                    new Point(739.0, 201.9),
-                    new Point(825.0, 201.9),
-                    new Point(869.9, 125.0)))));
-		    territories.add(new Territory("Siberia"			, siberia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(949.4, 204.5),
-                    new Point(956.8, 191.1),
-                    new Point(940.9, 162.5),
-                    new Point(947.1, 155.2),
-                    new Point(940.9, 144.4),
-                    new Point(954.0, 144.4),
-                    new Point(937.8, 117.0),
-                    new Point(875.3, 117.0),
-                    new Point(870.6, 124.9),
-                    new Point(825.0, 201.9),
-                    new Point(888.4, 201.9),
-                    new Point(877.3, 187.8),
-                    new Point(885.4, 176.1),
-                    new Point(907.5, 176.1),
-                    new Point(916.3, 159.9),
-                    new Point(930.5, 183.1),
-                    new Point(938.0, 183.1)))));
-		    territories.add(new Territory("Siria"			, siria_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(660.8, 272.8),
-                    new Point(664.6, 278.9),
-                    new Point(718.3, 278.9),
-                    new Point(708.9, 296.4),
-                    new Point(716.8, 310.2),
-                    new Point(637.0, 310.2),
-                    new Point(637.0, 306.2),
-                    new Point(628.7, 306.6),
-                    new Point(619.6, 291.5),
-                    new Point(628.7, 275.8),
-                    new Point(646.1, 275.8),
-                    new Point(647.3, 272.8)))));
-		    territories.add(new Territory("Tailandia"		, tailandia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(915.5, 350.0),
-                    new Point(885.3, 350.0),
-                    new Point(859.2, 396.3),
-                    new Point(879.9, 432.5),
-                    new Point(887.3, 446.2),
-                    new Point(895.1, 446.2),
-                    new Point(901.8, 432.5),
-                    new Point(897.5, 426.0),
-                    new Point(901.8, 420.7),
-                    new Point(887.0, 398.1),
-                    new Point(892.9, 389.8),
-                    new Point(895.9, 395.1),
-                    new Point(908.7, 395.1),
-                    new Point(911.4, 387.6),
-                    new Point(919.1, 387.6),
-                    new Point(927.4, 370.3)))));
-		    territories.add(new Territory("Turquia"			, turquia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(683.6, 278.9),
-                    new Point(691.0, 268.9),
-                    new Point(678.5, 247.4),
-                    new Point(668.1, 247.4),
-                    new Point(664.5, 240.9),
-                    new Point(651.9, 240.9),
-                    new Point(646.3, 251.2),
-                    new Point(639.4, 239.5),
-                    new Point(620.1, 239.5),
-                    new Point(611.2, 224.1),
-                    new Point(772.1, 224.1),
-                    new Point(784.1, 246.4),
-                    new Point(764.7, 278.9)))));
+		    territories.add(new Territory("Arabia Saudita"	, arabia_saudita_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(653, 338),
+                    new Vertex(680, 383),
+                    new Vertex(717, 382),
+                    new Vertex(726, 398),
+                    new Vertex(698, 445),
+                    new Vertex(649, 445),
+                    new Vertex(639, 430),
+                    new Vertex(646, 419),
+                    new Vertex(627, 383)))));
+		    territories.add(new Territory("Bangladesh"		, bangladesh_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(847, 345),
+                    new Vertex(884, 346),
+                    new Vertex(859, 390),
+                    new Vertex(879, 427),
+                    new Vertex(880, 452),
+                    new Vertex(870, 465),
+                    new Vertex(855, 435),
+                    new Vertex(829, 379)))));
+		    territories.add(new Territory("Cazaquistao"		, cazaquistao_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(738, 197),
+                    new Vertex(908, 197),
+                    new Vertex(920, 217),
+                    new Vertex(905, 241),
+                    new Vertex(784, 241),
+                    new Vertex(772, 219),
+                    new Vertex(726, 219)))));
+		    territories.add(new Territory("China"			, china_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(784, 242),
+                    new Vertex(806, 242),
+                    new Vertex(821, 272),
+                    new Vertex(873, 273),
+                    new Vertex(887, 297),
+                    new Vertex(838, 297),
+                    new Vertex(812, 345),
+                    new Vertex(785, 345),
+                    new Vertex(755, 292)))));
+		    territories.add(new Territory("Coreia Do Norte"	, coreia_do_norte_n, new ArrayList<Vertex>(Arrays.asList( 
+                    new Vertex(838, 297),
+                    new Vertex(887, 297),
+                    new Vertex(893, 309),
+                    new Vertex(908, 309),
+                    new Vertex(915, 321),
+                    new Vertex(826, 321)))));
+		    territories.add(new Territory("Coreia Do Sul"	, coreia_do_sul_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(826, 321),
+                    new Vertex(915, 321),
+                    new Vertex(921, 332),
+                    new Vertex(915, 345),
+                    new Vertex(812, 345)))));
+		    territories.add(new Territory("Estonia"			, estonia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(583, 92),
+                    new Vertex(605, 92),
+                    new Vertex(632, 96),
+                    new Vertex(734, 119),
+                    new Vertex(706, 168),
+                    new Vertex(626, 168)))));
+		    territories.add(new Territory("India"			, india_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(786, 345),
+                    new Vertex(846, 346),
+                    new Vertex(807, 415),
+                    new Vertex(812, 422),
+                    new Vertex(798, 445),
+                    new Vertex(764, 383)))));
+		    territories.add(new Territory("Ira"				, ira_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(701, 306),
+                    new Vertex(717, 306),
+                    new Vertex(750, 365),
+                    new Vertex(739, 383),
+                    new Vertex(733, 371),
+                    new Vertex(715, 370),
+                    new Vertex(690, 323)))));
+		    territories.add(new Territory("Iraque"			, iraque_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(671, 306),
+                    new Vertex(700, 306),
+                    new Vertex(691, 323),
+                    new Vertex(703, 346),
+                    new Vertex(693, 357),
+                    new Vertex(706, 382),
+                    new Vertex(680, 382),
+                    new Vertex(654, 338)))));
+		    territories.add(new Territory("Japao"			, japao_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(937, 217),
+                    new Vertex(956, 249),
+                    new Vertex(965, 271),
+                    new Vertex(955, 289),
+                    new Vertex(947, 289),
+                    new Vertex(939, 302),
+                    new Vertex(921, 302),
+                    new Vertex(930, 287),
+                    new Vertex(927, 283),
+                    new Vertex(934, 275),
+                    new Vertex(943, 265),
+                    new Vertex(927, 235)))));
+		    territories.add(new Territory("Jordania"		, jordania_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(648, 306),
+                    new Vertex(671, 306),
+                    new Vertex(627, 382),
+                    new Vertex(612, 373),
+                    new Vertex(602, 351),
+                    new Vertex(615, 332),
+                    new Vertex(633, 333)))));
+		    territories.add(new Territory("Letonia"			, letonia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(610, 140),
+                    new Vertex(627, 169),
+                    new Vertex(725, 169),
+                    new Vertex(739, 197),
+                    new Vertex(725, 218),
+                    new Vertex(612, 219),
+                    new Vertex(584, 171),
+                    new Vertex(592, 171)))));
+		    territories.add(new Territory("Mongolia"		, mongolia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(610, 140),
+                    new Vertex(626, 168),
+                    new Vertex(724, 168),
+                    new Vertex(738, 196),
+                    new Vertex(724, 219),
+                    new Vertex(612, 219),
+                    new Vertex(584, 171),
+                    new Vertex(591, 171)))));
+		    territories.add(new Territory("Paquistao"		, paquistao_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(718, 274),
+                    new Vertex(764, 274),
+                    new Vertex(754, 291),
+                    new Vertex(785, 344),
+                    new Vertex(763, 382),
+                    new Vertex(739, 383),
+                    new Vertex(751, 365),
+                    new Vertex(709, 292)))));
+		    territories.add(new Territory("Russia"			, russia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(744, 119),
+                    new Vertex(869, 120),
+                    new Vertex(825, 197),
+                    new Vertex(739, 196),
+                    new Vertex(724, 168),
+                    new Vertex(707, 168),
+                    new Vertex(729, 131)))));
+		    territories.add(new Territory("Siberia"			, siberia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(875, 112),
+                    new Vertex(437, 112),
+                    new Vertex(952, 139),
+                    new Vertex(941, 139),
+                    new Vertex(946, 150),
+                    new Vertex(940, 158),
+                    new Vertex(957, 186),
+                    new Vertex(949, 199),
+                    new Vertex(939, 178),
+                    new Vertex(930, 177),
+                    new Vertex(916, 155),
+                    new Vertex(907, 170),
+                    new Vertex(885, 171),
+                    new Vertex(877, 182),
+                    new Vertex(888, 196),
+                    new Vertex(826, 197)))));
+		    territories.add(new Territory("Siria"			, siria_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(628, 271),
+                    new Vertex(647, 267),
+                    new Vertex(660, 268),
+                    new Vertex(664, 274),
+                    new Vertex(717, 274),
+                    new Vertex(708, 291),
+                    new Vertex(716, 305),
+                    new Vertex(636, 305),
+                    new Vertex(628, 301),
+                    new Vertex(619, 285)))));
+		    territories.add(new Territory("Tailandia"		, tailandia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(885, 346),
+                    new Vertex(915, 346),
+                    new Vertex(926, 364),
+                    new Vertex(919, 382),
+                    new Vertex(911, 382),
+                    new Vertex(908, 390),
+                    new Vertex(901, 416),
+                    new Vertex(901, 427),
+                    new Vertex(895, 441),
+                    new Vertex(887, 441),
+                    new Vertex(859, 391)))));
+		    territories.add(new Territory("Turquia"			, turquia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(612, 220),
+                    new Vertex(771, 219),
+                    new Vertex(784, 241),
+                    new Vertex(764, 274),
+                    new Vertex(684, 273),
+                    new Vertex(691, 263),
+                    new Vertex(678, 242),
+                    new Vertex(667, 242),
+                    new Vertex(664, 235),
+                    new Vertex(652, 236),
+                    new Vertex(646, 245),
+                    new Vertex(638, 235),
+                    new Vertex(620, 234)))));
 		    
 		    //OC
 		    
-		    territories.add(new Territory("Australia"		, australia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(875.1, 539.4),
-                    new Point(885.9, 539.4),
-                    new Point(919.7, 598.0),
-                    new Point(911.5, 611.8),
-                    new Point(917.6, 623.4),
-                    new Point(901.8, 650.0),
-                    new Point(891.1, 650.0),
-                    new Point(877.6, 673.5),
-                    new Point(846.1, 673.5),
-                    new Point(837.9, 655.8),
-                    new Point(823.4, 655.8),
-                    new Point(816.7, 641.9)))));
-		    territories.add(new Territory("Indonesia"		, indonesia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(850.9, 480.7),
-                    new Point(861.3, 500.4),
-                    new Point(880.7, 500.4),
-                    new Point(887.7, 486.3),
-                    new Point(902.5, 486.3),
-                    new Point(907.6, 498.3),
-                    new Point(925.2, 498.3),
-                    new Point(935.6, 517.9),
-                    new Point(943.8, 517.9),
-                    new Point(954.3, 536.6),
-                    new Point(928.3, 536.6),
-                    new Point(920.3, 522.0),
-                    new Point(907.2, 522.0),
-                    new Point(904.7, 528.9),
-                    new Point(890.3, 528.9),
-                    new Point(885.3, 517.5),
-                    new Point(849.0, 517.5),
-                    new Point(835.2, 490.0),
-                    new Point(841.0, 480.7)))));
-		    territories.add(new Territory("Nova Zelandia"	, nova_zelandia_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(928.8, 601.5),
-                    new Point(936.9, 601.5),
-                    new Point(943.0, 613.7),
-                    new Point(939.8, 616.5),
-                    new Point(944.2, 616.5),
-                    new Point(950.3, 628.6),
-                    new Point(931.9, 661.5),
-                    new Point(926.6, 661.5),
-                    new Point(917.6, 678.5),
-                    new Point(900.1, 678.5),
-                    new Point(917.6, 644.5),
-                    new Point(922.9, 644.5),
-                    new Point(932.3, 627.8),
-                    new Point(928.0, 619.1),
-                    new Point(934.1, 610.0)))));
-		    territories.add(new Territory("Perth"			, perth_n, new ArrayList<Point>(Arrays.asList(
-                    new Point(856.7, 535.5),
-                    new Point(839.2, 535.5),
-                    new Point(822.3, 565.8),
-                    new Point(799.1, 565.8),
-                    new Point(789.6, 584.3),
-                    new Point(781.3, 584.3),
-                    new Point(775.3, 595.7),
-                    new Point(775.3, 598.3),
-                    new Point(782.3, 608.6),
-                    new Point(782.3, 610.7),
-                    new Point(770.9, 630.1),
-                    new Point(763.5, 630.1),
-                    new Point(756.7, 639.9),
-                    new Point(766.4, 655.8),
-                    new Point(780.3, 655.8),
-                    new Point(787.3, 641.9),
-                    new Point(816.7, 641.9),
-                    new Point(861.6, 562.1),
-                    new Point(855.6, 550.2),
-                    new Point(862.4, 542.3)))));
+		    territories.add(new Territory("Australia"		, australia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(874, 535),
+                    new Vertex(887, 534),
+                    new Vertex(919, 593),
+                    new Vertex(911, 606),
+                    new Vertex(917, 618),
+                    new Vertex(901, 645),
+                    new Vertex(890, 645),
+                    new Vertex(877, 668),
+                    new Vertex(845, 668),
+                    new Vertex(838, 651),
+                    new Vertex(823, 651),
+                    new Vertex(816, 636)))));
+		    territories.add(new Territory("Indonesia"		, indonesia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(851, 476),
+                    new Vertex(860, 495),
+                    new Vertex(881, 495),
+                    new Vertex(887, 481),
+                    new Vertex(902, 481),
+                    new Vertex(907, 493),
+                    new Vertex(924, 493),
+                    new Vertex(935, 513),
+                    new Vertex(944, 513),
+                    new Vertex(954, 531),
+                    new Vertex(927, 531),
+                    new Vertex(920, 518),
+                    new Vertex(907, 517),
+                    new Vertex(904, 524),
+                    new Vertex(890, 524),
+                    new Vertex(885, 512),
+                    new Vertex(848, 512),
+                    new Vertex(834, 485),
+                    new Vertex(840, 477)
+                    ))));
+		    territories.add(new Territory("Nova Zelandia"	, nova_zelandia_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(928, 600),
+                    new Vertex(936, 600),
+                    new Vertex(943, 612),
+                    new Vertex(950, 628),
+                    new Vertex(932, 660),
+                    new Vertex(926, 660),
+                    new Vertex(917, 677),
+                    new Vertex(899, 677),
+                    new Vertex(917, 642)))));
+		    territories.add(new Territory("Perth"			, perth_n, new ArrayList<Vertex>(Arrays.asList(
+                    new Vertex(856, 531),
+                    new Vertex(862, 537),
+                    new Vertex(855, 545),
+                    new Vertex(861, 557),
+                    new Vertex(816, 636),
+                    new Vertex(786, 637),
+                    new Vertex(780, 650),
+                    new Vertex(766, 651),
+                    new Vertex(756, 634),
+                    new Vertex(763, 625),
+                    new Vertex(770, 625),
+                    new Vertex(782, 605),
+                    new Vertex(775, 592),
+                    new Vertex(781, 580),
+                    new Vertex(789, 578),
+                    new Vertex(798, 561),
+                    new Vertex(822, 561),
+                    new Vertex(838, 531)))));
 		    
 	}
 }

@@ -1,18 +1,15 @@
 package model;
 import java.util.*;
+import java.awt.Point;
 
-class Point {
+class Vertex extends Point {
 	
-	private static double INF = Double.MAX_VALUE;
+	private static int INF = Integer.MAX_VALUE;
 	
-	 double x;
-	 double y; 
+	public Vertex (int x, int y) {
+		super(x,y);
+	}
 	  
-    public Point(double x, double y)
-	{
-		this.x = x;
-		this.y = y;
-	}  
 	
 	static Point centroid(ArrayList<Point> polygon) {
 		
