@@ -354,7 +354,7 @@ public class GameExecution {
 	{
 		int[] center = new int[2];
 		
-		Point c = Territory.getTerritory(i).getCenter();
+		Vertex c = Territory.getTerritory(i).getCenter();
 		
 		center[0] = (int)c.x;
 		center[1] = (int)c.y;
