@@ -1,6 +1,6 @@
 package controller;
 
-public enum GameState {
+enum GameState {
 	newGameMenu,
 	chooseNumberOfPlayersMenu,
 	playerRegisterMenu,

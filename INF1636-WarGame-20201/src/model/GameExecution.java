@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
+import observer.IObserver;
+
 public class GameExecution {
 
 	private static GameExecution singleton;
@@ -68,6 +70,11 @@ public class GameExecution {
 		return players.get(i).getColor().getColorCode();
 	}
 
+	public int getPlayerAvailableArmy(int i)
+	{
+		return players.get(i).getAvailableArmies();
+	}
+	
 	public List<Player> getPlayerList() {
 		return Collections.unmodifiableList(players);
 	}
@@ -347,12 +354,17 @@ public class GameExecution {
 	{
 		int[] center = new int[2];
 		
-		Point c = Territory.getTerritoriesList().get(i).getCenter();
+		Point c = Territory.getTerritory(i).getCenter();
 		
 		center[0] = (int)c.x;
 		center[1] = (int)c.y;
 		
 		return center;
+	}
+	
+	public void addTerritoryObserver(int i, IObserver o)
+	{
+		Territory.getTerritory(i).addObserver(o);
 	}
 	
 }

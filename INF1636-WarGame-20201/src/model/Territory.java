@@ -5,12 +5,15 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-class Territory {
+import observer.Observable;
+
+class Territory extends Observable {
 	private String name;
 	private GameColor color;
 	private int numTroops = 0;
 	private ArrayList<String> neighbors;
 	private ArrayList<Point> frontiers;
+	private Point center;
 	private static ArrayList<Territory> territories = new ArrayList<Territory>(51);
 	
 	public Territory(String n, ArrayList<String> neighbors, ArrayList<Point> fronteirs) {
@@ -59,11 +62,15 @@ class Territory {
 		}
 		
 		numTroops = t;
+		
+		notifyObservers();
 	}
 	
 	//Receives integer that increase or decrease troops
 	public void modifyTroops(int t) {
 		numTroops += t;
+		
+		notifyObservers();
 	}
 	
 	public ArrayList<String> getNeighbors(){
@@ -73,6 +80,8 @@ class Territory {
 	public void setColor(GameColor c)
 	{
 		color = c;
+		
+		notifyObservers();
 	}
 	
 	public Point getCenter()
@@ -904,5 +913,19 @@ class Territory {
                     new Point(855.6, 550.2),
                     new Point(862.4, 542.3)))));
 		    
+	}
+
+	@Override
+	public Object get(int i) {
+		switch(i)
+		{
+		case 0:
+			return name;
+		case 1:
+			return color.getColorCode();
+		case 2:
+			return numTroops;
+		}
+		return null;
 	}
 }

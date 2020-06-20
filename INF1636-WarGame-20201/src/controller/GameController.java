@@ -10,13 +10,15 @@ public class GameController{
 
 	private static GameController singleton;
 	
-	private GameState currentState = GameState.newGameMenu;
+	private GameState currentState;
 	private JFrame activeFrame;
-	private GameExecution gE = GameExecution.getGameExecution();
+	private GameExecution gE;
 	
 	private GameController()
 	{
 		activeFrame = new FRNewGame();
+		gE = GameExecution.getGameExecution();
+		currentState = GameState.newGameMenu;
 	}
 	
 	public static GameController getGameController()
@@ -49,6 +51,8 @@ public class GameController{
 				gE.firstDraw();
 				changeFrame(new FRGame());
 				currentState = GameState.game;
+				break;
+			case game:
 				break;
 			default:
 				break;

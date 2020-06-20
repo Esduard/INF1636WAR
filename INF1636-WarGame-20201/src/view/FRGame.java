@@ -3,33 +3,27 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.*;
 
 import controller.TurnController;
 import model.GameExecution;
 
+@SuppressWarnings("serial")
 public class FRGame extends JFrame{
 	
 	private final static Dimension MAP_SIZE = new Dimension(1024, 768);
 	private final static Dimension LABEL_SIZE = new Dimension(300,100);
+	private final static String NEXT_TURN_IMG_FILE_PATH = "src\\images\\war_btnProxJogada.png";
 	
-	private GameExecution gE;
-	
-	private JLabel playerTurn;
-	private ArrayList<String> playerNames = new ArrayList<String>();
-	private ArrayList<String> playerColors = new ArrayList<String>();
-
-	private ArrayList<JLabel> territoriesInfo = new ArrayList<JLabel>();
-	
-	private JFrame objFrame;
+	private LBTurn turnLabel;
 	
 	public FRGame()
 	{		
 		super("WAR");
 		
-		gE = GameExecution.getGameExecution();
+		TurnController tC = TurnController.getTurnController();
+		GameExecution gE = GameExecution.getGameExecution();
 		JPanel p = new PNMap(MAP_SIZE);
 		
 		getContentPane().add(p);
@@ -37,28 +31,21 @@ public class FRGame extends JFrame{
 		//
 		// 	Player turn:
 		//
-		playerTurn = new JLabel();
-		p.add(playerTurn);
-		playerTurn.setBounds(MAP_SIZE.width/2 - LABEL_SIZE.width/2, 0, LABEL_SIZE.width, LABEL_SIZE.height);
-		
-		for(int i = 0; i < gE.getPlayerCount(); i++)
-		{
-			playerNames.add(gE.getPlayerName(i));
-			playerColors.add(gE.getPlayerColorCode(i));
-		}
-	
-		setTurnLabel(TurnController.getPlayerController().getCurrentPlayer());
+		turnLabel = new LBTurn();
+		p.add(turnLabel);
+		turnLabel.setBounds(MAP_SIZE.width/2 - LABEL_SIZE.width/2, 0, LABEL_SIZE.width, LABEL_SIZE.height);
+		turnLabel.setPlayer(tC.getCurrentPlayer());
+		tC.addObserver(turnLabel);
 		
 		//
 		//	Territories Info:
 		//
 		for(int i = 0; i < gE.getTerritoryCount(); i++)
 		{
-			JLabel l = new JLabel();
+			LBTerritory l = new LBTerritory();
 			int[] center = gE.getTerritoryCenter(i);
 			
-			territoriesInfo.add(l);
-			setTerritoryLabel(i, gE.getTerritoryName(i), gE.getTerritoryColorCode(i), gE.getTerritoryArmy(i));
+			l.setTerritoryInfo(gE.getTerritoryName(i), gE.getTerritoryColorCode(i), gE.getTerritoryArmy(i));
 			p.add(l);
 			l.setBounds(center[0], center[1], 100, 50);
 		}
@@ -71,44 +58,36 @@ public class FRGame extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				showObjective();
+				FRObjective f = new FRObjective();
+				tC.addObserver(f);
 			}
 			
 		});
 		
 		p.add(objB);
 		Dimension objBSize = objB.getPreferredSize();
-		objB.setBounds(0, MAP_SIZE.height - objBSize.height * 2, objBSize.width * 2, objBSize.height * 2);
+		objB.setBounds(408 - objBSize.width * 2, 682, objBSize.width * 2, objBSize.height * 2);
+		
+		//
+		// Next Turn:
+		//
+		JButton nextTurn = new JButton(new ImageIcon(NEXT_TURN_IMG_FILE_PATH));
+		nextTurn.addActionListener(new ActionListener() {
+		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TurnController.getTurnController().nextTurn();
+			}
+			
+		});
+		
+		p.add(nextTurn);
+		Dimension nextTurnSize = nextTurn.getPreferredSize();
+		nextTurn.setBounds(615, 682, nextTurnSize.width, nextTurnSize.height);
+		nextTurn.setContentAreaFilled(false);
+		nextTurn.setFocusPainted(false);
 		
 		pack();
 		setResizable(false);
-	}
-	
-	public void setTurnLabel(int i)
-	{
-		playerTurn.setText("<html><font size=18 color="+ playerColors.get(i) +">Turno do "+ playerNames.get(i) + "</font></html>");
-		repaint();
-	}
-	
-	public void setTerritoryLabel(int i, String name, String color, int army)
-	{
-		territoriesInfo.get(i).setText("<html><center><font size=4 color="+ color +">"+ name + "<br>" 
-										+ army + "</font></html>");
-		repaint();
-	}
-	
-	private void showObjective()
-	{
-		if(objFrame != null)
-			objFrame.dispose();
-		
-		int i = TurnController.getPlayerController().getCurrentPlayer();
-		objFrame = new JFrame();
-		JPanel p = new PNObjective(gE.getPlayerObjective(i));
-
-		objFrame.getContentPane().add(p);
-		objFrame.pack();
-		objFrame.setResizable(false);
-		objFrame.setVisible(true);
 	}
 }
