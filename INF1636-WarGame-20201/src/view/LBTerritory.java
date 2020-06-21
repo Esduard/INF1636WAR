@@ -15,7 +15,11 @@ class LBTerritory extends JLabel implements IObserver {
 	
 	public void setTerritoryInfo(String name, String color, int army)
 	{
-		setText("<html><center><font size=4 color="+ color +">"+ name + "<br>" + army + "</font></html>");
+		if(name == "Coreia Do Norte" || name == "Coreia Do Sul")
+			setText("<html><center><font size=2 color="+ color +">"+ name + " " + army + "</font></html>");
+		else {
+			setText("<html><center><font size=2 color="+ color +">"+ name + "<br>" + army + "</font></html>");
+		}
 		repaint();
 	}
 	

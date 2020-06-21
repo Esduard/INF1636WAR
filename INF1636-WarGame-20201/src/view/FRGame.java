@@ -47,7 +47,7 @@ public class FRGame extends JFrame{
 			
 			l.setTerritoryInfo(gE.getTerritoryName(i), gE.getTerritoryColorCode(i), gE.getTerritoryArmy(i));
 			p.add(l);
-			l.setBounds(center[0], center[1], 100, 50);
+			l.setBounds(center[0] - 20, center[1] - 20, 100, 50);
 		}
 		
 		//
