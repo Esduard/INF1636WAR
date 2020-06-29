@@ -1,9 +1,11 @@
 package model;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.Stack;
 
 import observer.IObserver;
@@ -35,11 +37,10 @@ public class GameExecution {
 		Objective.initialize();
 	}
 
-	public ArrayList<String> getColorNames()
-	{
+	public ArrayList<String> getColorNames() {
 		return GameColor.getColorNames();
 	}
-	
+
 	public Player getPlayer(int i) {
 		return players.get(i);
 	}
@@ -60,21 +61,18 @@ public class GameExecution {
 		return players.get(i).getName();
 	}
 
-	public String getPlayerObjective(int i)
-	{
+	public String getPlayerObjective(int i) {
 		return players.get(i).getObj().getDescription();
 	}
-	
-	public String getPlayerColorCode(int i)
-	{
+
+	public String getPlayerColorCode(int i) {
 		return players.get(i).getColor().getColorCode();
 	}
 
-	public int getPlayerAvailableArmy(int i)
-	{
+	public int getPlayerAvailableArmy(int i) {
 		return players.get(i).getAvailableArmies();
 	}
-	
+
 	public List<Player> getPlayerList() {
 		return Collections.unmodifiableList(players);
 	}
@@ -116,7 +114,7 @@ public class GameExecution {
 			players.set(cont, p);
 			cont++;
 		}
-		
+
 		Collections.shuffle(players);
 
 		return true;
@@ -169,7 +167,7 @@ public class GameExecution {
 		Collections.shuffle(players);
 	}
 
-	public void placeArmy(int player, int army, String territory) {
+	public void placeArmy(int player, int army, int territory) {
 		Player p = players.get(player);
 		Territory t = Territory.getTerritory(territory);
 
@@ -181,7 +179,7 @@ public class GameExecution {
 			throw new IllegalArgumentException();
 		}
 
-		p.manageTerritory(t, army);
+		p.placeArmy(t, army);
 	}
 
 	public void distribuiteArmy(int i) {
@@ -191,10 +189,10 @@ public class GameExecution {
 		army += p.getContinentBonus();
 		army += p.getAllTerritories().size() / 2;
 
-		p.receiveArmies(army);
+		p.modifyAvailableArmies(army);
 	}
 
-	public boolean executeAttack(Territory src, Territory target, int[] attack, int[] defend) {
+	protected boolean executeAttack(Territory src, Territory target, int[] attack, int[] defend) {
 
 		if (!GameValidation.validateAttack(src.getColor(), src, target, attack.length)) {
 			return false;
@@ -262,8 +260,7 @@ public class GameExecution {
 
 		return true;
 	}
-
-	private void conquer(Player attacker, Player defender, Territory src, Territory target, int[] attack,
+	private boolean conquer(Player attacker, Player defender, Territory src, Territory target, int[] attack,
 			int[] defend) {
 
 		executeAttack(src, target, attack, defend);
@@ -277,14 +274,36 @@ public class GameExecution {
 			if (defender.getAllTerritories().isEmpty()) {
 				attacker.KillPlayer(defender.getColor());
 			}
-
+			
+			return true;
 		}
-
+		else
+			return false;
 	}
 
-	public void attack(int attacker, int defender, String src, String target, int[] attackDice, int[] defenseDice) {
-		conquer(players.get(attacker), players.get(defender), Territory.getTerritory(src),
-				Territory.getTerritory(target), attackDice, defenseDice);
+	public int[] throwDices(int territory, boolean defense) {
+		Territory t = Territory.getTerritory(territory);
+		Random r = new Random();
+		int[] dices;
+
+		if (!defense) {
+			if (t.getTroops() - 1 > 3)
+				dices = r.ints(3, 1, 7).toArray();
+			else
+				dices = r.ints(t.getTroops() - 1, 1, 7).toArray();
+		} else {
+			if (t.getTroops() > 3)
+				dices = r.ints(3, 1, 7).toArray();
+			else
+				dices = r.ints(t.getTroops(), 1, 7).toArray();
+		}
+
+		return dices;
+	}
+
+	public boolean attack(int src, int target, int[] attackDices, int[] defenseDices) {
+		return conquer(getTerritoryOwner(src), getTerritoryOwner(target), Territory.getTerritory(src),
+				Territory.getTerritory(target), attackDices, defenseDices);
 	}
 
 	public boolean CardTrade(int player, ArrayList<Card> selected) {
@@ -294,7 +313,7 @@ public class GameExecution {
 			cardStack.addAll(selected);
 			Collections.shuffle(cardStack);
 
-			p.receiveArmies(cardBonus);
+			p.modifyAvailableArmies(cardBonus);
 			if (cardBonus < 12) {
 				cardBonus += 2;
 			} else if (cardBonus == 12) {
@@ -333,11 +352,14 @@ public class GameExecution {
 
 	}
 
-	public int getTerritoryCount()
-	{
+	public boolean playerHasTerritory(int p, int t) {
+		return players.get(p).hasTerritory(Territory.getTerritory(t));
+	}
+
+	public int getTerritoryCount() {
 		return Territory.getTerritoriesList().size();
 	}
-	
+
 	public String getTerritoryName(int i) {
 		return Territory.getTerritory(i).getName();
 	}
@@ -349,22 +371,67 @@ public class GameExecution {
 	public int getTerritoryArmy(int i) {
 		return Territory.getTerritory(i).getTroops();
 	}
-	
-	public int[] getTerritoryCenter(int i)
-	{
+
+	public int[] getTerritoryCenter(int i) {
 		int[] center = new int[2];
-		
+
 		Vertex c = Territory.getTerritory(i).getCenter();
-		
-		center[0] = (int)c.x;
-		center[1] = (int)c.y;
-		
+
+		center[0] = (int) c.x;
+		center[1] = (int) c.y;
+
 		return center;
 	}
-	
-	public void addTerritoryObserver(int i, IObserver o)
-	{
+
+	public int getTerritoryIndexByClick(Point p) {
+		for (int i = 0; i < Territory.getTerritoriesList().size(); i++) {
+			List<Vertex> polygon = Territory.getTerritory(i).getFrontiers();
+			if (Vertex.isInsidePolygon(polygon.size(), polygon, p.x, p.y))
+				return i;
+		}
+		return -1;
+	}
+
+	private Player getTerritoryOwner(int t) {
+		for (Player p : players) {
+			if (p.hasTerritory(Territory.getTerritory(t)))
+				return p;
+		}
+		return null;
+	}
+
+	public boolean isNeighbour(int territory, int neighbour) {
+		return Territory.getTerritory(territory).getNeighbors().contains(getTerritoryName(neighbour));
+	}
+
+	/**
+	 * If a certain player has a territory which is a neighbour to this territory.
+	 * 
+	 * @param player
+	 * @param territory
+	 * @return
+	 */
+	public boolean playerHasNeighbour(int player, int territory) {
+		List<Territory> l = players.get(player).getAllTerritories();
+
+		for (int i = 0; i < l.size(); i++) {
+			if (isNeighbour(territory, Territory.getTerritoriesList().indexOf(l.get(i)))) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public void addTerritoryObserver(int i, IObserver o) {
 		Territory.getTerritory(i).addObserver(o);
 	}
-	
+
+	public void addPlayerObserver(int i, IObserver o) {
+		players.get(i).addObserver(o);
+	}
+
+	public void removePlayerObserver(int i, IObserver o) {
+		players.get(i).removeObserver(o);
+	}
 }

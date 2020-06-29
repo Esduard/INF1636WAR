@@ -2,57 +2,68 @@ package controller;
 
 import model.GameExecution;
 import observer.IObserver;
+import observer.NextStateNotifier;
 import observer.NextTurnNotifier;
 
-public class TurnController{
-	
+public class TurnController {
+
 	private static TurnController singleton;
-	
+
 	private int currentPlayer;
 	private GameExecution gE;
 	private TurnState currentState;
 	private NextTurnNotifier nextTurnNotifier = new NextTurnNotifier();
-	
-	private TurnController()
-	{
+	private NextStateNotifier nextStateNotifier = new NextStateNotifier();
+
+	private TurnController() {
 		gE = GameExecution.getGameExecution();
 		currentPlayer = 0;
 		currentState = TurnState.armyPlacement;
+		gE.distribuiteArmy(currentPlayer);
 	}
-	
-	public static TurnController getTurnController()
-	{
-		if(singleton == null)
+
+	public static TurnController getTurnController() {
+		if (singleton == null)
 			singleton = new TurnController();
 		return singleton;
 	}
-	
-	public void nextTurn()
-	{
-		if(currentState == TurnState.ended)
-		{
-			if(currentPlayer < gE.getPlayerCount() - 1)
+
+	public void nextTurn() {
+		if (currentState == TurnState.ended) {
+			int prevPlayer = currentPlayer;
+
+			if (currentPlayer < gE.getPlayerCount() - 1)
 				currentPlayer++;
 			else
 				currentPlayer = 0;
-			
-			nextTurnNotifier.setNextPlayer(currentPlayer);
+
+			gE.distribuiteArmy(currentPlayer);
+			nextTurnNotifier.setPlayers(currentPlayer, prevPlayer);
+		}
+		else if(currentState == TurnState.attack)
+		{
+			nextState();
+		}
+		else if(currentState == TurnState.armyMovement)
+		{
+			nextState();
 		}
 	}
-	
-	public void nextState()
-	{
-		switch(currentState)
-		{
-		case armyMovement:
-			currentState = TurnState.cardDraw;
-			break;
+
+	public void nextState() {
+		
+		TurnState s = currentState;
+		
+		switch (currentState) {
 		case armyPlacement:
-			if(gE.getPlayerAvailableArmy(currentPlayer) == 0)
+			if (gE.getPlayerAvailableArmy(currentPlayer) == 0)
 				currentState = TurnState.attack;
 			break;
 		case attack:
 			currentState = TurnState.armyMovement;
+			break;
+		case armyMovement:
+			currentState = TurnState.cardDraw;
 			break;
 		case cardDraw:
 			currentState = TurnState.ended;
@@ -62,15 +73,22 @@ public class TurnController{
 		default:
 			break;
 		}
+
+		if(s != currentState)
+			nextStateNotifier.setNextState(currentState.ordinal());
 	}
-	
-	public int getCurrentPlayer()
-	{
+
+	public int getCurrentPlayer() {
 		return currentPlayer;
 	}
-	
-	public void addObserver(IObserver o)
-	{
-		nextTurnNotifier.addObserver(o);
+
+	public int getCurrentState() {
+		return currentState.ordinal();
 	}
+
+	public void addObserver(IObserver o) {
+		nextTurnNotifier.addObserver(o);
+		nextStateNotifier.addObserver(o);
+	}
+	
 }

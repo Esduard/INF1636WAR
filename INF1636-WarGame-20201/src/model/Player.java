@@ -1,7 +1,9 @@
 package model;
 import java.util.*;
 
-class Player {
+import observer.Observable;
+
+class Player extends Observable{
 	private String name;
 	private GameColor color;
 	private Objective objective;
@@ -186,10 +188,20 @@ class Player {
 			throw new NullPointerException("Parameter of type Territory cannot be null");
 	}
 	
-	public void receiveArmies(int army) {
+	public void modifyAvailableArmies(int army) {
 		availableArmies += army;
+		
+		notifyObservers();
 	}
 	
+	public void placeArmy(Territory t, int army)
+	{
+		if(Territories.contains(t) && availableArmies >= army)
+		{
+			t.modifyTroops(army);
+			modifyAvailableArmies(-army);
+		}
+	}
 	
 	public void resetPlayer() {
 		
@@ -238,6 +250,21 @@ class Player {
 		}
 		return false;
 		
+	}
+	
+	public boolean hasTerritory(Territory t)
+	{
+		return Territories.contains(t);
+	}
+
+	@Override
+	public Object get(int i) {
+		switch(i)
+		{
+		case 0:
+			return availableArmies;
+		}
+		return null;
 	}
 	
 }

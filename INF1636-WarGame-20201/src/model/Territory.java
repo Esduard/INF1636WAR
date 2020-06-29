@@ -90,6 +90,11 @@ class Territory extends Observable {
 		return center;
 	}
 	
+	public List<Vertex> getFrontiers()
+	{
+		return Collections.unmodifiableList(frontiers);
+	}
+	
 	public static List<Territory> getTerritoriesList()
 	{
 		return Collections.unmodifiableList(territories);
@@ -175,7 +180,7 @@ class Territory extends Observable {
 	    	      Arrays.asList("Argelia","Franca"));
 
 	    ArrayList<String> franca_n = new ArrayList<String>(
-	    	      Arrays.asList("Espanha","Italia","Reino Unido"));
+	    	      Arrays.asList("Espanha","Italia","Reino Unido", "Suecia"));
 
 	    ArrayList<String> italia_n = new ArrayList<String>(
 	    	      Arrays.asList("Romenia","Polonia","Suecia","Franca","Argelia"));
@@ -283,7 +288,7 @@ class Territory extends Observable {
                     new Vertex(111, 163),
                     new Vertex(58, 163),
                     new Vertex(71, 137),
-                    new Vertex(76, 137))), new Vertex(103, 139)));
+                    new Vertex(76, 137))), new Vertex(93, 139)));
 		    territories.add(new Territory("Calgary"			, calgary_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(134, 119),
                     new Vertex(148, 119),
@@ -337,14 +342,14 @@ class Territory extends Observable {
                     new Vertex(172, 403),
                     new Vertex(161, 403),
                     new Vertex(146, 373),
-                    new Vertex(135, 373))), new Vertex(151, 354))); //not every Vertex but its something
+                    new Vertex(135, 373))), new Vertex(151, 364))); //not every Vertex but its something
 		    territories.add(new Territory("Nova York"		, nova_york_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(246, 216),
                     new Vertex(296, 216),
                     new Vertex(203, 346),
                     new Vertex(166, 306),
                     new Vertex(202, 246),
-                    new Vertex(231, 245))), new Vertex(221, 254))); //not every Vertex but its something
+                    new Vertex(231, 245))), new Vertex(221, 264))); //not every Vertex but its something
 		    territories.add(new Territory("Quebec"			, quebec_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(231, 186),
                     new Vertex(262, 186),
@@ -356,7 +361,7 @@ class Territory extends Observable {
                     new Vertex(340, 159),
                     new Vertex(325, 211),
                     new Vertex(296, 216),
-                    new Vertex(214, 215))), new Vertex(276, 192)));
+                    new Vertex(214, 215))), new Vertex(276, 189)));
 		    territories.add(new Territory("Texas"			, texas_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(177, 216),
                     new Vertex(246, 216),
@@ -392,7 +397,7 @@ class Territory extends Observable {
                     new Vertex(235, 430),
                     new Vertex(275, 500),
                     new Vertex(241, 559),
-                    new Vertex(197, 495))), new Vertex(241, 481)));
+                    new Vertex(197, 495))), new Vertex(231, 491)));
 		    territories.add(new Territory("Venezuela"		, venezuela_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(192, 395),
                     new Vertex(255, 394),
@@ -429,14 +434,14 @@ class Territory extends Observable {
                     new Vertex(623, 431),
                     new Vertex(565, 432),
                     new Vertex(549, 405),
-                    new Vertex(516, 405))), new Vertex(567, 379)));
+                    new Vertex(516, 405))), new Vertex(567, 389)));
 		    territories.add(new Territory("Nigeria"			, nigeria_n, new ArrayList<Vertex>(Arrays.asList(
 		    		new Vertex(427, 408),
                     new Vertex(548, 406),
                     new Vertex(588, 478),
                     new Vertex(520, 478),
                     new Vertex(502, 448),
-                    new Vertex(449, 447))), new Vertex(502, 421)));
+                    new Vertex(449, 447))), new Vertex(502, 431)));
 		    territories.add(new Territory("Somalia"			, somalia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(563, 433),
                     new Vertex(624, 433),
@@ -473,7 +478,7 @@ class Territory extends Observable {
                     new Vertex(556, 256),
                     new Vertex(562, 296),
                     new Vertex(536, 304),
-                    new Vertex(510, 259))), new Vertex(551, 228)));
+                    new Vertex(510, 259))), new Vertex(531, 258)));
 		    territories.add(new Territory("Reino Unido"	, reino_unido_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(461, 141),
                     new Vertex(480, 141),
@@ -481,14 +486,14 @@ class Territory extends Observable {
                     new Vertex(482, 207),
                     new Vertex(445, 207),
                     new Vertex(422, 193),
-                    new Vertex(431, 176))), new Vertex(458, 169)));
+                    new Vertex(431, 176))), new Vertex(454, 169)));
 		    territories.add(new Territory("Polonia"		, polonia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(574, 172),
                     new Vertex(585, 171),
                     new Vertex(600, 200),
                     new Vertex(582, 232),
                     new Vertex(567, 232),
-                    new Vertex(552, 205))), new Vertex(577, 204)));
+                    new Vertex(552, 205))), new Vertex(572, 204)));
 		    territories.add(new Territory("Suecia"		, suecia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(551, 91),
                     new Vertex(583, 92),
@@ -528,7 +533,7 @@ class Territory extends Observable {
                     new Vertex(649, 445),
                     new Vertex(639, 430),
                     new Vertex(646, 419),
-                    new Vertex(627, 383))), new Vertex(667, 410)));
+                    new Vertex(627, 383))), new Vertex(672, 410)));
 		    territories.add(new Territory("Bangladesh"		, bangladesh_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(847, 345),
                     new Vertex(884, 346),
@@ -537,7 +542,7 @@ class Territory extends Observable {
                     new Vertex(880, 452),
                     new Vertex(870, 465),
                     new Vertex(855, 435),
-                    new Vertex(829, 379))), new Vertex(869, 452)));
+                    new Vertex(829, 379))), new Vertex(849, 392)));
 		    territories.add(new Territory("Cazaquistao"		, cazaquistao_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(738, 197),
                     new Vertex(908, 197),
@@ -562,13 +567,13 @@ class Territory extends Observable {
                     new Vertex(893, 309),
                     new Vertex(908, 309),
                     new Vertex(915, 321),
-                    new Vertex(826, 321))), new Vertex(846, 310)));
+                    new Vertex(826, 321))), new Vertex(866, 310)));
 		    territories.add(new Territory("Coreia Do Sul"	, coreia_do_sul_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(826, 321),
                     new Vertex(915, 321),
                     new Vertex(921, 332),
                     new Vertex(915, 345),
-                    new Vertex(812, 345))), new Vertex(864, 330)));
+                    new Vertex(812, 345))), new Vertex(864, 335)));
 		    territories.add(new Territory("Estonia"			, estonia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(583, 92),
                     new Vertex(605, 92),
@@ -590,7 +595,7 @@ class Territory extends Observable {
                     new Vertex(739, 383),
                     new Vertex(733, 371),
                     new Vertex(715, 370),
-                    new Vertex(690, 323))), new Vertex(738, 346)));
+                    new Vertex(690, 323))), new Vertex(740, 346)));
 		    territories.add(new Territory("Iraque"			, iraque_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(671, 306),
                     new Vertex(700, 306),
@@ -599,7 +604,7 @@ class Territory extends Observable {
                     new Vertex(693, 357),
                     new Vertex(706, 382),
                     new Vertex(680, 382),
-                    new Vertex(654, 338))), new Vertex(687, 345)));
+                    new Vertex(654, 338))), new Vertex(677, 345)));
 		    territories.add(new Territory("Japao"			, japao_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(937, 217),
                     new Vertex(956, 249),
@@ -620,7 +625,7 @@ class Territory extends Observable {
                     new Vertex(612, 373),
                     new Vertex(602, 351),
                     new Vertex(615, 332),
-                    new Vertex(633, 333))), new Vertex(630, 341)));
+                    new Vertex(633, 333))), new Vertex(615, 341)));
 		    territories.add(new Territory("Letonia"			, letonia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(610, 140),
                     new Vertex(627, 169),
@@ -695,7 +700,7 @@ class Territory extends Observable {
                     new Vertex(901, 427),
                     new Vertex(895, 441),
                     new Vertex(887, 441),
-                    new Vertex(859, 391))), new Vertex(894, 364)));
+                    new Vertex(859, 391))), new Vertex(907, 374)));
 		    territories.add(new Territory("Turquia"			, turquia_n, new ArrayList<Vertex>(Arrays.asList(
                     new Vertex(612, 220),
                     new Vertex(771, 219),
@@ -774,7 +779,7 @@ class Territory extends Observable {
                     new Vertex(789, 578),
                     new Vertex(798, 561),
                     new Vertex(822, 561),
-                    new Vertex(838, 531))), new Vertex(822, 588)));
+                    new Vertex(838, 531))), new Vertex(802, 588)));
 		    
 	}
 

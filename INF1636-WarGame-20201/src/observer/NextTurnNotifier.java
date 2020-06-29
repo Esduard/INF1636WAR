@@ -3,10 +3,12 @@ package observer;
 public class NextTurnNotifier extends Observable {
 	
 	private int nextPlayer;
+	private int prevPlayer;
 	
-	public void setNextPlayer(int i)
+	public void setPlayers(int next, int prev)
 	{
-		nextPlayer = i;
+		nextPlayer = next;
+		prevPlayer = prev;
 		
 		notifyObservers();
 	}
@@ -18,6 +20,8 @@ public class NextTurnNotifier extends Observable {
 		{
 		case 0:
 			return nextPlayer;
+		case 1:
+			return prevPlayer;
 		}
 		
 		return null;
