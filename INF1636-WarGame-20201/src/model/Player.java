@@ -1,9 +1,14 @@
 package model;
+import java.io.Serializable;
 import java.util.*;
 
 import observer.Observable;
 
-class Player extends Observable{
+class Player extends Observable implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private GameColor color;
 	private Objective objective;

@@ -78,7 +78,7 @@ public class FRPlayerRegister extends JFrame {
 				if(!r)
 					JOptionPane.showMessageDialog(null, "Jogadores inválidos. Não é permitido repetir cores.");
 				else
-					GameController.getGameController().nextState();
+					GameController.getGameController().nextState(false);
 			}
 		});
 		

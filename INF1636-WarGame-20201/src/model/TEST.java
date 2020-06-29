@@ -128,7 +128,7 @@ public class TEST {
 		
 		Player p = gE.getPlayer(0);
 		
-		System.out.println("Correctly trades 3 cards that he owns, gets 4 bonus troops");
+		System.out.println("Correctly trades 3 cards that he owns (Alasca,Calgary,California), gets 4 bonus troops");
 		
 			System.out.println("BEFORE TRADE");
 			
@@ -152,7 +152,7 @@ public class TEST {
 			for(Card c: cards)
 				System.out.print(c.getTerritory().getName() + " ");
 			
-			System.out.println("availableTroops: " + p.getAvailableArmies());
+			System.out.println("\tavailableTroops: " + p.getAvailableArmies());
 			
 			gE.CardTrade(0,selected);
 			
@@ -166,11 +166,11 @@ public class TEST {
 			for(Card c: cards)
 				System.out.print(c.getTerritory().getName() + " ");
 			
-			System.out.println("availableTroops: " + p.getAvailableArmies());
+			System.out.println("\tavailableTroops: " + p.getAvailableArmies());
 			
 			p.resetPlayerCards();
 		
-		System.out.println("Incorrectly trades 3 cards that he doesn't own");
+		System.out.println("Incorrectly trades 3 cards (Alasca,Calgary,California) that he doesn't own");
 		
 			System.out.println("BEFORE TRADE");
 			
@@ -185,7 +185,7 @@ public class TEST {
 			for(Card c: cards)
 				System.out.print(c.getTerritory().getName() + " ");
 			
-			System.out.println("available Troops: " + p.getAvailableArmies());
+			System.out.println("\tavailable Troops: " + p.getAvailableArmies());
 			
 			gE.CardTrade(0,selected);
 			
@@ -199,11 +199,11 @@ public class TEST {
 			for(Card c: cards)
 				System.out.print(c.getTerritory().getName() + " ");
 			
-			System.out.println("available Troops: " + p.getAvailableArmies());
+			System.out.println("\tavailable Troops: " + p.getAvailableArmies());
 			
 			p.resetPlayerCards();
 		
-		System.out.println("Correctly trades 3 cards that he owns the turfs");
+		System.out.println("Correctly trades 3 cards (Alasca,Calgary,California) that he owns the turfs");
 		
 			System.out.println("BEFORE TRADE");
 			
@@ -226,7 +226,7 @@ public class TEST {
 			for(Card c: cards)
 				System.out.print(c.getTerritory().getName() + " ");
 			
-			System.out.println("available Troops: " + p.getAvailableArmies());
+			System.out.println("\tavailable Troops: " + p.getAvailableArmies());
 			
 			gE.CardTrade(0,selected);
 			
@@ -239,7 +239,7 @@ public class TEST {
 			for(Card c: cards)
 				System.out.print(c.getTerritory().getName() + " ");
 			
-			System.out.println("available Troops: " + p.getAvailableArmies());
+			System.out.println("\tavailable Troops: " + p.getAvailableArmies());
 			
 			p.resetPlayerCards();
 		
@@ -539,8 +539,8 @@ public class TEST {
 		
 		int [] min_value = {1,1,1};
 		
-		// attack (int attacker, int defender, String src, String target, int[] attackDice, int[] defenseDice)
-		gE.attack(0,1,"Argentina","Brasil", max_value , min_value);
+
+		gE.attack(GameExecution.getGameExecution().getTerritoryIndex("Argentina"),GameExecution.getGameExecution().getTerritoryIndex("Brasil"), max_value , min_value);
 		
 		for(int i=0;i<3;i++) {
 			System.out.println("Objective complete: " + gE.getPlayer(i).getObj().ValidateObjective());
@@ -574,7 +574,7 @@ public class TEST {
 	    gE.getPlayer(2).setObjective(objs[0]);
 		
 	    
-		gE.attack(2,1,"Peru","Brasil", max_value , min_value);
+		gE.attack(GameExecution.getGameExecution().getTerritoryIndex("Peru"),GameExecution.getGameExecution().getTerritoryIndex("Brasil"), max_value , min_value);
 		
 		
 		for(int i=0;i<3;i++) {

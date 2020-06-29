@@ -1,10 +1,15 @@
 package model;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-class Card {
+class Card implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Shape shape;
 	private Territory territory;
 

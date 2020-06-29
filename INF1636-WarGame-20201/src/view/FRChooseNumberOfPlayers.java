@@ -37,7 +37,7 @@ public class FRChooseNumberOfPlayers extends JFrame{
 					if(!r)
 						JOptionPane.showMessageDialog(null, "Número inválido de jogadores. Escolha um número de 3 a 6.");
 					else
-						GameController.getGameController().nextState();
+						GameController.getGameController().nextState(false);
 				}
 			}
 

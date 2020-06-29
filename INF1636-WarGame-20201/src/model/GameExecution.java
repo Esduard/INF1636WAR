@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,7 +11,12 @@ import java.util.Stack;
 
 import observer.IObserver;
 
-public class GameExecution {
+public class GameExecution implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static GameExecution singleton;
 
@@ -464,6 +470,18 @@ public class GameExecution {
 	public String getTerritoryName(int i) {
 		return this.getTerritory(i).getName();
 	}
+	
+	public int getTerritoryIndex(String name) {
+		
+	for(int i=0; i< territories.size(); i++) {
+		if(territories.get(i).getName() == name) {
+			return i;
+		}
+	}
+	return -1;
+		
+	}
+	
 
 	public String getTerritoryColorCode(int i) {
 		return this.getTerritory(i).getColor().getColorCode();

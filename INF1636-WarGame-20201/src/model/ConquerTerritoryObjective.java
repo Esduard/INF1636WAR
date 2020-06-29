@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class ConquerTerritoryObjective extends Objective {
+public class ConquerTerritoryObjective extends Objective{
 
 	private int numberOfTerritories;
 	private int armyPerTerritory;

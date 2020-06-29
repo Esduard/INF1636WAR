@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class ConquerContinentObjective extends Objective {
+public class ConquerContinentObjective extends Objective{
 
 	private Continent[] continents;
 	private boolean extraContinent;

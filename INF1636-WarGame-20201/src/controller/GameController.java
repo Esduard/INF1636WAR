@@ -1,12 +1,20 @@
 package controller;
 
+import java.io.Serializable;
+
 import javax.swing.JFrame;
 
 
 import model.GameExecution;
 import view.*;
 
-public class GameController{
+import savestate.*;
+
+public class GameController {
+
+	/**
+	 * 
+	 */
 
 	private static GameController singleton;
 	
@@ -39,8 +47,13 @@ public class GameController{
 		activeFrame.setVisible(true);
 	}
 	
-	public void nextState()
+	public void nextState(boolean load)
 	{
+		if(load) {
+			changeFrame(new FRGame());
+			currentState = GameState.game;
+			return;
+		}
 		switch (currentState) {
 			case newGameMenu:
 				changeFrame(new FRChooseNumberOfPlayers());

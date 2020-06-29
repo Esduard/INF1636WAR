@@ -1,24 +1,27 @@
 package savestate;
 
+import java.io.Serializable;
+
 import controller.GameController;
 import controller.TurnController;
 import model.GameExecution;
 
-public class SaveFile {
+
+
+public class SaveFile implements Serializable {
 	
-private GameExecution singletonGameExecution;
-	
-	private GameController singletonGameController;
-	
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private GameExecution singletonGameExecution;
 	private TurnController singletonTurnController;
 	
 	
 	public SaveFile(){
 			
 			singletonGameExecution = GameExecution.getGameExecution();
-			
-			singletonGameController = GameController.getGameController();
-			
 			singletonTurnController = TurnController.getTurnController();
 			
 		}
@@ -26,7 +29,6 @@ private GameExecution singletonGameExecution;
 	public void loadSaveFile() {
 		
 		GameExecution.setGameExecution(singletonGameExecution);
-		GameController.setGameController(singletonGameController);
 		TurnController.setTurnController(singletonTurnController);
 		
 	}

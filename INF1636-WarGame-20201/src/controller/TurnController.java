@@ -1,11 +1,18 @@
 package controller;
 
+import java.io.Serializable;
+
 import model.GameExecution;
 import observer.IObserver;
 import observer.NextStateNotifier;
 import observer.NextTurnNotifier;
 
-public class TurnController {
+public class TurnController implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static TurnController singleton;
 

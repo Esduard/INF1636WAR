@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 
+
 import controller.GameController;
 
 import java.awt.*;
@@ -9,6 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import java.io.*;
+
+import savestate.WAR_IO;
 
 public class FRNewGame extends JFrame{
 	
@@ -21,6 +26,10 @@ public class FRNewGame extends JFrame{
 		JLabel l = new JLabel(new ImageIcon(IMG_FILE_PATH));
 		JButton b = new JButton( new ImageIcon(BUTTON_ICON_FILE_PATH));
 		
+		JButton bload = new JButton("Carregar Jogo");
+		
+		JFileChooser loadGame = new JFileChooser("Carregar Jogo");
+		
 		getContentPane().add(p);
 		p.setLayout(null);
 		
@@ -28,9 +37,23 @@ public class FRNewGame extends JFrame{
 				{
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						GameController.getGameController().nextState();
+						GameController.getGameController().nextState(false);
 					}
 				});
+		
+		bload.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int returnValue = loadGame.showOpenDialog(null);
+				if(returnValue == JFileChooser.APPROVE_OPTION) {
+					File selectedFile = loadGame.getSelectedFile();
+					System.out.print(selectedFile.getAbsolutePath());
+					WAR_IO.CarregarJogo(selectedFile);
+					GameController.getGameController().nextState(true);
+				}
+            }
+		});
 		
 		
 		
@@ -39,8 +62,12 @@ public class FRNewGame extends JFrame{
 		
 		p.add(l);
 		p.add(b);
+		p.add(bload);
+		p.add(loadGame);
 		
 		b.setBounds(16, 50, 191, 50);
+		bload.setBounds(16, 110, 191, 50);
+		
 		l.setBounds(0,0, lSize.width, lSize.height);
 		
 		pack();

@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -10,6 +11,10 @@ import javax.swing.*;
 
 import controller.TurnController;
 import model.GameExecution;
+import savestate.SaveFile;
+import savestate.WAR_IO;
+
+import java.io.File;
 
 @SuppressWarnings("serial")
 public class FRGame extends JFrame {
@@ -17,6 +22,7 @@ public class FRGame extends JFrame {
 	private final static Dimension MAP_SIZE = new Dimension(1024, 768);
 	private final static Dimension PANEL_SIZE = new Dimension(1024, 100);
 	private final static String NEXT_TURN_IMG_FILE_PATH = "src\\images\\war_btnProxJogada.png";
+	private final static String SAVE_IMG_FILE_PATH = "src\\images\\Devices-media-floppy-icon.png";
 
 	private PNTurn turnPanel;
 
@@ -151,6 +157,33 @@ public class FRGame extends JFrame {
 		Dimension objBSize = objB.getPreferredSize();
 		objB.setBounds(408 - objBSize.width * 2, 682, objBSize.width * 2, objBSize.height * 2);
 
+		//
+		//Save Game
+		//
+		
+		JButton saveB = new JButton(new ImageIcon(SAVE_IMG_FILE_PATH));
+		JFileChooser saveFC = new JFileChooser("Salvar Jogo");;
+		p.add(saveB);
+		Dimension SaveBSize = saveB.getPreferredSize();
+		saveB.setBounds(800, 682, SaveBSize.width, SaveBSize.height);
+		
+		saveB.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int returnValue = saveFC.showOpenDialog(null);
+				if(returnValue == JFileChooser.APPROVE_OPTION) {
+					File selectedFile = saveFC.getSelectedFile();
+					System.out.print(selectedFile.getAbsolutePath());
+					SaveFile s = new SaveFile();
+					WAR_IO.SalvarJogo(selectedFile.getAbsolutePath(),s);				
+				}
+			}
+
+		});
+		
+		
+		
 		//
 		// Next Turn:
 		//

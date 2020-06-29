@@ -1,12 +1,17 @@
 package model;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-abstract class Objective {
+abstract class Objective implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String description;
 	protected abstract boolean ValidateObjective();
 	protected Player player;
