@@ -27,7 +27,7 @@ public class FRGame extends JFrame {
 	private PNTurn turnPanel;
 
 	private int selectedTerritory = -1;
-
+	
 	public FRGame() {
 		super("WAR");
 
@@ -87,6 +87,26 @@ public class FRGame extends JFrame {
 									JOptionPane.showMessageDialog(null, "Tropas insuficientes");
 							}
 						}
+						break;
+					case 2: // Army movement
+						if (gE.playerHasTerritory(p, t) && selectedTerritory == -1) {
+							if (gE.playerHasNeighbour(p, t)) {
+								int answer = JOptionPane.showConfirmDialog(null,
+										"Deseja deslocar tropas para " + gE.getTerritoryName(t) + "?",
+										"Deslocamento de Tropa", JOptionPane.YES_NO_OPTION);
+								if (answer == 0)
+									selectedTerritory = t;
+							} else
+								JOptionPane.showMessageDialog(null, "Você não possui algum territorio vizinho a este.");
+						} else if (selectedTerritory > -1 && gE.playerHasTerritory(p, t)) {
+							int army = Integer.parseInt(JOptionPane.showInputDialog(
+									"Digite o numero de tropas que deseja deslocar de " + gE.getTerritoryName(t)
+											+ " para " + gE.getTerritoryName(selectedTerritory) + ":",
+									1));
+							gE.movePlayerTroops(tC.getCurrentPlayer(), t, selectedTerritory, army);
+						}
+						break;
+
 					}
 				} else
 					return;

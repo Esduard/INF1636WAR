@@ -353,17 +353,20 @@ public class GameExecution implements Serializable{
 
 	}
 
-	public boolean movePlayerTroops(int player, Territory src, Territory target, int mov) {
+	public boolean movePlayerTroops(int player, int src, int target, int mov) {
 
 		Player p = players.get(player);
 
-		ArrayList<Territory> territories = new ArrayList<Territory>(Arrays.asList(src, target));
+		Territory s = getTerritory(src);
+		Territory t = getTerritory(target);
+
+		ArrayList<Territory> territories = new ArrayList<Territory>(Arrays.asList(s, t));
 
 		if (!p.verifyTerritories(territories)) {
 			return false;
 		}
 
-		moveTroops(src, target, mov);
+		moveTroops(s, t, mov);
 
 		return true;
 	}
@@ -434,7 +437,7 @@ public class GameExecution implements Serializable{
 		}
 	}
 
-	public boolean playerManualDraw(int player, Card c) {
+	protected boolean playerManualDraw(int player, Card c) {
 
 		if ((!cardStack.contains(c) && players.get(player).hasCard(c)))
 			return false;
@@ -444,6 +447,11 @@ public class GameExecution implements Serializable{
 		cardStack.removeElement(c);
 
 		return true;
+	}
+	
+	public void playerDraw(int i)
+	{
+		players.get(i).draw(cardStack.pop());
 	}
 
 	public void resetPlayers() {
@@ -554,4 +562,42 @@ public class GameExecution implements Serializable{
 	public void removePlayerObserver(int i, IObserver o) {
 		players.get(i).removeObserver(o);
 	}
+
+	public boolean checkPlayerObjective(int i) {
+		return players.get(i).getObj().ValidateObjective();
+	}
+
+	public String getCardImgFilePath(int i)
+	{
+		Territory t = cards.get(i).getTerritory();
+		
+		String s = "src\\images\\war_carta_";
+		
+		if(t.getContinent().getName() == "America do Norte")
+		{
+		s= s.concat("an_");
+		}
+		if(t.getContinent().getName() == "America do Sul")
+		{
+		s = s.concat("asl_");
+		}
+		if(t.getContinent().getName() == "Africa")
+		{
+		s = s.concat("af_");
+		}
+		if(t.getContinent().getName() == "Europa")
+		{
+		s = s.concat("eu_");
+		}
+		if(t.getContinent().getName() == "Oceania")
+		{
+		s = s.concat("oc_");
+		}
+		if(t.getContinent().getName() == "Asia")
+		{
+			s = s.concat("as_");
+		}
+		return s.concat(t.getName().strip().toLowerCase());
+	}
+	
 }

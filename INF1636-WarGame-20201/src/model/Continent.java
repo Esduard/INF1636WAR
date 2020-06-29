@@ -24,6 +24,11 @@ class Continent implements Serializable{
 		name = n;
 		territories = t;
 		bonusArmy = b;
+		
+		for(Territory ter : t)
+		{
+			ter.setContinent(this);
+		}
 	}
 	
 	public Territory[] getTerritories()
@@ -38,7 +43,6 @@ class Continent implements Serializable{
 	public int getBonusArmy() {
 		return bonusArmy;
 	}
-	
 	
 	public static ArrayList<Continent> initialize()
 	{

@@ -3,7 +3,7 @@ package controller;
 import java.io.Serializable;
 
 import javax.swing.JFrame;
-
+import javax.swing.JOptionPane;
 
 import model.GameExecution;
 import view.*;
@@ -17,31 +17,28 @@ public class GameController {
 	 */
 
 	private static GameController singleton;
-	
+
 	private GameState currentState;
 	private JFrame activeFrame;
 	private GameExecution gE;
-	
-	private GameController()
-	{
+
+	private GameController() {
 		activeFrame = new FRNewGame();
 		gE = GameExecution.getGameExecution();
 		currentState = GameState.newGameMenu;
 	}
-	
-	public static GameController getGameController()
-	{
-		if(singleton == null)
+
+	public static GameController getGameController() {
+		if (singleton == null)
 			singleton = new GameController();
 		return singleton;
 	}
-	
+
 	public static void setGameController(GameController gC) {
 		singleton = gC;
 	}
-	
-	private void changeFrame(JFrame f)
-	{
+
+	private void changeFrame(JFrame f) {
 		activeFrame.dispose();
 		activeFrame = f;
 		activeFrame.setVisible(true);
@@ -55,24 +52,29 @@ public class GameController {
 			return;
 		}
 		switch (currentState) {
-			case newGameMenu:
-				changeFrame(new FRChooseNumberOfPlayers());
-				currentState = GameState.chooseNumberOfPlayersMenu;
-				break;
-			case chooseNumberOfPlayersMenu:
-				changeFrame(new FRPlayerRegister());
-				currentState = GameState.playerRegisterMenu;
-				break;
-			case playerRegisterMenu:
-				gE.initializeGameComponents();
-				gE.firstDraw();
-				changeFrame(new FRGame());
-				currentState = GameState.game;
-				break;
-			case game:
-				break;
-			default:
-				break;
+		case newGameMenu:
+			changeFrame(new FRChooseNumberOfPlayers());
+			currentState = GameState.chooseNumberOfPlayersMenu;
+			break;
+		case chooseNumberOfPlayersMenu:
+			changeFrame(new FRPlayerRegister());
+			currentState = GameState.playerRegisterMenu;
+			break;
+		case playerRegisterMenu:
+			gE.initializeGameComponents();
+			gE.firstDraw();
+			changeFrame(new FRGame());
+			currentState = GameState.game;
+			break;
+		case game:
+			JOptionPane.showMessageDialog(null, gE.getPlayerName(TurnController.getTurnController().getCurrentPlayer())
+					+ " completou seu objetivo. FIM DE JOGO");
+			System.exit(0);
+			break;
+		case ended:
+			break;
+		default:
+			break;
 		}
 	}
 }
