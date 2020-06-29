@@ -19,6 +19,11 @@ class Continent {
 		name = n;
 		territories = t;
 		bonusArmy = b;
+		
+		for(Territory ter : t)
+		{
+			ter.setContinent(this);
+		}
 	}
 	
 	public Territory[] getTerritories()
@@ -33,7 +38,6 @@ class Continent {
 	public int getBonusArmy() {
 		return bonusArmy;
 	}
-	
 	
 	public static ArrayList<Continent> initialize()
 	{

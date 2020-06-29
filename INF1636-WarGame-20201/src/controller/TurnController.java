@@ -43,6 +43,12 @@ public class TurnController {
 
 			gE.distribuiteArmy(currentPlayer);
 			nextTurnNotifier.setPlayers(currentPlayer, prevPlayer);
+			
+			if(gE.checkPlayerObjective(currentPlayer))
+			{
+				GameController.getGameController().nextState();
+			}
+			
 		} else if (currentState == TurnState.attack) {
 			nextState();
 		} else if (currentState == TurnState.armyMovement) {
@@ -64,6 +70,7 @@ public class TurnController {
 			break;
 		case armyMovement:
 			currentState = TurnState.cardDraw;
+			gE.playerDraw(currentPlayer);
 			break;
 		case cardDraw:
 			currentState = TurnState.ended;

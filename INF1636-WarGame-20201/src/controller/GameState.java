@@ -4,5 +4,6 @@ enum GameState {
 	newGameMenu,
 	chooseNumberOfPlayersMenu,
 	playerRegisterMenu,
-	game
+	game,
+	ended
 }
