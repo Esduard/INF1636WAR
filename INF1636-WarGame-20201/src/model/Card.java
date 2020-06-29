@@ -7,7 +7,6 @@ import java.util.List;
 class Card {
 	private Shape shape;
 	private Territory territory;
-	private static ArrayList<Card> cards = new ArrayList<Card>();
 
 	public Card(Shape s, Territory t) {
 		shape = s;
@@ -26,6 +25,8 @@ class Card {
 	{
 		ArrayList<Card> cArray = new ArrayList<Card>(2);
 		
+		List<Card> cards = GameExecution.getGameExecution().getCardList();
+		
 		for(Card c: cards) {
 			if(c.getShape() == Shape.Joker) {
 				cArray.add(c);
@@ -35,6 +36,9 @@ class Card {
 	}
 	
 	public static Card getCard(Territory t) {
+		
+		List<Card> cards = GameExecution.getGameExecution().getCardList();
+		
 		for(Card c: cards) {
 			if(c.getTerritory().equals(t)) {
 				return c;
@@ -43,98 +47,89 @@ class Card {
 		return null;
 	}
 	
-	public static List<Card> getCardList()
-	{
-		return Collections.unmodifiableList(cards);
-	}
-	
-	public static void resetCards() {
-		cards.clear();
-	}
-	
-	public static void initialize()
+	public static ArrayList<Card> initialize()
 	{	
 		//public Card(Shape s, Territory t);
 		
-		resetCards();
+		ArrayList<Card> cards = new ArrayList<Card>();
 		
 		//NA_Territories 
 		
-		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Alasca")));
-		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Calgary")));
-		cards.add(new Card(Shape.Square		, Territory.getTerritory("California")));
-		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Groenlandia")));
-		cards.add(new Card(Shape.Square		, Territory.getTerritory("Mexico")));
-		cards.add(new Card(Shape.Square		, Territory.getTerritory("Nova York")));
-		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Quebec")));
-		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Texas")));
-		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Vancouver")));
+		cards.add(new Card(Shape.Triangle	, GameExecution.getGameExecution().getTerritory("Alasca")));
+		cards.add(new Card(Shape.Circle		, GameExecution.getGameExecution().getTerritory("Calgary")));
+		cards.add(new Card(Shape.Square		, GameExecution.getGameExecution().getTerritory("California")));
+		cards.add(new Card(Shape.Circle		, GameExecution.getGameExecution().getTerritory("Groenlandia")));
+		cards.add(new Card(Shape.Square		, GameExecution.getGameExecution().getTerritory("Mexico")));
+		cards.add(new Card(Shape.Square		, GameExecution.getGameExecution().getTerritory("Nova York")));
+		cards.add(new Card(Shape.Circle		, GameExecution.getGameExecution().getTerritory("Quebec")));
+		cards.add(new Card(Shape.Triangle	, GameExecution.getGameExecution().getTerritory("Texas")));
+		cards.add(new Card(Shape.Triangle	, GameExecution.getGameExecution().getTerritory("Vancouver")));
 		
 		
 		//SA_Territories 
 		
-		cards.add(new Card(Shape.Square		, Territory.getTerritory("Argentina")));
-		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Brasil")));
-		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Peru")));
-		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Venezuela")));
+		cards.add(new Card(Shape.Square		, GameExecution.getGameExecution().getTerritory("Argentina")));
+		cards.add(new Card(Shape.Circle		, GameExecution.getGameExecution().getTerritory("Brasil")));
+		cards.add(new Card(Shape.Triangle	, GameExecution.getGameExecution().getTerritory("Peru")));
+		cards.add(new Card(Shape.Triangle	, GameExecution.getGameExecution().getTerritory("Venezuela")));
 		
 		//AF_Territories 
 		
-		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Africa Do Sul")));
-		cards.add(new Card(Shape.Square		, Territory.getTerritory("Angola")));
-		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Argelia")));
-		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Egito")));
-		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Nigeria")));
-		cards.add(new Card(Shape.Square		, Territory.getTerritory("Somalia")));
+		cards.add(new Card(Shape.Triangle	, GameExecution.getGameExecution().getTerritory("Africa Do Sul")));
+		cards.add(new Card(Shape.Square		, GameExecution.getGameExecution().getTerritory("Angola")));
+		cards.add(new Card(Shape.Circle		, GameExecution.getGameExecution().getTerritory("Argelia")));
+		cards.add(new Card(Shape.Triangle	, GameExecution.getGameExecution().getTerritory("Egito")));
+		cards.add(new Card(Shape.Circle		, GameExecution.getGameExecution().getTerritory("Nigeria")));
+		cards.add(new Card(Shape.Square		, GameExecution.getGameExecution().getTerritory("Somalia")));
 		
 		//EU_Territories 
 		
-		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Espanha")));
-		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Franca")));
-		cards.add(new Card(Shape.Square		, Territory.getTerritory("Italia")));
-		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Reino Unido")));
-		cards.add(new Card(Shape.Square		, Territory.getTerritory("Suecia")));
-		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Polonia")));
-		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Romenia")));
-		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Ucrania")));
+		cards.add(new Card(Shape.Circle		, GameExecution.getGameExecution().getTerritory("Espanha")));
+		cards.add(new Card(Shape.Triangle	, GameExecution.getGameExecution().getTerritory("Franca")));
+		cards.add(new Card(Shape.Square		, GameExecution.getGameExecution().getTerritory("Italia")));
+		cards.add(new Card(Shape.Circle		, GameExecution.getGameExecution().getTerritory("Reino Unido")));
+		cards.add(new Card(Shape.Square		, GameExecution.getGameExecution().getTerritory("Suecia")));
+		cards.add(new Card(Shape.Triangle	, GameExecution.getGameExecution().getTerritory("Polonia")));
+		cards.add(new Card(Shape.Triangle	, GameExecution.getGameExecution().getTerritory("Romenia")));
+		cards.add(new Card(Shape.Circle		, GameExecution.getGameExecution().getTerritory("Ucrania")));
 		
 		
 		//AS_Territories 
 		
-		cards.add(new Card(Shape.Circle		, Territory.getTerritory("Arabia Saudita")));
-		cards.add(new Card(Shape.Circle 	, Territory.getTerritory("Bangladesh")));
-		cards.add(new Card(Shape.Circle 	, Territory.getTerritory("Cazaquistao")));
-		cards.add(new Card(Shape.Square		, Territory.getTerritory("China")));
-		cards.add(new Card(Shape.Square 	, Territory.getTerritory("Coreia Do Norte")));
-		cards.add(new Card(Shape.Triangle 	, Territory.getTerritory("Coreia Do Sul")));
-		cards.add(new Card(Shape.Circle 	, Territory.getTerritory("Estonia")));
-		cards.add(new Card(Shape.Triangle 	, Territory.getTerritory("India")));
-		cards.add(new Card(Shape.Square 	, Territory.getTerritory("Ira")));
-		cards.add(new Card(Shape.Triangle 	, Territory.getTerritory("Iraque")));
-		cards.add(new Card(Shape.Circle 	, Territory.getTerritory("Japao")));
-		cards.add(new Card(Shape.Square 	, Territory.getTerritory("Jordania")));
-		cards.add(new Card(Shape.Square 	, Territory.getTerritory("Letonia")));
-		cards.add(new Card(Shape.Triangle 	, Territory.getTerritory("Mongolia")));
-		cards.add(new Card(Shape.Circle 	, Territory.getTerritory("Paquistao")));
-		cards.add(new Card(Shape.Triangle 	, Territory.getTerritory("Russia")));
-		cards.add(new Card(Shape.Square 	, Territory.getTerritory("Siberia")));
-		cards.add(new Card(Shape.Square 	, Territory.getTerritory("Siria")));
-		cards.add(new Card(Shape.Triangle 	, Territory.getTerritory("Tailandia")));
-		cards.add(new Card(Shape.Triangle 	, Territory.getTerritory("Turquia")));
+		cards.add(new Card(Shape.Circle		, GameExecution.getGameExecution().getTerritory("Arabia Saudita")));
+		cards.add(new Card(Shape.Circle 	, GameExecution.getGameExecution().getTerritory("Bangladesh")));
+		cards.add(new Card(Shape.Circle 	, GameExecution.getGameExecution().getTerritory("Cazaquistao")));
+		cards.add(new Card(Shape.Square		, GameExecution.getGameExecution().getTerritory("China")));
+		cards.add(new Card(Shape.Square 	, GameExecution.getGameExecution().getTerritory("Coreia Do Norte")));
+		cards.add(new Card(Shape.Triangle 	, GameExecution.getGameExecution().getTerritory("Coreia Do Sul")));
+		cards.add(new Card(Shape.Circle 	, GameExecution.getGameExecution().getTerritory("Estonia")));
+		cards.add(new Card(Shape.Triangle 	, GameExecution.getGameExecution().getTerritory("India")));
+		cards.add(new Card(Shape.Square 	, GameExecution.getGameExecution().getTerritory("Ira")));
+		cards.add(new Card(Shape.Triangle 	, GameExecution.getGameExecution().getTerritory("Iraque")));
+		cards.add(new Card(Shape.Circle 	, GameExecution.getGameExecution().getTerritory("Japao")));
+		cards.add(new Card(Shape.Square 	, GameExecution.getGameExecution().getTerritory("Jordania")));
+		cards.add(new Card(Shape.Square 	, GameExecution.getGameExecution().getTerritory("Letonia")));
+		cards.add(new Card(Shape.Triangle 	, GameExecution.getGameExecution().getTerritory("Mongolia")));
+		cards.add(new Card(Shape.Circle 	, GameExecution.getGameExecution().getTerritory("Paquistao")));
+		cards.add(new Card(Shape.Triangle 	, GameExecution.getGameExecution().getTerritory("Russia")));
+		cards.add(new Card(Shape.Square 	, GameExecution.getGameExecution().getTerritory("Siberia")));
+		cards.add(new Card(Shape.Square 	, GameExecution.getGameExecution().getTerritory("Siria")));
+		cards.add(new Card(Shape.Triangle 	, GameExecution.getGameExecution().getTerritory("Tailandia")));
+		cards.add(new Card(Shape.Triangle 	, GameExecution.getGameExecution().getTerritory("Turquia")));
 		
 		
 		//OC_Territories
 		
-		cards.add(new Card(Shape.Triangle 	, Territory.getTerritory("Australia")));
-		cards.add(new Card(Shape.Triangle	, Territory.getTerritory("Indonesia")));
-		cards.add(new Card(Shape.Square		, Territory.getTerritory("Nova Zelandia")));
-		cards.add(new Card(Shape.Circle 	, Territory.getTerritory("Perth")));
+		cards.add(new Card(Shape.Triangle 	, GameExecution.getGameExecution().getTerritory("Australia")));
+		cards.add(new Card(Shape.Triangle	, GameExecution.getGameExecution().getTerritory("Indonesia")));
+		cards.add(new Card(Shape.Square		, GameExecution.getGameExecution().getTerritory("Nova Zelandia")));
+		cards.add(new Card(Shape.Circle 	, GameExecution.getGameExecution().getTerritory("Perth")));
 		
 		//Jokers
 		
 		cards.add(new Card(Shape.Joker	, null));
 		cards.add(new Card(Shape.Joker	, null));
 		
-		
+		return cards;
 	}
 }

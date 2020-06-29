@@ -7,8 +7,6 @@ class Continent {
 	private Territory[] territories;
 	private int bonusArmy;
 	
-	private static ArrayList<Continent> continents = new ArrayList<Continent>(6);
-	
 	//Index for each continent on Continents List
 	public static final int NA = 0;
 	public static final int SA = 1;
@@ -36,26 +34,14 @@ class Continent {
 		return bonusArmy;
 	}
 	
-	public static List<Continent> getContinentList()
-	{
-		return Collections.unmodifiableList(continents);
-	}
 	
-	public static Continent getContinent(int initial) {
-		return continents.get(initial);
-	}
-	
-	public static void resetContinents() {
-		continents.clear();
-	}
-	
-	
-	public static void initialize()
+	public static ArrayList<Continent> initialize()
 	{
 		//initialize territories and continents
-		Continent.resetContinents();
 		
-	    List<Territory> territoryList = Territory.getTerritoriesList();
+	    List<Territory> territoryList = GameExecution.getGameExecution().getTerritoriesList();
+	    
+	    ArrayList<Continent> continents = new ArrayList<Continent>();
 	    
 	  //public Territory(String n, Color c, ArrayList<String> neighbors );
 		
@@ -125,5 +111,7 @@ class Continent {
 	    }
 	    
 	    continents.add(new Continent("Oceania", oceania, 2));
+	    
+	    return continents;
 	}
 }

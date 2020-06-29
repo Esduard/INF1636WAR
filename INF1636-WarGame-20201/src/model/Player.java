@@ -78,7 +78,7 @@ class Player extends Observable{
 	{
 		int bonus = 0;
 		
-		for(Continent c:Continent.getContinentList())
+		for(Continent c:GameExecution.getGameExecution().getContinentList())
 		{
 			boolean validBonus = true;
 			Territory []continentTerritories = c.getTerritories();

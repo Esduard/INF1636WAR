@@ -28,6 +28,10 @@ public class TurnController {
 		return singleton;
 	}
 
+	public static void setTurnController(TurnController tC) {
+		singleton = tC;
+	}
+
 	public void nextTurn() {
 		if (currentState == TurnState.ended) {
 			int prevPlayer = currentPlayer;
@@ -39,21 +43,17 @@ public class TurnController {
 
 			gE.distribuiteArmy(currentPlayer);
 			nextTurnNotifier.setPlayers(currentPlayer, prevPlayer);
-		}
-		else if(currentState == TurnState.attack)
-		{
+		} else if (currentState == TurnState.attack) {
 			nextState();
-		}
-		else if(currentState == TurnState.armyMovement)
-		{
+		} else if (currentState == TurnState.armyMovement) {
 			nextState();
 		}
 	}
 
 	public void nextState() {
-		
+
 		TurnState s = currentState;
-		
+
 		switch (currentState) {
 		case armyPlacement:
 			if (gE.getPlayerAvailableArmy(currentPlayer) == 0)
@@ -74,7 +74,7 @@ public class TurnController {
 			break;
 		}
 
-		if(s != currentState)
+		if (s != currentState)
 			nextStateNotifier.setNextState(currentState.ordinal());
 	}
 
@@ -90,5 +90,5 @@ public class TurnController {
 		nextTurnNotifier.addObserver(o);
 		nextStateNotifier.addObserver(o);
 	}
-	
+
 }

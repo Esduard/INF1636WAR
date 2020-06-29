@@ -28,6 +28,10 @@ public class GameController{
 		return singleton;
 	}
 	
+	public static void setGameController(GameController gC) {
+		singleton = gC;
+	}
+	
 	private void changeFrame(JFrame f)
 	{
 		activeFrame.dispose();

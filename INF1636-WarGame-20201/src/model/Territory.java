@@ -13,7 +13,6 @@ class Territory extends Observable {
 	private int numTroops = 0;
 	private ArrayList<String> neighbors;
 	private ArrayList<Vertex> frontiers;
-	private static ArrayList<Territory> territories = new ArrayList<Territory>(51);
 	private Vertex center;
 	
 	public Territory(String n, ArrayList<String> neighbors, ArrayList<Vertex> fronteirs, Vertex center) {
@@ -21,26 +20,6 @@ class Territory extends Observable {
 		this.neighbors = neighbors;
 		this.frontiers = fronteirs;
 		this.center = center;
-	}
-	
-	public static Territory getTerritory(String name)
-	{
-		for(Territory t : territories)
-		{
-			if(t.name == name)
-				return t;
-		}
-		
-		return null;
-	}
-	
-	public static Territory getTerritory(int i_turf)
-	{
-		if(i_turf > -1 && i_turf < territories.size()){
-			return territories.get(i_turf);
-		}
-		
-		return null;
 	}
 	
 	public String getName() {
@@ -95,19 +74,9 @@ class Territory extends Observable {
 		return Collections.unmodifiableList(frontiers);
 	}
 	
-	public static List<Territory> getTerritoriesList()
-	{
-		return Collections.unmodifiableList(territories);
-	}
-	
-	public static void resetTerritories() {
-		territories.clear();
-	}
-	
-	public static void initialize()
+	public static ArrayList<Territory> initialize()
 	{
 		//initialize neighbor lists
-		Territory.resetTerritories();
 
 		//NA
 
@@ -278,7 +247,7 @@ class Territory extends Observable {
 	    ArrayList<String> perth_n = new ArrayList<String>(
 	    	      Arrays.asList("Australia"));
 		    
-		  //public Territory(String n, ArrayList<String> neighbors );
+	    ArrayList<Territory> territories = new ArrayList<Territory>();
 			
 			//NA
 		    
@@ -781,6 +750,8 @@ class Territory extends Observable {
                     new Vertex(822, 561),
                     new Vertex(838, 531))), new Vertex(802, 588)));
 		    
+	return territories;
+	
 	}
 
 	@Override
