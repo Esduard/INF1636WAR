@@ -12,8 +12,6 @@ abstract class Objective {
 	protected Player player;
 	protected String code;
 	
-	private static ArrayList<Objective> objectives = new ArrayList<Objective>(14);
-	
 	
 	public void setPlayer(Player p) {
 		player = p;
@@ -28,39 +26,16 @@ abstract class Objective {
 		return code;
 	}
 	
-	public static List<Objective> getObjectiveList()
-	{
-		return Collections.unmodifiableList(objectives);
-	}
-	
-	public static Objective getObjective(int i) {
-		return objectives.get(i);
-	}
 	
 	
 	
-	public static Objective getObjective(String code) {
-		
-		for(Objective o: objectives) {
-			if(o.getCode() == code) {
-				return o;
-			}
-		}
-		return null;
-	}
-	
-	public static void resetObjectives() {
-		objectives.clear();
-	}
-	
-	
-	public static void initialize()
+	public static ArrayList<Objective> initialize()
 	{
 		GameExecution gE = GameExecution.getGameExecution();
 		
-		Objective.resetObjectives();
+		ArrayList<Objective> objectives = new ArrayList<Objective>();
 		
-		List<Continent> continents = Continent.getContinentList();
+		List<Continent> continents = GameExecution.getGameExecution().getContinentList();
 		
 		int EU = Continent.EU;
 		int SA = Continent.SA;
@@ -171,5 +146,6 @@ abstract class Objective {
 		objectives.add(new ConquerContinentObjective("CCASAF0","Conquistar na totalidade a Asia e a Africa", ContinentsASAF, false,null,extraContinentsEUOC));
 		
 
+		return objectives;
 	}
 }

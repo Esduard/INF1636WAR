@@ -18,6 +18,15 @@ public class GameExecution {
 	private ArrayList<GameColor> remainingColors = new ArrayList<GameColor>(Arrays.asList(GameColor.Branco,
 			GameColor.Preto, GameColor.Azul, GameColor.Amarelo, GameColor.Verde, GameColor.Vermelho));
 	private int cardBonus = 4;
+	
+	
+	private ArrayList<Territory> territories; //51
+	
+	private ArrayList<Continent> continents; //6
+	
+	private ArrayList<Card> cards;
+	
+	private ArrayList<Objective> objectives;
 
 	private GameExecution() {
 	}
@@ -27,12 +36,25 @@ public class GameExecution {
 			singleton = new GameExecution();
 		return singleton;
 	}
+	
+	public static void setGameExecution(GameExecution gE) {
+		singleton = gE;
+	}
 
 	public void initializeGameComponents() {
-		Territory.initialize();
-		Continent.initialize();
-		Card.initialize();
-		Objective.initialize();
+		if(territories != null)
+			resetTerritories();
+		if(continents != null)
+			resetContinents();
+		if(cards != null)
+			resetCards();
+		if(objectives != null)
+			resetObjectives();
+		
+		territories = Territory.initialize();
+		continents = Continent.initialize();
+		cards = Card.initialize();
+		objectives = Objective.initialize();
 	}
 
 	public ArrayList<String> getColorNames()
@@ -78,6 +100,90 @@ public class GameExecution {
 	public List<Player> getPlayerList() {
 		return Collections.unmodifiableList(players);
 	}
+	
+	//territory methods
+	
+	public List<Territory> getTerritoriesList()
+	{
+		return Collections.unmodifiableList(territories);
+	}
+	
+	public void resetTerritories() {
+			territories.clear();
+	}
+	
+	public Territory getTerritory(String name)
+	{
+		for(Territory t : territories)
+		{
+			if(t.getName() == name)
+				return t;
+		}
+		
+		return null;
+	}
+	
+	public Territory getTerritory(int i_turf)
+	{
+		if(i_turf > -1 && i_turf < territories.size()){
+			return territories.get(i_turf);
+		}
+		
+		return null;
+	}
+	
+	//continent methods
+	
+	public List<Continent> getContinentList()
+	{
+		return Collections.unmodifiableList(continents);
+	}
+	
+	public Continent getContinent(int initial) {
+		return continents.get(initial);
+	}
+	
+	public void resetContinents() {
+		continents.clear();
+	}
+	
+	//card methods
+	
+	public List<Card> getCardList()
+	{
+		return Collections.unmodifiableList(cards);
+	}
+	
+	public void resetCards() {
+		cards.clear();
+	}
+	
+	//objective methods
+	
+	public List<Objective> getObjectiveList()
+	{
+		return Collections.unmodifiableList(objectives);
+	}
+	
+	public Objective getObjective(int i) {
+		return objectives.get(i);
+	}
+	
+	
+	
+	public Objective getObjective(String code) {
+		
+		for(Objective o: objectives) {
+			if(o.getCode() == code) {
+				return o;
+			}
+		}
+		return null;
+	}
+	
+	public void resetObjectives() {
+		objectives.clear();
+	}
 
 	// Return if the argument numberOfPlayers is valid
 	public boolean createPlayerList(int numberOfPlayers) {
@@ -89,6 +195,8 @@ public class GameExecution {
 			return true;
 		}
 	}
+	
+	
 
 	// Return if the player was added
 	public boolean addPlayers(String[] names, String[] colors) {
@@ -124,14 +232,12 @@ public class GameExecution {
 
 	public void firstDraw() {
 
-		List<Objective> objectives = Objective.getObjectiveList();
 		// Draw cards and objectives
 		// Creating stacks to draw cards and objectives
 		objStack.addAll(objectives);
 
 		Collections.shuffle(objStack);
-
-		List<Card> cards = Card.getCardList();
+		
 		cardStack.addAll(cards);
 
 		// Remove jokers
@@ -171,7 +277,7 @@ public class GameExecution {
 
 	public void placeArmy(int player, int army, String territory) {
 		Player p = players.get(player);
-		Territory t = Territory.getTerritory(territory);
+		Territory t = this.getTerritory(territory);
 
 		if (p == null || t == null) {
 			throw new NullPointerException();
@@ -189,7 +295,15 @@ public class GameExecution {
 		int army = 0;
 
 		army += p.getContinentBonus();
-		army += p.getAllTerritories().size() / 2;
+		
+		int from_turf = p.getAllTerritories().size() / 2;
+		
+		if(from_turf < 3) {
+		army += 3;
+		}
+		else {
+			army += from_turf;
+		}
 
 		p.receiveArmies(army);
 	}
@@ -283,8 +397,8 @@ public class GameExecution {
 	}
 
 	public void attack(int attacker, int defender, String src, String target, int[] attackDice, int[] defenseDice) {
-		conquer(players.get(attacker), players.get(defender), Territory.getTerritory(src),
-				Territory.getTerritory(target), attackDice, defenseDice);
+		conquer(players.get(attacker), players.get(defender), this.getTerritory(src),
+				this.getTerritory(target), attackDice, defenseDice);
 	}
 
 	public boolean CardTrade(int player, ArrayList<Card> selected) {
@@ -335,26 +449,26 @@ public class GameExecution {
 
 	public int getTerritoryCount()
 	{
-		return Territory.getTerritoriesList().size();
+		return territories.size();
 	}
 	
 	public String getTerritoryName(int i) {
-		return Territory.getTerritory(i).getName();
+		return this.getTerritory(i).getName();
 	}
 
 	public String getTerritoryColorCode(int i) {
-		return Territory.getTerritory(i).getColor().getColorCode();
+		return this.getTerritory(i).getColor().getColorCode();
 	}
 
 	public int getTerritoryArmy(int i) {
-		return Territory.getTerritory(i).getTroops();
+		return this.getTerritory(i).getTroops();
 	}
 	
 	public int[] getTerritoryCenter(int i)
 	{
 		int[] center = new int[2];
 		
-		Vertex c = Territory.getTerritory(i).getCenter();
+		Vertex c = this.getTerritory(i).getCenter();
 		
 		center[0] = (int)c.x;
 		center[1] = (int)c.y;
@@ -364,7 +478,7 @@ public class GameExecution {
 	
 	public void addTerritoryObserver(int i, IObserver o)
 	{
-		Territory.getTerritory(i).addObserver(o);
+		this.getTerritory(i).addObserver(o);
 	}
 	
 }

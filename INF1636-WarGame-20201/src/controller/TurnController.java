@@ -27,6 +27,10 @@ public class TurnController{
 		return singleton;
 	}
 	
+	public static void setTurnController(TurnController tC) {
+		singleton = tC;
+	}
+	
 	public void nextTurn()
 	{
 		if(currentState == TurnState.ended)
