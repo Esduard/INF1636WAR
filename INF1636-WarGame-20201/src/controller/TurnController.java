@@ -53,7 +53,7 @@ public class TurnController implements Serializable {
 			
 			if(gE.checkPlayerObjective(currentPlayer))
 			{
-				GameController.getGameController().nextState();
+				GameController.getGameController().nextState(false);
 			}
 			
 		} else if (currentState == TurnState.attack) {
