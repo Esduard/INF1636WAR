@@ -5,14 +5,17 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.TurnController;
 import model.GameExecution;
 import observer.*;
 
+@SuppressWarnings("serial")
 class PNTurn extends JPanel implements IObserver{
 
 	private GameExecution gE;
 	private JLabel player;
 	private JLabel state;
+	private JLabel availableArmy;
 	
 	private String currentPlayerColor;
 	private String currentPlayerName;
@@ -21,7 +24,7 @@ class PNTurn extends JPanel implements IObserver{
 		"Posicione seus novos exércitos",
 		"Clique sobre o territorio que deseja atacar, se não passe o turno",
 		"Se desejar, movimente suas tropas, se não passe o turno",
-		"Clique no baralho para receber suas cartas",
+		"Clique no botao cartas para visualizar suas cartas",
 		"Quando estiver pronto passe o turno"
 	};
 	
@@ -32,11 +35,13 @@ class PNTurn extends JPanel implements IObserver{
 		gE = GameExecution.getGameExecution();
 		player = new JLabel();
 		state = new JLabel();
+		availableArmy = new JLabel();
 		
 		this.setLayout(new BorderLayout());
 		
-		this.add(player, BorderLayout.WEST);
-		this.add(state, BorderLayout.EAST);
+		this.add(player, BorderLayout.EAST);
+		this.add(state, BorderLayout.WEST);
+		this.add(availableArmy, BorderLayout.SOUTH);
 	}
 	
 	public void setPlayer(int i)
@@ -51,12 +56,24 @@ class PNTurn extends JPanel implements IObserver{
 	{
 		state.setText("<html><font size=6 color="+ currentPlayerColor +">" + stateDescriptions[i] + "</font></html>");
 		state.repaint();
+		
+		if(i == 0)
+		{
+			setAvailableArmy(gE.getPlayerAvailableArmy(TurnController.getTurnController().getCurrentPlayer()));
+		}
 	}
 	
 	public void setAvailableArmy(int i)
 	{
-		state.setText("<html><font size=6 color="+ currentPlayerColor +">" + "Faltam " + i + "</font></html>");
-		state.repaint();
+		if(i == 0)
+		{
+			availableArmy.setText(" ");
+		}
+		else
+		{
+			availableArmy.setText("<html><font size=6 color="+ currentPlayerColor +">" + "Faltam " + i + "</font></html>");
+			availableArmy.repaint();
+		}
 	}
 	
 	@Override

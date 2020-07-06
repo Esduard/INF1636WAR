@@ -11,7 +11,7 @@ import java.util.Stack;
 
 import observer.IObserver;
 
-public class GameExecution implements Serializable{
+public class GameExecution implements Serializable {
 
 	/**
 	 * 
@@ -114,7 +114,7 @@ public class GameExecution implements Serializable{
 		territories.clear();
 	}
 
-	public Territory getTerritory(String name) {
+	protected Territory getTerritory(String name) {
 		for (Territory t : territories) {
 			if (t.getName() == name)
 				return t;
@@ -416,7 +416,7 @@ public class GameExecution implements Serializable{
 				attackDices, defenseDices);
 	}
 
-	public boolean CardTrade(int player, ArrayList<Card> selected) {
+	protected boolean CardTrade(int player, ArrayList<Card> selected) {
 		Player p = players.get(player);
 		if (p.tradeCards(selected)) {
 			// puts cards back on stack
@@ -436,6 +436,15 @@ public class GameExecution implements Serializable{
 			return false;
 		}
 	}
+	
+	public boolean tradeCards(int player, List<String> cards)
+	{
+		ArrayList<Card> l = new ArrayList<Card>();
+		
+		for(String s : cards)
+			l.add(Card.getCard(getTerritory(s)));
+		return CardTrade(player, l);
+	}
 
 	protected boolean playerManualDraw(int player, Card c) {
 
@@ -448,9 +457,8 @@ public class GameExecution implements Serializable{
 
 		return true;
 	}
-	
-	public void playerDraw(int i)
-	{
+
+	public void playerDraw(int i) {
 		players.get(i).draw(cardStack.pop());
 	}
 
@@ -478,18 +486,17 @@ public class GameExecution implements Serializable{
 	public String getTerritoryName(int i) {
 		return this.getTerritory(i).getName();
 	}
-	
+
 	public int getTerritoryIndex(String name) {
-		
-	for(int i=0; i< territories.size(); i++) {
-		if(territories.get(i).getName() == name) {
-			return i;
+
+		for (int i = 0; i < territories.size(); i++) {
+			if (territories.get(i).getName() == name) {
+				return i;
+			}
 		}
+		return -1;
+
 	}
-	return -1;
-		
-	}
-	
 
 	public String getTerritoryColorCode(int i) {
 		return this.getTerritory(i).getColor().getColorCode();
@@ -531,13 +538,7 @@ public class GameExecution implements Serializable{
 		return getTerritory(territory).getNeighbors().contains(getTerritoryName(neighbour));
 	}
 
-	/**
-	 * If a certain player has a territory which is a neighbour to this territory.
-	 * 
-	 * @param player
-	 * @param territory
-	 * @return
-	 */
+	// If a certain player has a territory which is a neighbour to this territory.
 	public boolean playerHasNeighbour(int player, int territory) {
 		List<Territory> l = players.get(player).getAllTerritories();
 
@@ -567,37 +568,48 @@ public class GameExecution implements Serializable{
 		return players.get(i).getObj().ValidateObjective();
 	}
 
-	public String getCardImgFilePath(int i)
-	{
-		Territory t = cards.get(i).getTerritory();
-		
+	public String getCardImgFilePath(String cardName) {
+		Territory t = getTerritory(cardName);
+
 		String s = "src\\images\\war_carta_";
-		
-		if(t.getContinent().getName() == "America do Norte")
-		{
-		s= s.concat("an_");
+
+		if (t.getContinent().getName() == "America do Norte") {
+			s += "an_";
 		}
-		if(t.getContinent().getName() == "America do Sul")
-		{
-		s = s.concat("asl_");
+		if (t.getContinent().getName() == "America do Sul") {
+			s += "asl_";
 		}
-		if(t.getContinent().getName() == "Africa")
-		{
-		s = s.concat("af_");
+		if (t.getContinent().getName() == "Africa") {
+			s += "af_";
 		}
-		if(t.getContinent().getName() == "Europa")
-		{
-		s = s.concat("eu_");
+		if (t.getContinent().getName() == "Europa") {
+			s += "eu_";
 		}
-		if(t.getContinent().getName() == "Oceania")
-		{
-		s = s.concat("oc_");
+		if (t.getContinent().getName() == "Oceania") {
+			s += "oc_";
 		}
-		if(t.getContinent().getName() == "Asia")
-		{
-			s = s.concat("as_");
+		if (t.getContinent().getName() == "Asia") {
+			s += "as_";
 		}
-		return s.concat(t.getName().strip().toLowerCase());
+		s += t.getName().strip().toLowerCase() + ".png";
+		return s;
+	}
+
+	// Returns a list containing the name of all cards from the Player i
+	public List<String> getPlayerCardNameList(int i) {
+		ArrayList<String> l = new ArrayList<String>();
+		for (Card c : players.get(i).getAllCards()) {
+			l.add(c.getTerritory().getName());
+		}
+
+		return Collections.unmodifiableList(l);
 	}
 	
+	public boolean isPlayerTradeObligatory(int i)
+	{
+		if(players.get(i).isTradeViable() == 2)
+			return true;
+		else
+			return false;
+	}
 }

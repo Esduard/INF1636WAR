@@ -103,7 +103,7 @@ class Territory extends Observable implements Serializable{
 
 		ArrayList<String> nova_york_n = new ArrayList<String>(Arrays.asList("Quebec", "Texas"));
 
-		ArrayList<String> quebec_n = new ArrayList<String>(Arrays.asList("Groenlandia", "Nova York"));
+		ArrayList<String> quebec_n = new ArrayList<String>(Arrays.asList("Groenlandia", "Nova York", "Vancouver"));
 
 		ArrayList<String> texas_n = new ArrayList<String>(
 				Arrays.asList("California", "Quebec", "Mexico", "Nova York", "Vancouver"));

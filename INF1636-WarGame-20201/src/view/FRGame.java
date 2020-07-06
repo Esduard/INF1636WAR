@@ -27,7 +27,7 @@ public class FRGame extends JFrame {
 	private PNTurn turnPanel;
 
 	private int selectedTerritory = -1;
-	
+
 	public FRGame() {
 		super("WAR");
 
@@ -54,9 +54,14 @@ public class FRGame extends JFrame {
 					switch (tC.getCurrentState()) {
 					case 0: // Army Placement
 						if (gE.playerHasTerritory(p, t)) {
-							int army = Integer.parseInt(
-									JOptionPane.showInputDialog("Digite o numero de tropas que deseja posicionar em "
-											+ gE.getTerritoryName(t) + ":", 1));
+							int army = 0;
+							try {
+								army = Integer.parseInt(JOptionPane
+										.showInputDialog("Digite o numero de tropas que deseja posicionar em "
+												+ gE.getTerritoryName(t) + ":", 1));
+							} catch (NumberFormatException exc) {
+								return;
+							}
 							gE.placeArmy(p, army, t);
 							tC.nextState();
 						}
@@ -98,12 +103,20 @@ public class FRGame extends JFrame {
 									selectedTerritory = t;
 							} else
 								JOptionPane.showMessageDialog(null, "Você não possui algum territorio vizinho a este.");
-						} else if (selectedTerritory > -1 && gE.playerHasTerritory(p, t)) {
-							int army = Integer.parseInt(JOptionPane.showInputDialog(
-									"Digite o numero de tropas que deseja deslocar de " + gE.getTerritoryName(t)
-											+ " para " + gE.getTerritoryName(selectedTerritory) + ":",
-									1));
-							gE.movePlayerTroops(tC.getCurrentPlayer(), t, selectedTerritory, army);
+						} else if (selectedTerritory > -1 && gE.playerHasTerritory(p, t)
+								&& gE.isNeighbour(selectedTerritory, t)) {
+							int army = 0;
+							try {
+								army = Integer.parseInt(JOptionPane.showInputDialog(
+										"Digite o numero de tropas que deseja deslocar de " + gE.getTerritoryName(t)
+												+ " para " + gE.getTerritoryName(selectedTerritory) + ":",
+										1));
+							} catch (NumberFormatException exc) {
+								return;
+							}
+							if(!gE.movePlayerTroops(tC.getCurrentPlayer(), t, selectedTerritory, army))
+								JOptionPane.showMessageDialog(null, "Quantidade de tropas invalidas");
+							selectedTerritory = -1;
 						}
 						break;
 
@@ -143,7 +156,7 @@ public class FRGame extends JFrame {
 
 		p.add(turnPanel);
 		turnPanel.setOpaque(false);
-		turnPanel.setBounds(0, -32, PANEL_SIZE.width, PANEL_SIZE.height);
+		turnPanel.setBounds(0, -16, PANEL_SIZE.width, PANEL_SIZE.height);
 
 		//
 		// Territories Info:
@@ -162,7 +175,7 @@ public class FRGame extends JFrame {
 		//
 		// Show Objective:
 		//
-		JButton objB = new JButton("Objective");
+		JButton objB = new JButton("Objetivo");
 		objB.addActionListener(new ActionListener() {
 
 			@Override
@@ -178,32 +191,48 @@ public class FRGame extends JFrame {
 		objB.setBounds(408 - objBSize.width * 2, 682, objBSize.width * 2, objBSize.height * 2);
 
 		//
-		//Save Game
+		// Show Cards:
 		//
-		
+		JButton cardB = new JButton("Cartas");
+		cardB.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FRCard f = new FRCard();
+				tC.addObserver(f);
+			}
+
+		});
+
+		p.add(cardB);
+		cardB.setBounds(208 - objBSize.width * 2, 682, objBSize.width * 2, objBSize.height * 2);
+
+		//
+		// Save Game
+		//
+
 		JButton saveB = new JButton(new ImageIcon(SAVE_IMG_FILE_PATH));
-		JFileChooser saveFC = new JFileChooser("Salvar Jogo");;
+		JFileChooser saveFC = new JFileChooser("Salvar Jogo");
+		;
 		p.add(saveB);
 		Dimension SaveBSize = saveB.getPreferredSize();
 		saveB.setBounds(800, 682, SaveBSize.width, SaveBSize.height);
-		
+
 		saveB.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int returnValue = saveFC.showOpenDialog(null);
-				if(returnValue == JFileChooser.APPROVE_OPTION) {
+				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = saveFC.getSelectedFile();
 					System.out.print(selectedFile.getAbsolutePath());
 					SaveFile s = new SaveFile();
-					WAR_IO.SalvarJogo(selectedFile.getAbsolutePath(),s);				
+					WAR_IO.SalvarJogo(selectedFile.getAbsolutePath(), s);
 				}
 			}
 
 		});
-		
-		
-		
+
 		//
 		// Next Turn:
 		//

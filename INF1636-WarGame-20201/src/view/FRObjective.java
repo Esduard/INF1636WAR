@@ -8,6 +8,7 @@ import model.GameExecution;
 import observer.IObserver;
 import observer.Observable;
 
+@SuppressWarnings("serial")
 class FRObjective extends JFrame implements IObserver{
 	
 	public FRObjective()

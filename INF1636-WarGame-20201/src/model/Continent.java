@@ -64,7 +64,7 @@ class Continent implements Serializable{
 	    	 cont_all_territories++;
 	    }
 	    
-	    continents.add(new Continent("América do Norte", northAmerica, 5));
+	    continents.add(new Continent("America do Norte", northAmerica, 5));
 	    
 		//SA
 	    Territory[] southAmerica = new Territory[4];
@@ -75,7 +75,7 @@ class Continent implements Serializable{
 	    	 cont_all_territories++;
 	    }
 	    
-	    continents.add(new Continent("América do Sul", southAmerica, 2));
+	    continents.add(new Continent("America do Sul", southAmerica, 2));
 	    
 	    //AF
 	    Territory[] africa = new Territory[6];
@@ -86,7 +86,7 @@ class Continent implements Serializable{
 	    	 cont_all_territories++;
 	    }
 	    
-	    continents.add(new Continent("África", africa, 3));
+	    continents.add(new Continent("Africa", africa, 3));
 	    
 	    //EU
 	    Territory[] europe = new Territory[8];

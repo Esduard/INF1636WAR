@@ -2,6 +2,8 @@ package controller;
 
 import java.io.Serializable;
 
+import javax.swing.JOptionPane;
+
 import model.GameExecution;
 import observer.IObserver;
 import observer.NextStateNotifier;
@@ -40,7 +42,24 @@ public class TurnController implements Serializable {
 	}
 
 	public void nextTurn() {
-		if (currentState == TurnState.ended) {
+		switch(currentState)
+		{
+		case armyMovement:
+			nextState();
+			break;
+		case armyPlacement:
+			JOptionPane.showMessageDialog(null, "Posicione todas suas tropas antes de passar o turno");
+			break;
+		case attack:
+			nextState();
+			break;
+		case cardDraw:
+			if(!gE.isPlayerTradeObligatory(currentPlayer))
+				nextState();
+			else
+				JOptionPane.showMessageDialog(null, "Voce possui 5 cartas, precisa troca-las antes de passar de turno");
+			break;
+		case ended:
 			int prevPlayer = currentPlayer;
 
 			if (currentPlayer < gE.getPlayerCount() - 1)
@@ -55,11 +74,9 @@ public class TurnController implements Serializable {
 			{
 				GameController.getGameController().nextState(false);
 			}
-			
-		} else if (currentState == TurnState.attack) {
-			nextState();
-		} else if (currentState == TurnState.armyMovement) {
-			nextState();
+			break;
+		default:
+			break;
 		}
 	}
 

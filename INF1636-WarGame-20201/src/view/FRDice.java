@@ -13,7 +13,7 @@ import javax.swing.*;
 import model.GameExecution;
 
 @SuppressWarnings("serial")
-public class FRDice extends JFrame {
+class FRDice extends JFrame {
 
 	private final static String DICE_IMG_PATH = "src\\images\\dado_";
 
@@ -58,6 +58,7 @@ public class FRDice extends JFrame {
 						e1.printStackTrace();
 					}
 					attackLabels[i].setIcon(new ImageIcon(dice));
+					System.out.print(attackDices[i]);
 				}
 
 				for (int i = 0; i < defenseDices.length; i++) {
@@ -69,10 +70,11 @@ public class FRDice extends JFrame {
 						e1.printStackTrace();
 					}
 					defenseLabels[i].setIcon(new ImageIcon(dice));
+					System.out.print(defenseDices[i]);
 				}
 
 				if (gE.attack(src, target, attackDices, defenseDices)) {
-					JOptionPane.showMessageDialog(null, gE.getTerritoryName(target) + " foi conquistado.");
+					JOptionPane.showMessageDialog(null, gE.getTerritoryName(target) + " foi conquistad@.");
 					dispose();
 				}
 			}
