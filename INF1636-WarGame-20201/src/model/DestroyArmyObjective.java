@@ -22,9 +22,6 @@ public class DestroyArmyObjective extends Objective {
 			else {
 				return false;
 			}
-			
-			
-			
 		}
 		
 		//get target player's territory count
