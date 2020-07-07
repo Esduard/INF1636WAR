@@ -100,6 +100,7 @@ public class TurnController implements Serializable {
 			currentState = TurnState.ended;
 			break;
 		case ended:
+			currentState = TurnState.armyPlacement;
 			break;
 		default:
 			break;

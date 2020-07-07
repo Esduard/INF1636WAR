@@ -1,14 +1,11 @@
 package controller;
 
-import java.io.Serializable;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import model.GameExecution;
 import view.*;
 
-import savestate.*;
 
 public class GameController {
 
