@@ -10,9 +10,24 @@ public class DestroyArmyObjective extends Objective {
 	@Override
 	protected boolean ValidateObjective() {
 		
-		//get target player's territory count
+		
 		//System.out.println("target is " + target.getName());
 		//System.out.println("target turf count is " + target.getAllTerritories().size());
+		if(target.equals(player)) {
+			//if your target is yourself change method
+			List<Territory> territories = this.player.getAllTerritories();
+			if (territories.size() >= 24) {
+				return true;
+			}
+			else {
+				return false;
+			}
+			
+			
+			
+		}
+		
+		//get target player's territory count
 		if(target.getAllTerritories().isEmpty()) {
 			//if count is 0 then assert that you killed him
 			ArrayList<GameColor> killList = player.getPlayersKilled();
@@ -24,7 +39,6 @@ public class DestroyArmyObjective extends Objective {
 						return true;
 					}
 				}
-			
 			}
 			
 			//if player was killed by someone else verify if territory count is valid
