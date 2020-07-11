@@ -98,7 +98,7 @@ class Territory extends Observable implements Serializable{
 
 		ArrayList<String> alasca_n = new ArrayList<String>(Arrays.asList("Siberia", "Vancouver", "Calgary"));
 
-		ArrayList<String> calgary_n = new ArrayList<String>(Arrays.asList("Alasca", "Vancouver", "Groenlandia"));
+		ArrayList<String> calgary_n = new ArrayList<String>(Arrays.asList("Alasca", "Vancouver", "Groelandia"));
 
 		ArrayList<String> california_n = new ArrayList<String>(Arrays.asList("Mexico", "Texas", "Vancouver"));
 
@@ -108,7 +108,7 @@ class Territory extends Observable implements Serializable{
 
 		ArrayList<String> nova_york_n = new ArrayList<String>(Arrays.asList("Quebec", "Texas"));
 
-		ArrayList<String> quebec_n = new ArrayList<String>(Arrays.asList("Groenlandia", "Nova York", "Vancouver", "Texas"));
+		ArrayList<String> quebec_n = new ArrayList<String>(Arrays.asList("Groelandia", "Nova York", "Vancouver", "Texas"));
 
 		ArrayList<String> texas_n = new ArrayList<String>(
 				Arrays.asList("California", "Quebec", "Mexico", "Nova York", "Vancouver"));
@@ -154,7 +154,7 @@ class Territory extends Observable implements Serializable{
 
 		ArrayList<String> polonia_n = new ArrayList<String>(Arrays.asList("Letonia", "Ucrania", "Romenia", "Italia"));
 
-		ArrayList<String> reino_unido_n = new ArrayList<String>(Arrays.asList("Groenlandia", "Franca"));
+		ArrayList<String> reino_unido_n = new ArrayList<String>(Arrays.asList("Groelandia", "Franca"));
 
 		ArrayList<String> romenia_n = new ArrayList<String>(Arrays.asList("Ucrania", "Polonia", "Italia", "Egito"));
 

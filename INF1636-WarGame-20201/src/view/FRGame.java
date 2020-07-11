@@ -75,7 +75,7 @@ public class FRGame extends JFrame {
 								if (answer == 0)
 									selectedTerritory = t;
 							} else
-								JOptionPane.showMessageDialog(null, "Você não pode atacar este territorio, tropas insuficientes ou não possui um vizinho.");
+								JOptionPane.showMessageDialog(null, "Você não pode atacar este territorio pois não possui um vizinho com tropas suficientes.");
 						} else if (selectedTerritory > -1 && gE.playerHasTerritory(p, t)
 								&& gE.isNeighbor(selectedTerritory, t)) {
 							int answer = JOptionPane

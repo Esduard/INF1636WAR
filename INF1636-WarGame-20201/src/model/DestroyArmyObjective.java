@@ -11,8 +11,7 @@ public class DestroyArmyObjective extends Objective {
 	protected boolean ValidateObjective() {
 		
 		
-		//System.out.println("target is " + target.getName());
-		//System.out.println("target turf count is " + target.getAllTerritories().size());
+		
 		if(target.equals(player)) {
 			//if your target is yourself change method
 			List<Territory> territories = this.player.getAllTerritories();

@@ -389,6 +389,9 @@ public class GameExecution implements Serializable {
 			if (defender.getAllTerritories().isEmpty()) {
 				attacker.KillPlayer(defender.getColor());
 			}
+			
+			attacker.setConquered(true);
+			
 			return true;
 		} else
 			return false;
@@ -484,8 +487,13 @@ public class GameExecution implements Serializable {
 		return true;
 	}
 
-	public void playerDraw(int i) {
-		players.get(i).draw(cardStack.pop());
+	public int playerDraw(int i) {
+		int ret = players.get(i).draw(cardStack.peek());
+		
+		if(ret == 2){
+			cardStack.pop();
+		}
+		return ret;
 	}
 
 	public void resetPlayers() {
@@ -525,6 +533,7 @@ public class GameExecution implements Serializable {
 	}
 
 	public String getTerritoryColorCode(int i) {
+		System.out.println(getTerritory(i).getColor());
 		return this.getTerritory(i).getColor().getColorCode();
 	}
 

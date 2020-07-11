@@ -81,7 +81,7 @@ abstract class Objective implements Serializable{
 		{
 			Player p = gE.getPlayer(i);
 			
-			objectives.add(new DestroyArmyObjective("DA" + p.getColor(),"Destruir totalmente os exercitos do jogador " + p.getColor(), p,null));
+			objectives.add(new DestroyArmyObjective("DA" + p.getColor(),"Destruir totalmente os exercitos do jogador " + p.getColor() + ". Se for voce mesmo ou o exercito ser destruido por outro jogador conquiste 24 territorios.", p,null));
 		}
 		
 		//Conquer continent

@@ -16,10 +16,19 @@ class Player extends Observable implements Serializable{
 	private ArrayList<Territory> Territories = new ArrayList<Territory>();
 	private int availableArmies = 0;
 	private ArrayList<GameColor> playersKilled = new ArrayList<GameColor>(); 
+	private boolean conquered = false;
 	
 	public Player(String n,GameColor c) {
 		name = n;
 		color = c;
+	}
+	
+	public boolean getConquered() {
+		return conquered;
+	}
+	
+	public void setConquered(boolean t) {
+		conquered = t;
 	}
 	
 	public List<Card> cardToTerritory()
@@ -34,9 +43,20 @@ class Player extends Observable implements Serializable{
 		return cardRet;
 	}
 	
-	public void draw(Card c)
+	public int draw(Card c)
 	{
+		if (c != null) {
+			//empty stack ret = 0
+			return 0;
+		}
+		if(!conquered) {
+			//didin't conquer anything ret = 1
+			return 1;
+		}
+		//successful draw ret = 2
 		Cards.add(c);
+		conquered = false;
+		return 2;
 	}
 	
 	public void gainTerritory(Territory t) {
