@@ -242,7 +242,7 @@ public class GameExecution implements Serializable {
 		while (!isCardStackEmpty) {
 			for (Player p : players) {
 				if (!isCardStackEmpty) {
-					p.draw(cardStack.pop());
+					p.draw(cardStack.pop(), true);
 
 					isCardStackEmpty = cardStack.isEmpty();
 				} else
@@ -420,7 +420,6 @@ public class GameExecution implements Serializable {
 	public int getDicesAmount(int territory, boolean defense)
 	{
 		Territory t = getTerritory(territory);
-		int[] dices;
 
 		if (!defense) {
 			if (t.getTroops() - 1 > 3)
@@ -533,7 +532,6 @@ public class GameExecution implements Serializable {
 	}
 
 	public String getTerritoryColorCode(int i) {
-		System.out.println(getTerritory(i).getColor());
 		return this.getTerritory(i).getColor().getColorCode();
 	}
 

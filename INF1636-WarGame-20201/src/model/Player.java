@@ -50,7 +50,23 @@ class Player extends Observable implements Serializable{
 			return 0;
 		}
 		if(!conquered) {
-			//didin't conquer anything ret = 1
+			//didn't conquer anything ret = 1
+			return 1;
+		}
+		//successful draw ret = 2
+		Cards.add(c);
+		conquered = false;
+		return 2;
+	}
+	
+	public int draw(Card c, boolean firstDraw)
+	{
+		if (c == null) {
+			//empty stack ret = 0
+			return 0;
+		}
+		if(!conquered && !firstDraw) {
+			//didn't conquer anything ret = 1
 			return 1;
 		}
 		//successful draw ret = 2
