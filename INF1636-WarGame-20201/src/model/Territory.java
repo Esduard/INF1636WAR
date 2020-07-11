@@ -244,7 +244,7 @@ class Territory extends Observable implements Serializable{
 				new ArrayList<Vertex>(Arrays.asList(new Vertex(107, 216), new Vertex(177, 216), new Vertex(126, 305),
 						new Vertex(90, 305), new Vertex(77, 204), new Vertex(90, 266), new Vertex(84, 253))),
 				new Vertex(116, 258)));
-		territories.add(new Territory("Groenlandia", groenlandia_n,
+		territories.add(new Territory("Groelandia", groenlandia_n,
 				new ArrayList<Vertex>(Arrays.asList(new Vertex(270, 112), new Vertex(285, 90), new Vertex(371, 90),
 						new Vertex(379, 102), new Vertex(379, 106), new Vertex(372, 117), new Vertex(365, 117),
 						new Vertex(351, 145), new Vertex(335, 145), new Vertex(327, 135), new Vertex(285, 135))),

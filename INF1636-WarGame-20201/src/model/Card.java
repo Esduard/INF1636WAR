@@ -63,7 +63,7 @@ class Card implements Serializable{
 		cards.add(new Card(Shape.Triangle	, GameExecution.getGameExecution().getTerritory("Alasca")));
 		cards.add(new Card(Shape.Circle		, GameExecution.getGameExecution().getTerritory("Calgary")));
 		cards.add(new Card(Shape.Square		, GameExecution.getGameExecution().getTerritory("California")));
-		cards.add(new Card(Shape.Circle		, GameExecution.getGameExecution().getTerritory("Groenlandia")));
+		cards.add(new Card(Shape.Circle		, GameExecution.getGameExecution().getTerritory("Groelandia")));
 		cards.add(new Card(Shape.Square		, GameExecution.getGameExecution().getTerritory("Mexico")));
 		cards.add(new Card(Shape.Square		, GameExecution.getGameExecution().getTerritory("Nova York")));
 		cards.add(new Card(Shape.Circle		, GameExecution.getGameExecution().getTerritory("Quebec")));

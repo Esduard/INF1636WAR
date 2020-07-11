@@ -413,6 +413,22 @@ public class GameExecution implements Serializable {
 
 		return dices;
 	}
+	
+	public int getDicesAmount(int territory, boolean defense)
+	{
+		Territory t = getTerritory(territory);
+		int[] dices;
+
+		if (!defense) {
+			if (t.getTroops() - 1 > 3)
+				return 3;
+		} else {
+			if (t.getTroops() > 3)
+				return 3;
+		}
+
+		return t.getTroops();
+	}
 
 	public int attack(int src, int target, int[] attackDices, int[] defenseDices) {
 		int ret = 0;
@@ -620,7 +636,7 @@ public class GameExecution implements Serializable {
 		if (t.getContinent().getName() == "Asia") {
 			s += "as_";
 		}
-		s += t.getName().strip().toLowerCase() + ".png";
+		s += t.getName().replaceAll(" ", "").toLowerCase() + ".png";
 		
 		System.out.print(s);
 		
