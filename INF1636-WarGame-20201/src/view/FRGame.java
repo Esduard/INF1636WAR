@@ -68,16 +68,16 @@ public class FRGame extends JFrame {
 						break;
 					case 1: // Attack
 						if (!gE.playerHasTerritory(p, t) && selectedTerritory == -1) {
-							if (gE.playerHasNeighbour(p, t)) {
+							if (gE.playerCanAttackTerritory(p, t)) {
 								int answer = JOptionPane.showConfirmDialog(null,
 										"Deseja atacar " + gE.getTerritoryName(t) + "?", "Ataque",
 										JOptionPane.YES_NO_OPTION);
 								if (answer == 0)
 									selectedTerritory = t;
 							} else
-								JOptionPane.showMessageDialog(null, "Você não possui algum territorio vizinho a este.");
+								JOptionPane.showMessageDialog(null, "Você não pode atacar este territorio, tropas insuficientes ou não possui um vizinho.");
 						} else if (selectedTerritory > -1 && gE.playerHasTerritory(p, t)
-								&& gE.isNeighbour(selectedTerritory, t)) {
+								&& gE.isNeighbor(selectedTerritory, t)) {
 							int answer = JOptionPane
 									.showConfirmDialog(null,
 											"Deseja atacar " + gE.getTerritoryName(selectedTerritory) + " pel@ "
@@ -104,7 +104,7 @@ public class FRGame extends JFrame {
 							} else
 								JOptionPane.showMessageDialog(null, "Você não possui algum territorio vizinho a este.");
 						} else if (selectedTerritory > -1 && gE.playerHasTerritory(p, t)
-								&& gE.isNeighbour(selectedTerritory, t)) {
+								&& gE.isNeighbor(selectedTerritory, t)) {
 							int army = 0;
 							try {
 								army = Integer.parseInt(JOptionPane.showInputDialog(

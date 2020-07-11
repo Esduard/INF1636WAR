@@ -24,6 +24,7 @@ public class GameController {
 
 	private GameController() {
 		activeFrame = new FRNewGame();
+		activeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gE = GameExecution.getGameExecution();
 		currentState = GameState.newGameMenu;
 	}
@@ -42,6 +43,7 @@ public class GameController {
 		activeFrame.dispose();
 		activeFrame = f;
 		activeFrame.setVisible(true);
+		activeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public void nextState(boolean load)

@@ -366,26 +366,29 @@ public class GameExecution implements Serializable {
 			return false;
 		}
 
-		moveTroops(s, t, mov);
-
-		return true;
+		return moveTroops(s, t, mov);
 	}
 
-	private boolean conquer(Player attacker, Player defender, Territory src, Territory target, int[] attack,
-			int[] defend) {
-
-		executeAttack(src, target, attack, defend);
+	/**
+	 * 
+	 * @param attacker
+	 * @param defender
+	 * @param src
+	 * @param target
+	 * @param army     - Number of troops going to the territory conquered
+	 * @return
+	 */
+	private boolean conquer(Player attacker, Player defender, Territory src, Territory target, int army) {
 
 		if (target.getTroops() <= 0) {
 
 			attacker.gainTerritory(target);
 			defender.loseTerritory(target);
-			moveTroops(src, target, attack.length);
+			moveTroops(src, target, army);
 
 			if (defender.getAllTerritories().isEmpty()) {
 				attacker.KillPlayer(defender.getColor());
 			}
-
 			return true;
 		} else
 			return false;
@@ -411,9 +414,17 @@ public class GameExecution implements Serializable {
 		return dices;
 	}
 
-	public boolean attack(int src, int target, int[] attackDices, int[] defenseDices) {
-		return conquer(getTerritoryOwner(src), getTerritoryOwner(target), getTerritory(src), getTerritory(target),
-				attackDices, defenseDices);
+	public int attack(int src, int target, int[] attackDices, int[] defenseDices) {
+		int ret = 0;
+		Territory t_src = getTerritory(src);
+		Territory t_target = getTerritory(target);
+		if (executeAttack(t_src, t_target, attackDices, defenseDices)) {
+			ret++;
+			if (conquer(getTerritoryOwner(src), getTerritoryOwner(target), t_src, t_target,
+					attackDices.length))
+				ret++;
+		}
+		return ret;
 	}
 
 	protected boolean CardTrade(int player, ArrayList<Card> selected) {
@@ -436,12 +447,11 @@ public class GameExecution implements Serializable {
 			return false;
 		}
 	}
-	
-	public boolean tradeCards(int player, List<String> cards)
-	{
+
+	public boolean tradeCards(int player, List<String> cards) {
 		ArrayList<Card> l = new ArrayList<Card>();
-		
-		for(String s : cards)
+
+		for (String s : cards)
 			l.add(Card.getCard(getTerritory(s)));
 		return CardTrade(player, l);
 	}
@@ -534,18 +544,37 @@ public class GameExecution implements Serializable {
 		return null;
 	}
 
-	public boolean isNeighbour(int territory, int neighbour) {
-		return getTerritory(territory).getNeighbors().contains(getTerritoryName(neighbour));
+	public boolean isNeighbor(int territory, int neighbour) {
+		return getTerritory(territory).isNeighbor(getTerritory(neighbour).getName());
+	}
+	
+	public boolean playerHasNeighbour(int player, int territory)
+	{
+		List<Territory> l = players.get(player).getAllTerritories();
+		
+		for (String n : getTerritory(territory).getNeighbors()) {
+			Territory t = getTerritory(n);
+			if(l.contains(t))
+				return true;
+		}
+		return false;
 	}
 
-	// If a certain player has a territory which is a neighbour to this territory.
-	public boolean playerHasNeighbour(int player, int territory) {
+	/**
+	 * If a certain player can attack the territory passed.
+	 * 
+	 * @param player    - The attacker
+	 * @param territory - The territory to be attacked
+	 * @return If the player has a neighbor with enough army to the territory chosen
+	 *         returns true, else returns false
+	 */
+	public boolean playerCanAttackTerritory(int player, int territory) {
 		List<Territory> l = players.get(player).getAllTerritories();
 
-		for (int i = 0; i < l.size(); i++) {
-			if (isNeighbour(territory, getTerritoriesList().indexOf(l.get(i)))) {
+		for (String n : getTerritory(territory).getNeighbors()) {
+			Territory t = getTerritory(n);
+			if (l.contains(t) && t.getTroops() > 1)
 				return true;
-			}
 		}
 
 		return false;
@@ -592,6 +621,9 @@ public class GameExecution implements Serializable {
 			s += "as_";
 		}
 		s += t.getName().strip().toLowerCase() + ".png";
+		
+		System.out.print(s);
+		
 		return s;
 	}
 
@@ -604,10 +636,9 @@ public class GameExecution implements Serializable {
 
 		return Collections.unmodifiableList(l);
 	}
-	
-	public boolean isPlayerTradeObligatory(int i)
-	{
-		if(players.get(i).isTradeViable() == 2)
+
+	public boolean isPlayerTradeObligatory(int i) {
+		if (players.get(i).isTradeViable() == 2)
 			return true;
 		else
 			return false;

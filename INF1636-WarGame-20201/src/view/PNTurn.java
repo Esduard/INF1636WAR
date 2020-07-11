@@ -22,8 +22,8 @@ class PNTurn extends JPanel implements IObserver{
 	
 	private static final String[] stateDescriptions = {
 		"Posicione seus novos exércitos",
-		"Clique sobre o territorio que deseja atacar, se não passe o turno",
-		"Se desejar, movimente suas tropas, se não passe o turno",
+		"Se desejar, realize ataques, clicando primeiro no destino depois na origem, se não passe o turno",
+		"Se desejar, movimente suas tropas, clicando primeiro no destino depois na origem se não passe o turno",
 		"Clique no botao cartas para visualizar suas cartas",
 		"Quando estiver pronto passe o turno"
 	};
@@ -54,7 +54,7 @@ class PNTurn extends JPanel implements IObserver{
 	
 	public void setState(int i)
 	{
-		state.setText("<html><font size=6 color="+ currentPlayerColor +">" + stateDescriptions[i] + "</font></html>");
+		state.setText("<html><font size=5 color="+ currentPlayerColor +">" + stateDescriptions[i] + "</font></html>");
 		state.repaint();
 		
 		if(i == 0)

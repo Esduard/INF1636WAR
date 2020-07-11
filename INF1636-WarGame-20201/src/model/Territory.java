@@ -85,6 +85,11 @@ class Territory extends Observable implements Serializable{
 	public List<Vertex> getFrontiers() {
 		return Collections.unmodifiableList(frontiers);
 	}
+	
+	public boolean isNeighbor(String neighbor)
+	{
+		return neighbors.contains(neighbor);
+	}
 
 	public static ArrayList<Territory> initialize() {
 		// initialize neighbor lists

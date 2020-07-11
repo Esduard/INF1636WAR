@@ -73,9 +73,20 @@ class FRDice extends JFrame {
 					System.out.print(defenseDices[i]);
 				}
 
-				if (gE.attack(src, target, attackDices, defenseDices)) {
+				int ret = gE.attack(src, target, attackDices, defenseDices);
+				switch(ret)
+				{
+				case 0:
+					JOptionPane.showMessageDialog(null, "Ataque invalido");
+					dispose();
+					break;
+				case 1:
+					JOptionPane.showMessageDialog(null, "Ataque realizado");
+					break;
+				case 2:
 					JOptionPane.showMessageDialog(null, gE.getTerritoryName(target) + " foi conquistad@.");
 					dispose();
+					break;
 				}
 			}
 

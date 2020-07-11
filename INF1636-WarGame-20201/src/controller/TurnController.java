@@ -74,6 +74,8 @@ public class TurnController implements Serializable {
 			{
 				GameController.getGameController().nextState(false);
 			}
+			
+			nextState();
 			break;
 		default:
 			break;
@@ -100,6 +102,7 @@ public class TurnController implements Serializable {
 			currentState = TurnState.ended;
 			break;
 		case ended:
+			currentState = TurnState.armyPlacement;
 			break;
 		default:
 			break;
