@@ -388,6 +388,12 @@ public class GameExecution implements Serializable {
 
 			if (defender.getAllTerritories().isEmpty()) {
 				attacker.KillPlayer(defender.getColor());
+				
+				//obtain all enemy cards
+				List<Card> cards_transfer = defender.getAllCards();
+				attacker.getCards(cards_transfer);
+				defender.emptyCards();
+				
 			}
 			
 			attacker.setConquered(true);
