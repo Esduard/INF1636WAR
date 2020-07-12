@@ -83,7 +83,8 @@ class Territory extends Observable implements IObserver, Serializable{
 	 */
 	public void modifyTroops(int t, boolean moving) {
 		modifyTroops(t);
-		newTroops += t;
+		if(moving)
+			newTroops += t;
 	}
 	
 	public ArrayList<String> getNeighbors() {

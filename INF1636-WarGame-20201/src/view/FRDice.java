@@ -54,7 +54,6 @@ class FRDice extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				System.out.print("pp");
 				if (e.getKeyCode() == KeyEvent.VK_K) {
 					int[] attackDices = new int[gE.getDicesAmount(src, false)];
 					int[] defenseDices = new int[gE.getDicesAmount(target, true)];
@@ -116,7 +115,6 @@ class FRDice extends JFrame {
 				e1.printStackTrace();
 			}
 			attackLabels[i].setIcon(new ImageIcon(dice));
-			System.out.print(attackDices[i]);
 		}
 
 		for (int i = 0; i < defenseDices.length; i++) {
@@ -128,7 +126,6 @@ class FRDice extends JFrame {
 				e1.printStackTrace();
 			}
 			defenseLabels[i].setIcon(new ImageIcon(dice));
-			System.out.print(defenseDices[i]);
 		}
 
 		int ret = gE.attack(src, target, attackDices, defenseDices);

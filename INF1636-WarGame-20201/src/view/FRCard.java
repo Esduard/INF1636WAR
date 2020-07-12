@@ -39,8 +39,6 @@ class FRCard extends JFrame implements IObserver {
 			public void valueChanged(ListSelectionEvent e) {
 				String s = l.getSelectedValue();
 				
-				System.out.print(gE.getCardImgFilePath(s));
-				
 				if(s != null)
 					cardLabel.setIcon(new ImageIcon(gE.getCardImgFilePath(s)));
 			}
@@ -55,8 +53,10 @@ class FRCard extends JFrame implements IObserver {
 					JOptionPane.showMessageDialog(null,
 							"E necessario selecionar no minimo 3 cartas para realizar uma troca");
 				else {
-					if (gE.tradeCards(tC.getCurrentPlayer(), l.getSelectedValuesList()))
+					if (gE.tradeCards(tC.getCurrentPlayer(), l.getSelectedValuesList())) {
 						JOptionPane.showMessageDialog(null, "Troca realizada");
+						dispose();
+					}
 					else
 						JOptionPane.showMessageDialog(null, "Troca falhou");
 				}

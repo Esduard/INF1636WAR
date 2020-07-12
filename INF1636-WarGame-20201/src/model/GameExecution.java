@@ -13,9 +13,6 @@ import observer.IObserver;
 
 public class GameExecution implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private static GameExecution singleton;
@@ -341,11 +338,11 @@ public class GameExecution implements Serializable {
 
 	public boolean moveTroops(Territory src, Territory target, int troops, boolean conquer) {
 
-		System.out.print(src.getNewTroops());
+		System.out.print(troops);
 		
 		if (((src.getNewTroops() > 0 && (src.getTroops() - src.getNewTroops() >= troops))
 				|| (src.getNewTroops() == 0 && src.getTroops() > troops)) && (src.getColor().equals(target.getColor()))) {
-			src.modifyTroops(-troops);
+			src.modifyTroops(-troops, !conquer);
 			target.modifyTroops(troops, !conquer);
 			return true;
 		} else {
@@ -603,7 +600,6 @@ public class GameExecution implements Serializable {
 
 		for (String n : getTerritory(territory).getNeighbors()) {
 			Territory t = getTerritory(n);
-			System.out.print(n);
 			if (l.contains(t) && t.getTroops() > 1)
 				return true;
 		}
@@ -635,24 +631,22 @@ public class GameExecution implements Serializable {
 
 		String continent = t.getContinent().getName();
 		
-		System.out.print(continent);
-		
-		if (continent == "America do Norte") {
+		if (continent.equals("America do Norte")) {
 			s += "an_";
 		}
-		if (continent == "America do Sul") {
+		if (continent.equals("America do Sul")) {
 			s += "asl_";
 		}
-		if (continent == "Africa") {
+		if (continent.equals("Africa")) {
 			s += "af_";
 		}
-		if (continent == "Europa") {
+		if (continent.equals("Europa")) {
 			s += "eu_";
 		}
-		if (continent == "Oceania") {
+		if (continent.equals("Oceania")) {
 			s += "oc_";
 		}
-		if (continent == "Asia") {
+		if (continent.equals("Asia")) {
 			s += "as_";
 		}
 		s += t.getName().replaceAll(" ", "").toLowerCase() + ".png";
