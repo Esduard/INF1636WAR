@@ -9,10 +9,6 @@ import view.*;
 
 public class GameController {
 
-	/**
-	 * 
-	 */
-
 	private static GameController singleton;
 
 	private GameState currentState;

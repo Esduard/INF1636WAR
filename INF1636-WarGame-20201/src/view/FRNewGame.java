@@ -48,7 +48,6 @@ public class FRNewGame extends JFrame{
 				int returnValue = loadGame.showOpenDialog(null);
 				if(returnValue == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = loadGame.getSelectedFile();
-					System.out.print(selectedFile.getAbsolutePath());
 					WAR_IO.CarregarJogo(selectedFile);
 					GameController.getGameController().nextState(true);
 				}

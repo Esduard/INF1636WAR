@@ -233,7 +233,6 @@ public class FRGame extends JFrame implements IObserver {
 				int returnValue = saveFC.showSaveDialog(null);
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = saveFC.getSelectedFile();
-					System.out.print(selectedFile.getAbsolutePath());
 					SaveFile s = new SaveFile();
 					WAR_IO.SalvarJogo(selectedFile.getAbsolutePath(), s);
 				}

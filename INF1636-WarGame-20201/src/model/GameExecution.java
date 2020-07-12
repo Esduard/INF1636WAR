@@ -17,12 +17,11 @@ public class GameExecution implements Serializable {
 
 	private static GameExecution singleton;
 
-	private Stack<Objective> objStack = new Stack<Objective>();
-	private Stack<Card> cardStack = new Stack<Card>();
-	private ArrayList<Player> players = new ArrayList<Player>();
-	private ArrayList<GameColor> remainingColors = new ArrayList<GameColor>(Arrays.asList(GameColor.Branco,
-			GameColor.Preto, GameColor.Azul, GameColor.Amarelo, GameColor.Verde, GameColor.Vermelho));
-	private int cardBonus = 4;
+	private Stack<Objective> objStack;
+	private Stack<Card> cardStack;
+	private ArrayList<Player> players;
+	private ArrayList<GameColor> remainingColors;
+	private int cardBonus;
 
 	private ArrayList<Territory> territories; // 51
 
@@ -33,6 +32,12 @@ public class GameExecution implements Serializable {
 	private ArrayList<Objective> objectives;
 
 	private GameExecution() {
+		objStack = new Stack<Objective>();
+		cardStack = new Stack<Card>();
+		players = new ArrayList<Player>();
+		remainingColors = new ArrayList<GameColor>(Arrays.asList(GameColor.Branco, GameColor.Preto, GameColor.Azul,
+				GameColor.Amarelo, GameColor.Verde, GameColor.Vermelho));
+		cardBonus = 4;
 	}
 
 	public static GameExecution getGameExecution() {
@@ -43,6 +48,7 @@ public class GameExecution implements Serializable {
 
 	public static void setGameExecution(GameExecution gE) {
 		singleton = gE;
+		System.out.println(singleton.players.size());
 	}
 
 	public void initializeGameComponents() {
@@ -337,11 +343,9 @@ public class GameExecution implements Serializable {
 	}
 
 	public boolean moveTroops(Territory src, Territory target, int troops, boolean conquer) {
-
-		System.out.print(troops);
-		
 		if (((src.getNewTroops() > 0 && (src.getTroops() - src.getNewTroops() >= troops))
-				|| (src.getNewTroops() == 0 && src.getTroops() > troops)) && (src.getColor().equals(target.getColor()))) {
+				|| (src.getNewTroops() == 0 && src.getTroops() > troops))
+				&& (src.getColor().equals(target.getColor()))) {
 			src.modifyTroops(-troops);
 			target.modifyTroops(troops, !conquer);
 			return true;
@@ -385,12 +389,12 @@ public class GameExecution implements Serializable {
 
 			if (defender.getAllTerritories().isEmpty()) {
 				attacker.KillPlayer(defender.getColor());
-				
-				//obtain all enemy cards
+
+				// obtain all enemy cards
 				List<Card> cards_transfer = defender.getAllCards();
 				attacker.getCards(cards_transfer);
 				defender.emptyCards();
-				
+
 			}
 
 			attacker.setConquered(true);
@@ -484,7 +488,7 @@ public class GameExecution implements Serializable {
 		if ((!cardStack.contains(c) && players.get(player).hasCard(c)))
 			return false;
 
-		players.get(player).draw(c,true);
+		players.get(player).draw(c, true);
 
 		cardStack.removeElement(c);
 
@@ -630,7 +634,7 @@ public class GameExecution implements Serializable {
 		String s = "src\\images\\war_carta_";
 
 		String continent = t.getContinent().getName();
-		
+
 		if (continent.equals("America do Norte")) {
 			s += "an_";
 		}

@@ -26,14 +26,14 @@ class PNMap extends JPanel {
 		try {
 			mapImg = ImageIO.read(new File(MAP_IMG_FILE_PATH)).getScaledInstance(size.width, size.height, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 			System.exit(1);
 		}
 		
 		try {
 			bgImg = ImageIO.read(new File(BG_IMG_FILE_PATH)).getScaledInstance(size.width, size.height, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 			System.exit(1);
 		}
 	}

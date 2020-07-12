@@ -33,7 +33,7 @@ class PNObjective extends JPanel{
 		try {
 			objImg = ImageIO.read(new File(OBJECTIVE_IMG_FILE_PATH));
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 			System.exit(1);
 		}
 		

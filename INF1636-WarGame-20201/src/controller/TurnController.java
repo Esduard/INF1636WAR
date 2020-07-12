@@ -21,11 +21,13 @@ public class TurnController implements Serializable {
 	private int currentPlayer;
 	private GameExecution gE;
 	private TurnState currentState;
-	private NextTurnNotifier nextTurnNotifier = new NextTurnNotifier();
-	private NextStateNotifier nextStateNotifier = new NextStateNotifier();
+	private NextTurnNotifier nextTurnNotifier;
+	private NextStateNotifier nextStateNotifier;
 
 	private TurnController() {
 		gE = GameExecution.getGameExecution();
+		nextTurnNotifier = new NextTurnNotifier();
+		nextStateNotifier = new NextStateNotifier();
 		currentPlayer = 0;
 	}
 
