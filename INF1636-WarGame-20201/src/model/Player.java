@@ -43,6 +43,14 @@ class Player extends Observable implements Serializable{
 		return cardRet;
 	}
 	
+	public void emptyCards() {
+		Cards.clear();
+	}
+	
+	public void getCards(List<Card> c) {
+		Cards.addAll(c);
+	}
+	
 	public int draw(Card c)
 	{
 		System.out.println("Draw");
