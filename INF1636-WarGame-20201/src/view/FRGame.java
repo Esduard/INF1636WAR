@@ -230,7 +230,7 @@ public class FRGame extends JFrame implements IObserver {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int returnValue = saveFC.showOpenDialog(null);
+				int returnValue = saveFC.showSaveDialog(null);
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = saveFC.getSelectedFile();
 					System.out.print(selectedFile.getAbsolutePath());

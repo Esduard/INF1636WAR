@@ -23,6 +23,8 @@ public class ConquerTerritoryObjective extends Objective {
 			}
 		}
 
+		System.out.println(territoriesWithRequiredArmy);
+		
 		if (territoriesWithRequiredArmy >= numberOfTerritories)
 			return true;
 		else

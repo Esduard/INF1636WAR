@@ -342,7 +342,7 @@ public class GameExecution implements Serializable {
 		
 		if (((src.getNewTroops() > 0 && (src.getTroops() - src.getNewTroops() >= troops))
 				|| (src.getNewTroops() == 0 && src.getTroops() > troops)) && (src.getColor().equals(target.getColor()))) {
-			src.modifyTroops(-troops, !conquer);
+			src.modifyTroops(-troops);
 			target.modifyTroops(troops, !conquer);
 			return true;
 		} else {

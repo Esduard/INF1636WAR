@@ -19,16 +19,8 @@ public class ConquerContinentObjective extends Objective{
 			
 			Territory [] t = continents[i].getTerritories();
 			for(int j=0;j<t.length;j++) {
-				//System.out.println(t[j].getName() + " parte da " + continents[i].getName());
-			}
-			
-			for(int j=0;j<t.length;j++) {
 				
 				if(!territories.contains(t[j])){
-					//System.out.println("i = " + i);
-					//System.out.println("j = " + j);
-					//System.out.println("false ou em " + t[j].getName() + " parte da " + continents[i].getName());
-					
 					return false;
 				}
 			}
@@ -36,10 +28,8 @@ public class ConquerContinentObjective extends Objective{
 		}
 		
 		if(extraContinent) {
-			//System.out.println("extracontinet size: " + allExtraContinents.size());
 			for(int cont=0;cont<allExtraContinents.size();cont++)
 			{	
-				//System.out.println("checking extracontinet: " + allExtraContinents.get(cont).getName());
 				boolean hasContinent = true;
 				Territory []continentTerritories = allExtraContinents.get(cont).getTerritories();
 				for(Territory t:continentTerritories){

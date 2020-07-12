@@ -64,6 +64,12 @@ public class TurnController implements Serializable {
 				JOptionPane.showMessageDialog(null, "Voce possui 5 cartas, precisa troca-las antes de passar de turno");
 			break;
 		case ended:
+			
+			if(gE.checkPlayerObjective(currentPlayer))
+			{
+				GameController.getGameController().nextState(false);
+			}
+			
 			int prevPlayer = currentPlayer;
 
 			if (currentPlayer < gE.getPlayerCount() - 1)
@@ -100,10 +106,6 @@ public class TurnController implements Serializable {
 			currentState = TurnState.ended;
 			break;
 		case ended:
-			if(gE.checkPlayerObjective(currentPlayer))
-			{
-				GameController.getGameController().nextState(false);
-			}
 			currentState = TurnState.armyPlacement;
 			break;
 		default:

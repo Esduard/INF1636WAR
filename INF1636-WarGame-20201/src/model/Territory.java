@@ -79,7 +79,7 @@ class Territory extends Observable implements IObserver, Serializable{
 	
 	/**
 	 * @param t
-	 * @param moving - If troops comes from another territory instead of being positioned
+	 * @param moving - If troops comes from another territory during movement phase
 	 */
 	public void modifyTroops(int t, boolean moving) {
 		modifyTroops(t);
