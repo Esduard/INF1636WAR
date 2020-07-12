@@ -1,12 +1,13 @@
 package model;
 
-import java.io.Serializable;
+
 import java.util.*;
 
 public class ConquerTerritoryObjective extends Objective{
 
 	private int numberOfTerritories;
 	private int armyPerTerritory;
+	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected boolean ValidateObjective() {

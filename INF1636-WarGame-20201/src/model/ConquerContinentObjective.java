@@ -1,6 +1,6 @@
 package model;
 
-import java.io.Serializable;
+
 import java.util.*;
 
 public class ConquerContinentObjective extends Objective{
@@ -8,6 +8,7 @@ public class ConquerContinentObjective extends Objective{
 	private Continent[] continents;
 	private boolean extraContinent;
 	private ArrayList<Continent> allExtraContinents;
+	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected boolean ValidateObjective() {

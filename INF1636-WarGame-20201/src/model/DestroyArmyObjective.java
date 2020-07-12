@@ -6,6 +6,8 @@ import java.util.List;
 public class DestroyArmyObjective extends Objective {
 
 	private Player target;
+	private static final long serialVersionUID = 1L;
+	
 	
 	@Override
 	protected boolean ValidateObjective() {
