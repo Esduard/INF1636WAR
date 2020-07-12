@@ -11,13 +11,15 @@ import javax.swing.*;
 
 import controller.TurnController;
 import model.GameExecution;
+import observer.IObserver;
+import observer.Observable;
 import savestate.SaveFile;
 import savestate.WAR_IO;
 
 import java.io.File;
 
 @SuppressWarnings("serial")
-public class FRGame extends JFrame {
+public class FRGame extends JFrame implements IObserver {
 
 	private final static Dimension MAP_SIZE = new Dimension(1024, 768);
 	private final static Dimension PANEL_SIZE = new Dimension(1024, 100);
@@ -28,6 +30,8 @@ public class FRGame extends JFrame {
 
 	private int selectedTerritory = -1;
 
+	private JButton cardB; 
+	
 	public FRGame() {
 		super("WAR");
 
@@ -35,6 +39,8 @@ public class FRGame extends JFrame {
 		GameExecution gE = GameExecution.getGameExecution();
 		JPanel p = new PNMap(MAP_SIZE);
 
+		tC.addStateObserver(this);
+		
 		getContentPane().add(p);
 		p.setLayout(null);
 
@@ -115,7 +121,7 @@ public class FRGame extends JFrame {
 								return;
 							}
 							if(!gE.movePlayerTroops(tC.getCurrentPlayer(), t, selectedTerritory, army))
-								JOptionPane.showMessageDialog(null, "Quantidade de tropas invalidas");
+								JOptionPane.showMessageDialog(null, "Movimentacao invalida: quantidade de tropas invalida ou tentativa de mover tropas recem chegadas ");
 							selectedTerritory = -1;
 						}
 						break;
@@ -151,7 +157,8 @@ public class FRGame extends JFrame {
 		turnPanel = new PNTurn();
 		turnPanel.setPlayer(tC.getCurrentPlayer());
 		turnPanel.setState(tC.getCurrentState());
-		tC.addObserver(turnPanel);
+		tC.addStateObserver(turnPanel);
+		tC.addTurnObserver(turnPanel);
 		gE.addPlayerObserver(tC.getCurrentPlayer(), turnPanel);
 
 		p.add(turnPanel);
@@ -181,7 +188,7 @@ public class FRGame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FRObjective f = new FRObjective();
-				tC.addObserver(f);
+				tC.addTurnObserver(f);
 			}
 
 		});
@@ -193,13 +200,14 @@ public class FRGame extends JFrame {
 		//
 		// Show Cards:
 		//
-		JButton cardB = new JButton("Cartas");
+		cardB = new JButton("Cartas");
+		cardB.setEnabled(false);
 		cardB.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FRCard f = new FRCard();
-				tC.addObserver(f);
+				tC.addStateObserver(f);
 			}
 
 		});
@@ -254,5 +262,15 @@ public class FRGame extends JFrame {
 
 		pack();
 		setResizable(false);
+	}
+
+	@Override
+	public void update(Observable o) {
+		int state = (int)o.get(0);
+		
+		if(state != 3)
+			cardB.setEnabled(false);
+		else
+			cardB.setEnabled(true);
 	}
 }

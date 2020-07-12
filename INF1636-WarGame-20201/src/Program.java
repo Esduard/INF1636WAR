@@ -16,7 +16,7 @@ class Program {
 		
 			//TEST.testCardTrade();
 
-			GameController gC = GameController.getGameController();
+			GameController.getGameController();
 		}
 	
 }

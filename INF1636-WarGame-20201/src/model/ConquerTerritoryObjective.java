@@ -12,9 +12,9 @@ public class ConquerTerritoryObjective extends Objective{
 	@Override
 	protected boolean ValidateObjective() {
 		
-		//get acces to player territories
+		//get access to player territories
 		List<Territory> territories = this.player.getAllTerritories();
-		//if all terrtories have
+		//if all territories have
 		//System.out.println("turf count: " + territories.size());
 		if (territories.size() >= numberOfTerritories) {
 			

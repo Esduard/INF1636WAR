@@ -339,21 +339,21 @@ public class GameExecution implements Serializable {
 		return true;
 	}
 
-	public boolean moveTroops(Territory src, Territory target, int mov) {
+	public boolean moveTroops(Territory src, Territory target, int troops, boolean conquer) {
 
-		if ((src.getTroops() > mov) && (src.getColor().equals(target.getColor()))) {
-
-			src.modifyTroops(-mov);
-			target.modifyTroops(mov);
-
+		System.out.print(src.getNewTroops());
+		
+		if (((src.getNewTroops() > 0 && (src.getTroops() - src.getNewTroops() >= troops))
+				|| (src.getNewTroops() == 0 && src.getTroops() > troops)) && (src.getColor().equals(target.getColor()))) {
+			src.modifyTroops(-troops);
+			target.modifyTroops(troops, !conquer);
 			return true;
 		} else {
 			return false;
 		}
-
 	}
 
-	public boolean movePlayerTroops(int player, int src, int target, int mov) {
+	public boolean movePlayerTroops(int player, int src, int target, int troops) {
 
 		Player p = players.get(player);
 
@@ -366,7 +366,7 @@ public class GameExecution implements Serializable {
 			return false;
 		}
 
-		return moveTroops(s, t, mov);
+		return moveTroops(s, t, troops, false);
 	}
 
 	/**
@@ -384,14 +384,14 @@ public class GameExecution implements Serializable {
 
 			attacker.gainTerritory(target);
 			defender.loseTerritory(target);
-			moveTroops(src, target, army);
+			moveTroops(src, target, army, true);
 
 			if (defender.getAllTerritories().isEmpty()) {
 				attacker.KillPlayer(defender.getColor());
 			}
-			
+
 			attacker.setConquered(true);
-			
+
 			return true;
 		} else
 			return false;
@@ -416,27 +416,23 @@ public class GameExecution implements Serializable {
 
 		return dices;
 	}
-	
-	public int getDicesAmount(int territory, boolean defense)
-	{
+
+	public int getDicesAmount(int territory, boolean defense) {
 		Territory t = getTerritory(territory);
 
 		if (!defense) {
 			if (t.getTroops() - 1 > 3) {
 				return 3;
-			}
-			else { 
+			} else {
 				return t.getTroops() - 1;
 			}
-		} 
-		else {
+		} else {
 			if (t.getTroops() > 3)
 				return 3;
 			else
 				return t.getTroops();
 		}
 
-		
 	}
 
 	public int attack(int src, int target, int[] attackDices, int[] defenseDices) {
@@ -445,8 +441,7 @@ public class GameExecution implements Serializable {
 		Territory t_target = getTerritory(target);
 		if (executeAttack(t_src, t_target, attackDices, defenseDices)) {
 			ret++;
-			if (conquer(getTerritoryOwner(src), getTerritoryOwner(target), t_src, t_target,
-					attackDices.length))
+			if (conquer(getTerritoryOwner(src), getTerritoryOwner(target), t_src, t_target, attackDices.length))
 				ret++;
 		}
 		return ret;
@@ -495,8 +490,8 @@ public class GameExecution implements Serializable {
 
 	public int playerDraw(int i) {
 		int ret = players.get(i).draw(cardStack.peek());
-		
-		if(ret == 2){
+
+		if (ret == 2) {
 			cardStack.pop();
 		}
 		return ret;
@@ -577,14 +572,13 @@ public class GameExecution implements Serializable {
 	public boolean isNeighbor(int territory, int neighbour) {
 		return getTerritory(territory).isNeighbor(getTerritory(neighbour).getName());
 	}
-	
-	public boolean playerHasNeighbour(int player, int territory)
-	{
+
+	public boolean playerHasNeighbour(int player, int territory) {
 		List<Territory> l = players.get(player).getAllTerritories();
-		
+
 		for (String n : getTerritory(territory).getNeighbors()) {
 			Territory t = getTerritory(n);
-			if(l.contains(t))
+			if (l.contains(t))
 				return true;
 		}
 		return false;
@@ -603,6 +597,7 @@ public class GameExecution implements Serializable {
 
 		for (String n : getTerritory(territory).getNeighbors()) {
 			Territory t = getTerritory(n);
+			System.out.print(n);
 			if (l.contains(t) && t.getTroops() > 1)
 				return true;
 		}
@@ -632,28 +627,30 @@ public class GameExecution implements Serializable {
 
 		String s = "src\\images\\war_carta_";
 
-		if (t.getContinent().getName() == "America do Norte") {
+		String continent = t.getContinent().getName();
+		
+		System.out.print(continent);
+		
+		if (continent == "America do Norte") {
 			s += "an_";
 		}
-		if (t.getContinent().getName() == "America do Sul") {
+		if (continent == "America do Sul") {
 			s += "asl_";
 		}
-		if (t.getContinent().getName() == "Africa") {
+		if (continent == "Africa") {
 			s += "af_";
 		}
-		if (t.getContinent().getName() == "Europa") {
+		if (continent == "Europa") {
 			s += "eu_";
 		}
-		if (t.getContinent().getName() == "Oceania") {
+		if (continent == "Oceania") {
 			s += "oc_";
 		}
-		if (t.getContinent().getName() == "Asia") {
+		if (continent == "Asia") {
 			s += "as_";
 		}
 		s += t.getName().replaceAll(" ", "").toLowerCase() + ".png";
-		
-		System.out.print(s);
-		
+
 		return s;
 	}
 

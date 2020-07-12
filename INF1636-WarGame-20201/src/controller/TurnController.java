@@ -27,8 +27,6 @@ public class TurnController implements Serializable {
 	private TurnController() {
 		gE = GameExecution.getGameExecution();
 		currentPlayer = 0;
-		currentState = TurnState.armyPlacement;
-		gE.distribuiteArmy(currentPlayer);
 	}
 
 	public static TurnController getTurnController() {
@@ -39,6 +37,12 @@ public class TurnController implements Serializable {
 
 	public static void setTurnController(TurnController tC) {
 		singleton = tC;
+	}
+	
+	public void start()
+	{
+		currentState = TurnState.armyPlacement;
+		gE.distribuiteArmy(currentPlayer);
 	}
 
 	public void nextTurn() {
@@ -112,6 +116,11 @@ public class TurnController implements Serializable {
 			nextStateNotifier.setNextState(currentState.ordinal());
 	}
 
+	public void loadState()
+	{
+		nextStateNotifier.setNextState(currentState.ordinal());
+	}
+	
 	public int getCurrentPlayer() {
 		return currentPlayer;
 	}
@@ -120,8 +129,11 @@ public class TurnController implements Serializable {
 		return currentState.ordinal();
 	}
 
-	public void addObserver(IObserver o) {
+	public void addTurnObserver(IObserver o) {
 		nextTurnNotifier.addObserver(o);
+	}
+	
+	public void addStateObserver(IObserver o) {
 		nextStateNotifier.addObserver(o);
 	}
 

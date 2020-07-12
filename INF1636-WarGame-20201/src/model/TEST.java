@@ -380,7 +380,7 @@ public class TEST {
 		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
 		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
 
-		result = gE.moveTroops(Venezuela,Peru,1);
+		result = gE.moveTroops(Venezuela,Peru,1,false);
 		
 		System.out.println(result);
 		
@@ -398,7 +398,7 @@ public class TEST {
 		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
 		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
 
-		result = gE.moveTroops(Venezuela,Peru,1);
+		result = gE.moveTroops(Venezuela,Peru,1,false);
 		
 		System.out.println(result);
 		
@@ -416,7 +416,7 @@ public class TEST {
 		System.out.println(Venezuela.getName() + "-" + Venezuela.getColor() + " : " + Venezuela.getTroops());
 		System.out.println(Peru.getName() + "-" + Peru.getColor() + " : " + Peru.getTroops());
 
-		result = gE.moveTroops(Venezuela,Peru,2);
+		result = gE.moveTroops(Venezuela,Peru,2,false);
 		
 		System.out.println(result);
 		

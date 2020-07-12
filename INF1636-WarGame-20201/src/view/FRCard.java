@@ -32,16 +32,17 @@ class FRCard extends JFrame implements IObserver {
 		m.addAll(cardNames);
 		JList<String> l = new JList<String>(m);
 		l.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
+		
 		l.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-
-				if (l.getSelectedIndices().length > 3)
-					l.removeSelectionInterval(0, 0);
-
-				cardLabel.setIcon(new ImageIcon(gE.getCardImgFilePath(l.getSelectedValue())));
+				String s = l.getSelectedValue();
+				
+				System.out.print(gE.getCardImgFilePath(s));
+				
+				if(s != null)
+					cardLabel.setIcon(new ImageIcon(gE.getCardImgFilePath(s)));
 			}
 		});
 
@@ -77,6 +78,6 @@ class FRCard extends JFrame implements IObserver {
 
 	@Override
 	public void update(Observable o) {
-		dispose();
+			dispose();
 	}
 }

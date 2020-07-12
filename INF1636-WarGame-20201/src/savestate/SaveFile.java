@@ -1,8 +1,6 @@
 package savestate;
 
 import java.io.Serializable;
-
-import controller.GameController;
 import controller.TurnController;
 import model.GameExecution;
 

@@ -45,9 +45,12 @@ public class GameController {
 	
 	public void nextState(boolean load)
 	{
+		TurnController tC = TurnController.getTurnController();
+		
 		if(load) {
 			changeFrame(new FRGame());
 			currentState = GameState.game;
+			tC.loadState();
 			return;
 		}
 		switch (currentState) {
@@ -62,11 +65,12 @@ public class GameController {
 		case playerRegisterMenu:
 			gE.initializeGameComponents();
 			gE.firstDraw();
+			tC.start();
 			changeFrame(new FRGame());
 			currentState = GameState.game;
 			break;
 		case game:
-			JOptionPane.showMessageDialog(null, gE.getPlayerName(TurnController.getTurnController().getCurrentPlayer())
+			JOptionPane.showMessageDialog(null, gE.getPlayerName(tC.getCurrentPlayer())
 					+ " completou seu objetivo. FIM DE JOGO");
 			System.exit(0);
 			break;

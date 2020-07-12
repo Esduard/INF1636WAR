@@ -27,7 +27,7 @@ public class ConquerContinentObjective extends Objective{
 				if(!territories.contains(t[j])){
 					//System.out.println("i = " + i);
 					//System.out.println("j = " + j);
-					//System.out.println("falseou em " + t[j].getName() + " parte da " + continents[i].getName());
+					//System.out.println("false ou em " + t[j].getName() + " parte da " + continents[i].getName());
 					
 					return false;
 				}

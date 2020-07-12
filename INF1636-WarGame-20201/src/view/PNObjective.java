@@ -10,13 +10,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 class PNObjective extends JPanel{
 	
 	private final static Dimension DEFAULT_SIZE = new Dimension(380, 600);
 	private final static String OBJECTIVE_IMG_FILE_PATH = "src\\images\\war_carta_objetivo_grande.png";
-	private final static Rectangle labelRect = new Rectangle(27, 117, DEFAULT_SIZE.width - 54, 100);
+	private final static Rectangle labelRect = new Rectangle(25, 110, 306, 365);
 	private Image objImg;
 	
 	public PNObjective(String objective)
@@ -27,6 +28,7 @@ class PNObjective extends JPanel{
 		
 		add(l);
 		l.setBounds(labelRect);
+		l.setVerticalAlignment(SwingConstants.TOP);
 		
 		try {
 			objImg = ImageIO.read(new File(OBJECTIVE_IMG_FILE_PATH));

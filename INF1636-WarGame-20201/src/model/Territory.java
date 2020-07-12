@@ -6,9 +6,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import controller.TurnController;
+import observer.IObserver;
 import observer.Observable;
 
-class Territory extends Observable implements Serializable{
+class Territory extends Observable implements IObserver, Serializable{
 	/**
 	 * 
 	 */
@@ -20,12 +22,15 @@ class Territory extends Observable implements Serializable{
 	private ArrayList<Vertex> frontiers;
 	private Vertex center;
 	private Continent continent;
+	//Army moved to this territory during a turn, resets on next turn
+	private int newTroops = 0;
 
 	public Territory(String n, ArrayList<String> neighbors, ArrayList<Vertex> fronteirs, Vertex center) {
 		name = n;
 		this.neighbors = neighbors;
 		this.frontiers = fronteirs;
 		this.center = center;
+		TurnController.getTurnController().addTurnObserver(this);
 	}
 
 	public void setContinent(Continent c) {
@@ -49,6 +54,10 @@ class Territory extends Observable implements Serializable{
 
 		return numTroops;
 	}
+	
+	public int getNewTroops() {
+		return newTroops;
+	}
 
 	public void setTroops(int t) {
 
@@ -67,7 +76,16 @@ class Territory extends Observable implements Serializable{
 
 		notifyObservers();
 	}
-
+	
+	/**
+	 * @param t
+	 * @param moving - If troops comes from another territory instead of being positioned
+	 */
+	public void modifyTroops(int t, boolean moving) {
+		modifyTroops(t);
+		newTroops += t;
+	}
+	
 	public ArrayList<String> getNeighbors() {
 		return neighbors;
 	}
@@ -503,5 +521,10 @@ class Territory extends Observable implements Serializable{
 			return numTroops;
 		}
 		return null;
+	}
+
+	@Override
+	public void update(Observable o) {
+		newTroops = 0;
 	}
 }

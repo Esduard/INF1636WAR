@@ -1,10 +1,4 @@
 package savestate;
-
-import controller.GameController;
-
-import controller.TurnController;
-import model.GameExecution;
-
 import java.io.*;
 
 public class WAR_IO {
@@ -32,6 +26,7 @@ public class WAR_IO {
 			ObjectInputStream o = new ObjectInputStream(f);
 			SaveFile ctrl = (SaveFile) o.readObject();
 			ctrl.loadSaveFile();
+			o.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
