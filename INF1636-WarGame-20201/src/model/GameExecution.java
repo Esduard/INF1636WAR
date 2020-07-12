@@ -422,14 +422,21 @@ public class GameExecution implements Serializable {
 		Territory t = getTerritory(territory);
 
 		if (!defense) {
-			if (t.getTroops() - 1 > 3)
+			if (t.getTroops() - 1 > 3) {
 				return 3;
-		} else {
+			}
+			else { 
+				return t.getTroops() - 1;
+			}
+		} 
+		else {
 			if (t.getTroops() > 3)
 				return 3;
+			else
+				return t.getTroops();
 		}
 
-		return t.getTroops();
+		
 	}
 
 	public int attack(int src, int target, int[] attackDices, int[] defenseDices) {

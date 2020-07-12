@@ -57,7 +57,7 @@ class FRDice extends JFrame {
 				System.out.print("pp");
 				if (e.getKeyCode() == KeyEvent.VK_K) {
 					int[] attackDices = new int[gE.getDicesAmount(src, false)];
-					int[] defenseDices = new int[gE.getDicesAmount(target, false)];
+					int[] defenseDices = new int[gE.getDicesAmount(target, true)];
 					for (int i = 0; i < attackDices.length; i++) {
 						try {
 							attackDices[i] = Integer.parseInt(JOptionPane.showInputDialog("Escolha um dado para o ataque"));

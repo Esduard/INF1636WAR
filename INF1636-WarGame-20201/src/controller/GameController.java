@@ -66,7 +66,7 @@ public class GameController {
 			currentState = GameState.game;
 			break;
 		case game:
-			JOptionPane.showMessageDialog(null, gE.getPlayerName(TurnController.getTurnController().getCurrentPlayer())
+			JOptionPane.showMessageDialog(null, gE.getPlayerName(TurnController.getTurnController().getCurrentPlayer()-1)
 					+ " completou seu objetivo. FIM DE JOGO");
 			System.exit(0);
 			break;
