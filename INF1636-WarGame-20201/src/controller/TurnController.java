@@ -73,12 +73,6 @@ public class TurnController implements Serializable {
 
 			gE.distribuiteArmy(currentPlayer);
 			nextTurnNotifier.setPlayers(currentPlayer, prevPlayer);
-			
-			if(gE.checkPlayerObjective(currentPlayer))
-			{
-				GameController.getGameController().nextState(false);
-			}
-			
 			nextState();
 			break;
 		default:
@@ -106,6 +100,10 @@ public class TurnController implements Serializable {
 			currentState = TurnState.ended;
 			break;
 		case ended:
+			if(gE.checkPlayerObjective(currentPlayer))
+			{
+				GameController.getGameController().nextState(false);
+			}
 			currentState = TurnState.armyPlacement;
 			break;
 		default:
