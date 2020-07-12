@@ -14,9 +14,9 @@ class Program {
 			//TEST.testMoveTroops();
 			//TEST.testObjectiveValidation();
 		
-			//TEST.testCardTrade();
+			TEST.testCardTrade();
 
-			GameController.getGameController();
+			//GameController.getGameController();
 		}
 	
 }

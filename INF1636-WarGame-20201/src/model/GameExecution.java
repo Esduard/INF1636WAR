@@ -484,7 +484,7 @@ public class GameExecution implements Serializable {
 		if ((!cardStack.contains(c) && players.get(player).hasCard(c)))
 			return false;
 
-		players.get(player).draw(c);
+		players.get(player).draw(c,true);
 
 		cardStack.removeElement(c);
 
