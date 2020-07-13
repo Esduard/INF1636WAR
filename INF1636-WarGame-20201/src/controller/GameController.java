@@ -13,12 +13,10 @@ public class GameController {
 
 	private GameState currentState;
 	private JFrame activeFrame;
-	private GameExecution gE;
 
 	private GameController() {
 		activeFrame = new FRNewGame();
 		activeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gE = GameExecution.getGameExecution();
 		currentState = GameState.newGameMenu;
 	}
 
@@ -26,10 +24,6 @@ public class GameController {
 		if (singleton == null)
 			singleton = new GameController();
 		return singleton;
-	}
-
-	public static void setGameController(GameController gC) {
-		singleton = gC;
 	}
 
 	private void changeFrame(JFrame f) {
@@ -42,11 +36,11 @@ public class GameController {
 	public void nextState(boolean load)
 	{
 		TurnController tC = TurnController.getTurnController();
+		GameExecution gE = GameExecution.getGameExecution();
 		
 		if(load) {
 			changeFrame(new FRGame());
 			currentState = GameState.game;
-			gE = GameExecution.getGameExecution();
 			tC.loadState();
 			return;
 		}
