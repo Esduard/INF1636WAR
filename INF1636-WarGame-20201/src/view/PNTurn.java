@@ -65,15 +65,8 @@ class PNTurn extends JPanel implements IObserver{
 	
 	public void setAvailableArmy(int i)
 	{
-		if(i == 0)
-		{
-			availableArmy.setText(" ");
-		}
-		else
-		{
-			availableArmy.setText("<html><font size=6 color="+ currentPlayerColor +">" + "Faltam " + i + "</font></html>");
-			availableArmy.repaint();
-		}
+		availableArmy.setText("<html><font size=6 color="+ currentPlayerColor +">" + "Tropas disponiveis: " + i + "</font></html>");
+		availableArmy.repaint();
 	}
 	
 	@Override
