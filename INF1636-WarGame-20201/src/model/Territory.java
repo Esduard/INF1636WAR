@@ -11,10 +11,8 @@ import observer.IObserver;
 import observer.Observable;
 
 class Territory extends Observable implements IObserver, Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 5195958686894925295L;
 	private String name;
 	private GameColor color;
 	private int numTroops = 0;

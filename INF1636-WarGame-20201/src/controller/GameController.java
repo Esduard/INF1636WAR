@@ -46,6 +46,7 @@ public class GameController {
 		if(load) {
 			changeFrame(new FRGame());
 			currentState = GameState.game;
+			gE = GameExecution.getGameExecution();
 			tC.loadState();
 			return;
 		}

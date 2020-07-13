@@ -8,7 +8,7 @@ import java.util.List;
 
 abstract class Objective implements Serializable{
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 490585702357277429L;
 	protected String description;
 	protected abstract boolean ValidateObjective();
 	protected Player player;

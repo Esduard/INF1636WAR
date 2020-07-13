@@ -4,9 +4,9 @@ import java.util.*;
 
 public class ConquerTerritoryObjective extends Objective {
 
+	private static final long serialVersionUID = 7890802837211920608L;
 	private int numberOfTerritories;
 	private int armyPerTerritory;
-	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected boolean ValidateObjective() {

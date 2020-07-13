@@ -13,7 +13,7 @@ import observer.IObserver;
 
 public class GameExecution implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -2414709451220929604L;
 
 	private static GameExecution singleton;
 
@@ -48,7 +48,6 @@ public class GameExecution implements Serializable {
 
 	public static void setGameExecution(GameExecution gE) {
 		singleton = gE;
-		System.out.println(singleton.players.size());
 	}
 
 	public void initializeGameComponents() {

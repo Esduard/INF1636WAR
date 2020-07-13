@@ -38,7 +38,7 @@ public class FRGame extends JFrame implements IObserver {
 		TurnController tC = TurnController.getTurnController();
 		GameExecution gE = GameExecution.getGameExecution();
 		JPanel p = new PNMap(MAP_SIZE);
-
+		
 		tC.addStateObserver(this);
 		
 		getContentPane().add(p);

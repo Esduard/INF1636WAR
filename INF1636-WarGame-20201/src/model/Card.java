@@ -6,10 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Card implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 2464345101408054301L;
 	private Shape shape;
 	private Territory territory;
 

@@ -39,6 +39,7 @@ public class TurnController implements Serializable {
 
 	public static void setTurnController(TurnController tC) {
 		singleton = tC;
+		singleton.gE = GameExecution.getGameExecution();
 	}
 	
 	public void start()

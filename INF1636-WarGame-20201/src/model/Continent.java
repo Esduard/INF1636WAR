@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.util.*;
 
 class Continent implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 8465176647466731963L;
 	private String name;
 	private Territory[] territories;
 	private int bonusArmy;
