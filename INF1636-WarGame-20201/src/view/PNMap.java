@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 class PNMap extends JPanel {
 	
 	private final static String MAP_IMG_FILE_PATH = "src\\images\\war_tabuleiro_mapa.png";
