@@ -1,0 +1,4 @@
+saveFileDestroyBlackAsYellow - avance para a rodada do jogador amarelo e destrua o ultimo terrtorio do jogador preto. O jogo se encerrara no final da rodada.
+saveFileConquer24White - basta passar a rodada, os territórios já estão conquistados.
+saveFileConquerEU_SA_EXTRA - basta passar a rodada, os continentes já estão conquistados.
+saveFileCardsTrade - clique no botão de cartas e escolha as cartas que deseja trocar.
