@@ -326,7 +326,13 @@ public class GameExecution implements Serializable {
 		// generate array of results
 		int[] results = new int[2];
 
-		for (int i = defend.length - 1; i > -1; i--) {
+		int length = 0;
+		if(defend.length > attack.length)
+			length = attack.length;
+		else
+			length = defend.length;
+		
+		for (int i = length - 1; i > -1; i--) {
 			if (defend[i] >= attack[i]) // defense victory increase
 				results[0]++;
 
@@ -595,8 +601,8 @@ public class GameExecution implements Serializable {
 	 * 
 	 * @param player    - The attacker
 	 * @param territory - The territory to be attacked
-	 * @return If the player has a neighbor with enough army to the territory chosen
-	 *         returns true, else returns false
+	 * @return If the player has a neighbor with enough army to attack the territory
+	 *         chosen returns true, else returns false
 	 */
 	public boolean playerCanAttackTerritory(int player, int territory) {
 		List<Territory> l = players.get(player).getAllTerritories();

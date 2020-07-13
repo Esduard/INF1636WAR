@@ -271,5 +271,7 @@ public class FRGame extends JFrame implements IObserver {
 			cardB.setEnabled(false);
 		else
 			cardB.setEnabled(true);
+		
+		selectedTerritory = -1;
 	}
 }
