@@ -8,13 +8,12 @@ import controller.GameController;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import java.io.*;
 
 import savestate.WAR_IO;
 
+@SuppressWarnings("serial")
 public class FRNewGame extends JFrame{
 	
 	private final static String IMG_FILE_PATH = "src\\images\\bgconfiguracao.png";

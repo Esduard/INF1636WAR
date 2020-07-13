@@ -9,6 +9,7 @@ import javax.swing.*;
 import controller.GameController;
 import model.*;
 
+@SuppressWarnings("serial")
 public class FRChooseNumberOfPlayers extends JFrame{
 
 	public FRChooseNumberOfPlayers()
